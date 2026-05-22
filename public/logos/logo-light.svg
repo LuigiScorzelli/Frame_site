@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 160" width="480" height="160">
+  <rect width="480" height="160" fill="#FFFFFF" rx="12"/>
+  <rect width="480" height="160" fill="none" stroke="#E2E8F0" stroke-width="1.5" rx="12"/>
+  <text x="40" y="108" font-family="'Courier New', Courier, monospace" font-size="80" font-weight="700" letter-spacing="6">
+    <tspan fill="#1E293B">FR</tspan><tspan fill="#00C975">&gt;</tspan><tspan fill="#1E293B">ME</tspan>
+  </text>
+  <text x="42" y="138" font-family="'Arial', sans-serif" font-size="13" font-weight="400" letter-spacing="3" fill="#94A3B8">AI IMPLEMENTATION PARTNER</text>
+  <rect x="40" y="118" width="60" height="2" fill="#00C975" rx="1"/>
+</svg>
