@@ -2,14 +2,15 @@ import Link from "next/link";
 
 const footerLinks = {
   servizi: [
-    { label: "Automazione", href: "#servizi" },
-    { label: "Sviluppo", href: "#servizi" },
-    { label: "Consulenza AI", href: "#servizi" },
-    { label: "Data Analytics", href: "#servizi" },
+    { label: "Automazione", href: "/#servizi" },
+    { label: "Sviluppo", href: "/#servizi" },
+    { label: "Consulenza AI", href: "/#servizi" },
+    { label: "Data Analytics", href: "/#servizi" },
+    { label: "Amazon SEO", href: "/amazon-seo" },
   ],
   azienda: [
     { label: "Chi siamo", href: "/chi-siamo" },
-    { label: "Case Study", href: "#risultati" },
+    { label: "Case Study", href: "/#risultati" },
     { label: "Blog", href: "/blog" },
     { label: "Carriere", href: "/contatti" },
   ],

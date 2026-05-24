@@ -6,9 +6,10 @@ import { cn } from "@/lib/utils";
 import GlitchLogo from "@/components/animations/GlitchLogo";
 
 const navLinks = [
-  { label: "SERVIZI", href: "#servizi" },
+  { label: "SERVIZI", href: "/#servizi" },
+  { label: "AMAZON SEO", href: "/amazon-seo" },
   { label: "CHI SIAMO", href: "/chi-siamo" },
-  { label: "CASE STUDY", href: "#risultati" },
+  { label: "CASE STUDY", href: "/#risultati" },
   { label: "BLOG", href: "/blog" },
 ];
 
