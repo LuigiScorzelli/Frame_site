@@ -21,22 +21,23 @@ export default function Hero() {
         <div className="max-w-[900px]">
           <h1 className="animate-[fadeIn_0.6s_ease_forwards] opacity-0">
             <span className="block text-[80px] font-extrabold leading-none tracking-[-4px] text-text-0">
-              AUTOMATIZZIAMO
+              AUTOMAZIONI
             </span>
-            <span className="mt-2 flex gap-4">
-              <span className="text-[80px] font-extrabold leading-none tracking-[-4px] text-accent">IL TUO</span>
-              <span className="text-[80px] font-extrabold leading-none tracking-[-4px] text-cyan">BUSINESS.</span>
+            <span className="mt-2 block">
+              <span className="block text-[80px] font-extrabold leading-none tracking-[-4px] text-accent">INTELLIGENTI</span>
+              <span className="mt-2 block text-[80px] font-extrabold leading-none tracking-[-4px] text-cyan">PER LAVORARE</span>
+              <span className="mt-2 block text-[80px] font-extrabold leading-none tracking-[-4px] text-cyan">MEGLIO.</span>
             </span>
           </h1>
 
           <p className="mt-8 max-w-[560px] animate-[fadeIn_0.6s_ease_0.3s_forwards] text-lg leading-relaxed text-text-1 opacity-0" style={{ lineHeight: 1.6 }}>
-            Progettiamo sistemi intelligenti che eliminano il lavoro ripetitivo e accelerano la crescita della tua azienda.
+            Progettiamo automazioni, agenti AI e software su misura per analizzare dati interni, ridurre attivita ripetitive e proteggere know-how aziendale con setup proprietari e controllati.
           </p>
 
           <div className="mt-8 flex animate-[fadeIn_0.6s_ease_0.6s_forwards] items-center gap-4 opacity-0">
-            <Button href="/contatti" variant="gradient" size="lg">INIZIA ORA &rarr;</Button>
-            <a href="#risultati" className="border border-text-0 px-6 py-3 font-mono text-[11px] font-medium tracking-wider text-text-0 transition-colors hover:border-accent hover:text-accent" style={{ letterSpacing: "1px" }}>
-              VEDI I CASI STUDIO
+            <Button href="/contatti" variant="gradient" size="lg">PRENOTA UNA CALL &rarr;</Button>
+            <a href="#servizi" className="border border-text-0 px-6 py-3 font-mono text-[11px] font-medium tracking-wider text-text-0 transition-colors hover:border-accent hover:text-accent" style={{ letterSpacing: "1px" }}>
+              COSA POSSIAMO AUTOMATIZZARE
             </a>
           </div>
         </div>

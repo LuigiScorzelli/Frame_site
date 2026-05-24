@@ -9,9 +9,9 @@ import ChatWidget from "@/components/ui/ChatWidget";
 const timeSlots = ["09:00", "09:30", "10:00", "10:30", "11:00", "14:00", "14:30", "15:00"];
 
 const steps = [
-  { num: "01", title: "Analisi", desc: "Analizziamo insieme le tue esigenze e i tuoi processi attuali." },
-  { num: "02", title: "Proposta", desc: "Ti presentiamo un piano d\u2019azione personalizzato con costi e tempistiche." },
-  { num: "03", title: "Timeline", desc: "Definiamo insieme milestones e deliverables per partire subito." },
+  { num: "01", title: "Analisi", desc: "Analizziamo esigenze, processi attuali e dati coinvolti." },
+  { num: "02", title: "Perimetro", desc: "Definiamo accessi, strumenti, sicurezza e livello di controllo necessario." },
+  { num: "03", title: "Proposta", desc: "Valutiamo automazione, agente AI o software piu adatto al caso reale." },
 ];
 
 type FormErrors = {
@@ -76,7 +76,7 @@ export default function ContattiPage() {
           <div className="mx-auto max-w-[1440px] px-14 py-20 text-center">
             <span className="font-mono text-xs font-medium tracking-[2px] text-accent">CONTATTI</span>
             <h1 className="mt-3 text-[56px] font-extrabold tracking-[-3px] text-text-0">PARLIAMO DEL TUO PROGETTO.</h1>
-            <p className="mt-3 text-lg text-text-1">Prenota una call di 30 minuti con il nostro team.</p>
+            <p className="mt-3 text-lg text-text-1">Prenota una call di 30 minuti per analizzare processi, dati e possibili automazioni.</p>
           </div>
         </section>
 
@@ -189,9 +189,9 @@ export default function ContattiPage() {
               {/* Trust badges */}
               <div className="grid grid-cols-3 gap-4">
                 {[
-                  { v: "320h", l: "risparmiate" },
-                  { v: "12+", l: "automazioni" },
-                  { v: "3 sett.", l: "time to deploy" },
+                  { v: "DATI", l: "interni" },
+                  { v: "SEC", l: "accessi" },
+                  { v: "OPS", l: "processi" },
                 ].map((b) => (
                   <div key={b.l} className="border border-border bg-bg-1 p-4 text-center">
                     <div className="text-2xl font-extrabold text-accent">{b.v}</div>

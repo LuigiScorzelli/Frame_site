@@ -4,15 +4,15 @@ import { cn } from "@/lib/utils";
 import { useInView } from "@/components/animations/useInView";
 
 const badges = [
-  "AI INTEGRATION", "PROCESS AUTOMATION", "CUSTOM SOFTWARE",
-  "DATA ANALYTICS", "MACHINE LEARNING", "WORKFLOW DESIGN",
+  "AUTOMAZIONI", "AGENTI AI", "SOFTWARE CUSTOM",
+  "SETUP PROPRIETARI", "SICUREZZA DATI", "AMAZON SELLER",
 ];
 
 const caseStudies = [
-  { cliente: "E-commerce B2B", metrica: "-65%", label: "tempo gestione ordini", desc: "Automazione completa del flusso ordini con integrazione ERP e notifiche AI." },
-  { cliente: "Studio Legale", metrica: "40h/mese", label: "risparmiate in data entry", desc: "RAG pipeline per analisi documenti e compilazione automatica pratiche." },
-  { cliente: "Agenzia Marketing", metrica: "+180%", label: "produttivita contenuti", desc: "CopyAgent AI per generazione e ottimizzazione contenuti multicanale." },
-  { cliente: "Logistica PMI", metrica: "-45%", label: "errori di spedizione", desc: "Workflow n8n per validazione automatica ordini e tracking in tempo reale." },
+  { cliente: "Seller Amazon", metrica: "-40%", label: "tempo su controlli operativi", desc: "Ottimizzazione listing, flussi di controllo e gestione delle attivita operative." },
+  { cliente: "E-commerce", metrica: "30h/mese", label: "risparmiate su ordini e update", desc: "Automazione ordini, email, fogli e aggiornamenti interni tra strumenti gia in uso." },
+  { cliente: "Team operativo", metrica: "+55%", label: "risposte interne piu rapide", desc: "Agente AI per recuperare informazioni da procedure e documenti interni con accessi definiti." },
+  { cliente: "PMI", metrica: "1 tool", label: "processo gestito end-to-end", desc: "Software custom per gestire un processo non coperto da strumenti standard, con attenzione a dati e permessi." },
 ];
 
 export default function Risultati() {

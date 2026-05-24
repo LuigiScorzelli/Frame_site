@@ -4,12 +4,12 @@ import { cn } from "@/lib/utils";
 import { useInView } from "@/components/animations/useInView";
 
 const processes = [
-  { number: "01", icon: "🔍", title: "Analisi & Discovery", description: "Mappiamo i tuoi processi attuali per identificare colli di bottiglia e opportunita di automazione.", bullets: ["Audit dei processi aziendali", "Gap analysis tecnologica", "Roadmap di implementazione"] },
-  { number: "02", icon: "⚙️", title: "Progettazione & Build", description: "Progettiamo e sviluppiamo soluzioni custom con le tecnologie piu adatte al tuo caso.", bullets: ["Architettura scalabile", "Sviluppo agile", "Testing e QA integrato"] },
-  { number: "03", icon: "🚀", title: "Deploy & Ottimizzazione", description: "Lanciamo in produzione e monitoriamo le performance per un miglioramento continuo.", bullets: ["Deploy zero-downtime", "Monitoring in tempo reale", "Supporto e manutenzione"] },
-  { number: "04", icon: "🤖", title: "Integrazione AI", description: "Implementiamo modelli di intelligenza artificiale per automatizzare decisioni e previsioni.", bullets: ["Modelli predittivi custom", "Chatbot intelligenti", "Computer vision"] },
-  { number: "05", icon: "📊", title: "Data Analytics", description: "Trasformiamo i tuoi dati in insight azionabili con dashboard e report avanzati.", bullets: ["Business intelligence", "Dashboard interattive", "Data pipeline automatiche"] },
-  { number: "06", icon: "🛡️", title: "Sicurezza & Compliance", description: "Garantiamo che ogni soluzione rispetti gli standard di sicurezza e le normative vigenti.", bullets: ["GDPR compliance", "Penetration testing", "Encryption end-to-end"] },
+  { number: "01", icon: "🔍", title: "Analisi dei processi e dei dati", description: "Capire dove si perde tempo, quali dati servono davvero e quali informazioni devono restare sotto controllo.", bullets: ["Processi ripetitivi", "Dati interni", "Know-how aziendale"] },
+  { number: "02", icon: "🛡️", title: "Sicurezza e perimetro", description: "Definire accessi, permessi, strumenti e limiti di esposizione prima di progettare automazioni, agenti AI o software.", bullets: ["Accessi e permessi", "Ambienti controllati", "Riduzione esposizione dati"] },
+  { number: "03", icon: "⚙️", title: "Progettazione della soluzione", description: "Definire la soluzione piu adatta al problema reale, senza complessita inutile e con attenzione alla gestione del dato.", bullets: ["Flussi chiari", "Setup proprietario", "Roadmap essenziale"] },
+  { number: "04", icon: "🔗", title: "Sviluppo e integrazione", description: "Costruire la soluzione e collegarla agli strumenti gia presenti nel flusso di lavoro.", bullets: ["CRM, fogli ed email", "Gestionali ed e-commerce", "Piattaforme interne"] },
+  { number: "05", icon: "🧪", title: "Test operativo", description: "Verificare che il sistema funzioni nei casi reali, con dati, utenti, permessi e processi concreti.", bullets: ["Casi reali", "Controllo errori", "Feedback del team"] },
+  { number: "06", icon: "📈", title: "Ottimizzazione", description: "Migliorare il flusso dopo il rilascio, riducendo attriti, errori e passaggi superflui.", bullets: ["Iterazioni rapide", "Meno passaggi manuali", "Processo piu stabile"] },
 ];
 
 export default function ServiceDetails() {
@@ -22,7 +22,7 @@ export default function ServiceDetails() {
           <span className="font-mono text-xs font-medium tracking-[2px] text-accent">02 / LE NOSTRE SOLUZIONI</span>
           <h2 className="mt-4 text-[48px] font-extrabold tracking-[-2px] text-text-0">Come lavoriamo.</h2>
           <p className="mt-4 max-w-[600px] text-base leading-relaxed text-text-1" style={{ lineHeight: 1.6 }}>
-            Un approccio strutturato per trasformare la complessita in semplicita operativa.
+            Un approccio strutturato per trasformare complessita, dati interni e processi sensibili in sistemi operativi controllati.
           </p>
         </div>
 

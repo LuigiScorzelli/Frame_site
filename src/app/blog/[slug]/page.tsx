@@ -42,14 +42,14 @@ function RichText({ blocks }: { blocks: StrapiBlock[] }) {
           case "paragraph":
             return (
               <p key={i} className="text-base leading-relaxed text-text-1" style={{ lineHeight: 1.8 }}>
-                <InlineChildren children={block.children} />
+                <InlineChildren nodes={block.children} />
               </p>
             );
           case "heading": {
             const Tag = `h${block.level}` as "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
             return (
               <Tag key={i} className="mt-4 text-2xl font-bold tracking-[-1px] text-text-0">
-                <InlineChildren children={block.children} />
+                <InlineChildren nodes={block.children} />
               </Tag>
             );
           }
@@ -58,7 +58,7 @@ function RichText({ blocks }: { blocks: StrapiBlock[] }) {
               <ul key={i} className={`space-y-2 pl-6 ${block.format === "ordered" ? "list-decimal" : "list-disc"} text-text-1`}>
                 {block.children.map((item, j) => (
                   <li key={j} className="text-base leading-relaxed" style={{ lineHeight: 1.8 }}>
-                    <InlineChildren children={item.children} />
+                    <InlineChildren nodes={item.children} />
                   </li>
                 ))}
               </ul>
@@ -66,13 +66,13 @@ function RichText({ blocks }: { blocks: StrapiBlock[] }) {
           case "quote":
             return (
               <blockquote key={i} className="border-l-2 border-accent pl-6 text-text-1 italic">
-                <InlineChildren children={block.children} />
+                <InlineChildren nodes={block.children} />
               </blockquote>
             );
           case "code":
             return (
               <pre key={i} className="overflow-x-auto rounded-lg bg-bg-2 p-4 font-mono text-sm text-text-0">
-                <InlineChildren children={block.children} />
+                <InlineChildren nodes={block.children} />
               </pre>
             );
           case "image":
@@ -85,10 +85,10 @@ function RichText({ blocks }: { blocks: StrapiBlock[] }) {
   );
 }
 
-function InlineChildren({ children }: { children: StrapiInline[] }) {
+function InlineChildren({ nodes }: { nodes: StrapiInline[] }) {
   return (
     <>
-      {children.map((child, i) => {
+      {nodes.map((child, i) => {
         let el: React.ReactNode = child.text;
         if (child.bold) el = <strong key={i}>{el}</strong>;
         if (child.italic) el = <em key={i}>{el}</em>;

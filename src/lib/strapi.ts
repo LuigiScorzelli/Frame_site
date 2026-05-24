@@ -29,9 +29,9 @@ const ARTICOLI_PLACEHOLDER: Articolo[] = [
   {
     id: 1,
     documentId: "demo-1",
-    titolo: "Come l'AI sta trasformando l'automazione aziendale",
+    titolo: "AI e automazione: come mantenere il controllo dei dati",
     slug: "ai-automazione-aziendale",
-    excerpt: "Scopri come le aziende stanno utilizzando l'intelligenza artificiale per automatizzare processi complessi, ridurre i costi operativi e migliorare la produttività del team.",
+    excerpt: "Come valutare automazioni e agenti AI partendo da processi, dati interni, accessi e protezione del know-how aziendale.",
     contenuto: LOREM_BLOCKS,
     categoria: "AI",
     cover: null,

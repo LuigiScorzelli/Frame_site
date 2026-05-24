@@ -16,9 +16,9 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FR>ME — AI Implementation Partner",
+  title: "FR>ME — Automazioni, agenti AI e software con controllo dei dati",
   description:
-    "Automatizziamo i processi delle PMI italiane con AI concreta. Workflow automatizzati, knowledge base locali, agenti AI su misura.",
+    "Aiutiamo aziende e seller Amazon a semplificare processi operativi con automazioni, agenti AI e software su misura, mantenendo attenzione su dati interni, sicurezza e know-how aziendale.",
   keywords: [
     "AI",
     "automazione",
@@ -30,9 +30,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Luigi Scorzelli" }],
   openGraph: {
-    title: "FR>ME — AI Implementation Partner",
+    title: "FR>ME — Automazioni, agenti AI e software con controllo dei dati",
     description:
-      "L'AI che lavora. Non quella che si studia. Automatizziamo i processi delle PMI italiane.",
+      "Automazioni, agenti AI e software custom per processi aziendali, dati interni e setup proprietari.",
     url: "https://aiframe.it",
     siteName: "FR>ME",
     locale: "it_IT",

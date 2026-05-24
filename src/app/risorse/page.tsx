@@ -7,24 +7,24 @@ import { getRisorse } from "@/lib/strapi";
 import type { Risorsa } from "@/lib/types";
 
 export const metadata: Metadata = {
-  title: "Risorse — FR>ME | Template, Guide e Checklist AI",
+  title: "Risorse — FR>ME | Template, Guide e Checklist operative",
   description:
-    "Scarica template, guide PDF e checklist gratuite su automazione AI, workflow e compliance GDPR per la tua azienda.",
+    "Scarica template, guide e checklist su automazioni, setup proprietari, sicurezza dei dati e processi aziendali.",
   openGraph: {
     title: "Risorse — FR>ME",
     description:
-      "Template, guide e strumenti gratuiti per automatizzare la tua azienda con l'AI.",
+      "Template, guide e strumenti per automatizzare processi mantenendo controllo su dati e know-how.",
     url: "https://aiframe.it/risorse",
   },
 };
 
 const fallbackResources = [
-  { icon: "◇", badge: "TEMPLATE", badgeColor: "accent", title: "Automation Audit Template", desc: "Mappa i processi della tua azienda e identifica le opportunita di automazione con questo template strutturato.", ctaColor: "accent" },
-  { icon: "◎", badge: "GUIDA PDF", badgeColor: "cyan", title: "Guida AI per PMI", desc: "30 pagine di strategie pratiche per integrare l\u2019intelligenza artificiale nei processi delle piccole e medie imprese.", ctaColor: "cyan" },
-  { icon: "⬡", badge: "CHECKLIST", badgeColor: "accent", title: "Security Compliance Checklist", desc: "50 punti di controllo per verificare la sicurezza delle tue automazioni e la compliance GDPR.", ctaColor: "accent" },
+  { icon: "◇", badge: "TEMPLATE", badgeColor: "accent", title: "Process Audit Template", desc: "Mappa processi, strumenti e dati coinvolti per capire dove automatizzare senza perdere controllo sulle informazioni.", ctaColor: "accent" },
+  { icon: "◎", badge: "GUIDA PDF", badgeColor: "cyan", title: "Guida ai setup AI proprietari", desc: "Una guida pratica per valutare agenti AI, dati interni, accessi e strumenti prima di introdurre automazioni in azienda.", ctaColor: "cyan" },
+  { icon: "⬡", badge: "CHECKLIST", badgeColor: "accent", title: "Checklist sicurezza dati", desc: "Punti di controllo per valutare accessi, permessi, integrazioni e trattamento dei dati nelle automazioni operative.", ctaColor: "accent" },
 ];
 
-function ResourceCardStatic({ r, i }: { r: typeof fallbackResources[0]; i: number }) {
+function ResourceCardStatic({ r }: { r: typeof fallbackResources[0] }) {
   const isAccent = r.ctaColor === "accent";
   return (
     <div className="flex w-[420px] max-w-full flex-col justify-between border border-border bg-bg-1 p-8">
@@ -73,7 +73,7 @@ export default async function RisorsePage() {
               Tool, template e guide<br />per accelerare il tuo business.
             </h1>
             <p className="mt-6 max-w-[560px] text-base leading-relaxed text-text-1" style={{ lineHeight: 1.6 }}>
-              Scarica risorse gratuite create dal nostro team. Nessun costo, solo valore.
+              Risorse pratiche per ragionare su automazioni, dati interni, sicurezza e controllo operativo.
             </p>
           </div>
         </section>
@@ -103,8 +103,8 @@ export default async function RisorsePage() {
               </div>
             ) : (
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {fallbackResources.map((r, i) => (
-                  <ResourceCardStatic key={r.title} r={r} i={i} />
+                {fallbackResources.map((r) => (
+                  <ResourceCardStatic key={r.title} r={r} />
                 ))}
               </div>
             )}

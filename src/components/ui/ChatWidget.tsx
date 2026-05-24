@@ -8,7 +8,7 @@ const quickOptions = [
   { icon: "⚡", text: "Voglio automatizzare i miei processi", action: "contatti" },
   { icon: "📈", text: "Richiedi un preventivo", action: "contatti" },
   { icon: "📖", text: "Vedi i case study", action: "risultati" },
-  { icon: "💬", text: "Parla con il team", action: "email" },
+  { icon: "💬", text: "Scrivi a FR>ME", action: "email" },
 ] as const;
 
 export default function ChatWidget() {
@@ -25,7 +25,7 @@ export default function ChatWidget() {
         router.push("/#risultati");
         break;
       case "email":
-        window.location.href = "mailto:info@aiframe.it";
+        window.open("mailto:info@aiframe.it", "_self");
         break;
     }
   }

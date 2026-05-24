@@ -2,10 +2,10 @@ import Link from "next/link";
 
 const footerLinks = {
   servizi: [
-    { label: "Automazione", href: "/#servizi" },
-    { label: "Sviluppo", href: "/#servizi" },
-    { label: "Consulenza AI", href: "/#servizi" },
-    { label: "Data Analytics", href: "/#servizi" },
+    { label: "Automazioni intelligenti", href: "/#servizi" },
+    { label: "Agenti AI su misura", href: "/#servizi" },
+    { label: "Setup proprietari", href: "/#servizi" },
+    { label: "Software custom", href: "/#servizi" },
     { label: "Amazon SEO", href: "/amazon-seo" },
   ],
   azienda: [
@@ -40,7 +40,7 @@ export default function Footer() {
               <span className="text-[48px] font-extrabold tracking-[-2px] text-accent">&gt;</span>
               <span className="text-[48px] font-extrabold tracking-[-2px] text-text-0">ME</span>
             </Link>
-            <p className="mt-3 text-sm text-text-1">Automatizziamo il futuro.</p>
+            <p className="mt-3 text-sm text-text-1">Automazioni, agenti AI e software con controllo dei dati.</p>
             <div className="mt-4 flex gap-3">
               {socials.map((s) => (
                 <a

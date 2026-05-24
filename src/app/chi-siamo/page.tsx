@@ -4,30 +4,30 @@ import Footer from "@/components/layout/Footer";
 import ChatWidget from "@/components/ui/ChatWidget";
 
 export const metadata: Metadata = {
-  title: "Chi Siamo — FR>ME | AI Implementation Partner",
+  title: "Chi Siamo — FR>ME | AI, automazioni e controllo dei dati",
   description:
-    "Scopri il team FR>ME: esperti in automazione AI, sviluppo software e consulenza per PMI italiane. 320h+ automatizzate ogni mese.",
+    "Scopri FR>ME: automazioni, agenti AI e software custom per analizzare dati interni, proteggere know-how e semplificare processi aziendali.",
   openGraph: {
     title: "Chi Siamo — FR>ME",
     description:
-      "Il team che automatizza il futuro delle PMI italiane con AI concreta.",
+      "Uno studio operativo per automazioni, agenti AI e software custom con attenzione a dati, sicurezza e know-how aziendale.",
     url: "https://aiframe.it/chi-siamo",
   },
 };
 
-const stats = [
-  { value: "320h+", label: "ORE AUTOMATIZZATE OGNI MESE", color: "text-text-0" },
-  { value: "12+", label: "AUTOMAZIONI ATTIVE IN PRODUZIONE", color: "text-accent" },
-  { value: "3 sett.", label: "TEMPO MEDIO DI DELIVERY", color: "text-cyan" },
+const principles = [
+  { value: "DATI", label: "ANALISI INTERNA E SETUP CONTROLLATI", color: "text-text-0" },
+  { value: "SICUREZZA", label: "ACCESSI, PERMESSI E INTEGRAZIONI GOVERNATE", color: "text-accent" },
+  { value: "KNOW-HOW", label: "PROCEDURE AZIENDALI PROTETTE", color: "text-cyan" },
 ];
 
 const servizi = [
-  { icon: "⚡", title: "Automazione Processi", desc: "Eliminiamo le attivita ripetitive con workflow intelligenti. Dalla mappatura all\u2019implementazione di sistemi che lavorano 24/7.", tags: ["ZAPIER", "N8N", "MAKE"] },
-  { icon: "◇", title: "Sviluppo Software", desc: "Costruiamo piattaforme scalabili e performanti con tecnologie all\u2019avanguardia. Web app, API, microservizi.", tags: ["REACT", "NODE.JS", "PYTHON"] },
-  { icon: "◎", title: "Consulenza AI", desc: "Integriamo l\u2019intelligenza artificiale nei tuoi processi per decisioni piu rapide, chatbot e modelli predittivi.", tags: ["GPT", "ML MODELS", "NLP"], iconCyan: true },
-  { icon: "◈", title: "Data Analytics", desc: "Trasformiamo i tuoi dati in insight azionabili con dashboard, report avanzati e business intelligence.", tags: ["POWER BI", "LOOKER"], iconCyan: true },
-  { icon: "⬡", title: "Sicurezza & Compliance", desc: "Garantiamo che ogni soluzione rispetti gli standard di sicurezza e le normative vigenti. GDPR, penetration testing.", tags: ["GDPR", "ISO 27001"] },
-  { icon: "◆", title: "UX/UI Design", desc: "Progettiamo interfacce intuitive e esperienze utente che convertono. Design system, prototipi interattivi.", tags: [], iconCyan: true },
+  { icon: "⚡", title: "Automazioni intelligenti", desc: "Automatizziamo attivita ripetitive e flussi operativi riducendo passaggi manuali, errori e copie non necessarie di dati sensibili.", tags: ["WORKFLOW", "N8N", "MAKE"] },
+  { icon: "◎", title: "Agenti AI su misura", desc: "Costruiamo assistenti operativi e sistemi di supporto interno progettati intorno a dati, procedure e permessi definiti.", tags: ["AI AGENTS", "ASSISTENTI", "PERMESSI"], iconCyan: true },
+  { icon: "◇", title: "Software e setup proprietari", desc: "Sviluppiamo strumenti web e ambienti controllati per analizzare dati interni e gestire processi non coperti da software standard.", tags: ["DATI INTERNI", "ACCESSI", "API"] },
+  { icon: "◈", title: "Integrazioni operative", desc: "Colleghiamo strumenti gia in uso per ridurre copia-incolla, errori, passaggi manuali e lavoro disperso tra troppe piattaforme.", tags: ["CRM", "EMAIL", "GESTIONALI"], iconCyan: true },
+  { icon: "⬡", title: "Amazon SEO", desc: "Aiutiamo seller Amazon italiani a lavorare su listing, intenti di ricerca e flussi operativi legati alla gestione del catalogo.", tags: ["LISTING", "KEYWORD", "SELLER"] },
+  { icon: "◆", title: "Ottimizzazione processi", desc: "Analizziamo il lavoro quotidiano per capire dove semplificare, automatizzare e costruire strumenti piu adatti al team.", tags: ["PROCESSI", "OPERATIONS"], iconCyan: true },
 ];
 
 export default function ChiSiamoPage() {
@@ -44,10 +44,10 @@ export default function ChiSiamoPage() {
             <div className="pt-[200px]">
               <span className="font-mono text-xs font-medium tracking-[3px] text-accent">CHI SIAMO</span>
               <h1 className="mt-5 max-w-[800px] text-[56px] font-extrabold leading-[1.05] tracking-[-3px] text-text-0">
-                Un team che parla<br />la lingua dei risultati.
+                Uno studio operativo<br />per dati, AI e processi.
               </h1>
               <p className="mt-5 max-w-[560px] text-lg leading-relaxed text-text-1" style={{ lineHeight: 1.6 }}>
-                Ingegneri, designer e strategist uniti dalla passione per l&apos;automazione e l&apos;innovazione tecnologica.
+                FR&gt;ME nasce per costruire tecnologia utile dove contano controllo dei dati, sicurezza e protezione del know-how aziendale.
               </p>
             </div>
           </div>
@@ -59,7 +59,7 @@ export default function ChiSiamoPage() {
             <div className="mb-12">
               <span className="font-mono text-xs font-medium tracking-[2px] text-accent">LA NOSTRA MISSIONE</span>
               <h2 className="mt-4 max-w-[700px] text-[40px] font-extrabold tracking-[-2px] text-text-0">
-                Inquadrare il futuro attraverso la tecnologia.
+                Portare AI e automazione dentro l&apos;azienda, senza perdere controllo sulle informazioni.
               </h2>
             </div>
 
@@ -67,16 +67,16 @@ export default function ChiSiamoPage() {
               {/* Left: paragraphs */}
               <div className="space-y-6">
                 <p className="text-base leading-relaxed text-text-1" style={{ lineHeight: 1.8 }}>
-                  FR&gt;ME nasce dalla convinzione che ogni business merita strumenti intelligenti. Il nostro nome — una fusione tra &quot;frame&quot; e il simbolo &quot;&gt;&quot; del codice — rappresenta la nostra missione: inquadrare il futuro attraverso la tecnologia.
+                  FR&gt;ME nasce dall&apos;esigenza delle aziende di analizzare dati internamente, automatizzare processi e usare agenti AI senza disperdere informazioni sensibili, procedure e know-how su strumenti esterni non governati.
                 </p>
                 <p className="text-base leading-relaxed text-text-1" style={{ lineHeight: 1.8 }}>
-                  Siamo un team di ingegneri, designer e strategist che parlano la stessa lingua: quella dei risultati misurabili. Ogni progetto parte da un principio semplice: eliminare il superfluo, potenziare cio che conta.
+                  Lavoriamo come partner tecnico operativo: partiamo dai processi reali, definiamo il perimetro dei dati e costruiamo soluzioni su misura con attenzione a sicurezza, accessi, integrazioni e continuita del lavoro quotidiano.
                 </p>
               </div>
 
               {/* Right: stats */}
               <div className="space-y-4">
-                {stats.map((s) => (
+                {principles.map((s) => (
                   <div key={s.label} className="border border-border bg-bg-1 p-6">
                     <div className={`text-4xl font-extrabold tracking-[-2px] ${s.color}`}>{s.value}</div>
                     <div className="mt-1 font-mono text-[10px] font-medium tracking-[2px] text-text-1">{s.label}</div>
@@ -92,9 +92,9 @@ export default function ChiSiamoPage() {
           <div className="mx-auto max-w-[1440px] px-14">
             <div className="mb-12">
               <span className="font-mono text-xs font-medium tracking-[2px] text-accent">I NOSTRI SERVIZI</span>
-              <h2 className="mt-4 text-[40px] font-extrabold tracking-[-2px] text-text-0">Soluzioni su misura per ogni sfida.</h2>
+              <h2 className="mt-4 text-[40px] font-extrabold tracking-[-2px] text-text-0">Soluzioni su misura per processi reali.</h2>
               <p className="mt-4 max-w-[600px] text-base leading-relaxed text-text-1" style={{ lineHeight: 1.6 }}>
-                Dalla consulenza strategica all&apos;implementazione tecnica, copriamo l&apos;intero ciclo di vita dei tuoi progetti digitali.
+                Partiamo da come lavora la tua azienda e costruiamo automazioni, agenti AI o software custom intorno a dati, processi e requisiti di sicurezza.
               </p>
             </div>
 
@@ -123,7 +123,7 @@ export default function ChiSiamoPage() {
             <span className="font-mono text-xs font-medium tracking-[3px] text-accent">PRONTO A INIZIARE?</span>
             <h2 className="mt-4 text-[48px] font-extrabold tracking-[-2px] text-text-0">Parliamo del tuo progetto.</h2>
             <p className="mx-auto mt-4 max-w-[500px] text-base leading-relaxed text-text-1" style={{ lineHeight: 1.6 }}>
-              Prenota una call gratuita di 30 minuti e scopri come possiamo trasformare il tuo business.
+              Prenota una call gratuita di 30 minuti e scopri quali processi possiamo semplificare mantenendo controllo su dati e know-how.
             </p>
             <a
               href="/contatti"

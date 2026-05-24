@@ -20,13 +20,13 @@ export default function AIInterlude() {
       <div className="relative z-10 flex h-full items-center justify-center">
         <div className="max-w-[700px] text-center">
           <span className="mb-4 block font-mono text-[11px] tracking-[3px] text-accent">
-            ◆ POWERED BY AI
+            ◆ DATI, SICUREZZA E CONTROLLO
           </span>
           <h2 className="text-[48px] font-extrabold leading-[1.1] tracking-[-2px] text-text-0">
-            L&apos;intelligenza artificiale al servizio del tuo business
+            AI e automazioni senza perdere il controllo delle informazioni.
           </h2>
           <p className="mx-auto mt-4 max-w-[500px] text-base leading-relaxed text-text-1" style={{ lineHeight: 1.6 }}>
-            Reti neurali, machine learning e automazione convergono in un unico ecosistema progettato per far crescere la tua azienda.
+            Molte aziende vogliono analizzare dati interni e usare agenti AI, ma non possono esporre procedure, documenti e know-how a strumenti non controllati. FR&gt;ME costruisce setup proprietari con attenzione a sicurezza, accessi e gestione del dato.
           </p>
         </div>
       </div>

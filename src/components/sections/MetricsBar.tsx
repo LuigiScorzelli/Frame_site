@@ -4,10 +4,10 @@ import { cn } from "@/lib/utils";
 import { useInView } from "@/components/animations/useInView";
 
 const metrics = [
-  { value: "320h", label: "ORE RISPARMIATE / MESE" },
-  { value: "\u221245%", label: "COSTI OPERATIVI" },
-  { value: "12+", label: "AUTOMAZIONI ATTIVE" },
-  { value: "3 sett.", label: "TIME TO DEPLOY" },
+  { value: "DATI", label: "ANALISI INTERNA E SETUP CONTROLLATI" },
+  { value: "AI", label: "AGENTI SU PROCESSI E PROCEDURE AZIENDALI" },
+  { value: "SEC", label: "ACCESSI, PERMESSI E INTEGRAZIONI GOVERNATE" },
+  { value: "OPS", label: "AUTOMAZIONI PER IL LAVORO QUOTIDIANO" },
 ];
 
 export default function MetricsBar() {

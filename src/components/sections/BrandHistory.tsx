@@ -4,18 +4,16 @@ import { cn } from "@/lib/utils";
 import { useInView } from "@/components/animations/useInView";
 
 const values = [
-  { icon: "⚡", label: "VELOCITA", desc: "Deploy rapido, iterazioni continue." },
-  { icon: "◆", label: "AFFIDABILITA", desc: "Sistemi robusti e testati 24/7." },
-  { icon: "◎", label: "INNOVAZIONE", desc: "Sempre un passo avanti con le ultime tech." },
-  { icon: "◈", label: "PARTNERSHIP", desc: "Non fornitori, ma partner strategici." },
+  { icon: "⚡", label: "OPERATIVITA", desc: "Soluzioni pensate per il lavoro quotidiano." },
+  { icon: "◆", label: "CONTROLLO", desc: "Setup proprietari e accessi definiti." },
+  { icon: "◎", label: "SICUREZZA", desc: "Attenzione a dati, permessi e integrazioni." },
+  { icon: "◈", label: "KNOW-HOW", desc: "Protezione delle procedure aziendali interne." },
 ];
 
 const timeline = [
-  { year: "2021", title: "L\u2019idea prende forma", desc: "Due sviluppatori con una passione per l\u2019automazione iniziano a costruire tool interni per le aziende locali." },
-  { year: "2022", title: "Nasce FR>ME", desc: "Il brand prende forma ufficialmente. Primo ufficio, primi clienti enterprise, prime automazioni complesse." },
-  { year: "2023", title: "AI-First Approach", desc: "Integriamo l\u2019intelligenza artificiale come pilastro del nostro stack. GPT, ML models e NLP entrano nei nostri workflow." },
-  { year: "2024", title: "Scaling Up", desc: "Team raddoppiato, 12+ automazioni attive, partnership strategiche con leader del settore tech." },
-  { year: "2025 \u2014 OGGI", title: "Il futuro e adesso", desc: "Espansione internazionale, nuove soluzioni AI-powered e un ecosistema di prodotti in crescita." },
+  { year: "2026", title: "Nasce FR>ME", desc: "Uno studio operativo nato dall'esigenza di usare AI e automazioni senza disperdere dati, procedure e know-how aziendale." },
+  { year: "OGGI", title: "Setup proprietari e processi reali", desc: "Lavoriamo su automazioni, agenti AI e software custom costruiti intorno agli strumenti e ai dati interni dell'azienda." },
+  { year: "FOCUS", title: "Sicurezza prima della complessita", desc: "Ogni soluzione viene progettata considerando accessi, permessi, integrazioni e controllo delle informazioni sensibili." },
 ];
 
 export default function BrandHistory() {
@@ -30,10 +28,10 @@ export default function BrandHistory() {
 
       <div className="relative mx-auto max-w-[1440px] px-14">
         <div className="mb-12">
-          <span className="font-mono text-xs font-medium tracking-[2px] text-accent">03 / LA NOSTRA STORIA</span>
-          <h2 className="mt-4 text-[48px] font-extrabold tracking-[-2px] text-text-0">Da un&apos;idea, un framework.</h2>
+          <span className="font-mono text-xs font-medium tracking-[2px] text-accent">03 / PERCHE FR&gt;ME</span>
+          <h2 className="mt-4 text-[48px] font-extrabold tracking-[-2px] text-text-0">Controllo del dato, utilita operativa.</h2>
           <p className="mt-4 max-w-[600px] text-base leading-relaxed text-text-1" style={{ lineHeight: 1.6 }}>
-            Nati dall&apos;ossessione per l&apos;efficienza, cresciuti con la passione per l&apos;innovazione.
+            FR&gt;ME nasce per aiutare le aziende a usare AI, automazioni e software mantenendo il controllo su dati e know-how.
           </p>
         </div>
 
@@ -41,10 +39,10 @@ export default function BrandHistory() {
           {/* Left: Intro + Values */}
           <div className={cn("transition-all duration-500", inView ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0")}>
             <p className="mb-6 text-base leading-relaxed text-text-1" style={{ lineHeight: 1.8 }}>
-              FR&gt;ME nasce dalla convinzione che ogni business merita strumenti intelligenti. Il nostro nome — una fusione tra &quot;frame&quot; e il simbolo &quot;&gt;&quot; del codice — rappresenta la nostra missione: inquadrare il futuro attraverso la tecnologia.
+              FR&gt;ME nasce dall&apos;esigenza sempre piu concreta delle aziende di analizzare dati internamente, automatizzare processi e usare agenti AI senza affidare informazioni sensibili a strumenti esterni non governati.
             </p>
             <p className="mb-10 text-base leading-relaxed text-text-1" style={{ lineHeight: 1.8 }}>
-              Siamo un team di ingegneri, designer e strategist che parlano la stessa lingua: quella dei risultati misurabili. Ogni progetto parte da un principio semplice: eliminare il superfluo, potenziare cio che conta.
+              Lavoriamo come partner tecnico operativo: partiamo dai processi reali, definiamo il perimetro dei dati e costruiamo soluzioni su misura con attenzione a sicurezza, accessi, integrazioni e continuita del lavoro quotidiano.
             </p>
 
             <div className="grid grid-cols-2 gap-4">
