@@ -76,8 +76,8 @@ export async function POST(request: Request) {
     // Send email via Resend
     if (process.env.RESEND_API_KEY) {
       const resend = new Resend(process.env.RESEND_API_KEY);
-      await resend.emails.send({
-        from: "FR>ME Contatti <noreply@aiframe.it>",
+      const { error } = await resend.emails.send({
+        from: "FRAME Contatti <noreply@aiframe.it>",
         to: CONTACT_TO_EMAIL,
         subject: `Nuova richiesta da ${sanitized.nome}`,
         html: `
@@ -90,10 +90,17 @@ export async function POST(request: Request) {
           <p><strong>Messaggio:</strong> ${sanitized.messaggio || "Nessun messaggio"}</p>
         `,
       });
+      if (error) {
+        console.error("Resend error:", error);
+        return NextResponse.json({ error: "Errore nell'invio dell'email" }, { status: 500 });
+      }
+    } else {
+      console.warn("RESEND_API_KEY not configured, email not sent");
     }
 
     return NextResponse.json({ success: true });
-  } catch {
+  } catch (err) {
+    console.error("Contact API error:", err);
     return NextResponse.json({ error: "Errore interno del server" }, { status: 500 });
   }
 }
