@@ -1,0 +1,10 @@
+{
+  "version": "0.2.0-beta.19",
+  "package": "https://aiframe.it/wpla/wpla-lead-assistant-0.2.0-beta.19.zip",
+  "sha256": "094423019cec2c4502beaa3c9248c4fc9e52b5c27249b4dfafb2f03e6c038cf4",
+  "requires": "7.0",
+  "requires_php": "8.3",
+  "tested": "7.1",
+  "released": "2026-10-23",
+  "changelog": "Updates arrive inside WordPress: a newer version announced on aiframe.it appears in Dashboard > Updates and on the Plugins page, with \"View details\" and the changelog, and installs like any other plugin update, keeping settings, keys, sources and requests. The downloaded package is installed only if its SHA-256 matches the announced one; a missing, slow or invalid update file offers nothing and changes nothing. The first version with updates must still be installed with \"Replace current with uploaded\"."
+}
