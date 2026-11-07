@@ -5,13 +5,14 @@ import NewsletterSection from "@/components/sections/NewsletterSection";
 import ChatWidget from "@/components/ui/ChatWidget";
 import { getRisorse } from "@/lib/strapi";
 import type { Risorsa } from "@/lib/types";
+import { AGENCY_NAME } from "@/lib/brand";
 
 export const metadata: Metadata = {
-  title: "Risorse — FR>ME | Template, Guide e Checklist operative",
+  title: { absolute: `Guide su richieste dal sito, chatbot e CRM per piccole aziende | ${AGENCY_NAME}` },
   description:
     "Scarica template, guide e checklist su automazioni, setup proprietari, sicurezza dei dati e processi aziendali.",
   openGraph: {
-    title: "Risorse — FR>ME",
+    title: `Risorse | ${AGENCY_NAME}`,
     description:
       "Template, guide e strumenti per automatizzare processi mantenendo controllo su dati e know-how.",
     url: "https://aiframe.it/risorse",

@@ -1,0 +1,12 @@
+# aiframe
+
+> aiframe costruisce un plugin WordPress gratuito, in italiano, per piccole aziende: risponde ai clienti con le informazioni del sito, raccoglie le richieste fuori orario e le consegna via email e nel pannello di WordPress. Studio a Salerno.
+
+## Pagine
+
+- [Home](https://aiframe.it/): cosa fa il plugin, come si installa, a che punto è la beta, cosa è gratis e cosa no.
+- [Plugin](https://aiframe.it/plugin): cosa fa e cosa non fa, requisiti (WordPress 7.0, PHP 8.3), installazione della beta, domande frequenti.
+- [Servizi](https://aiframe.it/servizi): avvio guidato, piano a pagamento (in arrivo), collegamento al gestionale. Prezzo su chiamata.
+- [Risorse](https://aiframe.it/risorse): guide pratiche per chi riceve richieste dal sito.
+- [Privacy](https://aiframe.it/privacy): come sono trattati i dati sul sito e nel plugin.
+- [Contatti](https://aiframe.it/contatti): 30 minuti per parlare del tuo sito.

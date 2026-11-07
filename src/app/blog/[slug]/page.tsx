@@ -18,11 +18,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const articolo = res.data?.[0];
 
   if (!articolo) {
-    return { title: "Articolo non trovato — FR>ME" };
+    return { title: "Articolo non trovato" };
   }
 
   return {
-    title: `${articolo.titolo} — FR>ME Blog`,
+    title: articolo.titolo,
     description: articolo.excerpt,
     openGraph: {
       title: articolo.titolo,

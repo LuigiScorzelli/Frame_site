@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
+import { AGENCY_NAME, PLUGIN_NAME } from "@/lib/brand";
 
 export const metadata: Metadata = {
-  title: "Contatti — FR>ME | Prenota una Call",
+  title: "Contatti",
   description:
-    "Prenota una call gratuita con FR>ME. Analizziamo processi, dati e requisiti di sicurezza per valutare automazioni, agenti AI o software su misura.",
+    `Parliamone in 30 minuti: ci mostri il tuo sito, ti diciamo cosa farebbe ${PLUGIN_NAME} e se ha senso per te.`,
   openGraph: {
-    title: "Contatti — FR>ME",
+    title: `Contatti | ${AGENCY_NAME}`,
     description:
-      "Prenota una call gratuita per capire come automatizzare processi mantenendo controllo su dati e know-how.",
+      `Ci mostri il tuo sito, ti diciamo cosa farebbe ${PLUGIN_NAME} e se ha senso per te.`,
     url: "https://aiframe.it/contatti",
   },
 };

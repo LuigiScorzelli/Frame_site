@@ -4,13 +4,14 @@ import Footer from "@/components/layout/Footer";
 import BlogGrid from "@/components/sections/BlogGrid";
 import ChatWidget from "@/components/ui/ChatWidget";
 import { getArticoli } from "@/lib/strapi";
+import { AGENCY_NAME } from "@/lib/brand";
 
 export const metadata: Metadata = {
-  title: "Blog — FR>ME | Insight su AI e Automazione",
+  title: "Blog",
   description:
     "Articoli tecnici, case study e best practice su AI, automazione e sviluppo software per PMI italiane.",
   openGraph: {
-    title: "Blog — FR>ME",
+    title: `Blog | ${AGENCY_NAME}`,
     description:
       "Insight, guide e novita dal mondo dell'automazione AI.",
     url: "https://aiframe.it/blog",

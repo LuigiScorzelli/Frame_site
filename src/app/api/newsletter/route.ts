@@ -36,7 +36,7 @@ export async function POST(request: Request) {
     if (process.env.RESEND_API_KEY) {
       const resend = new Resend(process.env.RESEND_API_KEY);
       await resend.emails.send({
-        from: "FR>ME Newsletter <noreply@aiframe.it>",
+        from: process.env.RESEND_FROM || "aiframe <noreply@aiframe.it>",
         to: CONTACT_TO_EMAIL,
         subject: `Nuova iscrizione newsletter: ${sanitizedEmail}`,
         html: `<p>Nuova iscrizione alla newsletter: <strong>${sanitizedEmail}</strong></p>`,

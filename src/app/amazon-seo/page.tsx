@@ -3,20 +3,21 @@ import Link from "next/link";
 import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
 import ChatWidget from "@/components/ui/ChatWidget";
+import { AGENCY_NAME } from "@/lib/brand";
 
 const chatGptToolUrl =
   "https://chatgpt.com/g/g-69fceb94bca881919e19011a2aff1fb3-intent-hexagon-mapping-tool";
 
 export const metadata: Metadata = {
-  title: "Amazon SEO Intent Hexagon — FR>ME",
+  title: "Amazon SEO Intent Hexagon",
   description:
     "Scopri come Amazon interpreta keyword, intenti e percorsi di ricerca con l'Intent Hexagon. Audit Amazon SEO per seller e brand.",
   openGraph: {
-    title: "Amazon SEO Intent Hexagon — FR>ME",
+    title: `Amazon SEO Intent Hexagon | ${AGENCY_NAME}`,
     description:
       "Un framework pratico per trasformare il brevetto Amazon 12,561,383 in azioni su listing, keyword, competitor e accessori.",
     url: "https://aiframe.it/amazon-seo",
-    siteName: "FR>ME",
+    siteName: AGENCY_NAME,
     locale: "it_IT",
     type: "website",
   },

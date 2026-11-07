@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { formatDate } from "@/lib/utils";
 import { getStrapiMediaUrl } from "@/lib/strapi";
 import type { Articolo } from "@/lib/types";
+import { AGENCY_NAME } from "@/lib/brand";
 
 interface BlogCardProps {
   articolo: Articolo;
@@ -29,7 +30,7 @@ export default function BlogCard({ articolo, className }: BlogCardProps) {
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
-          <div className="flex h-full items-center justify-center font-mono text-2xl text-text-1/30">FR&gt;ME</div>
+          <div className="flex h-full items-center justify-center font-mono text-2xl text-text-1/30">{AGENCY_NAME}</div>
         )}
       </div>
       <div className="flex flex-1 flex-col p-5 pt-5">

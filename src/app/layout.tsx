@@ -3,6 +3,8 @@ import { Sora, Space_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
+import JsonLd from "@/components/seo/JsonLd";
+import { AGENCY_NAME, CITY, CONTACT_EMAIL, FOUNDER_URL, SITE_URL } from "@/lib/brand";
 
 const sora = Sora({
   variable: "--font-sora",
@@ -15,26 +17,22 @@ const spaceMono = Space_Mono({
   weight: ["400", "700"],
 });
 
+const descrizione =
+  "Plugin WordPress gratuito in italiano per piccole aziende: risponde ai clienti con le informazioni del sito, raccoglie le richieste fuori orario e te le consegna.";
+
 export const metadata: Metadata = {
-  title: "FR>ME — Automazioni, agenti AI e software con controllo dei dati",
-  description:
-    "Aiutiamo aziende e seller Amazon a semplificare processi operativi con automazioni, agenti AI e software su misura, mantenendo attenzione su dati interni, sicurezza e know-how aziendale.",
-  keywords: [
-    "AI",
-    "automazione",
-    "PMI",
-    "Italia",
-    "n8n",
-    "LangChain",
-    "agenti AI",
-  ],
-  authors: [{ name: "Luigi Scorzelli" }],
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${AGENCY_NAME}: il tuo sito WordPress risponde anche quando sei chiuso`,
+    template: `%s | ${AGENCY_NAME}`,
+  },
+  description: descrizione,
+  authors: [{ name: "Luigi Scorzelli", url: FOUNDER_URL }],
   openGraph: {
-    title: "FR>ME — Automazioni, agenti AI e software con controllo dei dati",
-    description:
-      "Automazioni, agenti AI e software custom per processi aziendali, dati interni e setup proprietari.",
-    url: "https://aiframe.it",
-    siteName: "FR>ME",
+    title: `${AGENCY_NAME}: il tuo sito WordPress risponde anche quando sei chiuso`,
+    description: descrizione,
+    url: SITE_URL,
+    siteName: AGENCY_NAME,
     locale: "it_IT",
     type: "website",
   },
@@ -50,6 +48,18 @@ export default function RootLayout({
       <body
         className={`${sora.variable} ${spaceMono.variable} antialiased bg-bg-0 text-text-0`}
       >
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: AGENCY_NAME,
+            url: SITE_URL,
+            email: CONTACT_EMAIL,
+            logo: `${SITE_URL}/logos/logo-icon.svg`,
+            address: { "@type": "PostalAddress", addressLocality: CITY, addressCountry: "IT" },
+            founder: { "@type": "Person", name: "Luigi Scorzelli", url: FOUNDER_URL },
+          }}
+        />
         {children}
         <Analytics />
         <SpeedInsights />

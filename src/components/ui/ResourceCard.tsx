@@ -3,6 +3,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { getStrapiMediaUrl } from "@/lib/strapi";
 import type { Risorsa } from "@/lib/types";
+import { AGENCY_NAME } from "@/lib/brand";
 
 interface ResourceCardProps {
   risorsa: Risorsa;
@@ -32,7 +33,7 @@ export default function ResourceCard({ risorsa, className }: ResourceCardProps) 
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
-          <div className="flex h-full items-center justify-center font-mono text-2xl text-text-1/30">FR&gt;ME</div>
+          <div className="flex h-full items-center justify-center font-mono text-2xl text-text-1/30">{AGENCY_NAME}</div>
         )}
       </div>
       <div className="flex flex-1 flex-col p-5">
