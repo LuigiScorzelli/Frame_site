@@ -15,6 +15,8 @@ export const WPORG_URL = process.env.NEXT_PUBLIC_WPORG_URL ?? "";
 // Freemius customer portal (sprint 2). Empty → link hidden.
 export const ACCOUNT_URL = process.env.NEXT_PUBLIC_ACCOUNT_URL ?? "";
 export const BETA_DOWNLOAD_PATH = "/api/wpla/download";
+/** "Installa gratis" target: /plugin decides between WordPress.org and the beta download. */
+export const INSTALL_PATH = "/plugin#installa";
 
 /** Where "Prenota 30 minuti" goes: Calendly if configured, otherwise the contact page. */
 export const BOOKING_URL = CALENDLY_URL || "/contatti";

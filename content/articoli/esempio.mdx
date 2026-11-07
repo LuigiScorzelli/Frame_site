@@ -1,0 +1,34 @@
+---
+titolo: "Articolo di esempio: come si scrive un articolo per aiframe"
+descrizione: "Bozza di prova per il blog in MDX: mostra frontmatter, titoli, liste, tabelle, il blocco Nota e il blocco Installa. Non viene pubblicata in produzione."
+data: 2026-11-07
+categoria: bottega
+tempoLettura: 2
+bozza: true
+---
+
+Questo file serve a controllare che il blog funzioni. Resta in bozza: in produzione non compare né nell'elenco né nella sitemap.
+
+## Il frontmatter
+
+Ogni articolo comincia con questi campi:
+
+- `titolo` e `descrizione` (140-160 caratteri, diventa la meta description)
+- `data` nel formato AAAA-MM-GG
+- `categoria`: una tra richieste-perse, sito-crm, ai-onesta, privacy, bottega
+- `tempoLettura` in minuti, `cover` facoltativa, `bozza` vero o falso
+
+Lo slug è il nome del file: `esempio.mdx` diventa `/risorse/esempio`.
+
+## Una tabella
+
+| Campo | Obbligatorio |
+| --- | --- |
+| titolo | sì |
+| cover | no |
+
+<Nota titolo="Regola sui numeri">
+Ogni numero in un articolo ha una fonte. Se il dato non c'è ancora, si scrive la frase senza numero.
+</Nota>
+
+<CtaInstalla />

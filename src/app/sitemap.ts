@@ -1,12 +1,13 @@
 import type { MetadataRoute } from "next";
-import { getArticoli } from "@/lib/strapi";
+import { getArticoli } from "@/lib/content";
 import { SITE_URL } from "@/lib/brand";
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: SITE_URL, lastModified: now, changeFrequency: "weekly", priority: 1 },
     { url: `${SITE_URL}/plugin`, lastModified: now, changeFrequency: "weekly", priority: 0.95 },
+    { url: `${SITE_URL}/check-up`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
     { url: `${SITE_URL}/servizi`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE_URL}/risorse`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE_URL}/contatti`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
@@ -14,14 +15,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/amazon-seo`, lastModified: now, changeFrequency: "monthly", priority: 0.4 },
   ];
 
-  // TODO 0.6 (Sessione B): read MDX articles from content/ and list them under /risorse/[slug].
-  const res = await getArticoli(1, 100);
-  const blogRoutes: MetadataRoute.Sitemap = res.data.map((articolo) => ({
-    url: `${SITE_URL}/blog/${articolo.slug}`,
-    lastModified: new Date(articolo.updatedAt),
-    changeFrequency: "monthly",
-    priority: 0.6,
-  }));
+  // Drafts are already excluded in production by getArticoli(); filter again so a dev build never lists them.
+  const articoli: MetadataRoute.Sitemap = getArticoli()
+    .filter((a) => !a.bozza)
+    .map((a) => ({
+      url: `${SITE_URL}/risorse/${a.slug}`,
+      lastModified: new Date(`${a.data}T12:00:00Z`),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    }));
 
-  return [...staticRoutes, ...blogRoutes];
+  return [...staticRoutes, ...articoli];
 }
