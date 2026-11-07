@@ -9,13 +9,25 @@ interface InteresseFormProps {
   interesse?: string;
   pagina: string;
   bottone?: string;
+  /** When set, the browser starts this download right after a successful sign-up (beta gate). */
+  download?: string;
+  /** Replaces the default consent text, e.g. to say what the beta emails are about. */
+  testoConsenso?: string;
 }
 
 /**
  * Email capture with explicit consent. Posts to /api/newsletter (Brevo double opt-in);
- * the route answers 503 while Brevo is not configured.
+ * the route answers 503 while Brevo is not configured. With `download`, the file starts
+ * right after the sign-up, without waiting for the confirmation email.
  */
-export default function InteresseForm({ fonte = "newsletter", interesse, pagina, bottone = "Avvisami quando è disponibile" }: InteresseFormProps) {
+export default function InteresseForm({
+  fonte = "newsletter",
+  interesse,
+  pagina,
+  bottone = "Avvisami quando è disponibile",
+  download,
+  testoConsenso,
+}: InteresseFormProps) {
   const [email, setEmail] = useState("");
   const [consenso, setConsenso] = useState(false);
   const [stato, setStato] = useState<"idle" | "loading" | "ok" | "error">("idle");
@@ -44,6 +56,10 @@ export default function InteresseForm({ fonte = "newsletter", interesse, pagina,
       setStato("ok");
       // The check-up email has its own funnel event; every other source counts as newsletter.
       traccia(fonte === "checkup" ? "checkup_email" : "newsletter_ok", { pagina, fonte });
+      if (download) {
+        traccia("download_beta", { pagina, posizione: "pagina", fonte });
+        window.location.assign(download);
+      }
     } catch {
       setStato("error");
       setErrore(`Non siamo riusciti a inviare. Scrivici a ${CONTACT_EMAIL}.`);
@@ -51,6 +67,15 @@ export default function InteresseForm({ fonte = "newsletter", interesse, pagina,
   };
 
   if (stato === "ok") {
+    if (download) {
+      return (
+        <p className="text-sm text-accent" role="status">
+          Download avviato. Se non parte,{" "}
+          <a href={download} className="underline hover:text-text-0">scarica da qui</a>. Controlla la posta per
+          confermare l&apos;iscrizione.
+        </p>
+      );
+    }
     return <p className="text-sm text-accent">Fatto. Controlla la posta per confermare.</p>;
   }
 
@@ -88,7 +113,7 @@ export default function InteresseForm({ fonte = "newsletter", interesse, pagina,
           className="mt-0.5 accent-[#BFFF00]"
         />
         <span>
-          Acconsento a ricevere email da {AGENCY_NAME}. Leggi la <a href="/privacy" className="underline hover:text-text-0">privacy</a>.
+          {testoConsenso ?? `Acconsento a ricevere email da ${AGENCY_NAME}.`} Leggi la <a href="/privacy" className="underline hover:text-text-0">privacy</a>.
         </span>
       </label>
       {errore && <p className="text-sm text-red" role="alert">{errore}</p>}

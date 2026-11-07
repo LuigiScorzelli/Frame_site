@@ -115,9 +115,17 @@ export default function PluginPage() {
                 </CtaButton>
               ) : (
                 <>
-                  <CtaButton href={BETA_DOWNLOAD_PATH} evento="download_beta" props={{ pagina: "plugin", posizione: "pagina", fonte: "beta" }}>
-                    SCARICA LA BETA &darr;
-                  </CtaButton>
+                  <p className="mb-4 text-[15px] text-text-0">
+                    Lasciaci l&apos;email e il download parte subito: ti scriviamo quando esce un aggiornamento e
+                    con qualche consiglio per usarlo bene.
+                  </p>
+                  <InteresseForm
+                    fonte="beta"
+                    pagina="plugin"
+                    bottone="SCARICA LA BETA ↓"
+                    download={BETA_DOWNLOAD_PATH}
+                    testoConsenso={`Acconsento a ricevere da ${AGENCY_NAME} email sugli aggiornamenti della beta e consigli per usarla.`}
+                  />
                   <ol className="mt-6 space-y-2 text-[15px] text-text-0">
                     {installazione.map((p, i) => (
                       <li key={p} className="flex gap-3">
