@@ -21,7 +21,7 @@ export function configBrevo(): ConfigBrevo | null {
   return { apiKey, listId, templateId, redirectUrl };
 }
 
-export type EsitoBrevo = { ok: true } | { ok: false; status: number; codice?: string };
+export type EsitoBrevo = { ok: true } | { ok: false; status: number; codice?: string; messaggio?: string };
 
 /**
  * Sends the double opt-in email. Brevo answers 201 for a new contact and 204 for an existing one:
@@ -46,6 +46,8 @@ export async function creaContattoDoi(
     cache: "no-store",
   });
   if (res.ok) return { ok: true };
-  const corpo = (await res.json().catch(() => ({}))) as { code?: string };
-  return { ok: false, status: res.status, codice: corpo.code };
+  const corpo = (await res.json().catch(() => ({}))) as { code?: string; message?: string };
+  // Brevo's message says which parameter failed; mask the email in case it is echoed back.
+  const messaggio = (corpo.message ?? "").split(email).join("<email>").slice(0, 300);
+  return { ok: false, status: res.status, codice: corpo.code, messaggio };
 }

@@ -61,7 +61,7 @@ export async function POST(request: Request) {
     if (esito.ok) return NextResponse.json({ ok: true });
 
     // Never log the email: only status and Brevo's error code.
-    console.error("newsletter: errore Brevo", esito.status, esito.codice ?? "");
+    console.error("newsletter: errore Brevo", esito.status, esito.codice ?? "", esito.messaggio ?? "");
     if (esito.status === 400 && esito.codice === "invalid_parameter") {
       return NextResponse.json({ error: "Inserisci un'email valida." }, { status: 400 });
     }
