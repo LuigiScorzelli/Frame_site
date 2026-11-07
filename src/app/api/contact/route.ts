@@ -1,14 +1,15 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { CONTACT_EMAIL } from "@/lib/brand";
+import { controllaLimite, creaLimitatore, intestazioniLimite } from "@/lib/ratelimit";
 
-const CONTACT_TO_EMAIL = process.env.CONTACT_TO_EMAIL || "info@aiframe.it";
+const CONTACT_TO_EMAIL = process.env.CONTACT_TO_EMAIL || CONTACT_EMAIL;
+const RESEND_FROM = process.env.RESEND_FROM || "aiframe <noreply@aiframe.it>";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-// Simple in-memory rate limiting (per IP, resets on server restart)
-const rateMap = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT = 10; // max requests
-const RATE_WINDOW = 60_000; // per 60 seconds
+// 10 requests per minute per IP: the 11th gets 429 (docs/lancio/01-piano-sprint.md, 0.8).
+const limitatore = creaLimitatore("contact", 10, "60 s");
 
 function escapeHtml(str: string): string {
   return str
@@ -19,88 +20,85 @@ function escapeHtml(str: string): string {
     .replace(/'/g, "&#039;");
 }
 
+function testo(v: unknown, max: number): string {
+  return typeof v === "string" ? v.trim().slice(0, max) : "";
+}
+
 export async function POST(request: Request) {
+  const limite = await controllaLimite(limitatore, request);
+  if (!limite.ok) {
+    return NextResponse.json(
+      { error: "Troppe richieste. Riprova tra poco." },
+      { status: 429, headers: intestazioniLimite(limite) },
+    );
+  }
+
+  let body: Record<string, unknown>;
   try {
-    // Rate limiting
-    const ip = request.headers.get("x-forwarded-for") ?? request.headers.get("x-real-ip") ?? "unknown";
-    const now = Date.now();
-    const entry = rateMap.get(ip);
-    if (entry && now < entry.resetAt) {
-      entry.count++;
-      if (entry.count > RATE_LIMIT) {
-        return NextResponse.json({ error: "Troppe richieste. Riprova tra poco." }, { status: 429 });
-      }
-    } else {
-      rateMap.set(ip, { count: 1, resetAt: now + RATE_WINDOW });
-    }
+    body = await request.json();
+    if (!body || typeof body !== "object" || Array.isArray(body)) throw new Error("not an object");
+  } catch {
+    return NextResponse.json({ errors: ["Richiesta non valida"] }, { status: 400 });
+  }
 
-    const body = await request.json();
-    const { nome, email, azienda, messaggio, data_preferita, orario } = body;
+  // Honeypot: real visitors never see this field. Bots that fill it get a silent 200.
+  if (testo(body.sito_web, 500).length > 0) {
+    return NextResponse.json({ success: true });
+  }
 
-    // Validation
-    const errors: string[] = [];
+  const nome = testo(body.nome, 120);
+  const email = testo(body.email, 200);
+  const sito = testo(body.sito, 300);
+  const messaggio = testo(body.messaggio, 5000);
+  const dataPreferita = testo(body.data_preferita, 60);
+  const orario = testo(body.orario, 20);
 
-    if (!nome || typeof nome !== "string" || nome.trim().length < 2) {
-      errors.push("Il nome deve avere almeno 2 caratteri");
-    }
-    if (!email || typeof email !== "string" || !EMAIL_REGEX.test(email.trim())) {
-      errors.push("Inserisci un'email valida");
-    }
-    if (azienda && typeof azienda === "string" && azienda.trim().length > 0 && azienda.trim().length < 2) {
-      errors.push("Il nome azienda deve avere almeno 2 caratteri");
-    }
-    if (!data_preferita || typeof data_preferita !== "string" || data_preferita.trim().length === 0) {
-      errors.push("Seleziona una data");
-    }
-    if (!orario || typeof orario !== "string" || orario.trim().length === 0) {
-      errors.push("Seleziona un orario");
-    }
+  const errors: string[] = [];
+  if (nome.length < 2) errors.push("Il nome deve avere almeno 2 caratteri");
+  if (!EMAIL_REGEX.test(email)) errors.push("Inserisci un'email valida");
+  if (body.consenso !== true) errors.push("Serve il consenso al trattamento dei dati");
+  if (errors.length > 0) {
+    return NextResponse.json({ errors }, { status: 400 });
+  }
 
-    if (errors.length > 0) {
-      return NextResponse.json({ errors }, { status: 400 });
+  const s = {
+    nome: escapeHtml(nome),
+    email: escapeHtml(email),
+    sito: escapeHtml(sito),
+    messaggio: escapeHtml(messaggio),
+    dataPreferita: escapeHtml(dataPreferita),
+    orario: escapeHtml(orario),
+  };
+
+  if (!process.env.RESEND_API_KEY) {
+    console.warn("contact: RESEND_API_KEY non configurata, email non inviata");
+    return NextResponse.json({ success: true });
+  }
+
+  try {
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    const { error } = await resend.emails.send({
+      from: RESEND_FROM,
+      to: CONTACT_TO_EMAIL,
+      replyTo: email,
+      subject: `Nuova richiesta da ${nome}`,
+      html: `
+        <h2>Nuova richiesta di contatto</h2>
+        <p><strong>Nome:</strong> ${s.nome}</p>
+        <p><strong>Email:</strong> ${s.email}</p>
+        <p><strong>Sito:</strong> ${s.sito || "Non indicato"}</p>
+        ${s.dataPreferita ? `<p><strong>Preferenza per la call:</strong> ${s.dataPreferita} ${s.orario}</p>` : ""}
+        <p><strong>Messaggio:</strong> ${s.messaggio || "Nessun messaggio"}</p>
+      `,
+    });
+    if (error) {
+      // Log the provider error name only: the payload contains personal data.
+      console.error("contact: errore Resend", error.name);
+      return NextResponse.json({ error: "Errore nell'invio dell'email" }, { status: 502 });
     }
-
-    // Sanitize
-    const sanitized = {
-      nome: escapeHtml(nome.trim()),
-      email: escapeHtml(email.trim()),
-      azienda: azienda ? escapeHtml(azienda.trim()) : "",
-      messaggio: messaggio ? escapeHtml(String(messaggio).trim()) : "",
-      data_preferita: escapeHtml(data_preferita.trim()),
-      orario: escapeHtml(orario.trim()),
-    };
-
-    // Audit log
-    console.log("New contact request:", sanitized);
-
-    // Send email via Resend
-    if (process.env.RESEND_API_KEY) {
-      const resend = new Resend(process.env.RESEND_API_KEY);
-      const { error } = await resend.emails.send({
-        from: "FRAME Contatti <noreply@aiframe.it>",
-        to: CONTACT_TO_EMAIL,
-        subject: `Nuova richiesta da ${sanitized.nome}`,
-        html: `
-          <h2>Nuova richiesta di contatto</h2>
-          <p><strong>Nome:</strong> ${sanitized.nome}</p>
-          <p><strong>Email:</strong> ${sanitized.email}</p>
-          <p><strong>Azienda:</strong> ${sanitized.azienda || "Non specificata"}</p>
-          <p><strong>Data preferita:</strong> ${sanitized.data_preferita}</p>
-          <p><strong>Orario:</strong> ${sanitized.orario}</p>
-          <p><strong>Messaggio:</strong> ${sanitized.messaggio || "Nessun messaggio"}</p>
-        `,
-      });
-      if (error) {
-        console.error("Resend error:", error);
-        return NextResponse.json({ error: "Errore nell'invio dell'email" }, { status: 500 });
-      }
-    } else {
-      console.warn("RESEND_API_KEY not configured, email not sent");
-    }
-
     return NextResponse.json({ success: true });
   } catch (err) {
-    console.error("Contact API error:", err);
+    console.error("contact: errore interno", err instanceof Error ? err.message : err);
     return NextResponse.json({ error: "Errore interno del server" }, { status: 500 });
   }
 }
