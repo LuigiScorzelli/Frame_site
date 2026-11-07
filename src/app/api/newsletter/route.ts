@@ -1,50 +1,73 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
+import { configBrevo, creaContattoDoi, type Fonte } from "@/lib/brevo";
+import { controllaLimite, creaLimitatore, intestazioniLimite } from "@/lib/ratelimit";
 
-const CONTACT_TO_EMAIL = process.env.CONTACT_TO_EMAIL || "info@aiframe.it";
+// POST /api/newsletter: Brevo contact with double opt-in and FONTE attribute (0.7).
+// Body: { email, fonte: "newsletter" | "checkup" | "beta", consenso: true, interesse? }.
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const FONTI: readonly Fonte[] = ["newsletter", "checkup", "beta"];
+const INTERESSE_REGEX = /^[a-z0-9-]{1,32}$/;
 
-const rateMap = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT = 5;
-const RATE_WINDOW = 60_000;
+const limitatore = creaLimitatore("newsletter", 5, "60 s");
 
 export async function POST(request: Request) {
+  const limite = await controllaLimite(limitatore, request);
+  if (!limite.ok) {
+    return NextResponse.json(
+      { error: "Troppe richieste. Riprova tra un minuto." },
+      { status: 429, headers: intestazioniLimite(limite) },
+    );
+  }
+
+  let body: Record<string, unknown>;
   try {
-    const ip = request.headers.get("x-forwarded-for") ?? request.headers.get("x-real-ip") ?? "unknown";
-    const now = Date.now();
-    const entry = rateMap.get(ip);
-    if (entry && now < entry.resetAt) {
-      entry.count++;
-      if (entry.count > RATE_LIMIT) {
-        return NextResponse.json({ error: "Troppe richieste. Riprova tra poco." }, { status: 429 });
-      }
-    } else {
-      rateMap.set(ip, { count: 1, resetAt: now + RATE_WINDOW });
+    body = await request.json();
+    if (!body || typeof body !== "object" || Array.isArray(body)) throw new Error("not an object");
+  } catch {
+    return NextResponse.json({ error: "Richiesta non valida." }, { status: 400 });
+  }
+
+  const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
+  if (!EMAIL_REGEX.test(email) || email.length > 200) {
+    return NextResponse.json({ error: "Inserisci un'email valida." }, { status: 400 });
+  }
+  if (body.consenso !== true) {
+    return NextResponse.json({ error: "Serve il consenso per mandarti le email." }, { status: 400 });
+  }
+  const fonte = body.fonte;
+  if (typeof fonte !== "string" || !FONTI.includes(fonte as Fonte)) {
+    return NextResponse.json({ error: "Fonte non valida." }, { status: 400 });
+  }
+  let interesse: string | undefined;
+  if (body.interesse !== undefined) {
+    if (typeof body.interesse !== "string" || !INTERESSE_REGEX.test(body.interesse)) {
+      return NextResponse.json({ error: "Interesse non valido." }, { status: 400 });
     }
+    interesse = body.interesse;
+  }
 
-    const body = await request.json();
-    const { email } = body;
+  const config = configBrevo();
+  if (!config) {
+    console.warn("newsletter: Brevo non configurato (BREVO_API_KEY, BREVO_LIST_ID, BREVO_DOI_TEMPLATE_ID, BREVO_REDIRECT_URL)");
+    return NextResponse.json({ error: "Iscrizioni non ancora attive" }, { status: 503 });
+  }
 
-    if (!email || typeof email !== "string" || !EMAIL_REGEX.test(email.trim())) {
+  try {
+    const esito = await creaContattoDoi(config, email, {
+      FONTE: fonte,
+      ...(interesse ? { INTERESSE: interesse } : {}),
+    });
+    if (esito.ok) return NextResponse.json({ ok: true });
+
+    // Never log the email: only status and Brevo's error code.
+    console.error("newsletter: errore Brevo", esito.status, esito.codice ?? "");
+    if (esito.status === 400 && esito.codice === "invalid_parameter") {
       return NextResponse.json({ error: "Inserisci un'email valida." }, { status: 400 });
     }
-
-    const sanitizedEmail = email.trim().toLowerCase();
-    console.log("Newsletter subscription:", sanitizedEmail);
-
-    if (process.env.RESEND_API_KEY) {
-      const resend = new Resend(process.env.RESEND_API_KEY);
-      await resend.emails.send({
-        from: process.env.RESEND_FROM || "aiframe <noreply@aiframe.it>",
-        to: CONTACT_TO_EMAIL,
-        subject: `Nuova iscrizione newsletter: ${sanitizedEmail}`,
-        html: `<p>Nuova iscrizione alla newsletter: <strong>${sanitizedEmail}</strong></p>`,
-      });
-    }
-
-    return NextResponse.json({ success: true });
-  } catch {
-    return NextResponse.json({ error: "Errore interno del server" }, { status: 500 });
+    return NextResponse.json({ error: "Non siamo riusciti a iscriverti. Riprova più tardi." }, { status: 502 });
+  } catch (err) {
+    console.error("newsletter: Brevo non raggiungibile", err instanceof Error ? err.name : err);
+    return NextResponse.json({ error: "Non siamo riusciti a iscriverti. Riprova più tardi." }, { status: 502 });
   }
 }
