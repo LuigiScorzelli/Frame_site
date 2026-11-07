@@ -3,12 +3,13 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { AGENCY_NAME, CONTACT_EMAIL } from "@/lib/brand";
 
 const quickOptions = [
   { icon: "⚡", text: "Voglio automatizzare i miei processi", action: "contatti" },
   { icon: "📈", text: "Richiedi un preventivo", action: "contatti" },
-  { icon: "📖", text: "Vedi i case study", action: "risultati" },
-  { icon: "💬", text: "Scrivi a FR>ME", action: "email" },
+  { icon: "📖", text: "Scopri il plugin", action: "plugin" },
+  { icon: "💬", text: `Scrivi a ${AGENCY_NAME}`, action: "email" },
 ] as const;
 
 export default function ChatWidget() {
@@ -21,11 +22,11 @@ export default function ChatWidget() {
       case "contatti":
         router.push("/contatti");
         break;
-      case "risultati":
-        router.push("/#risultati");
+      case "plugin":
+        router.push("/plugin");
         break;
       case "email":
-        window.open("mailto:info@aiframe.it", "_self");
+        window.open(`mailto:${CONTACT_EMAIL}`, "_self");
         break;
     }
   }
@@ -40,7 +41,7 @@ export default function ChatWidget() {
         )}
       >
         <div className="flex items-center justify-between border-b border-border px-4 py-3">
-          <span className="font-mono text-[11px] font-medium tracking-wider text-accent" style={{ letterSpacing: "1px" }}>FR&gt;ME ASSISTANT</span>
+          <span className="font-mono text-[11px] font-medium tracking-wider text-accent" style={{ letterSpacing: "1px" }}>{AGENCY_NAME.toUpperCase()} ASSISTANT</span>
           <button onClick={() => setOpen(false)} className="text-lg text-text-1 transition-colors hover:text-text-0">&times;</button>
         </div>
         <div className="p-4">
