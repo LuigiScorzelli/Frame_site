@@ -12,8 +12,8 @@ interface InteresseFormProps {
 }
 
 /**
- * Email capture with explicit consent. Posts to /api/newsletter
- * (the Brevo integration is item 0.7; until then the route may answer 503).
+ * Email capture with explicit consent. Posts to /api/newsletter (Brevo double opt-in);
+ * the route answers 503 while Brevo is not configured.
  */
 export default function InteresseForm({ fonte = "newsletter", interesse, pagina, bottone = "Avvisami quando è disponibile" }: InteresseFormProps) {
   const [email, setEmail] = useState("");
@@ -42,7 +42,8 @@ export default function InteresseForm({ fonte = "newsletter", interesse, pagina,
         return;
       }
       setStato("ok");
-      traccia("newsletter_ok", { pagina, fonte });
+      // The check-up email has its own funnel event; every other source counts as newsletter.
+      traccia(fonte === "checkup" ? "checkup_email" : "newsletter_ok", { pagina, fonte });
     } catch {
       setStato("error");
       setErrore(`Non siamo riusciti a inviare. Scrivici a ${CONTACT_EMAIL}.`);
