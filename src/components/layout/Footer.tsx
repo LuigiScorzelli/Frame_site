@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { ACCOUNT_URL, AGENCY_NAME, CITY, CONTACT_EMAIL, FOUNDER_URL } from "@/lib/brand";
+import { ACCOUNT_URL, AGENCY_NAME, CITY, CONTACT_EMAIL, FOUNDER_URL, PLUGIN_NAME } from "@/lib/brand";
 import TrackedLink from "@/components/ui/TrackedLink";
 
-const prodotto = [
+const cosaFacciamo = [
+  { label: "Servizi", href: "/servizi" },
   { label: "Plugin", href: "/plugin" },
   { label: "Check-up", href: "/check-up" },
-  { label: "Servizi", href: "/servizi" },
   { label: "Risorse", href: "/risorse" },
 ];
 
@@ -23,7 +23,7 @@ export default function Footer() {
               <span className="text-text-0">{AGENCY_NAME.slice(2)}</span>
             </Link>
             <p className="mt-3 text-sm text-text-1">
-              {AGENCY_NAME}, prodotti per piccole aziende che lavorano con il sito.
+              {AGENCY_NAME}, automazioni e AI per piccole aziende. Il nostro primo prodotto è {PLUGIN_NAME}.
             </p>
             <a href={`mailto:${CONTACT_EMAIL}`} className="mt-3 inline-block font-mono text-[13px] text-accent hover:underline">
               {CONTACT_EMAIL}
@@ -32,9 +32,9 @@ export default function Footer() {
 
           <div className="flex flex-wrap gap-12">
             <div>
-              <h2 className={headClass}>PRODOTTO</h2>
+              <h2 className={headClass}>COSA FACCIAMO</h2>
               <ul className="space-y-3">
-                {prodotto.map((l) => (
+                {cosaFacciamo.map((l) => (
                   <li key={l.href}><Link href={l.href} className={linkClass}>{l.label}</Link></li>
                 ))}
               </ul>

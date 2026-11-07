@@ -5,16 +5,14 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import GlitchLogo from "@/components/animations/GlitchLogo";
 import TrackedLink from "@/components/ui/TrackedLink";
-import { AGENCY_NAME } from "@/lib/brand";
+import { AGENCY_NAME, BOOKING_URL } from "@/lib/brand";
 
 const navLinks = [
+  { label: "SERVIZI", href: "/servizi" },
   { label: "PLUGIN", href: "/plugin" },
   { label: "CHECK-UP", href: "/check-up" },
-  { label: "SERVIZI", href: "/servizi" },
   { label: "RISORSE", href: "/risorse" },
 ];
-
-const INSTALL_HREF = "/plugin#installa";
 
 export default function NavBar() {
   const [scrolled, setScrolled] = useState(false);
@@ -48,8 +46,8 @@ export default function NavBar() {
         </div>
 
         <div className="hidden items-center gap-4 md:flex">
-          <TrackedLink href={INSTALL_HREF} evento="click_installa" props={{ posizione: "menu" }} className="bg-accent px-5 py-2 font-mono text-[10px] font-bold tracking-wider text-bg-0" style={{ letterSpacing: "1px" }}>
-            INSTALLA GRATIS &rarr;
+          <TrackedLink href={BOOKING_URL} evento="click_prenota" props={{ posizione: "menu" }} className="bg-accent px-5 py-2 font-mono text-[10px] font-bold tracking-wider text-bg-0" style={{ letterSpacing: "1px" }}>
+            PRENOTA 30 MINUTI &rarr;
           </TrackedLink>
         </div>
 
@@ -68,7 +66,7 @@ export default function NavBar() {
           {navLinks.map((link) => (
             <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)} className="font-mono text-xl font-medium tracking-wider text-text-0 transition-colors hover:text-accent">{link.label}</Link>
           ))}
-          <TrackedLink href={INSTALL_HREF} evento="click_installa" props={{ posizione: "menu" }} className="mt-4 bg-accent px-8 py-3 font-mono text-sm font-bold tracking-wider text-bg-0">INSTALLA GRATIS &rarr;</TrackedLink>
+          <TrackedLink href={BOOKING_URL} evento="click_prenota" props={{ posizione: "menu" }} className="mt-4 bg-accent px-8 py-3 font-mono text-sm font-bold tracking-wider text-bg-0">PRENOTA 30 MINUTI &rarr;</TrackedLink>
         </div>
       </div>
     </header>
