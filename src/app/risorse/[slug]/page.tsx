@@ -69,8 +69,13 @@ export default async function ArticoloPage({ params }: PageProps) {
         }}
       />
       <NavBar />
-      <main className="bg-bg-0 pt-24 lg:pt-28">
-        <article className="mx-auto max-w-[780px] px-6 pb-20 pt-16">
+      <main className="relative bg-bg-0 pt-24 lg:pt-28">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 h-[520px]"
+          style={{ backgroundImage: "radial-gradient(circle, rgba(232,236,244,0.03) 1px, transparent 1px)", backgroundSize: "32px 32px", maskImage: "linear-gradient(to bottom, black, transparent)" }}
+        />
+        <article className="relative mx-auto max-w-[780px] px-6 pb-20 pt-16">
           <div className="mb-8 flex items-center gap-2 font-mono text-[11px] tracking-[1px] text-text-1">
             <Link href="/risorse" className="transition-colors hover:text-accent">RISORSE</Link>
             <span aria-hidden>/</span>
@@ -78,7 +83,7 @@ export default async function ArticoloPage({ params }: PageProps) {
             {articolo.bozza && <span className="ml-2 border border-amber px-2 py-0.5 text-amber">BOZZA</span>}
           </div>
 
-          <h1 className="text-4xl font-extrabold leading-[1.1] tracking-[-2px] text-text-0 lg:text-5xl">
+          <h1 className="animate-[fadeIn_0.6s_ease_both] text-4xl font-extrabold leading-[1.05] tracking-[-2px] text-text-0 lg:text-[56px] lg:tracking-[-3px]">
             {articolo.titolo}
           </h1>
 
@@ -100,6 +105,7 @@ export default async function ArticoloPage({ params }: PageProps) {
             <p className="text-xl font-bold text-text-0">Il tuo sito può rispondere anche stasera.</p>
             <CtaButton
               href={INSTALL_PATH}
+              variant="gradient"
               evento="click_installa"
               props={{ pagina: "articolo", posizione: "chiusura" }}
               className="mt-6"

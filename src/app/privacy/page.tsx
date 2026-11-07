@@ -3,6 +3,7 @@ import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
 import ChatWidget from "@/components/ui/ChatWidget";
 import Section from "@/components/ui/Section";
+import PageHero from "@/components/ui/PageHero";
 import { AGENCY_NAME, CONTACT_EMAIL, PLUGIN_NAME, SITE_URL } from "@/lib/brand";
 
 const descrizione = `Come ${AGENCY_NAME} e il plugin ${PLUGIN_NAME} trattano i dati: spiegato in italiano semplice, poi l'informativa completa.`;
@@ -36,24 +37,17 @@ export default function PrivacyPage() {
     <>
       <NavBar />
       <main>
-        <section className="pb-8 pt-36 lg:pt-44">
-          <div className="mx-auto max-w-[1200px] px-6 lg:px-14">
-            <span className="font-mono text-xs font-medium tracking-[2px] text-accent">PRIVACY</span>
-            <h1 className="mt-6 max-w-4xl text-4xl font-extrabold leading-[1.1] tracking-[-2px] text-text-0 sm:text-5xl">
-              Come trattiamo i dati, spiegato come lo spiegheremmo a un cliente
-            </h1>
-          </div>
-        </section>
+        <PageHero tag="PRIVACY" title="Come trattiamo i dati, spiegato come lo spiegheremmo a un cliente" />
 
-        <Section tag="SUL SITO" title={`Sul sito ${AGENCY_NAME}.it`}>
-          <ul className="max-w-3xl space-y-3 text-[15px] leading-relaxed text-text-1">
-            {sulSito.map((x) => <li key={x} className="flex gap-3"><span className="text-accent" aria-hidden>·</span>{x}</li>)}
+        <Section numero={1} tag="SUL SITO" title={`Sul sito ${AGENCY_NAME}.it`}>
+          <ul className="max-w-3xl space-y-3 border border-border bg-bg-1 p-8 text-[15px] leading-relaxed text-text-1">
+            {sulSito.map((x) => <li key={x} className="flex gap-3"><span className="font-mono text-accent" aria-hidden>&gt;</span>{x}</li>)}
           </ul>
         </Section>
 
-        <Section tag="NEL PLUGIN" title={`Nel plugin ${PLUGIN_NAME} installato sul tuo sito`}>
-          <ul className="max-w-3xl space-y-3 text-[15px] leading-relaxed text-text-1">
-            {nelPlugin.map((x) => <li key={x} className="flex gap-3"><span className="text-accent" aria-hidden>·</span>{x}</li>)}
+        <Section numero={2} tag="NEL PLUGIN" title={`Nel plugin ${PLUGIN_NAME} installato sul tuo sito`}>
+          <ul className="max-w-3xl space-y-3 border border-border bg-bg-1 p-8 text-[15px] leading-relaxed text-text-1">
+            {nelPlugin.map((x) => <li key={x} className="flex gap-3"><span className="font-mono text-accent" aria-hidden>&gt;</span>{x}</li>)}
           </ul>
           <h3 className="mt-10 text-xl font-bold text-text-0">Come cancelli i dati di un cliente</h3>
           <p className="mt-3 max-w-3xl text-[15px] leading-relaxed text-text-1">
@@ -61,7 +55,7 @@ export default function PrivacyPage() {
           </p>
         </Section>
 
-        <Section tag="INFORMATIVA COMPLETA" title="Titolare, basi giuridiche, responsabili, tempi, diritti">
+        <Section numero={3} tag="INFORMATIVA COMPLETA" title="Titolare, basi giuridiche, responsabili, tempi, diritti">
           {/* TODO: testo legale completo, da far rivedere con il parere privacy già previsto. */}
           <p className="max-w-3xl text-[15px] leading-relaxed text-text-1">
             L&apos;informativa completa è in revisione legale e verrà pubblicata qui. Per qualsiasi richiesta sui tuoi

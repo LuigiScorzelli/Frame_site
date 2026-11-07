@@ -3,6 +3,8 @@ import Link from "next/link";
 import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
 import NewsletterSection from "@/components/sections/NewsletterSection";
+import PageHero from "@/components/ui/PageHero";
+import Section from "@/components/ui/Section";
 import ChatWidget from "@/components/ui/ChatWidget";
 import { CATEGORIE, formatDataArticolo, getArticoli } from "@/lib/content";
 import { AGENCY_NAME, SITE_URL } from "@/lib/brand";
@@ -40,47 +42,40 @@ export default function RisorsePage() {
     <>
       <NavBar />
       <main>
-        <section className="pb-16 pt-36 lg:pt-44">
-          <div className="mx-auto max-w-[1200px] px-6 lg:px-14">
-            <span className="font-mono text-xs font-medium tracking-[2px] text-accent">RISORSE</span>
-            <h1 className="mt-6 max-w-4xl text-4xl font-extrabold leading-[1.1] tracking-[-2px] text-text-0 sm:text-5xl">
-              Guide pratiche per chi riceve richieste dal sito e vuole perderne meno.
-            </h1>
+        <PageHero tag="RISORSE" title="Guide pratiche per chi riceve richieste dal sito e vuole perderne meno." />
 
-            <div className="mt-12 grid gap-6 md:grid-cols-2">
-              {schede.map((s) => (
-                <Link key={s.tag} href={s.href} className="group border border-border bg-bg-1 p-8 transition-colors hover:border-accent-border">
-                  <span className="font-mono text-[11px] font-bold tracking-[2px] text-cyan">{s.tag}</span>
-                  <h2 className="mt-3 text-xl font-bold text-text-0 group-hover:text-accent">{s.titolo}</h2>
-                  <p className="mt-2 text-[15px] text-text-1">{s.testo}</p>
-                </Link>
-              ))}
-            </div>
+        <Section numero={1} tag="DA DOVE PARTIRE">
+          <div className="grid gap-6 md:grid-cols-2">
+            {schede.map((s) => (
+              <Link key={s.tag} href={s.href} className="group border border-border bg-bg-1 p-8 transition-colors hover:border-accent-border">
+                <span className="font-mono text-[11px] font-bold tracking-[2px] text-cyan">{s.tag}</span>
+                <h2 className="mt-3 text-xl font-bold text-text-0 group-hover:text-accent">{s.titolo}</h2>
+                <p className="mt-2 text-[15px] text-text-1">{s.testo}</p>
+                <span className="mt-6 inline-block font-mono text-[11px] tracking-[1px] text-accent">APRI &rarr;</span>
+              </Link>
+            ))}
           </div>
-        </section>
+        </Section>
 
         {articoli.length > 0 && (
-          <section className="border-t border-border py-16">
-            <div className="mx-auto max-w-[1200px] px-6 lg:px-14">
-              <h2 className="text-2xl font-extrabold tracking-[-1px] text-text-0">Articoli</h2>
-              <ul className="mt-8 divide-y divide-border border-y border-border">
+          <Section numero={2} tag="ARTICOLI" title="Articoli">
+              <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {articoli.map((a) => (
                   <li key={a.slug}>
-                    <Link href={`/risorse/${a.slug}`} className="group block py-6">
+                    <Link href={`/risorse/${a.slug}`} className="group flex h-full flex-col border border-border bg-bg-1 p-8 transition-colors hover:border-accent-border">
                       <div className="flex flex-wrap items-center gap-3 font-mono text-[11px] tracking-[1px] text-text-1">
                         <span className="text-accent">{CATEGORIE[a.categoria].toUpperCase()}</span>
                         <time dateTime={a.data}>{formatDataArticolo(a.data)}</time>
                         <span>{a.tempoLettura} min</span>
                         {a.bozza && <span className="border border-amber px-2 py-0.5 text-amber">BOZZA</span>}
                       </div>
-                      <h3 className="mt-2 text-lg font-bold text-text-0 group-hover:text-accent">{a.titolo}</h3>
+                      <h3 className="mt-4 text-lg font-bold text-text-0 group-hover:text-accent">{a.titolo}</h3>
                       <p className="mt-1 max-w-3xl text-[15px] text-text-1">{a.descrizione}</p>
                     </Link>
                   </li>
                 ))}
               </ul>
-            </div>
-          </section>
+          </Section>
         )}
 
         <NewsletterSection pagina="risorse" />

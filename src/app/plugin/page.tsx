@@ -5,12 +5,15 @@ import Footer from "@/components/layout/Footer";
 import ChatWidget from "@/components/ui/ChatWidget";
 import CtaButton from "@/components/ui/CtaButton";
 import Section from "@/components/ui/Section";
+import PageHero from "@/components/ui/PageHero";
+import Scheda from "@/components/ui/Scheda";
+import { IconaCroce, IconaSpunta } from "@/components/ui/Icone";
 import InteresseForm from "@/components/ui/InteresseForm";
 import JsonLd from "@/components/seo/JsonLd";
 import { AGENCY_NAME, BETA_DOWNLOAD_PATH, PLUGIN_NAME, SITE_URL, WPORG_URL } from "@/lib/brand";
 
 const descrizione =
-  "Assistente per siti WordPress di piccole aziende: risponde con le informazioni del tuo sito, raccoglie le richieste fuori orario, le consegna via email e nel pannello. Gratis, dati in Europa.";
+  "Assistente per siti WordPress di piccole aziende: risponde con le informazioni del tuo sito, raccoglie le richieste fuori orario, le consegna via email e nel pannello. Gratis, con la tua chiave AI.";
 
 export const metadata: Metadata = {
   title: { absolute: `${PLUGIN_NAME}, plugin chatbot gratuito per WordPress in italiano | ${AGENCY_NAME}` },
@@ -95,20 +98,13 @@ export default function PluginPage() {
       />
       <NavBar />
       <main>
-        <section className="pb-20 pt-36 lg:pt-44">
-          <div className="mx-auto max-w-[1200px] px-6 lg:px-14">
-            <span className="font-mono text-xs font-medium tracking-[2px] text-accent">
-              PLUGIN WORDPRESS · GRATUITO · IN ITALIANO
-            </span>
-            <h1 className="mt-6 max-w-4xl text-4xl font-extrabold leading-[1.05] tracking-[-2px] text-text-0 sm:text-5xl lg:text-6xl">
-              {PLUGIN_NAME}: il tuo sito risponde anche quando sei chiuso.
-            </h1>
-            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-text-1">
+        <PageHero tag="PLUGIN WORDPRESS · GRATUITO · IN ITALIANO" title={`${PLUGIN_NAME}: il tuo sito risponde anche quando sei chiuso.`}>
+            <p className="max-w-2xl text-lg leading-relaxed text-text-1">
               Per attività locali, studi e piccole aziende con un sito WordPress. Risponde con le informazioni del tuo
               sito, raccoglie le richieste, te le consegna. Richiede WordPress 7.0 e PHP 8.3.
             </p>
 
-            <div id="installa" className="mt-10 scroll-mt-24 border border-accent-border bg-bg-1 p-8">
+            <div id="installa" className="mt-10 max-w-3xl scroll-mt-24 border border-accent-border bg-bg-1 p-8">
               {daWpOrg ? (
                 <CtaButton href={WPORG_URL} evento="click_installa" props={{ pagina: "plugin", posizione: "pagina" }}>
                   INSTALLA DA WORDPRESS.ORG &rarr;
@@ -138,33 +134,41 @@ export default function PluginPage() {
               )}
               <p className="mt-6 text-sm text-text-1">Nessun account, nessuna carta.</p>
             </div>
-          </div>
-        </section>
+        </PageHero>
 
-        <Section tag="IN CHIARO" title="Cosa fa e cosa non fa">
+        <Section numero={1} tag="IN CHIARO" title="Cosa fa e cosa non fa">
           <div className="grid gap-6 md:grid-cols-2">
-            <div className="border border-border bg-bg-1 p-8">
-              <h3 className="text-xl font-bold text-text-0">Fa</h3>
-              <ul className="mt-5 space-y-3 text-[15px] text-text-1">
+            <Scheda icona={<IconaSpunta />} titolo="Fa">
+              <ul className="space-y-3 text-[15px]">
                 {fa.map((x) => (
-                  <li key={x} className="flex gap-3"><span className="text-accent" aria-hidden>✓</span>{x}</li>
+                  <li key={x} className="flex gap-3"><span className="font-mono text-accent" aria-hidden>&gt;</span>{x}</li>
                 ))}
               </ul>
-            </div>
-            <div className="border border-border bg-bg-1 p-8">
-              <h3 className="text-xl font-bold text-text-0">Non fa</h3>
-              <ul className="mt-5 space-y-3 text-[15px] text-text-1">
+            </Scheda>
+            <Scheda icona={<span className="text-red"><IconaCroce /></span>} titolo="Non fa">
+              <ul className="space-y-3 text-[15px]">
                 {nonFa.map((x) => (
-                  <li key={x} className="flex gap-3"><span className="text-red" aria-hidden>✕</span>{x}</li>
+                  <li key={x} className="flex gap-3"><span className="font-mono text-red" aria-hidden>&gt;</span>{x}</li>
                 ))}
               </ul>
-            </div>
+            </Scheda>
           </div>
         </Section>
 
         {/* TODO: sezione "Schermate" (5 screenshot veri) e video 90 s di installazione quando disponibili */}
 
-        <Section tag="PROVE" title="A che punto siamo, detto chiaro">
+        <Section numero={2} tag="PROVE" title="A che punto siamo, detto chiaro">
+          <div className="mb-8 grid max-w-3xl gap-6 sm:grid-cols-2">
+            {[
+              { valore: "24/10/2026", etichetta: "IN PROVA SU SITI REALI DAL" },
+              { valore: "37/37", etichetta: "COLLAUDI AUTOMATICI SUPERATI (TEST INTERNI)" },
+            ].map((p) => (
+              <div key={p.valore} className="border border-border bg-bg-1 p-6">
+                <div className="font-mono text-3xl font-bold text-accent">{p.valore}</div>
+                <div className="mt-1 font-mono text-[11px] font-medium tracking-widest text-text-1">{p.etichetta}</div>
+              </div>
+            ))}
+          </div>
           <p className="max-w-3xl text-lg leading-relaxed text-text-1">
             {PLUGIN_NAME} è in prova su siti reali dal 24 ottobre 2026 e supera 37 collaudi automatici su 37 (test
             interni). Pubblicheremo i primi numeri degli utenti a gennaio 2027, con il loro permesso. Finché non li
@@ -172,7 +176,7 @@ export default function PluginPage() {
           </p>
         </Section>
 
-        <Section tag="PRIVACY" title="Cosa succede ai dati dei tuoi clienti">
+        <Section numero={3} tag="PRIVACY" title="Cosa succede ai dati dei tuoi clienti">
           <p className="max-w-3xl text-lg leading-relaxed text-text-1">
             Le conversazioni restano sul server 24 ore, poi vengono cancellate. L&apos;indirizzo IP viene salvato solo come
             impronta, non in chiaro. Le richieste consegnate si conservano per il tempo che scegli tu: 7, 30, 90, 180 o
@@ -183,18 +187,19 @@ export default function PluginPage() {
         </Section>
 
 
-        <Section tag="DOMANDE FREQUENTI" title="Domande frequenti">
-          <dl className="max-w-3xl divide-y divide-border border-y border-border">
-            {faq.map((f) => (
-              <div key={f.domanda} className="py-6">
-                <dt className="text-lg font-bold text-text-0">{f.domanda}</dt>
+        <Section numero={4} tag="DOMANDE FREQUENTI" title="Domande frequenti">
+          <dl className="grid gap-6 md:grid-cols-2">
+            {faq.map((f, i) => (
+              <div key={f.domanda} className="border border-border bg-bg-1 p-8">
+                <span className="font-mono text-[11px] tracking-[2px] text-cyan">{String(i + 1).padStart(2, "0")}</span>
+                <dt className="mt-3 text-lg font-bold text-text-0">{f.domanda}</dt>
                 <dd className="mt-2 text-[15px] leading-relaxed text-text-1">{f.risposta}</dd>
               </div>
             ))}
           </dl>
         </Section>
 
-        <Section tag="PIANO A PAGAMENTO" title="Quando ti serve di più">
+        <Section numero={5} tag="PIANO A PAGAMENTO" title="Quando ti serve di più">
           <p className="max-w-3xl text-lg leading-relaxed text-text-1">
             Il piano a pagamento aggiunge vendita guidata, preventivi con i tuoi prezzi, riconoscimento del cliente
             abituale, CRM e voce. 30 giorni di prova. Si attiva dal pannello del plugin, senza reinstallare.
@@ -209,8 +214,9 @@ export default function PluginPage() {
         </Section>
 
         <section className="border-t border-border bg-bg-1 py-24">
-          <div className="mx-auto flex max-w-[1200px] flex-col items-center gap-4 px-6 text-center sm:flex-row sm:justify-center lg:px-14">
+          <div className="mx-auto flex max-w-[1440px] flex-col items-center gap-4 px-6 text-center sm:flex-row sm:justify-center lg:px-14">
             <CtaButton
+              variant="gradient"
               href={daWpOrg ? WPORG_URL : "#installa"}
               evento="click_installa"
               props={{ pagina: "plugin", posizione: "chiusura" }}

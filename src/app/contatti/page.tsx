@@ -1,5 +1,6 @@
 import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
+import PageHero from "@/components/ui/PageHero";
 import ChatWidget from "@/components/ui/ChatWidget";
 import CalendlyEmbed from "@/components/ui/CalendlyEmbed";
 import ModuloContatti from "@/components/ui/ModuloContatti";
@@ -22,17 +23,12 @@ export default function ContattiPage() {
     <>
       <NavBar />
       <main>
-        <section className="pb-20 pt-36 lg:pt-44">
-          <div className="mx-auto max-w-[900px] px-6 lg:px-14">
-            <span className="font-mono text-xs font-medium tracking-[2px] text-accent">CONTATTI</span>
-            <h1 className="mt-6 text-4xl font-extrabold leading-[1.05] tracking-[-2px] text-text-0 sm:text-5xl">
-              Parliamone in 30 minuti.
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-1">
+        <PageHero tag="CONTATTI" title="Parliamone in 30 minuti.">
+            <p className="max-w-2xl text-lg leading-relaxed text-text-1">
               Ci mostri il tuo sito, ti diciamo cosa farebbe {PLUGIN_NAME} e se ha senso per te. Nessun impegno.
             </p>
 
-            <div className="mt-12">{conCalendly ? <CalendlyEmbed url={CALENDLY_URL} /> : <ModuloContatti />}</div>
+            <div className="mt-12 max-w-[900px] border border-border bg-bg-1 p-4 sm:p-8">{conCalendly ? <CalendlyEmbed url={CALENDLY_URL} /> : <ModuloContatti />}</div>
 
             <p className="mt-8 text-[15px] text-text-1">
               Oppure scrivici a{" "}
@@ -41,8 +37,8 @@ export default function ContattiPage() {
               </a>
               .
             </p>
-          </div>
-        </section>
+        </PageHero>
+        <div className="pb-8" />
       </main>
       <Footer />
       <ChatWidget />
