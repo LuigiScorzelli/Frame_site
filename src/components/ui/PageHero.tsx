@@ -1,26 +1,27 @@
-import SectionTag from "@/components/ui/SectionTag";
-
-interface PageHeroProps {
-  sectionTag?: string;
-  heading: React.ReactNode;
-  subtitle?: string;
-}
-
-export default function PageHero({ sectionTag, heading, subtitle }: PageHeroProps) {
+/** Inner-page header in the production style: dot grid, gradients, large H1 with CSS fade-in (visible without JS too). */
+export default function PageHero({
+  tag,
+  title,
+  children,
+}: {
+  tag: string;
+  title: React.ReactNode;
+  children?: React.ReactNode;
+}) {
   return (
-    <section className="relative overflow-hidden bg-bg-0 pb-16 pt-32 lg:pb-24 lg:pt-40">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        {sectionTag && (
-          <div className="mb-6">
-            <SectionTag>{sectionTag}</SectionTag>
-          </div>
-        )}
-        <h1 className="max-w-4xl font-mono text-4xl font-bold text-text-0 sm:text-5xl lg:text-6xl">
-          {heading}
+    <section className="relative overflow-hidden pb-16 pt-36 lg:pb-20 lg:pt-[180px]">
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{ backgroundImage: "radial-gradient(circle, rgba(232,236,244,0.03) 1px, transparent 1px)", backgroundSize: "32px 32px" }}
+      />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-bg-0 via-bg-0/80 to-bg-0/30" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-bg-0 via-bg-0/80 to-transparent" />
+      <div className="relative z-10 mx-auto max-w-[1440px] px-6 lg:px-14">
+        <span className="font-mono text-xs font-medium tracking-[3px] text-accent">{tag}</span>
+        <h1 className="mt-5 max-w-[900px] animate-[fadeIn_0.6s_ease_both] text-4xl font-extrabold leading-[1.05] tracking-[-2px] text-text-0 sm:text-5xl lg:text-[56px] lg:tracking-[-3px]">
+          {title}
         </h1>
-        {subtitle && (
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-1">{subtitle}</p>
-        )}
+        {children && <div className="mt-6 animate-[fadeIn_0.6s_ease_0.2s_both]">{children}</div>}
       </div>
     </section>
   );

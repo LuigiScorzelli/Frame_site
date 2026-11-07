@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { useInView } from "@/components/animations/useInView";
-import { IconaAssistente, IconaCodice, IconaFulmine } from "./Icone";
+import { IconaAssistente, IconaCodice, IconaFulmine } from "@/components/ui/Icone";
 
 const Tag = ({ children }: { children: string }) => (
   <span className="border border-[#2A3F66] bg-accent-dim px-2.5 py-0.5 font-mono text-[9px] font-medium tracking-wider text-accent" style={{ letterSpacing: "1px" }}>

@@ -3,25 +3,28 @@ import { cn } from "@/lib/utils";
 interface SectionProps {
   id?: string;
   tag?: string;
+  /** Optional section number, rendered as "01 / TAG" like the production home. */
+  numero?: number;
   title?: React.ReactNode;
+  intro?: React.ReactNode;
   className?: string;
   children: React.ReactNode;
 }
 
-/** Standard content section: optional mono tag, H2 title, body. */
-export default function Section({ id, tag, title, className, children }: SectionProps) {
+/** Standard content section in the production style: mono tag, large H2, optional intro, body. */
+export default function Section({ id, tag, numero, title, intro, className, children }: SectionProps) {
+  const etichetta = tag && numero ? `${String(numero).padStart(2, "0")} / ${tag}` : tag;
   return (
-    <section id={id} className={cn("border-t border-border py-20 lg:py-24", className)}>
-      <div className="mx-auto max-w-[1200px] px-6 lg:px-14">
-        {tag && (
-          <span className="font-mono text-xs font-medium tracking-[2px] text-accent">{tag}</span>
-        )}
+    <section id={id} className={cn("scroll-mt-20 border-t border-border bg-bg-0 py-20 lg:py-[100px]", className)}>
+      <div className="mx-auto max-w-[1440px] px-6 lg:px-14">
+        {etichetta && <span className="font-mono text-xs font-medium tracking-[2px] text-accent">{etichetta}</span>}
         {title && (
-          <h2 className="mt-4 max-w-3xl text-3xl font-extrabold leading-tight tracking-[-1px] text-text-0 lg:text-4xl">
+          <h2 className="mt-4 max-w-4xl text-3xl font-extrabold leading-[1.1] tracking-[-1.5px] text-text-0 lg:text-[48px] lg:tracking-[-2px]">
             {title}
           </h2>
         )}
-        <div className={cn(title || tag ? "mt-10" : "")}>{children}</div>
+        {intro && <div className="mt-4 max-w-[640px] text-base leading-relaxed text-text-1">{intro}</div>}
+        <div className={cn(title || tag ? "mt-12" : "")}>{children}</div>
       </div>
     </section>
   );
