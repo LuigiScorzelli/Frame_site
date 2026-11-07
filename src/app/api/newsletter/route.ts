@@ -62,7 +62,9 @@ export async function POST(request: Request) {
 
     // Never log the email: only status and Brevo's error code.
     console.error("newsletter: errore Brevo", esito.status, esito.codice ?? "", esito.messaggio ?? "");
-    if (esito.status === 400 && esito.codice === "invalid_parameter") {
+    // invalid_parameter also covers configuration faults (e.g. "An active DOI template does not exist"):
+    // blame the visitor's email only when Brevo's message is about the email.
+    if (esito.status === 400 && esito.codice === "invalid_parameter" && /email/i.test(esito.messaggio ?? "")) {
       return NextResponse.json({ error: "Inserisci un'email valida." }, { status: 400 });
     }
     return NextResponse.json({ error: "Non siamo riusciti a iscriverti. Riprova più tardi." }, { status: 502 });
