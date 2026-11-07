@@ -23,12 +23,12 @@ const sulSito = [
 ];
 
 const nelPlugin = [
-  "Le conversazioni restano 24 ore sul server e poi vengono cancellate.",
+  "Le conversazioni restano 24 ore sul server del tuo sito e poi vengono cancellate.",
   "L'indirizzo IP è salvato come impronta, non in chiaro.",
   "Le richieste consegnate si conservano per il tempo che scegli: da 7 a 365 giorni.",
   "Chi chiede solo informazioni non lascia dati.",
   "Chi lascia un recapito lascia solo quello che serve alla richiesta.",
-  // TODO:dato fornitore e regione dell'elaborazione AI: da inserire prima del deploy (vedi docs/lancio/00-LEGGIMI.md).
+  "Le domande dei visitatori vanno dal tuo sito direttamente al fornitore AI che scegli tu, OpenAI o Anthropic, con la tua chiave API: non passano dai nostri server. Si applicano il tuo contratto con il fornitore e la sua regione di elaborazione (di norma Stati Uniti): citalo nella privacy del tuo sito.",
 ];
 
 export default function PrivacyPage() {

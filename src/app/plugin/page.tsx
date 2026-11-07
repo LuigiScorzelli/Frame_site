@@ -41,8 +41,8 @@ const installazione = [
   "Attiva e segui la procedura guidata",
 ];
 
-// Only questions with a confirmed answer are shown. Pending ones (AI key, data region,
-// WooCommerce, AI cost, opening hours) are listed in docs/lancio/03-contenuti.md as [da confermare].
+// Only questions with a confirmed answer are shown. Pending ones (WooCommerce, AI cost,
+// opening hours) are listed in docs/lancio/03-contenuti.md as [da confermare].
 const faq = [
   {
     domanda: "Cosa succede se un cliente chiede una cosa che non c'è sul sito?",
@@ -51,6 +51,15 @@ const faq = [
   {
     domanda: "Chi vede le conversazioni?",
     risposta: "Tu, dal pannello, per il tempo di conservazione che hai scelto.",
+  },
+  {
+    domanda: "Serve una chiave di un fornitore AI?",
+    risposta: "Sì: inserisci la tua chiave API di OpenAI o di Anthropic, scegli tu quale. Il contratto con il fornitore è tuo.",
+  },
+  {
+    domanda: "Dove vengono elaborati i dati?",
+    risposta:
+      "Le domande vanno dal tuo sito direttamente al fornitore AI che hai scelto, senza passare dai nostri server, e sono elaborate nella sua regione (di norma Stati Uniti). Citalo nella privacy del tuo sito. Le conversazioni restano 24 ore sul tuo server, poi vengono cancellate.",
   },
 ];
 
