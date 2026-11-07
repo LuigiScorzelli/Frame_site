@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
 import ChatWidget from "@/components/ui/ChatWidget";
@@ -146,6 +147,25 @@ export default function PluginPage() {
 
         {/* TODO: sezione "Schermate" (5 screenshot veri) e video 90 s di installazione quando disponibili */}
 
+        <Section tag="PROVE" title="A che punto siamo, detto chiaro">
+          <p className="max-w-3xl text-lg leading-relaxed text-text-1">
+            {PLUGIN_NAME} è in prova su siti reali dal 24 ottobre 2026 e supera 37 collaudi automatici su 37 (test
+            interni). Pubblicheremo i primi numeri degli utenti a gennaio 2027, con il loro permesso. Finché non li
+            abbiamo, non li inventiamo.
+          </p>
+        </Section>
+
+        <Section tag="PRIVACY" title="Cosa succede ai dati dei tuoi clienti">
+          <p className="max-w-3xl text-lg leading-relaxed text-text-1">
+            Le conversazioni restano sul server 24 ore, poi vengono cancellate. L&apos;indirizzo IP viene salvato solo come
+            impronta, non in chiaro. Le richieste consegnate si conservano per il tempo che scegli tu: 7, 30, 90, 180 o
+            365 giorni. Esporti e cancelli i dati personali con gli strumenti standard di WordPress. Tutti i dettagli
+            nella{" "}
+            <Link href="/privacy" className="text-accent underline-offset-4 hover:underline">pagina privacy</Link>.
+          </p>
+        </Section>
+
+
         <Section tag="DOMANDE FREQUENTI" title="Domande frequenti">
           <dl className="max-w-3xl divide-y divide-border border-y border-border">
             {faq.map((f) => (
@@ -161,6 +181,10 @@ export default function PluginPage() {
           <p className="max-w-3xl text-lg leading-relaxed text-text-1">
             Il piano a pagamento aggiunge vendita guidata, preventivi con i tuoi prezzi, riconoscimento del cliente
             abituale, CRM e voce. 30 giorni di prova. Si attiva dal pannello del plugin, senza reinstallare.
+          </p>
+          <p className="mt-4 max-w-3xl text-[15px] leading-relaxed text-text-1">
+            Perché gratis? Perché il modo più onesto di farti vedere se funziona è lasciartelo provare sul tuo sito. Se
+            poi ti serve di più, c&apos;è il piano a pagamento.
           </p>
           <div className="mt-6">
             <InteresseForm fonte="newsletter" interesse="pro" pagina="plugin" />
