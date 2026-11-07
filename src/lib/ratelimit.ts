@@ -20,8 +20,9 @@ interface Limitatore {
   limita(chiave: string): Promise<RisultatoLimite>;
 }
 
-const UPSTASH_URL = process.env.UPSTASH_REDIS_REST_URL;
-const UPSTASH_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
+// The Vercel Marketplace integration injects KV_REST_API_*; UPSTASH_REDIS_REST_* works for a direct Upstash setup.
+const UPSTASH_URL = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
+const UPSTASH_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
 const redis = UPSTASH_URL && UPSTASH_TOKEN ? new Redis({ url: UPSTASH_URL, token: UPSTASH_TOKEN }) : null;
 
 let avvisoMostrato = false;
