@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ACCOUNT_URL, AGENCY_NAME, CITY, CONTACT_EMAIL, FOUNDER_URL, PLUGIN_NAME } from "@/lib/brand";
+import { ACCOUNT_URL, AGENCY_NAME, CITY, CONTACT_EMAIL, FOUNDER_URL, LOGO_TEXT, PLUGIN_NAME } from "@/lib/brand";
 import TrackedLink from "@/components/ui/TrackedLink";
 
 const cosaFacciamo = [
@@ -7,6 +7,12 @@ const cosaFacciamo = [
   { label: "Plugin", href: "/plugin" },
   { label: "Check-up", href: "/check-up" },
   { label: "Risorse", href: "/risorse" },
+];
+
+// Only confirmed profiles (7/11): the old footer pointed to GitHub/X accounts that do not exist.
+const contatti = [
+  { label: `Email ${CONTACT_EMAIL}`, icona: "@", href: `mailto:${CONTACT_EMAIL}`, esterno: false },
+  { label: "Luigi Scorzelli, sito personale", icona: "LS", href: FOUNDER_URL, esterno: true },
 ];
 
 const linkClass = "text-[13px] text-text-1 transition-colors hover:text-text-0";
@@ -18,9 +24,10 @@ export default function Footer() {
       <div className="mx-auto max-w-[1440px] px-6 py-12 lg:px-14">
         <div className="flex flex-col justify-between gap-12 lg:flex-row">
           <div className="max-w-sm">
-            <Link href="/" className="inline-flex items-center text-[40px] font-extrabold tracking-[-2px]">
-              <span className="text-accent">{AGENCY_NAME.slice(0, 2)}</span>
-              <span className="text-text-0">{AGENCY_NAME.slice(2)}</span>
+            <Link href="/" aria-label={`${AGENCY_NAME}, home`} className="inline-flex items-center text-[48px] font-extrabold tracking-[-2px]">
+              {LOGO_TEXT.split("").map((ch, i) => (
+                <span key={i} className={ch === ">" ? "text-accent" : "text-text-0"}>{ch}</span>
+              ))}
             </Link>
             <p className="mt-3 text-sm text-text-1">
               {AGENCY_NAME}, automazioni e AI per piccole aziende. Il nostro primo prodotto è {PLUGIN_NAME}.
@@ -28,6 +35,19 @@ export default function Footer() {
             <a href={`mailto:${CONTACT_EMAIL}`} className="mt-3 inline-block font-mono text-[13px] text-accent hover:underline">
               {CONTACT_EMAIL}
             </a>
+            <div className="mt-4 flex gap-3">
+              {contatti.map((c) => (
+                <a
+                  key={c.href}
+                  href={c.href}
+                  aria-label={c.label}
+                  {...(c.esterno ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-bg-2 font-mono text-xs text-text-1 transition-colors hover:bg-bg-1 hover:text-text-0"
+                >
+                  {c.icona}
+                </a>
+              ))}
+            </div>
           </div>
 
           <div className="flex flex-wrap gap-12">
@@ -64,7 +84,7 @@ export default function Footer() {
         <div className="mt-8 border-t border-border pt-8">
           {/* TODO:dato P. IVA da inserire (vedi docs/lancio/00-LEGGIMI.md) */}
           <p className="font-mono text-[11px] tracking-[0.5px] text-text-1">
-            {AGENCY_NAME} · {CITY}
+            &copy; 2026 {AGENCY_NAME} · {CITY}
           </p>
         </div>
       </div>

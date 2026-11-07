@@ -1,9 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback, useEffect } from "react";
-import { AGENCY_NAME } from "@/lib/brand";
-
-const LOGO_TEXT = AGENCY_NAME;
+import { LOGO_TEXT } from "@/lib/brand";
 const GLITCH_CHARS = "!@#$%&*<>{}[]01";
 const TICK_MS = 40;
 const TICKS_PER_CHAR = 3;
@@ -72,8 +70,9 @@ export default function GlitchLogo({ className }: { className?: string }) {
         onMouseEnter={startAnimation}
         style={{ letterSpacing: "-0.4px" }}
       >
-        <span className="text-accent">{LOGO_TEXT.slice(0, 2)}</span>
-        <span className="text-text-0">{LOGO_TEXT.slice(2)}</span>
+        {LOGO_TEXT.split("").map((ch, i) => (
+          <span key={i} className={ch === ">" ? "text-accent" : "text-text-0"}>{ch}</span>
+        ))}
       </span>
     );
   }

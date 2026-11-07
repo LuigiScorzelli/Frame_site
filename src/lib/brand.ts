@@ -2,6 +2,8 @@
 // No component may hard-code the plugin name or an external URL.
 
 export const AGENCY_NAME = "aiframe";
+// Visual logo only (Luigi, 7/11): the name in copy stays AGENCY_NAME.
+export const LOGO_TEXT = "FR>ME";
 // Provisional name until the final one is chosen (see docs/lancio/00-LEGGIMI.md).
 export const PLUGIN_NAME = process.env.NEXT_PUBLIC_PLUGIN_NAME ?? "Lead Assistant";
 export const CONTACT_EMAIL = "info@aiframe.it";
