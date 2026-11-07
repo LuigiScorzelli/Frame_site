@@ -9,6 +9,12 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      // "Chi siamo" now lives in the home section (docs/lancio/01-piano-sprint.md, 0.2).
+      { source: "/chi-siamo", destination: "/#chi-siamo", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;
