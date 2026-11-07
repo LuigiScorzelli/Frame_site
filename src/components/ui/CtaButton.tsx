@@ -7,6 +7,7 @@ const base =
 
 const variants = {
   primary: "bg-accent text-bg-0 hover:brightness-110",
+  gradient: "bg-[linear-gradient(135deg,#BFFF00,#00E5FF)] text-bg-0 hover:brightness-110",
   secondary: "border border-text-0 text-text-0 hover:border-accent hover:text-accent",
 };
 
