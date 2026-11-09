@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
-import ChatWidget from "@/components/ui/ChatWidget";
 import CtaButton from "@/components/ui/CtaButton";
 import PageHero from "@/components/ui/PageHero";
 import Section from "@/components/ui/Section";
@@ -55,7 +54,6 @@ export default function CheckUpPage() {
         </Section>
       </main>
       <Footer />
-      <ChatWidget />
     </>
   );
 }

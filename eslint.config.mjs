@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Widget copied unchanged from the plugin repo (assisteAI_CRM): fixed there, not here.
+    "public/assistente/**",
   ]),
 ]);
 

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
-import ChatWidget from "@/components/ui/ChatWidget";
 import { AGENCY_NAME } from "@/lib/brand";
 
 const chatGptToolUrl =
@@ -495,7 +494,6 @@ export default function AmazonSeoPage() {
         </section>
       </main>
       <Footer />
-      <ChatWidget />
     </>
   );
 }

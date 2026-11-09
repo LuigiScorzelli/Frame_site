@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
-import ChatWidget from "@/components/ui/ChatWidget";
 import CtaButton from "@/components/ui/CtaButton";
 import Section from "@/components/ui/Section";
 import Hero from "@/components/sections/home/Hero";
@@ -97,7 +96,6 @@ export default function Home() {
         </section>
       </main>
       <Footer />
-      <ChatWidget />
     </>
   );
 }

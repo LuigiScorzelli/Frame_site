@@ -5,7 +5,6 @@ import Footer from "@/components/layout/Footer";
 import NewsletterSection from "@/components/sections/NewsletterSection";
 import PageHero from "@/components/ui/PageHero";
 import Section from "@/components/ui/Section";
-import ChatWidget from "@/components/ui/ChatWidget";
 import { CATEGORIE, formatDataArticolo, getArticoli } from "@/lib/content";
 import { AGENCY_NAME, SITE_URL } from "@/lib/brand";
 
@@ -81,7 +80,6 @@ export default function RisorsePage() {
         <NewsletterSection pagina="risorse" />
       </main>
       <Footer />
-      <ChatWidget />
     </>
   );
 }

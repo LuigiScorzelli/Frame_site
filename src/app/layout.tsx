@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import JsonLd from "@/components/seo/JsonLd";
+import AssistenteAI from "@/components/ui/AssistenteAI";
 import { AGENCY_NAME, CITY, CONTACT_EMAIL, FOUNDER_URL, SITE_URL } from "@/lib/brand";
 
 const sora = Sora({
@@ -61,6 +62,7 @@ export default function RootLayout({
           }}
         />
         {children}
+        <AssistenteAI />
         <Analytics />
         <SpeedInsights />
       </body>

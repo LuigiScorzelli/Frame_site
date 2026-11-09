@@ -5,7 +5,6 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
-import ChatWidget from "@/components/ui/ChatWidget";
 import CtaButton from "@/components/ui/CtaButton";
 import JsonLd from "@/components/seo/JsonLd";
 import { componentiMdx } from "@/components/mdx/componenti";
@@ -125,7 +124,6 @@ export default async function ArticoloPage({ params }: PageProps) {
         </article>
       </main>
       <Footer />
-      <ChatWidget />
     </>
   );
 }

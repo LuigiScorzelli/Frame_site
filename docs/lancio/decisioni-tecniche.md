@@ -71,3 +71,15 @@ Con `NEXT_PUBLIC_CALENDLY_URL` valorizzato la pagina incorpora Calendly (widget 
 **Futuro:** quando esisterà la versione web del plugin, il widget potrà diventare la chat vera (demo del plugin dentro il pannello). Non fatto ora.
 
 **Servizi esterni verificati da Luigi lo stesso giorno:** Calendly, Vercel e Brevo funzionano dal sito.
+
+## 2026-11-09 · Assistente AI vero al posto del menu di scorciatoie (voce 0.14)
+
+**Decisione di Luigi:** il `ChatWidget` (menu di scorciatoie) è sostituito dall'assistente vero, il widget standalone del plugin collegato al workflow n8n "WP Lead Assistant - Servizi" sulla VPS (`https://n8n.aiframe.it/webhook/wpla-chat`, tenant `aiframe`). Colore `#1E2D4A` (bg-2: con bg-0 il pulsante spariva sullo sfondo), etichetta "Hai domande? Chiedi all'assistente", tre domande suggerite. Configurazione in `ASSISTANT` di `src/lib/brand.ts`.
+
+**Come:** `public/assistente/wpla-widget-<commit>.js` è una copia **non modificata** di `assisteAI_CRM/widget/src/wpla-widget.js` (commit nel nome, così la cache non serve una versione vecchia; esclusa da ESLint). Per aggiornarla: nuova copia con il nuovo commit nel nome, `scriptPath` in `brand.ts`, cancellare la vecchia. `AssistenteAI` è montato una volta in `layout.tsx` (`next/script`, `lazyOnload`) e imposta `window.WPLA_CONFIG`; la conversazione sopravvive al cambio pagina (`sessionStorage`). Privacy linkata in relativo (`/privacy`), così le anteprime usano la propria. `ChatWidget.tsx` resta nel repo, non montato: gli eventi `posizione: "widget"` non partono più.
+
+**Guasti:** se n8n risponde 200 con corpo vuoto il widget mostra "In questo momento non riesco a rispondere", il modulo di contatto e `info@aiframe.it` (provato in locale simulando la risposta vuota).
+
+**Origini:** il backend accetta solo origini esatte (`wpla_tenants.allowed_origins`): `www.aiframe.it`, `aiframe.it`, `localhost:3000`, l'alias Vercel del ramo `lancio-plugin`. Un nuovo dominio o alias va aggiunto lì, altrimenti risponde 403.
+
+**`/privacy`:** nuova sezione "L'assistente di aiframe.it" (OpenAI negli USA, server Hostinger gestito da noi, email via Resend, HubSpot, registri n8n cancellati dopo 7 giorni). Nessun tempo di conservazione promesso per conversazioni e lead: la cancellazione automatica delle tabelle `wpla_*` non c'è ancora.

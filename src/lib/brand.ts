@@ -20,5 +20,30 @@ export const BETA_DOWNLOAD_PATH = "/api/wpla/download";
 /** "Installa gratis" target: /plugin decides between WordPress.org and the beta download. */
 export const INSTALL_PATH = "/plugin#installa";
 
+/**
+ * AI assistant on this site: the plugin's standalone widget (public/assistente/, copied unchanged from
+ * assisteAI_CRM/widget/src/wpla-widget.js; the commit is in the file name) talking to the n8n workflow
+ * "WP Lead Assistant - Servizi" on our VPS. New origins go in wpla_tenants.allowed_origins, not here.
+ */
+export const ASSISTANT = {
+  scriptPath: "/assistente/wpla-widget-b4d6338.js",
+  endpoint: "https://n8n.aiframe.it/webhook/wpla-chat",
+  siteKey: "aiframe",
+  mode: "servizi",
+  title: `Assistente di ${AGENCY_NAME}`,
+  company: AGENCY_NAME,
+  // Text on top of it is white, so it must be dark; bg-2, because bg-0 hides the launcher on the page background.
+  color: "#1E2D4A",
+  // Relative: the widget accepts same-site paths, so previews link their own /privacy.
+  privacyUrl: "/privacy",
+  fallbackEmail: CONTACT_EMAIL,
+  launcherLabel: "Hai domande? Chiedi all'assistente",
+  suggestions: [
+    "Cosa fate per le piccole aziende?",
+    "Come funziona il plugin WordPress?",
+    "Come si inizia a lavorare con voi?",
+  ],
+} as const;
+
 /** Where "Prenota 30 minuti" goes: Calendly if configured, otherwise the contact page. */
 export const BOOKING_URL = CALENDLY_URL || "/contatti";

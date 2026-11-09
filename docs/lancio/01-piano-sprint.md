@@ -20,7 +20,7 @@ Obiettivo: lunedì 10/11 il sito parla al titolare di PMI con WordPress, ha il b
 | 0.11 | Pagina `/servizi` senza prezzi: tre servizi descritti, pulsante "Prenota 30 minuti" (link Calendly da `brand.ts`; se vuoto, apre il modulo contatti) | Nessuna cifra in pagina |
 | 0.12 | Pagina `/privacy` nuova con la parte "in italiano semplice" e la parte legale; `[da confermare]` per fornitore AI e regione sostituito da Luigi prima del deploy | La pagina esiste, è linkata nel footer e nei moduli |
 | 0.13 | SEO di base: `metadata` per pagina (titoli in `03-contenuti.md`), `sitemap.ts` e `robots.ts` aggiornati, JSON-LD `Organization` + `SoftwareApplication` in `/plugin`, `public/llms.txt` | Rich Results Test senza errori |
-| 0.14 | ~~Chat widget rimosso~~ Cambiato il 9/11: il chat widget **resta** sul sito e va **rivisto** (vedi `decisioni-tecniche.md`) | Da definire con Luigi |
+| 0.14 | ~~Chat widget rimosso~~ Cambiato il 9/11: al posto del menu c'è l'assistente AI vero (vedi `decisioni-tecniche.md`) | Risposta vera e risposta vuota gestite sull'anteprima del ramo |
 | 0.15 | `/contatti`: calendario fatto in casa sostituito da Calendly incorporato **[B Calendly]**; finché manca l'URL resta il modulo attuale senza calendario | Prenotazione di prova arriva in agenda |
 
 Fuori dallo sprint 0, anche se tenta: check-up automatico, Freemius, pagina partner, PDF.
