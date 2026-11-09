@@ -10,8 +10,9 @@ export const CONTACT_EMAIL = "info@aiframe.it";
 export const SITE_URL = "https://aiframe.it";
 export const FOUNDER_URL = "https://luigiscorzelli.com";
 export const CITY = "Salerno";
+// Public booking link, rendered in the HTML: plain config, not an env var (Luigi, 9/11).
 // Empty → "Prenota 30 minuti" falls back to the contact form.
-export const CALENDLY_URL = process.env.NEXT_PUBLIC_CALENDLY_URL ?? "";
+export const CALENDLY_URL = "https://calendly.com/luigi-scorzelli/30min";
 // Empty → install buttons point to the beta download.
 export const WPORG_URL = process.env.NEXT_PUBLIC_WPORG_URL ?? "";
 // Freemius customer portal (sprint 2). Empty → link hidden.

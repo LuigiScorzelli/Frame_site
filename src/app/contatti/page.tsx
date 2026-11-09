@@ -5,7 +5,7 @@ import CalendlyEmbed from "@/components/ui/CalendlyEmbed";
 import ModuloContatti from "@/components/ui/ModuloContatti";
 import { CALENDLY_URL, CONTACT_EMAIL, PLUGIN_NAME } from "@/lib/brand";
 
-// 0.15: Calendly inline when NEXT_PUBLIC_CALENDLY_URL is a valid https calendly.com link, otherwise the form.
+// 0.15: Calendly inline when CALENDLY_URL (src/lib/brand.ts) is a valid https calendly.com link, otherwise the form.
 function calendlyValido(url: string): boolean {
   try {
     const u = new URL(url);

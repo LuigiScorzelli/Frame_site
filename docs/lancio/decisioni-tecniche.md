@@ -28,7 +28,7 @@ Registro delle scelte prese durante l'implementazione, con il motivo. Una voce p
 
 ## 2026-11-07 · `/contatti` (voce 0.15)
 
-Con `NEXT_PUBLIC_CALENDLY_URL` valorizzato la pagina incorpora Calendly (widget inline, script caricato solo in quel caso). Senza, resta il modulo: nome, email, sito, messaggio, consenso, honeypot `sito_web`. Il calendario fatto in casa è stato tolto dal modulo: inviava "Call prenotata" senza che nessuna call fosse davvero in agenda.
+Con `CALENDLY_URL` valorizzato (dal 9/11 costante in `brand.ts`) la pagina incorpora Calendly (widget inline, script caricato solo in quel caso). Senza, resta il modulo: nome, email, sito, messaggio, consenso, honeypot `sito_web`. Il calendario fatto in casa è stato tolto dal modulo: inviava "Call prenotata" senza che nessuna call fosse davvero in agenda.
 
 ## 2026-11-07 · Home di nuovo dell'agenzia (voci 0.2, 0.3)
 
@@ -83,3 +83,9 @@ Con `NEXT_PUBLIC_CALENDLY_URL` valorizzato la pagina incorpora Calendly (widget 
 **Origini:** il backend accetta solo origini esatte (`wpla_tenants.allowed_origins`): `www.aiframe.it`, `aiframe.it`, `localhost:3000`, l'alias Vercel del ramo `lancio-plugin`. Un nuovo dominio o alias va aggiunto lì, altrimenti risponde 403.
 
 **`/privacy`:** nuova sezione "L'assistente di aiframe.it" (OpenAI negli USA, server Hostinger gestito da noi, email via Resend, HubSpot, registri n8n cancellati dopo 7 giorni). Nessun tempo di conservazione promesso per conversazioni e lead: la cancellazione automatica delle tabelle `wpla_*` non c'è ancora.
+
+## 2026-11-09 · Link Calendly come costante, non variabile d'ambiente (voce 0.15)
+
+**Decisione di Luigi:** `NEXT_PUBLIC_CALENDLY_URL` è tolta. Il link (`https://calendly.com/luigi-scorzelli/30min`) è in `CALENDLY_URL` di `src/lib/brand.ts`.
+
+**Perché:** in produzione la variabile mancava al momento della build e tutti i "Prenota 30 minuti" portavano a `/contatti`. Il link non è un segreto (sta nell'HTML di ogni pagina), quindi non serve una variabile: una costante non può mancare in un ambiente. Per cambiarlo si modifica `brand.ts` e si fa un deploy.

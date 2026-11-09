@@ -44,7 +44,7 @@ Da rimuovere: `src/lib/strapi.ts`, i tipi Strapi in `src/lib/types.ts`, le route
 export const AGENCY_NAME = "aiframe";
 export const PLUGIN_NAME = process.env.NEXT_PUBLIC_PLUGIN_NAME ?? "Lead Assistant"; // provvisorio
 export const CONTACT_EMAIL = "info@aiframe.it";
-export const CALENDLY_URL = process.env.NEXT_PUBLIC_CALENDLY_URL ?? "";   // vuoto → modulo contatti
+export const CALENDLY_URL = "https://calendly.com/luigi-scorzelli/30min";   // costante, non variabile; vuoto → modulo contatti
 export const WPORG_URL = process.env.NEXT_PUBLIC_WPORG_URL ?? "";         // vuoto → download beta
 export const ACCOUNT_URL = process.env.NEXT_PUBLIC_ACCOUNT_URL ?? "";     // portale Freemius, sprint 2
 export const BETA_DOWNLOAD_PATH = "/api/wpla/download";
@@ -59,7 +59,7 @@ Regola: nessun componente scrive il nome del plugin o un link esterno a mano.
 | `RESEND_FROM` | es. `aiframe <noreply@aiframe.it>` (dominio verificato) | 0 |
 | `BREVO_API_KEY`, `BREVO_LIST_ID`, `BREVO_DOI_TEMPLATE_ID`, `BREVO_REDIRECT_URL` | iscrizioni con doppio opt-in | 0 |
 | `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` | rate limit (Marketplace Vercel, piano gratuito) | 0 |
-| `NEXT_PUBLIC_PLUGIN_NAME`, `NEXT_PUBLIC_CALENDLY_URL`, `NEXT_PUBLIC_WPORG_URL`, `NEXT_PUBLIC_ACCOUNT_URL` | brand e link | 0-3 |
+| `NEXT_PUBLIC_PLUGIN_NAME`, `NEXT_PUBLIC_WPORG_URL`, `NEXT_PUBLIC_ACCOUNT_URL` | brand e link | 0-3 |
 | `CHECKUP_USER_AGENT` | identificazione onesta del check-up (es. `aiframe-checkup/1.0 (+https://aiframe.it/check-up)`) | 1 |
 | `FREEMIUS_*` | solo se il backend AI verifica le licenze | 3 |
 
