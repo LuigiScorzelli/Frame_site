@@ -1,7 +1,6 @@
 import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
 import PageHero from "@/components/ui/PageHero";
-import ChatWidget from "@/components/ui/ChatWidget";
 import CalendlyEmbed from "@/components/ui/CalendlyEmbed";
 import ModuloContatti from "@/components/ui/ModuloContatti";
 import { CALENDLY_URL, CONTACT_EMAIL, PLUGIN_NAME } from "@/lib/brand";
@@ -41,7 +40,6 @@ export default function ContattiPage() {
         <div className="pb-8" />
       </main>
       <Footer />
-      <ChatWidget />
     </>
   );
 }

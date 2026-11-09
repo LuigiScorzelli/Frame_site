@@ -15,7 +15,7 @@ export type Evento =
 /** Allowed properties only. Never put emails or visitor URLs here. */
 export type ProprietaEvento = {
   pagina?: string;
-  posizione?: "hero" | "chiusura" | "menu" | "footer" | "pagina";
+  posizione?: "hero" | "chiusura" | "menu" | "footer" | "pagina" | "widget";
   fonte?: "newsletter" | "checkup" | "beta";
 };
 
