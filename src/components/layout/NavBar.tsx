@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import GlitchLogo from "@/components/animations/GlitchLogo";
+import Logo from "@/components/ui/Logo";
 import TrackedLink from "@/components/ui/TrackedLink";
 import { AGENCY_NAME, BOOKING_URL } from "@/lib/brand";
 
@@ -36,17 +36,17 @@ export default function NavBar() {
     )}>
       <nav aria-label="Menu principale" className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-6 lg:px-14">
         <Link href="/" aria-label={`${AGENCY_NAME}, home`}>
-          <GlitchLogo className="text-lg font-extrabold tracking-tight" />
+          <Logo className="text-2xl" />
         </Link>
 
         <div className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="font-mono text-xs font-medium tracking-wider text-text-1 transition-colors hover:text-text-0" style={{ letterSpacing: "1px" }}>{link.label}</Link>
+            <Link key={link.href} href={link.href} className="font-label text-[13px] font-medium tracking-wider text-text-1 transition-colors hover:text-text-0" style={{ letterSpacing: "1px" }}>{link.label}</Link>
           ))}
         </div>
 
         <div className="hidden items-center gap-4 md:flex">
-          <TrackedLink href={BOOKING_URL} evento="click_prenota" props={{ posizione: "menu" }} className="bg-accent px-5 py-2 font-mono text-[10px] font-bold tracking-wider text-bg-0" style={{ letterSpacing: "1px" }}>
+          <TrackedLink href={BOOKING_URL} evento="click_prenota" props={{ posizione: "menu" }} className="bg-accent px-5 py-2.5 font-label text-[13px] font-bold tracking-wider text-bg-0" style={{ letterSpacing: "1px" }}>
             PRENOTA 30 MINUTI &rarr;
           </TrackedLink>
         </div>
@@ -64,9 +64,9 @@ export default function NavBar() {
       )}>
         <div className="flex h-full flex-col items-center justify-center gap-8">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)} className="font-mono text-xl font-medium tracking-wider text-text-0 transition-colors hover:text-accent">{link.label}</Link>
+            <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)} className="font-label text-xl font-medium tracking-wider text-text-0 transition-colors hover:text-accent">{link.label}</Link>
           ))}
-          <TrackedLink href={BOOKING_URL} evento="click_prenota" props={{ posizione: "menu" }} className="mt-4 bg-accent px-8 py-3 font-mono text-sm font-bold tracking-wider text-bg-0">PRENOTA 30 MINUTI &rarr;</TrackedLink>
+          <TrackedLink href={BOOKING_URL} evento="click_prenota" props={{ posizione: "menu" }} className="mt-4 bg-accent px-8 py-3 font-label text-sm font-bold tracking-wider text-bg-0">PRENOTA 30 MINUTI &rarr;</TrackedLink>
         </div>
       </div>
     </header>

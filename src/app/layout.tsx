@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Sora, Space_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -7,15 +7,14 @@ import JsonLd from "@/components/seo/JsonLd";
 import AssistenteAI from "@/components/ui/AssistenteAI";
 import { AGENCY_NAME, CITY, CONTACT_EMAIL, FOUNDER_URL, SITE_URL } from "@/lib/brand";
 
-const sora = Sora({
-  variable: "--font-sora",
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
   subsets: ["latin"],
 });
 
-const spaceMono = Space_Mono({
-  variable: "--font-space-mono",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["400", "700"],
 });
 
 const descrizione =
@@ -47,7 +46,7 @@ export default function RootLayout({
   return (
     <html lang="it">
       <body
-        className={`${sora.variable} ${spaceMono.variable} antialiased bg-bg-0 text-text-0`}
+        className={`${bricolage.variable} ${inter.variable} antialiased bg-bg-0 text-text-0`}
       >
         <JsonLd
           data={{

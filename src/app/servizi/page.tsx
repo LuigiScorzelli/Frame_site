@@ -89,9 +89,9 @@ function Schede({ elenco }: { elenco: Servizio[] }) {
     <div className="grid gap-6 lg:grid-cols-3">
       {elenco.map((s) => (
         <Scheda key={s.nome} icona={s.icona} sopra={s.nota?.toUpperCase()} titolo={s.nome} etichette={s.etichette}>
-          <p className="font-mono text-[11px] tracking-[1px] text-accent">PER CHI</p>
+          <p className="font-label text-[13px] tracking-[1px] text-accent">PER CHI</p>
           <p className="mt-1 text-[15px] text-text-0">{s.perChi}</p>
-          <p className="mt-5 font-mono text-[11px] tracking-[1px] text-accent">COSA COMPRENDE</p>
+          <p className="mt-5 font-label text-[13px] tracking-[1px] text-accent">COSA COMPRENDE</p>
           <p className="mt-1 text-[15px] leading-relaxed">{s.comprende}</p>
         </Scheda>
       ))}
@@ -129,7 +129,7 @@ export default function ServiziPage() {
           <ol className="grid gap-6 md:grid-cols-3">
             {procedura.map((p, i) => (
               <li key={p} className="border border-border bg-bg-1 p-8">
-                <span className="font-mono text-[11px] tracking-[2px] text-cyan">{String(i + 1).padStart(2, "0")}</span>
+                <span className="font-label text-[13px] tracking-[2px] text-accent">{String(i + 1).padStart(2, "0")}</span>
                 <p className="mt-4 text-lg font-bold tracking-[-0.5px] text-text-0">{p}</p>
               </li>
             ))}

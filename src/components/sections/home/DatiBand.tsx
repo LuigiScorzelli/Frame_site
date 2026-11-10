@@ -12,8 +12,8 @@ export default function DatiBand() {
       <div className="pointer-events-none absolute left-[5%] top-[10%] h-[400px] w-[600px] max-w-full rounded-full bg-[radial-gradient(ellipse,rgba(191,255,0,0.12),transparent)]" />
       <div className="pointer-events-none absolute right-[5%] top-[25%] h-[350px] w-[500px] max-w-full rounded-full bg-[radial-gradient(ellipse,rgba(0,229,255,0.1),transparent)]" />
       <div className="relative z-10 mx-auto max-w-[760px] px-6 text-center">
-        <span className="mb-4 block font-mono text-[11px] tracking-[3px] text-accent">◆ DATI, SICUREZZA E CONTROLLO</span>
-        <h2 className="text-4xl font-extrabold leading-[1.1] tracking-[-2px] text-text-0 lg:text-[48px]">
+        <span className="mb-4 block font-label text-[13px] tracking-[3px] text-accent">◆ DATI, SICUREZZA E CONTROLLO</span>
+        <h2 className="text-4xl font-display font-extrabold leading-[1.1] tracking-[-1px] text-text-0 lg:text-[48px]">
           I vostri dati restano sotto controllo.
         </h2>
         <p className="mx-auto mt-5 max-w-[560px] text-base leading-relaxed text-text-1">
