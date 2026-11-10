@@ -1,10 +1,10 @@
 {
-  "version": "0.2.0-beta.21",
-  "package": "https://aiframe.it/wpla/wpla-lead-assistant-0.2.0-beta.21.zip",
-  "sha256": "c0fe6a85af6e5752a4d959c5554921db523f16b6077050fd3f8dbe7e39c10157",
+  "version": "0.2.0-beta.22",
+  "package": "https://aiframe.it/wpla/wpla-lead-assistant-0.2.0-beta.22.zip",
+  "sha256": "4fa5d83a479174e8d52a4a906896070364f90bf43c919e28b5d674afdc456234",
   "requires": "7.0",
   "requires_php": "8.3",
   "tested": "7.1",
-  "released": "2026-10-24",
-  "changelog": "Privacy tools for the site owner: Tools > Export Personal Data and Tools > Erase Personal Data include the plugin's contact requests, found by the email entered in the form. Erasure also removes undelivered requests and their pending retries; requests with only a phone number are deleted from the plugin panel.\nReceived requests lets the owner choose how long delivered requests are kept: 7, 30, 90, 180 or 365 days (default 30, as before). Undelivered requests stay until the owner resends or deletes them.\nSettings > Privacy suggests a privacy policy text with the AI provider, the 24-hour server conversations, the hashed IP, the retention days and the undelivered requests.\nThe plugin panel warns when the daily cleanup has not run for more than 48 hours or is not scheduled, and Received requests shows the last cleanup time. The Data handling section explains how to set up a real cron job with your host."
+  "released": "2026-10-30",
+  "changelog": "New admin panel: a top-level Lead Assistant menu with seven pages (Overview, Guided setup, Sources and documentation, Requests, Unanswered questions, Appearance with a live widget preview, Settings). The old Settings > WP Lead Assistant address redirects to the Overview. Settings, keys, sources and requests are kept.\nCode follows the WordPress Coding Standards and PHPCompatibilityWP, checked in CI. Uninstall no longer overwrites a WordPress global variable; table names go through `$wpdb->prepare()` placeholders.\nPlugin Check passes with no errors on the ZIP, checked in CI (the update checker for aiframe.it is excluded until the WordPress.org build). The \"coming soon\" labels in the panel are escaped before output.\nFixed: saving the AI provider no longer resets the daily AI request limit, the Anthropic workspace or the consent when the form does not include them.\nSecurity reporting procedure: a Security section in this readme and the SECURITY.md file shipped in the ZIP explain how to report a vulnerability (security@aiframe.it), the response times, the scope and that only the latest beta receives fixes. No changes to how the plugin works."
 }
