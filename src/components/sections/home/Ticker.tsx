@@ -7,10 +7,10 @@ const voci = [
 export default function Ticker() {
   const doppie = [...voci, ...voci];
   return (
-    <section aria-hidden className="overflow-hidden py-3.5" style={{ background: "linear-gradient(90deg, #BFFF00, #00E5FF)" }}>
+    <section aria-hidden className="overflow-hidden py-3.5" style={{ background: "#BFFF00" }}>
       <div className="flex w-max animate-ticker motion-reduce:animate-none">
         {doppie.map((v, i) => (
-          <span key={`${v}-${i}`} className="mx-3 whitespace-nowrap font-mono text-[13px] font-bold text-bg-0" style={{ letterSpacing: "2px" }}>
+          <span key={`${v}-${i}`} className="mx-3 whitespace-nowrap font-label text-sm font-bold text-bg-0" style={{ letterSpacing: "2px" }}>
             {v}
           </span>
         ))}

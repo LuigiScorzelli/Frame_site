@@ -5,8 +5,8 @@ import { AGENCY_NAME, BOOKING_URL } from "@/lib/brand";
 const righe = [
   { testo: "QUANTO LAVORO", colore: "text-text-0" },
   { testo: "RIPETITIVO", colore: "text-accent" },
-  { testo: "FATE ANCORA", colore: "text-cyan" },
-  { testo: "A MANO?", colore: "text-cyan" },
+  { testo: "FATE ANCORA", colore: "text-text-0" },
+  { testo: "A MANO?", colore: "text-text-0" },
 ];
 
 export default function Hero() {
@@ -21,12 +21,12 @@ export default function Hero() {
 
       <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 lg:px-14">
         <div className="max-w-[900px]">
-          <span className="font-mono text-xs font-medium tracking-[2px] text-accent">AUTOMAZIONI E AI PER PICCOLE AZIENDE</span>
+          <span className="font-label text-[13px] font-medium tracking-[2px] text-accent">AUTOMAZIONI E AI PER PICCOLE AZIENDE</span>
           <h1 className="mt-6 animate-[fadeIn_0.6s_ease_forwards] opacity-0">
             {righe.map((r, i) => (
               <span
                 key={r.testo}
-                className={`${i > 0 ? "mt-2 " : ""}block text-5xl font-extrabold leading-none tracking-[-2px] sm:text-6xl lg:text-[80px] lg:tracking-[-4px] ${r.colore}`}
+                className={`${i > 0 ? "mt-2 " : ""}block text-5xl font-display font-extrabold leading-none tracking-[-1px] sm:text-6xl lg:text-[80px] lg:tracking-[-2px] ${r.colore}`}
               >
                 {r.testo}
               </span>

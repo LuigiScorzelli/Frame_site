@@ -17,8 +17,8 @@ export default function PageHero({
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-bg-0 via-bg-0/80 to-bg-0/30" />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-bg-0 via-bg-0/80 to-transparent" />
       <div className="relative z-10 mx-auto max-w-[1440px] px-6 lg:px-14">
-        <span className="font-mono text-xs font-medium tracking-[3px] text-accent">{tag}</span>
-        <h1 className="mt-5 max-w-[900px] animate-[fadeIn_0.6s_ease_both] text-4xl font-extrabold leading-[1.05] tracking-[-2px] text-text-0 sm:text-5xl lg:text-[56px] lg:tracking-[-3px]">
+        <span className="font-label text-[13px] font-medium tracking-[3px] text-accent">{tag}</span>
+        <h1 className="mt-5 max-w-[900px] animate-[fadeIn_0.6s_ease_both] text-4xl font-display font-extrabold leading-[1.05] tracking-[-1px] text-text-0 sm:text-5xl lg:text-[56px] lg:tracking-[-1.5px]">
           {title}
         </h1>
         {children && <div className="mt-6 animate-[fadeIn_0.6s_ease_0.2s_both]">{children}</div>}

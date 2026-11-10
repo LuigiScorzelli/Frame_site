@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 export const Etichetta = ({ children }: { children: string }) => (
-  <span className="border border-[#2A3F66] bg-accent-dim px-2.5 py-0.5 font-mono text-[9px] font-medium tracking-[1px] text-accent">{children}</span>
+  <span className="border border-[#2A3F66] bg-accent-dim px-2.5 py-0.5 font-label text-[12px] font-medium tracking-[1px] text-accent">{children}</span>
 );
 
 interface SchedaProps {
@@ -18,7 +18,7 @@ interface SchedaProps {
 export default function Scheda({ icona, sopra, titolo, etichette, className, children }: SchedaProps) {
   return (
     <article className={cn("flex flex-col border border-border bg-bg-1 p-8", className)}>
-      {sopra && <span className="font-mono text-[11px] tracking-[2px] text-cyan">{sopra}</span>}
+      {sopra && <span className="font-label text-[13px] tracking-[2px] text-accent">{sopra}</span>}
       {icona && (
         <div aria-hidden className={cn("mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-bg-2 text-xl text-accent", sopra && "mt-4")}>
           {icona}

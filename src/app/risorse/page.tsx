@@ -47,10 +47,10 @@ export default function RisorsePage() {
           <div className="grid gap-6 md:grid-cols-2">
             {schede.map((s) => (
               <Link key={s.tag} href={s.href} className="group border border-border bg-bg-1 p-8 transition-colors hover:border-accent-border">
-                <span className="font-mono text-[11px] font-bold tracking-[2px] text-cyan">{s.tag}</span>
+                <span className="font-label text-[13px] font-bold tracking-[2px] text-accent">{s.tag}</span>
                 <h2 className="mt-3 text-xl font-bold text-text-0 group-hover:text-accent">{s.titolo}</h2>
                 <p className="mt-2 text-[15px] text-text-1">{s.testo}</p>
-                <span className="mt-6 inline-block font-mono text-[11px] tracking-[1px] text-accent">APRI &rarr;</span>
+                <span className="mt-6 inline-block font-label text-[13px] tracking-[1px] text-accent">APRI &rarr;</span>
               </Link>
             ))}
           </div>
@@ -62,7 +62,7 @@ export default function RisorsePage() {
                 {articoli.map((a) => (
                   <li key={a.slug}>
                     <Link href={`/risorse/${a.slug}`} className="group flex h-full flex-col border border-border bg-bg-1 p-8 transition-colors hover:border-accent-border">
-                      <div className="flex flex-wrap items-center gap-3 font-mono text-[11px] tracking-[1px] text-text-1">
+                      <div className="flex flex-wrap items-center gap-3 font-label text-[13px] tracking-[1px] text-text-1">
                         <span className="text-accent">{CATEGORIE[a.categoria].toUpperCase()}</span>
                         <time dateTime={a.data}>{formatDataArticolo(a.data)}</time>
                         <span>{a.tempoLettura} min</span>

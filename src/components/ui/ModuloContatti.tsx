@@ -12,7 +12,7 @@ const VUOTO: Campi = { nome: "", email: "", sito: "", messaggio: "" };
 
 const input =
   "w-full border bg-bg-0 px-3.5 text-sm text-text-0 outline-none placeholder:text-text-2 focus:border-accent/50";
-const etichetta = "mb-1.5 block font-mono text-[10px] font-medium tracking-[1px] text-text-1";
+const etichetta = "mb-1.5 block font-label text-[12px] font-medium tracking-[1px] text-text-1";
 
 /** Fallback contact form while Calendly is not configured. Posts to /api/contact. */
 export default function ModuloContatti() {
@@ -70,12 +70,12 @@ export default function ModuloContatti() {
       <div>
         <label htmlFor="c-nome" className={etichetta}>NOME *</label>
         <input id="c-nome" autoComplete="name" value={campi.nome} onChange={set("nome")} placeholder="Il tuo nome" className={`${input} h-11 ${errori.nome ? "border-red" : "border-border"}`} aria-invalid={!!errori.nome} />
-        {errori.nome && <p className="mt-1 text-xs text-red">{errori.nome}</p>}
+        {errori.nome && <p className="mt-1 text-[13px] text-red">{errori.nome}</p>}
       </div>
       <div>
         <label htmlFor="c-email" className={etichetta}>EMAIL *</label>
         <input id="c-email" type="email" autoComplete="email" value={campi.email} onChange={set("email")} placeholder="email@azienda.it" className={`${input} h-11 ${errori.email ? "border-red" : "border-border"}`} aria-invalid={!!errori.email} />
-        {errori.email && <p className="mt-1 text-xs text-red">{errori.email}</p>}
+        {errori.email && <p className="mt-1 text-[13px] text-red">{errori.email}</p>}
       </div>
       <div>
         <label htmlFor="c-sito" className={etichetta}>IL TUO SITO</label>
@@ -92,20 +92,20 @@ export default function ModuloContatti() {
       </div>
 
       <div>
-        <label htmlFor="c-consenso" className="flex items-start gap-2 text-xs text-text-1">
+        <label htmlFor="c-consenso" className="flex items-start gap-2 text-[13px] text-text-1">
           <input id="c-consenso" type="checkbox" checked={consenso} onChange={(e) => { setConsenso(e.target.checked); if (errori.consenso) setErrori((x) => ({ ...x, consenso: undefined })); }} className="mt-0.5 accent-[#BFFF00]" />
           <span>
             Acconsento al trattamento dei miei dati da parte di {AGENCY_NAME} per rispondere a questa richiesta. Leggi la{" "}
             <a href="/privacy" className="underline hover:text-text-0">privacy</a>.
           </span>
         </label>
-        {errori.consenso && <p className="mt-1 text-xs text-red">{errori.consenso}</p>}
+        {errori.consenso && <p className="mt-1 text-[13px] text-red">{errori.consenso}</p>}
       </div>
 
       <button
         type="submit"
         disabled={stato === "sending"}
-        className="w-full bg-accent py-4 font-mono text-xs font-bold tracking-[1px] text-bg-0 disabled:opacity-50"
+        className="w-full bg-accent py-4 font-label text-sm font-bold tracking-wide text-bg-0 disabled:opacity-50"
       >
         {stato === "sending" ? "INVIO IN CORSO…" : "INVIA LA RICHIESTA →"}
       </button>

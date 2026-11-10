@@ -51,13 +51,13 @@ export default function PrivacyPage() {
 
         <Section numero={1} tag="SUL SITO" title={`Sul sito ${AGENCY_NAME}.it`}>
           <ul className="max-w-3xl space-y-3 border border-border bg-bg-1 p-8 text-[15px] leading-relaxed text-text-1">
-            {sulSito.map((x) => <li key={x} className="flex gap-3"><span className="font-mono text-accent" aria-hidden>&gt;</span>{x}</li>)}
+            {sulSito.map((x) => <li key={x} className="flex gap-3"><span className="font-label text-accent" aria-hidden>&gt;</span>{x}</li>)}
           </ul>
         </Section>
 
         <Section numero={2} tag="ASSISTENTE AI" title={`L'assistente di ${AGENCY_NAME}.it`}>
           <ul className="max-w-3xl space-y-3 border border-border bg-bg-1 p-8 text-[15px] leading-relaxed text-text-1">
-            {nellAssistente.map((x) => <li key={x} className="flex gap-3"><span className="font-mono text-accent" aria-hidden>&gt;</span>{x}</li>)}
+            {nellAssistente.map((x) => <li key={x} className="flex gap-3"><span className="font-label text-accent" aria-hidden>&gt;</span>{x}</li>)}
           </ul>
           <p className="mt-6 max-w-3xl text-[15px] leading-relaxed text-text-1">
             Per vedere o cancellare i tuoi dati scrivici a{" "}
@@ -67,7 +67,7 @@ export default function PrivacyPage() {
 
         <Section numero={3} tag="NEL PLUGIN" title={`Nel plugin ${PLUGIN_NAME} installato sul tuo sito`}>
           <ul className="max-w-3xl space-y-3 border border-border bg-bg-1 p-8 text-[15px] leading-relaxed text-text-1">
-            {nelPlugin.map((x) => <li key={x} className="flex gap-3"><span className="font-mono text-accent" aria-hidden>&gt;</span>{x}</li>)}
+            {nelPlugin.map((x) => <li key={x} className="flex gap-3"><span className="font-label text-accent" aria-hidden>&gt;</span>{x}</li>)}
           </ul>
           <h3 className="mt-10 text-xl font-bold text-text-0">Come cancelli i dati di un cliente</h3>
           <p className="mt-3 max-w-3xl text-[15px] leading-relaxed text-text-1">

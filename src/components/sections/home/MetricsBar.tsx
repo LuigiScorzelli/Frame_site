@@ -26,8 +26,8 @@ export default function MetricsBar() {
             )}
             style={{ transitionDelay: `${i * 100}ms` }}
           >
-            <div className="text-[40px] font-extrabold leading-none tracking-[-2px] text-text-0 lg:text-[48px]">{m.valore}</div>
-            <div className="mt-2 font-mono text-[10px] font-medium tracking-[2px] text-text-1">{m.etichetta}</div>
+            <div className="text-[40px] font-display font-extrabold leading-none tracking-[-1px] text-text-0 lg:text-[48px]">{m.valore}</div>
+            <div className="mt-2 font-label text-[12px] font-medium tracking-[2px] text-text-1">{m.etichetta}</div>
           </div>
         ))}
       </div>

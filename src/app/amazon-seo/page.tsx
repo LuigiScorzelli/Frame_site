@@ -205,7 +205,7 @@ const playbook = [
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="font-mono text-xs font-medium uppercase tracking-[2px] text-accent">
+    <p className="font-label text-[13px] font-medium uppercase tracking-[2px] text-accent">
       {children}
     </p>
   );
@@ -215,7 +215,7 @@ function PrimaryCta({ children }: { children: React.ReactNode }) {
   return (
     <Link
       href="/contatti"
-      className="inline-flex min-h-11 items-center justify-center bg-accent px-6 py-3 font-mono text-xs font-bold uppercase tracking-[1px] text-bg-0 transition-opacity hover:opacity-90"
+      className="inline-flex min-h-11 items-center justify-center bg-accent px-6 py-3 font-label text-[13px] font-bold uppercase tracking-[1px] text-bg-0 transition-opacity hover:opacity-90"
     >
       {children}
     </Link>
@@ -228,7 +228,7 @@ function SecondaryCta({ children }: { children: React.ReactNode }) {
       href={chatGptToolUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex min-h-11 items-center justify-center border border-cyan px-6 py-3 font-mono text-xs font-bold uppercase tracking-[1px] text-cyan transition-colors hover:bg-cyan hover:text-bg-0"
+      className="inline-flex min-h-11 items-center justify-center border border-cyan px-6 py-3 font-label text-[13px] font-bold uppercase tracking-[1px] text-cyan transition-colors hover:bg-cyan hover:text-bg-0"
     >
       {children}
     </a>
@@ -251,7 +251,7 @@ export default function AmazonSeoPage() {
           />
           <div className="relative mx-auto max-w-[1180px] px-6 pb-16 pt-12 text-center md:px-14 md:pb-20">
             <SectionLabel>Amazon SEO · Brevetto 12,561,383</SectionLabel>
-            <h1 className="mx-auto mt-5 max-w-[900px] text-4xl font-extrabold leading-tight text-text-0 md:text-6xl">
+            <h1 className="mx-auto mt-5 max-w-[900px] text-4xl font-display font-extrabold leading-tight text-text-0 md:text-6xl">
               Intent Hexagon: Amazon non premia più solo keyword.
               <span className="block text-accent">Anticipa l&apos;intento di acquisto.</span>
             </h1>
@@ -265,10 +265,10 @@ export default function AmazonSeoPage() {
             <div className="mx-auto mt-12 grid max-w-[820px] grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
               {intentTiles.map((intent, index) => (
                 <div key={intent} className="border border-border bg-bg-1 p-4 text-center">
-                  <span className="block font-mono text-[10px] text-text-2">
+                  <span className="block font-label text-[12px] text-text-2">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <span className="mt-2 block break-words font-mono text-[10px] font-bold uppercase tracking-[1px] text-text-0">
+                  <span className="mt-2 block break-words font-label text-[12px] font-bold uppercase tracking-[1px] text-text-0">
                     {intent}
                   </span>
                 </div>
@@ -289,7 +289,7 @@ export default function AmazonSeoPage() {
               <a
                 key={href}
                 href={href}
-                className="shrink-0 font-mono text-[11px] font-bold uppercase tracking-[1px] text-text-1 transition-colors hover:text-accent"
+                className="shrink-0 font-label text-[13px] font-bold uppercase tracking-[1px] text-text-1 transition-colors hover:text-accent"
               >
                 {label}
               </a>
@@ -300,7 +300,7 @@ export default function AmazonSeoPage() {
         <section id="problema" className="border-b border-border py-20">
           <div className="mx-auto max-w-[1180px] px-6 md:px-14">
             <SectionLabel>Il problema</SectionLabel>
-            <h2 className="mt-4 max-w-[820px] text-3xl font-extrabold leading-tight text-text-0 md:text-5xl">
+            <h2 className="mt-4 max-w-[820px] text-3xl font-display font-extrabold leading-tight text-text-0 md:text-5xl">
               Il ranking Amazon ha due layer. Molti seller lavorano solo sul primo.
             </h2>
             <p className="mt-5 max-w-[760px] text-base leading-relaxed text-text-1">
@@ -327,7 +327,7 @@ export default function AmazonSeoPage() {
               <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
                 {stages.map((stage) => (
                   <div key={stage.num} className="border border-border bg-bg-1 p-6">
-                    <p className="font-mono text-[10px] font-bold uppercase tracking-[1px] text-accent">
+                    <p className="font-label text-[12px] font-bold uppercase tracking-[1px] text-accent">
                       Stadio {stage.num}
                     </p>
                     <h3 className="mt-3 text-lg font-bold text-text-0">{stage.title}</h3>
@@ -342,7 +342,7 @@ export default function AmazonSeoPage() {
         <section id="hexagon" className="border-b border-border py-20">
           <div className="mx-auto max-w-[1180px] px-6 text-center md:px-14">
             <SectionLabel>I 6 tipi di intento</SectionLabel>
-            <h2 className="mt-4 text-3xl font-extrabold text-text-0 md:text-5xl">
+            <h2 className="mt-4 text-3xl font-display font-extrabold text-text-0 md:text-5xl">
               L&apos;Intent Hexagon
             </h2>
             <p className="mx-auto mt-4 max-w-[700px] text-base leading-relaxed text-text-1">
@@ -371,10 +371,10 @@ export default function AmazonSeoPage() {
             <div className="mt-10 grid gap-5 text-left md:grid-cols-2 xl:grid-cols-3">
               {intents.map((intent) => (
                 <div key={intent.title} className="border border-border bg-bg-1 p-6 transition-colors hover:border-cyan">
-                  <span className={`font-mono text-[11px] font-bold ${intent.color}`}>{intent.num}</span>
+                  <span className={`font-label text-[13px] font-bold ${intent.color}`}>{intent.num}</span>
                   <h3 className="mt-3 text-xl font-bold text-text-0">{intent.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-text-1">{intent.desc}</p>
-                  <p className="mt-4 inline-block bg-accent-dim px-3 py-2 font-mono text-[11px] leading-relaxed text-accent">
+                  <p className="mt-4 inline-block bg-accent-dim px-3 py-2 font-label text-[13px] leading-relaxed text-accent">
                     {intent.example}
                   </p>
                 </div>
@@ -386,7 +386,7 @@ export default function AmazonSeoPage() {
         <section id="esempi" className="border-b border-border py-20">
           <div className="mx-auto max-w-[1180px] px-6 md:px-14">
             <SectionLabel>Esempi pratici</SectionLabel>
-            <h2 className="mt-4 text-3xl font-extrabold text-text-0 md:text-5xl">
+            <h2 className="mt-4 text-3xl font-display font-extrabold text-text-0 md:text-5xl">
               L&apos;Hexagon in azione
             </h2>
             <p className="mt-4 max-w-[720px] text-base leading-relaxed text-text-1">
@@ -400,12 +400,12 @@ export default function AmazonSeoPage() {
                   <div className="mt-5 flex flex-wrap items-center gap-3">
                     {journey.steps.map(([query, badge], index) => (
                       <div key={`${journey.title}-${query}`} className="contents">
-                        <div className="border border-border bg-bg-2 px-3 py-2 font-mono text-[11px] text-text-0">
+                        <div className="border border-border bg-bg-2 px-3 py-2 font-label text-[13px] text-text-0">
                           {query}
                         </div>
                         {index < journey.steps.length - 1 && (
                           <div className="flex items-center gap-2">
-                            <span className="font-mono text-[9px] font-bold uppercase tracking-[1px] text-cyan">
+                            <span className="font-label text-[12px] font-bold uppercase tracking-[1px] text-cyan">
                               {badge}
                             </span>
                             <span className="text-accent">-&gt;</span>
@@ -426,7 +426,7 @@ export default function AmazonSeoPage() {
         <section id="regole" className="border-b border-border py-20">
           <div className="mx-auto max-w-[1180px] px-6 md:px-14">
             <SectionLabel>Le 5 regole del gioco</SectionLabel>
-            <h2 className="mt-4 text-3xl font-extrabold text-text-0 md:text-5xl">
+            <h2 className="mt-4 text-3xl font-display font-extrabold text-text-0 md:text-5xl">
               Come si comporta il sistema
             </h2>
             <p className="mt-4 max-w-[760px] text-base leading-relaxed text-text-1">
@@ -435,7 +435,7 @@ export default function AmazonSeoPage() {
             <div className="mt-8 space-y-4">
               {rules.map((rule, index) => (
                 <div key={rule.title} className="grid gap-4 border border-border bg-bg-1 p-6 md:grid-cols-[64px_1fr]">
-                  <div className="font-mono text-4xl font-bold text-accent">
+                  <div className="font-label text-4xl font-bold text-accent">
                     {String(index + 1).padStart(2, "0")}
                   </div>
                   <div>
@@ -451,7 +451,7 @@ export default function AmazonSeoPage() {
         <section id="playbook" className="border-b border-border py-20">
           <div className="mx-auto max-w-[1180px] px-6 md:px-14">
             <SectionLabel>Cosa fare</SectionLabel>
-            <h2 className="mt-4 max-w-[860px] text-3xl font-extrabold leading-tight text-text-0 md:text-5xl">
+            <h2 className="mt-4 max-w-[860px] text-3xl font-display font-extrabold leading-tight text-text-0 md:text-5xl">
               Guida pratica per trasformare gli intenti in listing più competitivi
             </h2>
             <p className="mt-4 max-w-[760px] text-base leading-relaxed text-text-1">
@@ -479,7 +479,7 @@ export default function AmazonSeoPage() {
           <div className="mx-auto max-w-[980px] px-6 text-center md:px-14">
             <div className="border border-border bg-bg-1 p-8 md:p-12">
               <SectionLabel>Audit Amazon SEO</SectionLabel>
-              <h2 className="mt-4 text-3xl font-extrabold leading-tight text-text-0 md:text-5xl">
+              <h2 className="mt-4 text-3xl font-display font-extrabold leading-tight text-text-0 md:text-5xl">
                 Vuoi applicare l&apos;Intent Hexagon ai tuoi listing Amazon?
               </h2>
               <p className="mx-auto mt-5 max-w-[700px] text-base leading-relaxed text-text-1">

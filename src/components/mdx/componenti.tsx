@@ -9,8 +9,8 @@ import { PLUGIN_NAME, INSTALL_PATH } from "@/lib/brand";
 
 function Nota({ titolo = "Nota", children }: { titolo?: string; children: React.ReactNode }) {
   return (
-    <aside className="my-8 border-l-2 border-cyan bg-bg-1 px-6 py-5">
-      <p className="font-mono text-[11px] font-bold tracking-[2px] text-cyan">{titolo.toUpperCase()}</p>
+    <aside className="my-8 border-l-2 border-accent bg-bg-1 px-6 py-5">
+      <p className="font-label text-[13px] font-bold tracking-[2px] text-accent">{titolo.toUpperCase()}</p>
       <div className="mt-2 text-[15px] leading-relaxed text-text-1 [&>p]:m-0">{children}</div>
     </aside>
   );
@@ -34,7 +34,7 @@ function CtaInstalla({ pagina = "articolo" }: { pagina?: string }) {
 }
 
 export const componentiMdx: NonNullable<MDXRemoteProps["components"]> = {
-  h1: (p) => <h2 {...p} className="mt-12 text-3xl font-extrabold tracking-[-1px] text-text-0" />,
+  h1: (p) => <h2 {...p} className="mt-12 text-3xl font-display font-extrabold tracking-[-0.5px] text-text-0" />,
   h2: (p) => <h2 {...p} className="mt-12 text-2xl font-bold tracking-[-1px] text-text-0" />,
   h3: (p) => <h3 {...p} className="mt-8 text-xl font-bold text-text-0" />,
   p: (p) => <p {...p} className="mt-5 text-base leading-[1.8] text-text-1" />,
@@ -53,7 +53,7 @@ export const componentiMdx: NonNullable<MDXRemoteProps["components"]> = {
       <table {...p} className="w-full border-collapse text-left text-sm text-text-1" />
     </div>
   ),
-  th: (p) => <th {...p} className="border-b border-border px-3 py-2 font-mono text-[11px] tracking-wider text-text-0" />,
+  th: (p) => <th {...p} className="border-b border-border px-3 py-2 font-label text-[13px] tracking-wider text-text-0" />,
   td: (p) => <td {...p} className="border-b border-border px-3 py-2" />,
   code: (p) => <code {...p} className="rounded bg-bg-2 px-1.5 py-0.5 font-mono text-sm text-accent" />,
   img: ({ src, alt }) =>

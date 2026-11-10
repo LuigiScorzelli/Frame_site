@@ -102,7 +102,7 @@ export default function ChatWidget() {
         )}
       >
         <div className="flex items-center justify-between border-b border-border px-4 py-3">
-          <h2 id={titleId} className="font-mono text-[11px] font-medium uppercase text-accent" style={{ letterSpacing: "1px" }}>
+          <h2 id={titleId} className="font-label text-[13px] font-medium uppercase text-accent" style={{ letterSpacing: "1px" }}>
             Come possiamo aiutarti
           </h2>
           <button
@@ -129,9 +129,9 @@ export default function ChatWidget() {
                   evento={opt.evento}
                   props={opt.evento ? { pagina, posizione: "widget" } : undefined}
                   className={cn(
-                    "block w-full px-3.5 py-2.5 text-left font-mono text-[11px] tracking-[0.5px] transition-all duration-200",
+                    "block w-full px-3.5 py-2.5 text-left font-label text-[13px] tracking-[0.5px] transition-all duration-200",
                     i === 0
-                      ? "bg-[linear-gradient(135deg,#BFFF00,#00E5FF)] font-medium text-bg-0 hover:brightness-110"
+                      ? "bg-accent font-medium text-bg-0 hover:brightness-110"
                       : "border border-border text-text-1 hover:border-accent/40 hover:text-text-0"
                   )}
                 >
@@ -159,7 +159,7 @@ export default function ChatWidget() {
         type="button"
         onClick={() => setOpen(!open)}
         className="relative flex h-12 w-12 items-center justify-center rounded-full text-bg-0 shadow-lg sm:h-14 sm:w-14"
-        style={{ background: "linear-gradient(135deg, #BFFF00, #00E5FF)" }}
+        style={{ background: "#BFFF00" }}
         aria-label={open ? "Chiudi il menu di aiuto" : "Apri il menu di aiuto"}
         aria-expanded={open}
         aria-controls={panelId}

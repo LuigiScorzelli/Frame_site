@@ -124,7 +124,7 @@ export default function PluginPage() {
                   <ol className="mt-6 space-y-2 text-[15px] text-text-0">
                     {installazione.map((p, i) => (
                       <li key={p} className="flex gap-3">
-                        <span className="font-mono text-accent">{i + 1}.</span>
+                        <span className="font-label text-accent">{i + 1}.</span>
                         {p}
                       </li>
                     ))}
@@ -140,14 +140,14 @@ export default function PluginPage() {
             <Scheda icona={<IconaSpunta />} titolo="Fa">
               <ul className="space-y-3 text-[15px]">
                 {fa.map((x) => (
-                  <li key={x} className="flex gap-3"><span className="font-mono text-accent" aria-hidden>&gt;</span>{x}</li>
+                  <li key={x} className="flex gap-3"><span className="font-label text-accent" aria-hidden>&gt;</span>{x}</li>
                 ))}
               </ul>
             </Scheda>
             <Scheda icona={<span className="text-red"><IconaCroce /></span>} titolo="Non fa">
               <ul className="space-y-3 text-[15px]">
                 {nonFa.map((x) => (
-                  <li key={x} className="flex gap-3"><span className="font-mono text-red" aria-hidden>&gt;</span>{x}</li>
+                  <li key={x} className="flex gap-3"><span className="font-label text-red" aria-hidden>&gt;</span>{x}</li>
                 ))}
               </ul>
             </Scheda>
@@ -163,8 +163,8 @@ export default function PluginPage() {
               { valore: "37/37", etichetta: "COLLAUDI AUTOMATICI SUPERATI (TEST INTERNI)" },
             ].map((p) => (
               <div key={p.valore} className="border border-border bg-bg-1 p-6">
-                <div className="font-mono text-3xl font-bold text-accent">{p.valore}</div>
-                <div className="mt-1 font-mono text-[11px] font-medium tracking-widest text-text-1">{p.etichetta}</div>
+                <div className="font-label text-3xl font-bold text-accent">{p.valore}</div>
+                <div className="mt-1 font-label text-[13px] font-medium tracking-widest text-text-1">{p.etichetta}</div>
               </div>
             ))}
           </div>
@@ -190,7 +190,7 @@ export default function PluginPage() {
           <dl className="grid gap-6 md:grid-cols-2">
             {faq.map((f, i) => (
               <div key={f.domanda} className="border border-border bg-bg-1 p-8">
-                <span className="font-mono text-[11px] tracking-[2px] text-cyan">{String(i + 1).padStart(2, "0")}</span>
+                <span className="font-label text-[13px] tracking-[2px] text-accent">{String(i + 1).padStart(2, "0")}</span>
                 <dt className="mt-3 text-lg font-bold text-text-0">{f.domanda}</dt>
                 <dd className="mt-2 text-[15px] leading-relaxed text-text-1">{f.risposta}</dd>
               </div>

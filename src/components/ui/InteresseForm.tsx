@@ -98,13 +98,13 @@ export default function InteresseForm({
         <button
           type="submit"
           disabled={stato === "loading"}
-          className="bg-accent px-6 py-3.5 font-mono text-[11px] font-bold tracking-wider text-bg-0 disabled:opacity-50"
+          className="bg-accent px-6 py-3.5 font-label text-sm font-bold tracking-wide text-bg-0 disabled:opacity-50"
           style={{ letterSpacing: "1px" }}
         >
           {stato === "loading" ? "Invio…" : bottone}
         </button>
       </div>
-      <label htmlFor={idConsenso} className="flex items-start gap-2 text-xs text-text-1">
+      <label htmlFor={idConsenso} className="flex items-start gap-2 text-[13px] text-text-1">
         <input
           id={idConsenso}
           type="checkbox"

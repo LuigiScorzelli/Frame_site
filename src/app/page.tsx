@@ -50,8 +50,8 @@ export default function Home() {
         {/* Plugin band */}
         <section className="border-t border-accent-border bg-bg-1 py-20 lg:py-24">
           <div className="mx-auto max-w-[1440px] px-6 lg:px-14">
-            <span className="font-mono text-xs font-medium tracking-[2px] text-cyan">IL NOSTRO PRIMO PRODOTTO</span>
-            <h2 className="mt-4 max-w-3xl text-3xl font-extrabold leading-tight tracking-[-1px] text-text-0 lg:text-[48px] lg:tracking-[-2px]">
+            <span className="font-label text-[13px] font-medium tracking-[2px] text-accent">IL NOSTRO PRIMO PRODOTTO</span>
+            <h2 className="mt-4 max-w-3xl text-3xl font-display font-extrabold leading-tight tracking-[-0.5px] text-text-0 lg:text-[48px] lg:tracking-[-1px]">
               {PLUGIN_NAME}: il sito WordPress che risponde anche quando siete chiusi
             </h2>
             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-text-1">
@@ -61,8 +61,8 @@ export default function Home() {
             <div className="mt-8 grid max-w-3xl gap-6 sm:grid-cols-2">
               {prove.map((p) => (
                 <div key={p.valore} className="border border-border bg-bg-0 p-6">
-                  <div className="font-mono text-3xl font-bold text-accent">{p.valore}</div>
-                  <div className="mt-1 font-mono text-[11px] font-medium tracking-widest text-text-1">{p.etichetta}</div>
+                  <div className="font-label text-3xl font-bold text-accent">{p.valore}</div>
+                  <div className="mt-1 font-label text-[13px] font-medium tracking-widest text-text-1">{p.etichetta}</div>
                 </div>
               ))}
             </div>
@@ -70,7 +70,7 @@ export default function Home() {
               <CtaButton href="/plugin" evento="click_installa" props={{ pagina: "home", posizione: "pagina" }}>
                 INSTALLA GRATIS &rarr;
               </CtaButton>
-              <Link href="/check-up" className="font-mono text-sm text-accent underline-offset-4 hover:underline">
+              <Link href="/check-up" className="font-label text-sm text-accent underline-offset-4 hover:underline">
                 Oppure fai il check-up del tuo sito in 2 minuti &rarr;
               </Link>
             </div>
@@ -81,7 +81,7 @@ export default function Home() {
 
         <section className="border-t border-border bg-bg-1 py-24">
           <div className="mx-auto max-w-[1200px] px-6 text-center lg:px-14">
-            <h2 className="text-3xl font-extrabold tracking-[-1px] text-text-0 lg:text-5xl">
+            <h2 className="text-3xl font-display font-extrabold tracking-[-0.5px] text-text-0 lg:text-5xl">
               Raccontateci un processo che vi fa perdere tempo.
             </h2>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">

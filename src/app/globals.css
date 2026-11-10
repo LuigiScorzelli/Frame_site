@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ============================================
-   aiframe Brand Design Tokens — Design 1.0
+   FR>ME Brand Design Tokens — Design 2.0 (10/11/2026)
    ============================================ */
 
 @theme inline {
@@ -14,17 +14,22 @@
   --color-accent-border: rgba(191, 255, 0, 0.18);
   --color-cyan: #00E5FF;
   --color-text-0: #E8ECF4;
-  --color-text-1: #8B9BB8;
-  --color-text-2: #556B8A;
+  --color-text-1: #A9B6CE; /* testo secondario: 9:1 su bg-0 (era #8B9BB8) */
+  --color-text-2: #8494B2; /* note e placeholder: 6:1 su bg-0 (era #556B8A, 3,2:1) */
   --color-border: #1E2D4A;
   --color-light-bg: #F5F5F5;
   --color-amber: #F59E0B;
   --color-red: #EF4444;
 
   /* Typography */
-  --font-sans: var(--font-sora), system-ui, sans-serif;
-  --font-mono: var(--font-space-mono), "Courier New", monospace;
-  --font-body: var(--font-sora), system-ui, sans-serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+  /* Titoli, numeri grandi e logo */
+  --font-display: var(--font-bricolage), var(--font-inter), system-ui, sans-serif;
+  /* Etichette, menu e pulsanti (prima erano in Space Mono) */
+  --font-label: var(--font-inter), system-ui, sans-serif;
+  /* Solo per il codice negli articoli */
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   /* Animations */
   --animate-ticker: ticker-scroll 30s linear infinite;
@@ -75,6 +80,12 @@
 /* ============================================
    Base Styles
    ============================================ */
+
+@layer base {
+  h1, h2, h3 {
+    font-family: var(--font-display);
+  }
+}
 
 body {
   background: var(--color-bg-0);

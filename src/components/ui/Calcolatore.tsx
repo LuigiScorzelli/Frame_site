@@ -52,7 +52,7 @@ function Campo({ id, etichetta, nota, valore, min, max, step, unita, onChange }:
     <div>
       <label htmlFor={htmlId} className="block text-[15px] font-semibold text-text-0">
         {etichetta}
-        {nota && <span className="ml-2 font-mono text-[10px] font-normal tracking-[1px] text-amber">{nota}</span>}
+        {nota && <span className="ml-2 font-label text-[12px] font-normal tracking-[1px] text-amber">{nota}</span>}
       </label>
       <div className="mt-2 flex items-center gap-2">
         <input
@@ -66,7 +66,7 @@ function Campo({ id, etichetta, nota, valore, min, max, step, unita, onChange }:
           onChange={(e) => onChange(id, e.target.valueAsNumber)}
           className="h-11 w-full max-w-[180px] border border-border bg-bg-0 px-3.5 text-sm text-text-0 outline-none focus:border-accent/60"
         />
-        {unita && <span className="font-mono text-sm text-text-1">{unita}</span>}
+        {unita && <span className="font-label text-sm text-text-1">{unita}</span>}
       </div>
     </div>
   );
@@ -120,7 +120,7 @@ export default function Calcolatore() {
         <Campo id="valoreCliente" etichetta="Quanto vale in media un cliente" valore={v.valoreCliente} min={0} max={10000000} step={10} unita="€" onChange={aggiorna} />
 
         <details className="border-t border-border pt-6">
-          <summary className="cursor-pointer font-mono text-[11px] font-bold tracking-[1px] text-text-1 hover:text-text-0">
+          <summary className="cursor-pointer font-label text-[13px] font-bold tracking-[1px] text-text-1 hover:text-text-0">
             AVANZATE
           </summary>
           <div className="mt-6 space-y-6">
@@ -133,7 +133,7 @@ export default function Calcolatore() {
 
       <div className="flex flex-col justify-between border border-accent-border bg-bg-1 p-8" aria-live="polite">
         <div>
-          <span className="font-mono text-[11px] font-bold tracking-[2px] text-accent">RISULTATO</span>
+          <span className="font-label text-[13px] font-bold tracking-[2px] text-accent">RISULTATO</span>
           <p className="mt-4 text-2xl font-bold leading-snug text-text-0">
             Ogni mese circa <span className="text-accent">{euro.format(euroMese)}</span> di richieste senza risposta in tempo.
           </p>
@@ -141,7 +141,7 @@ export default function Calcolatore() {
             Sono circa {numero.format(Math.round(perseMese * 10) / 10)} richieste al mese che finiscono a qualcun altro.
           </p>
         </div>
-        <div className="mt-8 border-t border-border pt-6 font-mono text-[11px] leading-relaxed text-text-1">
+        <div className="mt-8 border-t border-border pt-6 font-label text-[13px] leading-relaxed text-text-1">
           <p className="font-bold text-text-0">COME LO CALCOLIAMO</p>
           <p className="mt-2">
             richieste perse al mese = {numero.format(sicuri.richiesteSettimana)} × {numero.format(sicuri.settimaneMese)} × {numero.format(sicuri.fuoriOrario)}% × {numero.format(sicuri.quotaPersa)}

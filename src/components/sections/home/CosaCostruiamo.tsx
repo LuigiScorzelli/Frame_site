@@ -5,7 +5,7 @@ import { useInView } from "@/components/animations/useInView";
 import { IconaAssistente, IconaCodice, IconaFulmine } from "@/components/ui/Icone";
 
 const Tag = ({ children }: { children: string }) => (
-  <span className="border border-[#2A3F66] bg-accent-dim px-2.5 py-0.5 font-mono text-[9px] font-medium tracking-wider text-accent" style={{ letterSpacing: "1px" }}>
+  <span className="border border-[#2A3F66] bg-accent-dim px-2.5 py-0.5 font-label text-[12px] font-medium tracking-wider text-accent" style={{ letterSpacing: "1px" }}>
     {children}
   </span>
 );
@@ -72,8 +72,8 @@ export default function CosaCostruiamo() {
     <section id="servizi" ref={ref} className="relative bg-bg-0 py-24 lg:py-[100px]">
       <div className="mx-auto max-w-[1440px] px-6 lg:px-14">
         <div className="mb-12">
-          <span className="font-mono text-xs font-medium tracking-[2px] text-accent">01 / COSA FACCIAMO</span>
-          <h2 className="mt-4 text-4xl font-extrabold tracking-[-2px] text-text-0 lg:text-[48px]">Cosa costruiamo, in concreto.</h2>
+          <span className="font-label text-[13px] font-medium tracking-[2px] text-accent">01 / COSA FACCIAMO</span>
+          <h2 className="mt-4 text-4xl font-display font-extrabold tracking-[-1px] text-text-0 lg:text-[48px]">Cosa costruiamo, in concreto.</h2>
           <p className="mt-4 max-w-[600px] text-base leading-relaxed text-text-1">
             Partiamo da come lavorate oggi e dai dati che usate ogni giorno. Costruiamo sugli strumenti che avete già.
           </p>

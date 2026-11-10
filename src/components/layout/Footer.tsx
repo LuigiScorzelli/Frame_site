@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { ACCOUNT_URL, AGENCY_NAME, CITY, CONTACT_EMAIL, FOUNDER_URL, LOGO_TEXT, PLUGIN_NAME } from "@/lib/brand";
+import { ACCOUNT_URL, AGENCY_NAME, CITY, CONTACT_EMAIL, FOUNDER_URL, PLUGIN_NAME } from "@/lib/brand";
 import TrackedLink from "@/components/ui/TrackedLink";
+import Logo from "@/components/ui/Logo";
 
 const cosaFacciamo = [
   { label: "Servizi", href: "/servizi" },
@@ -15,24 +16,22 @@ const contatti = [
   { label: "Luigi Scorzelli, sito personale", icona: "LS", href: FOUNDER_URL, esterno: true },
 ];
 
-const linkClass = "text-[13px] text-text-1 transition-colors hover:text-text-0";
-const headClass = "mb-4 font-mono text-[10px] font-medium tracking-[2px] text-accent";
+const linkClass = "text-sm text-text-1 transition-colors hover:text-text-0";
+const headClass = "mb-4 font-label text-[12px] font-medium tracking-[2px] text-accent";
 
 export default function Footer() {
   return (
-    <footer className="bg-bg-0" style={{ borderTop: "2px solid transparent", borderImage: "linear-gradient(90deg, #BFFF00, #00E5FF) 1" }}>
+    <footer className="bg-bg-0" style={{ borderTop: "2px solid #BFFF00" }}>
       <div className="mx-auto max-w-[1440px] px-6 py-12 lg:px-14">
         <div className="flex flex-col justify-between gap-12 lg:flex-row">
           <div className="max-w-sm">
-            <Link href="/" aria-label={`${AGENCY_NAME}, home`} className="inline-flex items-center text-[48px] font-extrabold tracking-[-2px]">
-              {LOGO_TEXT.split("").map((ch, i) => (
-                <span key={i} className={ch === ">" ? "text-accent" : "text-text-0"}>{ch}</span>
-              ))}
+            <Link href="/" aria-label={`${AGENCY_NAME}, home`} className="inline-flex">
+              <Logo className="text-[48px]" />
             </Link>
             <p className="mt-3 text-sm text-text-1">
               {AGENCY_NAME}, automazioni e AI per piccole aziende. Il nostro primo prodotto è {PLUGIN_NAME}.
             </p>
-            <a href={`mailto:${CONTACT_EMAIL}`} className="mt-3 inline-block font-mono text-[13px] text-accent hover:underline">
+            <a href={`mailto:${CONTACT_EMAIL}`} className="mt-3 inline-block font-label text-sm text-accent hover:underline">
               {CONTACT_EMAIL}
             </a>
             <div className="mt-4 flex gap-3">
@@ -42,7 +41,7 @@ export default function Footer() {
                   href={c.href}
                   aria-label={c.label}
                   {...(c.esterno ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-bg-2 font-mono text-xs text-text-1 transition-colors hover:bg-bg-1 hover:text-text-0"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-bg-2 font-label text-[13px] text-text-1 transition-colors hover:bg-bg-1 hover:text-text-0"
                 >
                   {c.icona}
                 </a>
@@ -83,7 +82,7 @@ export default function Footer() {
 
         <div className="mt-8 border-t border-border pt-8">
           {/* TODO:dato P. IVA da inserire (vedi docs/lancio/00-LEGGIMI.md) */}
-          <p className="font-mono text-[11px] tracking-[0.5px] text-text-1">
+          <p className="font-label text-[13px] tracking-[0.5px] text-text-1">
             &copy; 2026 {AGENCY_NAME} · {CITY}
           </p>
         </div>

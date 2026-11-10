@@ -17,9 +17,9 @@ export default function Section({ id, tag, numero, title, intro, className, chil
   return (
     <section id={id} className={cn("scroll-mt-20 border-t border-border bg-bg-0 py-20 lg:py-[100px]", className)}>
       <div className="mx-auto max-w-[1440px] px-6 lg:px-14">
-        {etichetta && <span className="font-mono text-xs font-medium tracking-[2px] text-accent">{etichetta}</span>}
+        {etichetta && <span className="font-label text-[13px] font-medium tracking-[2px] text-accent">{etichetta}</span>}
         {title && (
-          <h2 className="mt-4 max-w-4xl text-3xl font-extrabold leading-[1.1] tracking-[-1.5px] text-text-0 lg:text-[48px] lg:tracking-[-2px]">
+          <h2 className="mt-4 max-w-4xl text-3xl font-display font-extrabold leading-[1.1] tracking-[-0.5px] text-text-0 lg:text-[48px] lg:tracking-[-1px]">
             {title}
           </h2>
         )}

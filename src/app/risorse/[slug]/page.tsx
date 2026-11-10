@@ -75,18 +75,18 @@ export default async function ArticoloPage({ params }: PageProps) {
           style={{ backgroundImage: "radial-gradient(circle, rgba(232,236,244,0.03) 1px, transparent 1px)", backgroundSize: "32px 32px", maskImage: "linear-gradient(to bottom, black, transparent)" }}
         />
         <article className="relative mx-auto max-w-[780px] px-6 pb-20 pt-16">
-          <div className="mb-8 flex items-center gap-2 font-mono text-[11px] tracking-[1px] text-text-1">
+          <div className="mb-8 flex items-center gap-2 font-label text-[13px] tracking-[1px] text-text-1">
             <Link href="/risorse" className="transition-colors hover:text-accent">RISORSE</Link>
             <span aria-hidden>/</span>
             <span className="text-accent">{CATEGORIE[articolo.categoria].toUpperCase()}</span>
             {articolo.bozza && <span className="ml-2 border border-amber px-2 py-0.5 text-amber">BOZZA</span>}
           </div>
 
-          <h1 className="animate-[fadeIn_0.6s_ease_both] text-4xl font-extrabold leading-[1.05] tracking-[-2px] text-text-0 lg:text-[56px] lg:tracking-[-3px]">
+          <h1 className="animate-[fadeIn_0.6s_ease_both] text-4xl font-display font-extrabold leading-[1.05] tracking-[-1px] text-text-0 lg:text-[56px] lg:tracking-[-1.5px]">
             {articolo.titolo}
           </h1>
 
-          <div className="mt-6 flex items-center gap-4 font-mono text-[11px] tracking-[1px] text-text-1">
+          <div className="mt-6 flex items-center gap-4 font-label text-[13px] tracking-[1px] text-text-1">
             <time dateTime={articolo.data}>{formatDataArticolo(articolo.data).toUpperCase()}</time>
             <span className="h-1 w-1 rounded-full bg-text-1" aria-hidden />
             <span>{articolo.tempoLettura} MIN DI LETTURA</span>
@@ -115,7 +115,7 @@ export default async function ArticoloPage({ params }: PageProps) {
 
           {prossimo && (
             <div className="mt-10 border-t border-border pt-8">
-              <span className="font-mono text-[11px] tracking-[1px] text-text-1">PROSSIMO ARTICOLO</span>
+              <span className="font-label text-[13px] tracking-[1px] text-text-1">PROSSIMO ARTICOLO</span>
               <Link href={`/risorse/${prossimo.slug}`} className="mt-2 block text-lg font-bold text-text-0 hover:text-accent">
                 {prossimo.titolo} &rarr;
               </Link>

@@ -31,7 +31,7 @@ export default function ContattiPage() {
 
             <p className="mt-8 text-[15px] text-text-1">
               Oppure scrivici a{" "}
-              <a href={`mailto:${CONTACT_EMAIL}`} className="font-mono text-accent hover:underline">
+              <a href={`mailto:${CONTACT_EMAIL}`} className="font-label text-accent hover:underline">
                 {CONTACT_EMAIL}
               </a>
               .
