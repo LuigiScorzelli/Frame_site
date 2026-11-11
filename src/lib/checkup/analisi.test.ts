@@ -77,6 +77,16 @@ describe("valuta: 5 items, 0-20 each, on 10 sample pages", () => {
   });
 });
 
+describe("promise remedy", () => {
+  const rimedio = (f: string) => valuta(rileva(home(f), null)).voci.find((v) => v.id === "promessa")!.rimedio;
+
+  it("points near the form only when there is one", () => {
+    expect(rimedio("04-modulo-lungo.html")).toContain("vicino al modulo");
+    expect(rimedio("02-vuoto.html")).toContain("nella pagina contatti o nel footer");
+    expect(rimedio("02-vuoto.html")).not.toContain("modulo");
+  });
+});
+
 describe("linkContatti", () => {
   it("finds the menu link on the same site", () => {
     expect(linkContatti(fixture("01-completo.html"), new URL("https://www.rossi.it/"))?.href).toBe("https://www.rossi.it/contatti/");

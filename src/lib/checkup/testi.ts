@@ -85,6 +85,8 @@ function fuoriOrario(r: Rilevamenti) {
 }
 
 function promessa(r: Rilevamenti) {
+  // "Near the form" only when there is one we can point to.
+  const vicino = moduloPrincipale(r) || r.moduloEsterno ? "vicino al modulo" : "nella pagina contatti o nel footer";
   const dove = r.paginaContatti ? "nella home e nella pagina contatti" : "nella home";
   if (r.promessa && r.orari) {
     return {
@@ -95,7 +97,7 @@ function promessa(r: Rilevamenti) {
   if (r.orari) {
     return {
       spiegazione: `Ci sono gli orari, ma ${dove} non abbiamo trovato una promessa sui tempi di risposta: chi scrive non sa quando avrà notizie.`,
-      rimedio: 'Aggiungi vicino al modulo una frase come "Rispondiamo entro 24 ore lavorative".',
+      rimedio: `Aggiungi ${vicino} una frase come "Rispondiamo entro 24 ore lavorative".`,
     };
   }
   if (r.promessa) {
@@ -106,7 +108,7 @@ function promessa(r: Rilevamenti) {
   }
   return {
     spiegazione: `${dove.charAt(0).toUpperCase()}${dove.slice(1)} non abbiamo trovato né orari né una promessa sui tempi di risposta.`,
-    rimedio: 'Scrivi gli orari e una promessa chiara, ad esempio "Rispondiamo entro 24 ore lavorative", vicino al modulo.',
+    rimedio: `Scrivi gli orari e una promessa chiara, ad esempio "Rispondiamo entro 24 ore lavorative", ${vicino}.`,
   };
 }
 

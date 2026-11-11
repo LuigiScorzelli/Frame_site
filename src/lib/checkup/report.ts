@@ -22,6 +22,15 @@ export function oggettoReport(r: RisultatoCheckup): string {
   return `Il check-up di ${nomeSito(r.sito)}: ${r.punteggio}/100`;
 }
 
+/**
+ * The plugin pitch makes sense only for WordPress sites that lose points on "fuori orario"
+ * (not for sites that already have the plugin or another full answer).
+ */
+export function proponiPlugin(r: RisultatoCheckup): boolean {
+  const v = r.voci.find((x) => x.id === "fuori_orario");
+  return r.wordpress && v !== undefined && v.punti < v.max;
+}
+
 /** The 3 items with the fewest points (ties keep the page order). */
 export function vociDaSistemare(r: RisultatoCheckup) {
   return [...r.voci].sort((a, b) => a.punti / a.max - b.punti / b.max).slice(0, 3);
@@ -30,6 +39,7 @@ export function vociDaSistemare(r: RisultatoCheckup) {
 export function htmlReport(r: RisultatoCheckup): string {
   const sito = escapa(nomeSito(r.sito));
   const installa = `${SITE_URL}${INSTALL_PATH}`;
+  const plugin = proponiPlugin(r);
   const prenota = BOOKING_URL.startsWith("http") ? BOOKING_URL : `${SITE_URL}${BOOKING_URL}`;
   const voci = vociDaSistemare(r)
     .map(
@@ -56,10 +66,14 @@ export function htmlReport(r: RisultatoCheckup): string {
   </td></tr>
   ${voci}
   <tr><td style="padding-top:24px;border-top:1px solid #E2E8F0;">
-    <p style="margin:0;font-size:15px;line-height:1.5;color:#334155;">La voce "fuori orario" si sistema in 5 minuti con il nostro plugin gratuito per WordPress.</p>
+    ${
+      plugin
+        ? `<p style="margin:0;font-size:15px;line-height:1.5;color:#334155;">La voce "fuori orario" si sistema in 5 minuti con il nostro plugin gratuito per WordPress.</p>`
+        : `<p style="margin:0;font-size:15px;line-height:1.5;color:#334155;">Se vuoi una mano a sistemare queste voci, parliamone in 30 minuti.</p>`
+    }
     <p style="margin:16px 0 0;">
-      <a href="${installa}" style="display:inline-block;background:#BFFF00;color:#0B1120;padding:12px 20px;font-weight:bold;text-decoration:none;">Installa gratis</a>
-      &nbsp;
+      ${plugin ? `<a href="${installa}" style="display:inline-block;background:#BFFF00;color:#0B1120;padding:12px 20px;font-weight:bold;text-decoration:none;">Installa gratis</a>
+      &nbsp;` : ""}
       <a href="${prenota}" style="display:inline-block;border:1px solid #0B1120;color:#0B1120;padding:11px 20px;font-weight:bold;text-decoration:none;">Prenota 30 minuti</a>
     </p>
   </td></tr>
@@ -80,5 +94,7 @@ export function testoReport(r: RisultatoCheckup): string {
   const voci = vociDaSistemare(r)
     .map((v) => `${v.nome} (${v.punti}/${v.max})\n${v.spiegazione}\nCosa fare: ${v.rimedio}`)
     .join("\n\n");
-  return `Check-up di ${nomeSito(r.sito)}: ${r.punteggio}/100\n\nLe tre cose da sistemare per prime:\n\n${voci}\n\nInstalla gratis: ${SITE_URL}${INSTALL_PATH}\n`;
+  const prenota = BOOKING_URL.startsWith("http") ? BOOKING_URL : `${SITE_URL}${BOOKING_URL}`;
+  const chiusura = proponiPlugin(r) ? `Installa gratis: ${SITE_URL}${INSTALL_PATH}\n` : "";
+  return `Check-up di ${nomeSito(r.sito)}: ${r.punteggio}/100\n\nLe tre cose da sistemare per prime:\n\n${voci}\n\n${chiusura}Prenota 30 minuti: ${prenota}\n`;
 }

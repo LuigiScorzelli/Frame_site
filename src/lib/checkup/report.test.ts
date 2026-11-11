@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { RisultatoCheckup } from "./index";
-import { htmlReport, oggettoReport, vociDaSistemare } from "./report";
+import { htmlReport, oggettoReport, proponiPlugin, testoReport, vociDaSistemare } from "./report";
 
 const base: RisultatoCheckup = {
   punteggio: 42,
@@ -32,5 +32,21 @@ describe("report email", () => {
 
   it("subject has host and score", () => {
     expect(oggettoReport(base)).toBe("Il check-up di esempio.it: 42/100");
+  });
+
+  it("pitches the plugin only to WordPress sites that lose out-of-hours points", () => {
+    expect(proponiPlugin(base)).toBe(true);
+    expect(htmlReport(base)).toContain("Installa gratis");
+
+    const conPlugin = { ...base, voci: base.voci.map((v) => (v.id === "fuori_orario" ? { ...v, punti: 20 } : v)) };
+    expect(proponiPlugin(conPlugin)).toBe(false);
+    expect(htmlReport(conPlugin)).not.toContain("fuori orario\" si sistema");
+    expect(htmlReport(conPlugin)).not.toContain("Installa gratis");
+    expect(testoReport(conPlugin)).not.toContain("Installa gratis");
+    expect(htmlReport(conPlugin)).toContain("Prenota 30 minuti");
+
+    const nonWordpress = { ...base, wordpress: false };
+    expect(proponiPlugin(nonWordpress)).toBe(false);
+    expect(htmlReport(nonWordpress)).not.toContain("Installa gratis");
   });
 });
