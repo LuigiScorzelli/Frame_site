@@ -1,5 +1,5 @@
 import CtaButton from "@/components/ui/CtaButton";
-import { Puntini } from "@/components/ui/Sfondo";
+import { Bagliori, Puntini } from "@/components/ui/Sfondo";
 import { AGENCY_NAME, BOOKING_URL } from "@/lib/brand";
 
 // Production hero style (main, before the launch branch) with the new agency copy.
@@ -14,6 +14,7 @@ export default function Hero() {
   return (
     <section className="relative flex min-h-screen items-end overflow-hidden pb-24 pt-32">
       <Puntini />
+      <Bagliori disposizione="hero" />
 
       <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 lg:px-14">
         <div className="max-w-[900px]">
