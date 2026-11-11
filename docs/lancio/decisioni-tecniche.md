@@ -139,3 +139,5 @@ Con `CALENDLY_URL` valorizzato (dal 9/11 costante in `brand.ts`) la pagina incor
 **Da tenere presente:** se il video della voce 1.3 va nell'hero della home, i bagliori vanno spostati accanto o sotto.
 
 **Aggiornamento 11/11, dopo l'anteprima (decisione di Luigi):** la scritta FR>ME non resta solo in "Chi siamo": va anche dietro "05 / Piano a pagamento" di `/plugin` e la newsletter di `/risorse` (prop `scritta` di `Section`). Le testate delle pagine tengono la parola della pagina. In home, "Cosa costruiamo" apre con "Collegamenti e strumenti su misura" nella scheda grande; "Automazioni dei flussi ripetitivi" passa nella prima laterale.
+
+**Aggiornamento 11/11, seconda revisione dell'anteprima (decisione di Luigi):** in "Come lavoriamo" tornano le emoji colorate; le icone SVG lime sono tolte. La scheda grande di "Cosa costruiamo" ha testo più grande su desktop (titolo 28 px, testo 18 px).
