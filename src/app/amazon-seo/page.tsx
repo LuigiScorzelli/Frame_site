@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
-import { AGENCY_NAME } from "@/lib/brand";
+import { AGENCY_NAME, SITE_URL } from "@/lib/brand";
 
 const chatGptToolUrl =
   "https://chatgpt.com/g/g-69fceb94bca881919e19011a2aff1fb3-intent-hexagon-mapping-tool";
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     title: `Amazon SEO Intent Hexagon | ${AGENCY_NAME}`,
     description:
       "Un framework pratico per trasformare il brevetto Amazon 12,561,383 in azioni su listing, keyword, competitor e accessori.",
-    url: "https://aiframe.it/amazon-seo",
+    url: `${SITE_URL}/amazon-seo`,
     siteName: AGENCY_NAME,
     locale: "it_IT",
     type: "website",
