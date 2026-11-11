@@ -107,6 +107,8 @@ categoria: richieste-perse  # richieste-perse | sito-crm | ai-onesta | privacy |
 tempoLettura: 7
 cover: /images/articoli/slug.jpg   # opzionale
 bozza: false                # true = non pubblicato in produzione
+autore: luigi-scorzelli     # opzionale (11/11): firma e pagina autore, da AUTORI in src/lib/brand.ts
+cta: checkup                # opzionale (11/11): checkup | installa | nessuna; default installa. Una sola CTA per articolo
 ```
 `src/lib/content.ts`: `getArticoli({categoria?})` ordinati per data, `getArticolo(slug)`, `getCategorie()`. Compilazione con `next-mdx-remote` o `@next/mdx` (scegliere una, documentare). Componenti MDX consentiti: titoli, paragrafi, liste, tabelle, immagini (`next/image`), blocco "Nota" e blocco "CTA installa". Redirect 301 `/blog` → `/risorse`, `/blog/:slug` → `/risorse/:slug` in `next.config.ts`.
 
@@ -117,9 +119,10 @@ bozza: false                # true = non pubblicato in produzione
 ```ts
 export type Evento =
   | "click_installa" | "download_beta" | "checkup_start" | "checkup_done" | "checkup_email"
-  | "newsletter_ok" | "click_prova" | "click_prenota" | "click_account" | "download_checklist";
+  | "newsletter_ok" | "click_prova" | "click_prenota" | "click_checkup" | "click_account" | "download_checklist";
 export function traccia(e: Evento, props?: Record<string, string | number>) { track(e, props); }
 ```
+`click_checkup` (11/11): clic sulla CTA "Fai il check-up" in fondo a un articolo.
 Proprietà consentite: `pagina`, `posizione` (hero, chiusura, menu, footer, pagina, widget), `fonte`. Mai email o URL del visitatore nelle proprietà.
 
 ## 9. Calcolatore "quanto costa una richiesta persa" (client)

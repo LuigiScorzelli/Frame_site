@@ -10,6 +10,7 @@ export type Evento =
   | "newsletter_ok"
   | "click_prova"
   | "click_prenota"
+  | "click_checkup"
   | "click_account"
   | "download_checklist";
 

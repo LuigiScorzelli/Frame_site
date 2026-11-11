@@ -9,7 +9,7 @@ import CtaButton from "@/components/ui/CtaButton";
 import JsonLd from "@/components/seo/JsonLd";
 import { componentiMdx } from "@/components/mdx/componenti";
 import { CATEGORIE, formatDataArticolo, getArticoli, getArticolo } from "@/lib/content";
-import { AGENCY_NAME, SITE_URL, INSTALL_PATH } from "@/lib/brand";
+import { AGENCY_NAME, AUTORI, SITE_URL, INSTALL_PATH } from "@/lib/brand";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -50,6 +50,7 @@ export default async function ArticoloPage({ params }: PageProps) {
   const indice = lista.findIndex((a) => a.slug === slug);
   // List is newest first: the "next" article to read is the previous (older) one, else the newest.
   const prossimo = lista.length > 1 ? lista[(indice + 1) % lista.length] : null;
+  const autore = articolo.autore ? { slug: articolo.autore, ...AUTORI[articolo.autore] } : null;
 
   return (
     <>
@@ -63,7 +64,9 @@ export default async function ArticoloPage({ params }: PageProps) {
           inLanguage: "it",
           mainEntityOfPage: `${SITE_URL}/risorse/${slug}`,
           ...(articolo.cover ? { image: `${SITE_URL}${articolo.cover}` } : {}),
-          author: { "@type": "Organization", name: AGENCY_NAME, url: SITE_URL },
+          author: autore
+            ? { "@type": "Person", name: autore.nome, jobTitle: autore.ruolo, url: `${SITE_URL}/autore/${autore.slug}` }
+            : { "@type": "Organization", name: AGENCY_NAME, url: SITE_URL },
           publisher: { "@type": "Organization", name: AGENCY_NAME, url: SITE_URL },
         }}
       />
@@ -92,6 +95,16 @@ export default async function ArticoloPage({ params }: PageProps) {
             <span>{articolo.tempoLettura} MIN DI LETTURA</span>
           </div>
 
+          {autore && (
+            <p className="mt-4 text-[15px] text-text-1">
+              di{" "}
+              <Link href={`/autore/${autore.slug}`} rel="author" className="font-semibold text-text-0 underline-offset-4 hover:text-accent hover:underline">
+                {autore.nome}
+              </Link>
+              , {autore.ruolo}
+            </p>
+          )}
+
           <div className="my-10 h-px bg-border" />
 
           <MDXRemote
@@ -100,18 +113,36 @@ export default async function ArticoloPage({ params }: PageProps) {
             options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
           />
 
-          <div className="mt-16 border border-accent-border bg-bg-1 p-8">
-            <p className="text-xl font-bold text-text-0">Il tuo sito può rispondere anche stasera.</p>
-            <CtaButton
-              href={INSTALL_PATH}
-              variant="gradient"
-              evento="click_installa"
-              props={{ pagina: "articolo", posizione: "chiusura" }}
-              className="mt-6"
-            >
-              INSTALLA GRATIS &rarr;
-            </CtaButton>
-          </div>
+          {/* One call to action per article, chosen in the frontmatter (editorial line, AV24). */}
+          {articolo.cta === "installa" && (
+            <div className="mt-16 border border-accent-border bg-bg-1 p-8">
+              <p className="text-xl font-bold text-text-0">Il tuo sito può rispondere anche stasera.</p>
+              <CtaButton
+                href={INSTALL_PATH}
+                variant="gradient"
+                evento="click_installa"
+                props={{ pagina: "articolo", posizione: "chiusura" }}
+                className="mt-6"
+              >
+                INSTALLA GRATIS &rarr;
+              </CtaButton>
+            </div>
+          )}
+          {articolo.cta === "checkup" && (
+            <div className="mt-16 border border-accent-border bg-bg-1 p-8">
+              <p className="text-xl font-bold text-text-0">Vuoi vedere come il tuo sito riceve le richieste?</p>
+              <p className="mt-2 text-[15px] text-text-1">Il check-up è gratuito: risultato subito in pagina.</p>
+              <CtaButton
+                href="/check-up"
+                variant="gradient"
+                evento="click_checkup"
+                props={{ pagina: "articolo", posizione: "chiusura" }}
+                className="mt-6"
+              >
+                FAI IL CHECK-UP &rarr;
+              </CtaButton>
+            </div>
+          )}
 
           {prossimo && (
             <div className="mt-10 border-t border-border pt-8">

@@ -11,6 +11,23 @@ export const CONTACT_EMAIL = "info@aiframe.it";
 export const SITE_URL = "https://www.aiframe.it";
 export const FOUNDER_URL = "https://luigiscorzelli.com";
 export const CITY = "Salerno";
+
+/**
+ * Article authors (byline, author page, JSON-LD Person). Signature from the communication standard
+ * (Company Brain, AV2): "Luigi Scorzelli, AI Automation Engineer".
+ */
+export const AUTORI = {
+  "luigi-scorzelli": {
+    nome: "Luigi Scorzelli",
+    ruolo: "AI Automation Engineer",
+    sitoPersonale: FOUNDER_URL,
+    presentazione: [
+      `Ha fondato ${AGENCY_NAME} a ${CITY}: costruiamo automazioni e assistenti AI per piccole aziende senza reparto tecnico.`,
+      "Scrive qui di richieste dei clienti, siti e strumenti, partendo da come lavorano davvero le persone.",
+    ],
+  },
+} as const;
+export type SlugAutore = keyof typeof AUTORI;
 // Public booking link, rendered in the HTML: plain config, not an env var (Luigi, 9/11).
 // Empty → "Prenota 30 minuti" falls back to the contact form.
 export const CALENDLY_URL = "https://calendly.com/luigi-scorzelli/30min";
