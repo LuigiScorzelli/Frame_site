@@ -14,6 +14,8 @@ export default function FilterTabs({ tabs, active, onChange }: FilterTabsProps) 
       {tabs.map((tab) => (
         <button
           key={tab}
+          type="button"
+          aria-pressed={active === tab}
           onClick={() => onChange(tab)}
           className={cn(
             "rounded-lg px-4 py-2 font-label text-[13px] font-medium uppercase tracking-wider transition-all duration-200",

@@ -2,9 +2,10 @@ import "server-only";
 import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
+import { AUTORI, type SlugAutore } from "@/lib/brand";
 
 // MDX articles in content/articoli/*.mdx (docs/lancio/02-specifiche.md, section 6).
-// The slug is the file name. Drafts (`bozza: true`) are visible only in development.
+// The slug is the file name. Drafts (`bozza: true`) are visible only in development and previews.
 
 export const CATEGORIE = {
   "richieste-perse": "Richieste perse",
@@ -16,6 +17,10 @@ export const CATEGORIE = {
 
 export type Categoria = keyof typeof CATEGORIE;
 
+/** Closing call to action of an article: only one per article (editorial line, AV24). */
+export const CTA_ARTICOLO = ["checkup", "installa", "nessuna"] as const;
+export type CtaArticolo = (typeof CTA_ARTICOLO)[number];
+
 export interface FrontmatterArticolo {
   titolo: string;
   descrizione: string;
@@ -25,6 +30,10 @@ export interface FrontmatterArticolo {
   tempoLettura: number;
   cover?: string;
   bozza: boolean;
+  /** Author slug from AUTORI in brand.ts; without it the article is signed by the agency. */
+  autore?: SlugAutore;
+  /** Default "installa", the closing block every article had before 11/11/2026. */
+  cta: CtaArticolo;
 }
 
 export interface Articolo extends FrontmatterArticolo {
@@ -35,7 +44,9 @@ export interface Articolo extends FrontmatterArticolo {
 
 const CARTELLA = path.join(process.cwd(), "content", "articoli");
 const SLUG_VALIDO = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const mostraBozze = process.env.NODE_ENV !== "production";
+// Drafts show in development and on Vercel previews (protected, noindex), so Luigi can review an
+// article before publishing; never on production.
+const mostraBozze = process.env.NODE_ENV !== "production" || process.env.VERCEL_ENV === "preview";
 
 function dataIso(v: unknown): string {
   // gray-matter turns unquoted YAML dates into Date objects.
@@ -58,6 +69,8 @@ function leggiFile(file: string): Articolo {
   if (typeof data.tempoLettura !== "number" || data.tempoLettura <= 0) errori.push("tempoLettura");
   if (data.cover !== undefined && typeof data.cover !== "string") errori.push("cover");
   if (data.bozza !== undefined && typeof data.bozza !== "boolean") errori.push("bozza");
+  if (data.autore !== undefined && !(typeof data.autore === "string" && data.autore in AUTORI)) errori.push("autore");
+  if (data.cta !== undefined && !CTA_ARTICOLO.includes(data.cta)) errori.push(`cta (${CTA_ARTICOLO.join(" | ")})`);
 
   // A broken article must fail the build, not ship half-rendered.
   if (errori.length) throw new Error(`content/articoli/${file}: frontmatter non valido (${errori.join(", ")})`);
@@ -71,6 +84,8 @@ function leggiFile(file: string): Articolo {
     tempoLettura: data.tempoLettura,
     cover: data.cover,
     bozza: data.bozza ?? false,
+    autore: data.autore as SlugAutore | undefined,
+    cta: (data.cta as CtaArticolo | undefined) ?? "installa",
     corpo: content,
   };
 }
@@ -92,6 +107,11 @@ function tutti(): Articolo[] {
 export function getArticoli({ categoria }: { categoria?: Categoria } = {}): Articolo[] {
   const lista = tutti();
   return categoria ? lista.filter((a) => a.categoria === categoria) : lista;
+}
+
+/** Published articles signed by one author, newest first. */
+export function getArticoliAutore(autore: SlugAutore): Articolo[] {
+  return tutti().filter((a) => a.autore === autore);
 }
 
 export function getArticolo(slug: string): Articolo | null {

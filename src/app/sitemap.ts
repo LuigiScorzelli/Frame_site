@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getArticoli } from "@/lib/content";
-import { SITE_URL } from "@/lib/brand";
+import { AUTORI, SITE_URL } from "@/lib/brand";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -25,5 +25,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6,
     }));
 
-  return [...staticRoutes, ...articoli];
+  const autori: MetadataRoute.Sitemap = Object.keys(AUTORI).map((slug) => ({
+    url: `${SITE_URL}/autore/${slug}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.4,
+  }));
+
+  return [...staticRoutes, ...articoli, ...autori];
 }

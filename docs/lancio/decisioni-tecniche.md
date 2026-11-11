@@ -105,3 +105,17 @@ Con `CALENDLY_URL` valorizzato (dal 9/11 costante in `brand.ts`) la pagina incor
 **Limiti:** 10 check-up all'ora per IP, 3 email al giorno per indirizzo (hash), cache del solo risultato 1 ora in Upstash (`checkup:v1:<sha256 URL>`). `checkup:stats` non fatto. Gli eventi `checkup_start`/`checkup_done` partono sia dal calcolatore (come prima) sia dal check-up, che aggiunge `fonte: "checkup"`.
 
 **Limiti noti visti nel test dei siti reali:** siti dietro Akamai Bot Manager (es. marchesi1824.com) chiudono la connessione al nostro user-agent dichiarato → 422; chat e widget caricati via JavaScript (anche l'assistente di aiframe.it, montato con `lazyOnload`) non si vedono.
+
+## 2026-11-11 · Articoli sul piano del 10/11, firma e una CTA per articolo (voce 1.2)
+
+**Decisione di Luigi:** la voce 1.2 segue il piano dei contenuti del 10/11 (Company Brain, `2026-11-10-strategia-comunicazione-frme/`), non la bozza del 5/11. L'articolo 1 è "Il percorso di una richiesta cliente, disegnato su un foglio" (testo v2 della sezione 1 di `marketing-settimana-1-contenuti-v2.md`, parole invariate tranne "oggi in beta" al posto di "oggi in beta privata": la beta si scarica da `/plugin`). L'articolo del test dei 30 siti non esce finché il test non ha i numeri. L'articolo 2 ("Cosa fa, e cosa non fa, un assistente AI…") ha solo la scaletta: la voce 1.2 si chiude quando esce anche lui.
+
+**Firma (AV2):** `AUTORI` in `brand.ts`, campo facoltativo `autore` nel frontmatter, riga "di Luigi Scorzelli, AI Automation Engineer" sotto il titolo e pagina `/autore/luigi-scorzelli` con presentazione ed elenco degli articoli. Nel JSON-LD `Article` l'autore diventa `Person` (anticipa una parte della voce 1.4). Nei testi resta "aiframe" (regola del repo) finché la voce 124 del Company Brain (FR>ME) non viene portata qui.
+
+**Una sola CTA per articolo (AV24, K49):** campo `cta` nel frontmatter (`checkup` | `installa` | `nessuna`, default `installa`, cioè il blocco di prima). L'articolo 1 chiude con "Fai il check-up" e il nuovo evento `click_checkup`.
+
+**Filtri in `/risorse`:** `ElencoArticoli` lato client con `FilterTabs` (ora con `type="button"` e `aria-pressed`); i filtri compaiono solo con articoli in almeno due categorie.
+
+**Bozze sulle anteprime:** da oggi `bozza: true` si vede anche sulle anteprime Vercel (`VERCEL_ENV=preview`, protette, pagina in `noindex`, esclusa dalla sitemap), non solo in sviluppo: serve a rileggere un articolo prima di pubblicarlo. In produzione resta nascosta.
+
+**Pubblicazione:** riletto da Luigi sull'anteprima, pubblicato l'11/11 con data 11/11 (decisione di Luigi: oggi, non martedì 17/11 come nel piano). Va online con il merge su `main`, non c'è pubblicazione programmata.

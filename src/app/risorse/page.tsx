@@ -5,6 +5,7 @@ import Footer from "@/components/layout/Footer";
 import NewsletterSection from "@/components/sections/NewsletterSection";
 import PageHero from "@/components/ui/PageHero";
 import Section from "@/components/ui/Section";
+import ElencoArticoli from "@/components/ui/ElencoArticoli";
 import { CATEGORIE, formatDataArticolo, getArticoli } from "@/lib/content";
 import { AGENCY_NAME, SITE_URL } from "@/lib/brand";
 
@@ -58,22 +59,19 @@ export default function RisorsePage() {
 
         {articoli.length > 0 && (
           <Section numero={2} tag="ARTICOLI" title="Articoli">
-              <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {articoli.map((a) => (
-                  <li key={a.slug}>
-                    <Link href={`/risorse/${a.slug}`} className="group flex h-full flex-col border border-border bg-bg-1 p-8 transition-colors hover:border-accent-border">
-                      <div className="flex flex-wrap items-center gap-3 font-label text-[13px] tracking-[1px] text-text-1">
-                        <span className="text-accent">{CATEGORIE[a.categoria].toUpperCase()}</span>
-                        <time dateTime={a.data}>{formatDataArticolo(a.data)}</time>
-                        <span>{a.tempoLettura} min</span>
-                        {a.bozza && <span className="border border-amber px-2 py-0.5 text-amber">BOZZA</span>}
-                      </div>
-                      <h3 className="mt-4 text-lg font-bold text-text-0 group-hover:text-accent">{a.titolo}</h3>
-                      <p className="mt-1 max-w-3xl text-[15px] text-text-1">{a.descrizione}</p>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+            <ElencoArticoli
+              articoli={articoli.map((a) => ({
+                slug: a.slug,
+                titolo: a.titolo,
+                descrizione: a.descrizione,
+                data: a.data,
+                dataLeggibile: formatDataArticolo(a.data),
+                tempoLettura: a.tempoLettura,
+                categoria: a.categoria,
+                nomeCategoria: CATEGORIE[a.categoria],
+                bozza: a.bozza,
+              }))}
+            />
           </Section>
         )}
 
