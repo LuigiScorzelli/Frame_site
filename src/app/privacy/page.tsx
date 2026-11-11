@@ -23,6 +23,14 @@ const sulSito = [
   // TODO sprint 2: aggiungere Freemius per acquisti e licenze.
 ];
 
+// Facts from the code of POST /api/checkup (src/lib/checkup, 11/11/2026).
+const nelCheckup = [
+  "Il check-up scarica la home e la pagina contatti del sito che indichi, una volta, dichiarandosi come aiframe-checkup. Legge solo l'HTML pubblico, non esegue script e non salva le pagine.",
+  "Per un'ora teniamo il risultato (indirizzo del sito e punteggi), così se rifai il controllo non scarichiamo di nuovo il sito. Poi si cancella da solo.",
+  "Se lasci l'email e dai il consenso, ti mandiamo il report tramite Resend e ti iscriviamo in Brevo con doppia conferma, insieme al nome del sito controllato. Senza conferma non entri in lista.",
+  "Nei registri tecnici scriviamo solo l'esito del controllo, mai l'indirizzo del sito né la tua email. Per limitare gli abusi usiamo un'impronta del tuo IP, non l'IP in chiaro.",
+];
+
 // Facts checked on 9/11/2026 against the n8n setup on the VPS. Do not promise retention times for the
 // conversation and lead tables: automatic deletion does not exist yet (only n8n executions, 7 days).
 const nellAssistente = [
@@ -56,7 +64,13 @@ export default function PrivacyPage() {
           </ul>
         </Section>
 
-        <Section numero={2} tag="ASSISTENTE AI" title={`L'assistente di ${AGENCY_NAME}.it`}>
+        <Section numero={2} tag="CHECK-UP" title="Il check-up del tuo sito">
+          <ul className="max-w-3xl space-y-3 border border-border bg-bg-1 p-8 text-[15px] leading-relaxed text-text-1">
+            {nelCheckup.map((x) => <li key={x} className="flex gap-3"><span className="font-label text-accent" aria-hidden>&gt;</span>{x}</li>)}
+          </ul>
+        </Section>
+
+        <Section numero={3} tag="ASSISTENTE AI" title={`L'assistente di ${AGENCY_NAME}.it`}>
           <ul className="max-w-3xl space-y-3 border border-border bg-bg-1 p-8 text-[15px] leading-relaxed text-text-1">
             {nellAssistente.map((x) => <li key={x} className="flex gap-3"><span className="font-label text-accent" aria-hidden>&gt;</span>{x}</li>)}
           </ul>
@@ -66,7 +80,7 @@ export default function PrivacyPage() {
           </p>
         </Section>
 
-        <Section numero={3} tag="NEL PLUGIN" title={`Nel plugin ${PLUGIN_NAME} installato sul tuo sito`}>
+        <Section numero={4} tag="NEL PLUGIN" title={`Nel plugin ${PLUGIN_NAME} installato sul tuo sito`}>
           <ul className="max-w-3xl space-y-3 border border-border bg-bg-1 p-8 text-[15px] leading-relaxed text-text-1">
             {nelPlugin.map((x) => <li key={x} className="flex gap-3"><span className="font-label text-accent" aria-hidden>&gt;</span>{x}</li>)}
           </ul>
@@ -76,7 +90,7 @@ export default function PrivacyPage() {
           </p>
         </Section>
 
-        <Section numero={4} tag="INFORMATIVA COMPLETA" title="Titolare, basi giuridiche, responsabili, tempi, diritti">
+        <Section numero={5} tag="INFORMATIVA COMPLETA" title="Titolare, basi giuridiche, responsabili, tempi, diritti">
           {/* TODO: testo legale completo, da far rivedere con il parere privacy già previsto. */}
           <p className="max-w-3xl text-[15px] leading-relaxed text-text-1">
             L&apos;informativa completa è in revisione legale e verrà pubblicata qui. Per qualsiasi richiesta sui tuoi
