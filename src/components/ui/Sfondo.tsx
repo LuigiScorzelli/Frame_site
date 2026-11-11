@@ -45,7 +45,7 @@ const DISPOSIZIONI = {
   /** Inner-page header: smaller and quieter than the home. */
   testata: [
     "-right-[8%] -top-[10%] h-[460px] w-[640px] bg-[radial-gradient(ellipse,rgba(191,255,0,0.09),transparent_70%)]",
-    "right-[30%] top-[40%] h-[320px] w-[480px] bg-[radial-gradient(ellipse,rgba(0,229,255,0.06),transparent_70%)]",
+    "right-[12%] top-[35%] h-[420px] w-[620px] bg-[radial-gradient(ellipse,rgba(0,229,255,0.06),transparent_70%)]",
   ],
 } as const;
 
@@ -60,11 +60,18 @@ export function Bagliori({ disposizione }: { disposizione: keyof typeof DISPOSIZ
   );
 }
 
+const TAGLIE = {
+  /** "Chi siamo" in the home: short word (the logo), lots of room. */
+  grande: "text-[160px] tracking-[-8px] lg:text-[300px] lg:tracking-[-15px]",
+  /** Inner-page headers: longer words, sits behind the H1. */
+  media: "text-[96px] tracking-[-4px] sm:text-[140px] sm:tracking-[-6px] lg:text-[220px] lg:tracking-[-10px]",
+} as const;
+
 /** Giant background word (the "Chi siamo" background). */
-export function ScrittaSfondo({ testo, className }: { testo: string; className?: string }) {
+export function ScrittaSfondo({ testo, taglia = "grande", className }: { testo: string; taglia?: keyof typeof TAGLIE; className?: string }) {
   return (
     <div aria-hidden className={cn("pointer-events-none absolute right-0 top-0 select-none overflow-hidden", className)}>
-      <span className="block whitespace-nowrap text-right text-[160px] font-display font-extrabold leading-none tracking-[-8px] text-accent/[0.035] lg:text-[300px] lg:tracking-[-15px]">
+      <span className={cn("block whitespace-nowrap text-right font-display font-extrabold leading-none text-accent/[0.035]", TAGLIE[taglia])}>
         {testo}
       </span>
     </div>

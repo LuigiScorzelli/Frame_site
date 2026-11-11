@@ -104,7 +104,7 @@ export default function ServiziPage() {
     <>
       <NavBar />
       <main>
-        <PageHero tag="SERVIZI" title="Cosa possiamo fare per la vostra azienda?">
+        <PageHero tag="SERVIZI" parola="SERVIZI" title="Cosa possiamo fare per la vostra azienda?">
             <p className="max-w-2xl text-lg leading-relaxed text-text-1">
               Lavoriamo in due modi: progetti su misura per togliere lavoro ripetitivo, e servizi intorno a{" "}
               <Link href="/plugin" className="text-accent underline-offset-4 hover:underline">{PLUGIN_NAME}</Link>, il

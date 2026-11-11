@@ -26,7 +26,7 @@ export default function CheckUpPage() {
     <>
       <NavBar />
       <main>
-        <PageHero tag="CHECK-UP" title="Il tuo sito risponde ai clienti? Scoprilo in 2 minuti.">
+        <PageHero tag="CHECK-UP" parola="CHECK-UP" title="Il tuo sito risponde ai clienti? Scoprilo in 2 minuti.">
             <p className="max-w-2xl text-lg leading-relaxed text-text-1">
               Inserisci l&apos;indirizzo del sito. Controlliamo come riceve le richieste: moduli, chat, orari, promessa di
               risposta, pagina contatti da telefono. Risultato subito in pagina, report completo via email se lo vuoi.

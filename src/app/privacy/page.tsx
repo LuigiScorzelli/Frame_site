@@ -56,7 +56,7 @@ export default function PrivacyPage() {
     <>
       <NavBar />
       <main>
-        <PageHero tag="PRIVACY" title="Come trattiamo i dati, spiegato come lo spiegheremmo a un cliente" />
+        <PageHero tag="PRIVACY" parola="PRIVACY" title="Come trattiamo i dati, spiegato come lo spiegheremmo a un cliente" />
 
         <Section numero={1} tag="SUL SITO" title={`Sul sito ${AGENCY_NAME}.it`}>
           <ul className="max-w-3xl space-y-3 border border-border bg-bg-1 p-8 text-[15px] leading-relaxed text-text-1">

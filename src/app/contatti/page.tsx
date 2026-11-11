@@ -22,7 +22,7 @@ export default function ContattiPage() {
     <>
       <NavBar />
       <main>
-        <PageHero tag="CONTATTI" title="Parliamone in 30 minuti.">
+        <PageHero tag="CONTATTI" parola="CONTATTI" title="Parliamone in 30 minuti.">
             <p className="max-w-2xl text-lg leading-relaxed text-text-1">
               Ci mostri il tuo sito, ti diciamo cosa farebbe {PLUGIN_NAME} e se ha senso per te. Nessun impegno.
             </p>

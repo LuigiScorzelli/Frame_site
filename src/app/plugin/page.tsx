@@ -97,7 +97,7 @@ export default function PluginPage() {
       />
       <NavBar />
       <main>
-        <PageHero tag="PLUGIN WORDPRESS · GRATUITO · IN ITALIANO" title={`${PLUGIN_NAME}: il tuo sito risponde anche quando sei chiuso.`}>
+        <PageHero tag="PLUGIN WORDPRESS · GRATUITO · IN ITALIANO" parola="PLUGIN" title={`${PLUGIN_NAME}: il tuo sito risponde anche quando sei chiuso.`}>
             <p className="max-w-2xl text-lg leading-relaxed text-text-1">
               Per attività locali, studi e piccole aziende con un sito WordPress. Risponde con le informazioni del tuo
               sito, raccoglie le richieste, te le consegna. Richiede WordPress 7.0 e PHP 8.3.
