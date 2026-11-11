@@ -10,7 +10,7 @@ import Scheda from "@/components/ui/Scheda";
 import { IconaCroce, IconaSpunta } from "@/components/ui/Icone";
 import InteresseForm from "@/components/ui/InteresseForm";
 import JsonLd from "@/components/seo/JsonLd";
-import { AGENCY_NAME, BETA_DOWNLOAD_PATH, PLUGIN_NAME, SITE_URL, WPORG_URL } from "@/lib/brand";
+import { AGENCY_NAME, BETA_DOWNLOAD_PATH, LOGO_TEXT, PLUGIN_NAME, SITE_URL, WPORG_URL } from "@/lib/brand";
 
 const descrizione =
   "Assistente per siti WordPress di piccole aziende: risponde con le informazioni del tuo sito, raccoglie le richieste fuori orario, le consegna via email e nel pannello. Gratis, con la tua chiave AI.";
@@ -199,7 +199,7 @@ export default function PluginPage() {
           </dl>
         </Section>
 
-        <Section numero={5} tag="PIANO A PAGAMENTO" title="Quando ti serve di più">
+        <Section numero={5} scritta={LOGO_TEXT} tag="PIANO A PAGAMENTO" title="Quando ti serve di più">
           <p className="max-w-3xl text-lg leading-relaxed text-text-1">
             Il piano a pagamento aggiunge vendita guidata, preventivi con i tuoi prezzi, riconoscimento del cliente
             abituale, CRM e voce. 30 giorni di prova. Si attiva dal pannello del plugin, senza reinstallare.
