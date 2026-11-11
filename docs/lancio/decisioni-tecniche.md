@@ -116,4 +116,6 @@ Con `CALENDLY_URL` valorizzato (dal 9/11 costante in `brand.ts`) la pagina incor
 
 **Filtri in `/risorse`:** `ElencoArticoli` lato client con `FilterTabs` (ora con `type="button"` e `aria-pressed`); i filtri compaiono solo con articoli in almeno due categorie.
 
+**Bozze sulle anteprime:** da oggi `bozza: true` si vede anche sulle anteprime Vercel (`VERCEL_ENV=preview`, protette, pagina in `noindex`, esclusa dalla sitemap), non solo in sviluppo: serve a rileggere un articolo prima di pubblicarlo. In produzione resta nascosta.
+
 **Pubblicazione:** l'articolo è in `bozza: true` finché Luigi non lo approva sull'anteprima; poi `bozza: false`, PR e merge su `main` nel giorno scelto da Luigi (piano: martedì 17/11). Va online con il merge, non c'è pubblicazione programmata.

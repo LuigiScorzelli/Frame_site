@@ -5,7 +5,7 @@ import matter from "gray-matter";
 import { AUTORI, type SlugAutore } from "@/lib/brand";
 
 // MDX articles in content/articoli/*.mdx (docs/lancio/02-specifiche.md, section 6).
-// The slug is the file name. Drafts (`bozza: true`) are visible only in development.
+// The slug is the file name. Drafts (`bozza: true`) are visible only in development and previews.
 
 export const CATEGORIE = {
   "richieste-perse": "Richieste perse",
@@ -44,7 +44,9 @@ export interface Articolo extends FrontmatterArticolo {
 
 const CARTELLA = path.join(process.cwd(), "content", "articoli");
 const SLUG_VALIDO = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const mostraBozze = process.env.NODE_ENV !== "production";
+// Drafts show in development and on Vercel previews (protected, noindex), so Luigi can review an
+// article before publishing; never on production.
+const mostraBozze = process.env.NODE_ENV !== "production" || process.env.VERCEL_ENV === "preview";
 
 function dataIso(v: unknown): string {
   // gray-matter turns unquoted YAML dates into Date objects.
