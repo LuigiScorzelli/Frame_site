@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Inter } from "next/font/google";
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -16,6 +17,14 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
 });
+
+// Umami (cookieless statistics): production deployments only, so dev and preview visits are not counted.
+// UMAMI_ANCHE_PREVIEW=1, passed only as a build env of a one-off test deploy, turns it on in a preview.
+const UMAMI_WEBSITE_ID = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID;
+const umamiAttivo =
+  Boolean(UMAMI_WEBSITE_ID) &&
+  (process.env.VERCEL_ENV === "production" ||
+    (process.env.VERCEL_ENV === "preview" && process.env.UMAMI_ANCHE_PREVIEW === "1"));
 
 const descrizione =
   "Plugin WordPress gratuito in italiano per piccole aziende: risponde ai clienti con le informazioni del sito, raccoglie le richieste fuori orario e te le consegna.";
@@ -64,6 +73,13 @@ export default function RootLayout({
         <AssistenteAI />
         <Analytics />
         <SpeedInsights />
+        {umamiAttivo && (
+          <Script
+            src="https://cloud.umami.is/script.js"
+            data-website-id={UMAMI_WEBSITE_ID}
+            strategy="afterInteractive"
+          />
+        )}
       </body>
     </html>
   );
