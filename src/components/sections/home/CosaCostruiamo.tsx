@@ -20,22 +20,22 @@ interface Scheda {
 }
 
 const grande: Scheda = {
-  titolo: "AUTOMAZIONI DEI FLUSSI RIPETITIVI",
-  testo: "Copiare dati da un'email a un foglio, mandare lo stesso promemoria ogni settimana, aggiornare due programmi a mano: lo fa il sistema, voi controllate.",
-  immagine: "/images/servizi/automazione.jpg",
+  titolo: "COLLEGAMENTI E STRUMENTI SU MISURA",
+  testo: "CRM, email, gestionale ed e-commerce che si passano i dati da soli, senza doppioni. Quando il software standard non basta, costruiamo lo strumento che manca.",
+  immagine: "/images/servizi/sviluppo.jpg",
   velo: "bg-bg-0/90",
-  icona: <IconaFulmine />,
-  tag: ["WORKFLOW", "EMAIL E FOGLI", "PROMEMORIA"],
+  icona: <IconaCodice />,
+  tag: ["INTEGRAZIONI", "GESTIONALI", "SU MISURA"],
 };
 
 const laterali: Scheda[] = [
   {
-    titolo: "COLLEGAMENTI E STRUMENTI SU MISURA",
-    testo: "CRM, email, gestionale ed e-commerce che si passano i dati da soli, senza doppioni. Quando il software standard non basta, costruiamo lo strumento che manca.",
-    immagine: "/images/servizi/sviluppo.jpg",
+    titolo: "AUTOMAZIONI DEI FLUSSI RIPETITIVI",
+    testo: "Copiare dati da un'email a un foglio, mandare lo stesso promemoria ogni settimana, aggiornare due programmi a mano: lo fa il sistema, voi controllate.",
+    immagine: "/images/servizi/automazione.jpg",
     velo: "bg-bg-0/85",
-    icona: <IconaCodice />,
-    tag: ["INTEGRAZIONI", "GESTIONALI", "SU MISURA"],
+    icona: <IconaFulmine />,
+    tag: ["WORKFLOW", "EMAIL E FOGLI", "PROMEMORIA"],
   },
   {
     titolo: "ASSISTENTI AI SUI VOSTRI DATI",
