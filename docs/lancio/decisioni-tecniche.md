@@ -137,3 +137,5 @@ Con `CALENDLY_URL` valorizzato (dal 9/11 costante in `brand.ts`) la pagina incor
 **Regola:** bagliori negli hero e in una sola fascia pausa per pagina, altrimenti diventano carta da parati. Contrasto peggiore del testo `text-1` sopra i bagliori sovrapposti: 5,6:1.
 
 **Da tenere presente:** se il video della voce 1.3 va nell'hero della home, i bagliori vanno spostati accanto o sotto.
+
+**Aggiornamento 11/11, dopo l'anteprima (decisione di Luigi):** la scritta FR>ME non resta solo in "Chi siamo": va anche dietro "05 / Piano a pagamento" di `/plugin` e la newsletter di `/risorse` (prop `scritta` di `Section`). Le testate delle pagine tengono la parola della pagina. In home, "Cosa costruiamo" apre con "Collegamenti e strumenti su misura" nella scheda grande; "Automazioni dei flussi ripetitivi" passa nella prima laterale.
