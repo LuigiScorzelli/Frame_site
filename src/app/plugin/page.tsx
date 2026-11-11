@@ -5,6 +5,7 @@ import Footer from "@/components/layout/Footer";
 import CtaButton from "@/components/ui/CtaButton";
 import Section from "@/components/ui/Section";
 import PageHero from "@/components/ui/PageHero";
+import FasciaPausa from "@/components/ui/FasciaPausa";
 import Scheda from "@/components/ui/Scheda";
 import { IconaCroce, IconaSpunta } from "@/components/ui/Icone";
 import InteresseForm from "@/components/ui/InteresseForm";
@@ -175,15 +176,15 @@ export default function PluginPage() {
           </p>
         </Section>
 
-        <Section numero={3} tag="PRIVACY" title="Cosa succede ai dati dei tuoi clienti">
-          <p className="max-w-3xl text-lg leading-relaxed text-text-1">
+        <FasciaPausa etichetta="03 / PRIVACY" titolo="Cosa succede ai dati dei tuoi clienti">
+          <p>
             Le conversazioni restano sul server 24 ore, poi vengono cancellate. L&apos;indirizzo IP viene salvato solo come
             impronta, non in chiaro. Le richieste consegnate si conservano per il tempo che scegli tu: 7, 30, 90, 180 o
             365 giorni. Esporti e cancelli i dati personali con gli strumenti standard di WordPress. Tutti i dettagli
             nella{" "}
             <Link href="/privacy" className="text-accent underline-offset-4 hover:underline">pagina privacy</Link>.
           </p>
-        </Section>
+        </FasciaPausa>
 
 
         <Section numero={4} tono="alterno" tag="DOMANDE FREQUENTI" title="Domande frequenti">
