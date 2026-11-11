@@ -26,19 +26,21 @@ const umamiAttivo =
   (process.env.VERCEL_ENV === "production" ||
     (process.env.VERCEL_ENV === "preview" && process.env.UMAMI_ANCHE_PREVIEW === "1"));
 
+// Defaults for pages without their own metadata (home og:title, 404): same message as the home page.
+const titoloPredefinito = `${AGENCY_NAME}: automazioni e assistenti AI per piccole aziende`;
 const descrizione =
-  "Plugin WordPress gratuito in italiano per piccole aziende: risponde ai clienti con le informazioni del sito, raccoglie le richieste fuori orario e te le consegna.";
+  "Costruiamo automazioni, assistenti AI e collegamenti tra gli strumenti che usate già, per piccole aziende senza reparto tecnico. E abbiamo un plugin WordPress gratuito.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${AGENCY_NAME}: il tuo sito WordPress risponde anche quando sei chiuso`,
+    default: titoloPredefinito,
     template: `%s | ${AGENCY_NAME}`,
   },
   description: descrizione,
   authors: [{ name: "Luigi Scorzelli", url: FOUNDER_URL }],
   openGraph: {
-    title: `${AGENCY_NAME}: il tuo sito WordPress risponde anche quando sei chiuso`,
+    title: titoloPredefinito,
     description: descrizione,
     url: SITE_URL,
     siteName: AGENCY_NAME,

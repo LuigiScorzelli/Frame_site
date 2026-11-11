@@ -7,7 +7,8 @@ export const LOGO_TEXT = "FR>ME";
 // Provisional name until the final one is chosen (see docs/lancio/00-LEGGIMI.md).
 export const PLUGIN_NAME = process.env.NEXT_PUBLIC_PLUGIN_NAME ?? "Lead Assistant";
 export const CONTACT_EMAIL = "info@aiframe.it";
-export const SITE_URL = "https://aiframe.it";
+// Primary domain (Luigi, 11/11): aiframe.it redirects here with a 308.
+export const SITE_URL = "https://www.aiframe.it";
 export const FOUNDER_URL = "https://luigiscorzelli.com";
 export const CITY = "Salerno";
 // Public booking link, rendered in the HTML: plain config, not an env var (Luigi, 9/11).
