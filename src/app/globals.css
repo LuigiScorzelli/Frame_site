@@ -87,6 +87,14 @@
   }
 }
 
+/* Section tono="alterno" sits on bg-1: cards that are bg-1 switch to bg-0 so they stay visible.
+   Do not put forms with bg-0 inputs in an alternate section (they would disappear).
+   Unlayered on purpose: Tailwind v4 drops this selector inside @layer utilities, and an
+   unlayered rule beats the bg-bg-1 utility. */
+[data-tono="alterno"] .bg-bg-1 {
+  background-color: var(--color-bg-0);
+}
+
 body {
   background: var(--color-bg-0);
   color: var(--color-text-0);

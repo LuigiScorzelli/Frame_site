@@ -116,7 +116,7 @@ export default function ServiziPage() {
           <Schede elenco={progetti} />
         </Section>
 
-        <Section numero={2} tag={`INTORNO A ${PLUGIN_NAME.toUpperCase()}`} title="Non vuoi configurare niente? Lo facciamo noi.">
+        <Section numero={2} tono="alterno" tag={`INTORNO A ${PLUGIN_NAME.toUpperCase()}`} title="Non vuoi configurare niente? Lo facciamo noi.">
           <Schede elenco={plugin} />
           <p className="mt-8 text-[15px] text-text-1">
             Gestisci siti per i tuoi clienti?{" "}

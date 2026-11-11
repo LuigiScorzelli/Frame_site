@@ -58,7 +58,7 @@ export default function RisorsePage() {
         </Section>
 
         {articoli.length > 0 && (
-          <Section numero={2} tag="ARTICOLI" title="Articoli">
+          <Section numero={2} tono="alterno" tag="ARTICOLI" title="Articoli">
             <ElencoArticoli
               articoli={articoli.map((a) => ({
                 slug: a.slug,

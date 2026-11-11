@@ -64,7 +64,7 @@ export default function PrivacyPage() {
           </ul>
         </Section>
 
-        <Section numero={2} tag="CHECK-UP" title="Il check-up del tuo sito">
+        <Section numero={2} tono="alterno" tag="CHECK-UP" title="Il check-up del tuo sito">
           <ul className="max-w-3xl space-y-3 border border-border bg-bg-1 p-8 text-[15px] leading-relaxed text-text-1">
             {nelCheckup.map((x) => <li key={x} className="flex gap-3"><span className="font-label text-accent" aria-hidden>&gt;</span>{x}</li>)}
           </ul>
@@ -80,7 +80,7 @@ export default function PrivacyPage() {
           </p>
         </Section>
 
-        <Section numero={4} tag="NEL PLUGIN" title={`Nel plugin ${PLUGIN_NAME} installato sul tuo sito`}>
+        <Section numero={4} tono="alterno" tag="NEL PLUGIN" title={`Nel plugin ${PLUGIN_NAME} installato sul tuo sito`}>
           <ul className="max-w-3xl space-y-3 border border-border bg-bg-1 p-8 text-[15px] leading-relaxed text-text-1">
             {nelPlugin.map((x) => <li key={x} className="flex gap-3"><span className="font-label text-accent" aria-hidden>&gt;</span>{x}</li>)}
           </ul>

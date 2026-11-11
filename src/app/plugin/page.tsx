@@ -156,7 +156,7 @@ export default function PluginPage() {
 
         {/* TODO: sezione "Schermate" (5 screenshot veri) e video 90 s di installazione quando disponibili */}
 
-        <Section numero={2} tag="PROVE" title="A che punto siamo, detto chiaro">
+        <Section numero={2} tono="alterno" tag="PROVE" title="A che punto siamo, detto chiaro">
           <div className="mb-8 grid max-w-3xl gap-6 sm:grid-cols-2">
             {[
               { valore: "24/10/2026", etichetta: "IN PROVA SU SITI REALI DAL" },
@@ -186,7 +186,7 @@ export default function PluginPage() {
         </Section>
 
 
-        <Section numero={4} tag="DOMANDE FREQUENTI" title="Domande frequenti">
+        <Section numero={4} tono="alterno" tag="DOMANDE FREQUENTI" title="Domande frequenti">
           <dl className="grid gap-6 md:grid-cols-2">
             {faq.map((f, i) => (
               <div key={f.domanda} className="border border-border bg-bg-1 p-8">
