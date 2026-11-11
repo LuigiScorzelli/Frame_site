@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { useInView } from "@/components/animations/useInView";
+import { ScrittaSfondo } from "@/components/ui/Sfondo";
 import { AGENCY_NAME, CITY, FOUNDER_URL, LOGO_TEXT, PLUGIN_NAME } from "@/lib/brand";
 
 const valori = [
@@ -16,11 +17,7 @@ export default function ChiSiamo() {
   const { ref, inView } = useInView({ threshold: 0.1 });
   return (
     <section id="chi-siamo" ref={ref} className="relative scroll-mt-20 overflow-hidden border-t border-border bg-bg-0 py-24 lg:py-[100px]">
-      <div aria-hidden className="pointer-events-none absolute right-0 top-0 overflow-hidden">
-        <span className="block text-right text-[160px] font-display font-extrabold leading-none tracking-[-8px] text-accent/[0.035] lg:text-[300px] lg:tracking-[-15px]">
-          {LOGO_TEXT}
-        </span>
-      </div>
+      <ScrittaSfondo testo={LOGO_TEXT} />
       <div className="relative mx-auto max-w-[1440px] px-6 lg:px-14">
         <div className="mb-12">
           <span className="font-label text-[13px] font-medium tracking-[2px] text-accent">03 / CHI C&apos;È DIETRO</span>

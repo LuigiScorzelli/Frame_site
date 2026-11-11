@@ -1,21 +1,22 @@
 import Link from "next/link";
+import { Puntini } from "@/components/ui/Sfondo";
 
 export default function NotFound() {
   return (
     <main
-      className="flex min-h-screen flex-col items-center justify-center bg-bg-0 px-6 text-center"
-      style={{ backgroundImage: "radial-gradient(circle, rgba(232,236,244,0.03) 1px, transparent 1px)", backgroundSize: "32px 32px" }}
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-bg-0 px-6 text-center"
     >
-      <span className="font-label text-[13px] font-medium tracking-[3px] text-accent">404</span>
-      <h1 className="mt-4 text-5xl font-display font-extrabold lg:text-[64px] tracking-[-1.5px] text-text-0">
+      <Puntini sfuma="bordi" />
+      <span className="relative font-label text-[13px] font-medium tracking-[3px] text-accent">404</span>
+      <h1 className="relative mt-4 text-5xl font-display font-extrabold lg:text-[64px] tracking-[-1.5px] text-text-0">
         Questa pagina non c&apos;è.
       </h1>
-      <p className="mt-4 max-w-md text-base text-text-1" style={{ lineHeight: 1.6 }}>
+      <p className="relative mt-4 max-w-md text-base text-text-1" style={{ lineHeight: 1.6 }}>
         Il plugin invece sì.
       </p>
       <Link
         href="/plugin"
-        className="mt-8 inline-flex items-center justify-center bg-accent px-7 py-3.5 font-label text-sm font-bold tracking-wide text-bg-0"
+        className="relative mt-8 inline-flex items-center justify-center bg-accent px-7 py-3.5 font-label text-sm font-bold tracking-wide text-bg-0"
         style={{ letterSpacing: "1px" }}
       >
         VAI AL PLUGIN &rarr;

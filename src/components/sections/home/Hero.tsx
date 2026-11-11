@@ -1,4 +1,5 @@
 import CtaButton from "@/components/ui/CtaButton";
+import { Puntini } from "@/components/ui/Sfondo";
 import { AGENCY_NAME, BOOKING_URL } from "@/lib/brand";
 
 // Production hero style (main, before the launch branch) with the new agency copy.
@@ -12,12 +13,7 @@ const righe = [
 export default function Hero() {
   return (
     <section className="relative flex min-h-screen items-end overflow-hidden pb-24 pt-32">
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{ backgroundImage: "radial-gradient(circle, rgba(232,236,244,0.03) 1px, transparent 1px)", backgroundSize: "32px 32px" }}
-      />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-bg-0 via-bg-0/85 to-bg-0/30" />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-bg-0 via-bg-0/80 to-transparent" />
+      <Puntini />
 
       <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 lg:px-14">
         <div className="max-w-[900px]">
