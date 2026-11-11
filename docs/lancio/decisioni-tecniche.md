@@ -89,3 +89,19 @@ Con `CALENDLY_URL` valorizzato (dal 9/11 costante in `brand.ts`) la pagina incor
 **Decisione di Luigi:** `NEXT_PUBLIC_CALENDLY_URL` è tolta. Il link (`https://calendly.com/luigi-scorzelli/30min`) è in `CALENDLY_URL` di `src/lib/brand.ts`.
 
 **Perché:** in produzione la variabile mancava al momento della build e tutti i "Prenota 30 minuti" portavano a `/contatti`. Il link non è un segreto (sta nell'HTML di ogni pagina), quindi non serve una variabile: una costante non può mancare in un ambiente. Per cambiarlo si modifica `brand.ts` e si fa un deploy.
+
+## 2026-11-11 · Check-up v1 (voce 1.1)
+
+**Piano approvato da Luigi l'11/11.** `POST /api/checkup` in `src/app/api/checkup/route.ts`, motore in `src/lib/checkup/` (`rete.ts` download sicuro, `analisi.ts` le 5 voci, `testi.ts` spiegazioni e rimedi, `report.ts` email, `index.ts` orchestrazione e cache), interfaccia in `src/components/ui/Checkup.tsx`.
+
+**Librerie:** `undici` 7 (non l'8, che vuole Node ≥ 22.19) per collegare la verifica DNS alla connessione; `node-html-parser` per leggere l'HTML senza regex fragili; `vitest` 4 per i test (`npm test`, 69 test, HTML di esempio in `src/lib/checkup/fixtures/`).
+
+**SSRF:** solo http/https su porte 80/443, niente credenziali né nomi interni; IP letterali controllati subito; per i nomi la `lookup` di undici risolve tutti gli indirizzi e rifiuta se anche uno è privato, loopback, link-local (metadati cloud), CGNAT, documentazione, multicast, IPv6 non globale, IPv4 mappato, 6to4/Teredo. Il controllo è sull'IP a cui ci colleghiamo davvero (niente DNS rebinding). Al massimo 3 redirect, ognuno ricontrollato. 8 s per pagina, 18 s in tutto, 1 MB letto, `User-Agent` da `CHECKUP_USER_AGENT`.
+
+**Punteggio:** 5 voci da 0 a 20, totale 0-100, come in `02-specifiche.md`. Il modulo mancante pesa solo in "Scrivere fuori orario"; in "Da telefono" e "Informativa chiara" la parte sul modulo è "non applicabile" e prende i punti (detto nella spiegazione). Il nostro plugin sul sito vale 20 su "fuori orario". Si legge l'HTML senza eseguire JavaScript: lo diciamo sotto il risultato e nell'email.
+
+**Email:** solo con email e consenso. Brevo con doppio opt-in, `FONTE=checkup`, `SITO=<host>`; finché l'attributo `SITO` non esiste in Brevo la route riprova senza `SITO` (avviso nei log). Report via Resend con le 3 voci più basse; il sito del visitatore è testo, non link. Se Brevo o Resend falliscono il risultato si mostra lo stesso, con l'esito in `email`.
+
+**Limiti:** 10 check-up all'ora per IP, 3 email al giorno per indirizzo (hash), cache del solo risultato 1 ora in Upstash (`checkup:v1:<sha256 URL>`). `checkup:stats` non fatto. Gli eventi `checkup_start`/`checkup_done` partono sia dal calcolatore (come prima) sia dal check-up, che aggiunge `fonte: "checkup"`.
+
+**Limiti noti visti nel test dei siti reali:** siti dietro Akamai Bot Manager (es. marchesi1824.com) chiudono la connessione al nostro user-agent dichiarato → 422; chat e widget caricati via JavaScript (anche l'assistente di aiframe.it, montato con `lazyOnload`) non si vedono.
