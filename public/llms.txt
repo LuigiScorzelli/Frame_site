@@ -9,6 +9,7 @@
 - [Plugin](https://www.aiframe.it/plugin): cosa fa e cosa non fa, requisiti (WordPress 7.0, PHP 8.3), installazione della beta, domande frequenti.
 - [Check-up](https://www.aiframe.it/check-up): controllo gratuito di come un sito riceve le richieste (5 voci con punteggio e spiegazione, report via email se richiesto) e calcolatore di quanto costano le richieste perse.
 - [Risorse](https://www.aiframe.it/risorse): articoli per chi riceve richieste dal sito.
+- [Il percorso di una richiesta cliente, disegnato su un foglio](https://www.aiframe.it/risorse/percorso-richiesta-cliente): un foglio con cinque colonne e quattro passi per vedere dove si fermano le richieste dei clienti (modulo, email, WhatsApp, telefono) e cosa sistemare per primo, anche senza strumenti.
 - [Luigi Scorzelli](https://www.aiframe.it/autore/luigi-scorzelli): pagina autore degli articoli, AI Automation Engineer, fondatore di aiframe.
 - [Privacy](https://www.aiframe.it/privacy): come sono trattati i dati sul sito, nell'assistente e nel plugin.
 - [Contatti](https://www.aiframe.it/contatti): 30 minuti per parlare del tuo sito.
