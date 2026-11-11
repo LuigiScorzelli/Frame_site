@@ -16,6 +16,7 @@ export const metadata: Metadata = {
 
 const sulSito = [
   "Statistiche senza cookie (Vercel Analytics).",
+  "Contiamo le visite e i clic sui pulsanti principali con Umami, fornito da Umami Software Inc.: non usa cookie, raccoglie solo dati aggregati, senza identificare chi visita, e i dati sono conservati nella regione UE.",
   "Le email che ci lasci vanno in Brevo con doppia conferma.",
   "I moduli passano da Resend.",
   "Le prenotazioni passano da Calendly.",
