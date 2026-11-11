@@ -2,13 +2,12 @@
 
 import { cn } from "@/lib/utils";
 import { useInView } from "@/components/animations/useInView";
-import { IconaIngranaggio, IconaLente, IconaProvetta, IconaScudo } from "@/components/ui/Icone";
 
 const passi = [
-  { numero: "01", icona: <IconaLente />, titolo: "Analisi", testo: "Partiamo da 30 minuti di chiamata: ci raccontate dove si perde tempo e quali dati usate ogni giorno.", punti: ["Processi ripetitivi", "Dati che usate"] },
-  { numero: "02", icona: <IconaScudo />, titolo: "Dati e accessi", testo: "Prima di costruire decidiamo chi può vedere cosa, dove restano i dati e quali strumenti tocchiamo.", punti: ["Accessi e permessi", "Dove restano i dati"] },
-  { numero: "03", icona: <IconaIngranaggio />, titolo: "Costruzione", testo: "Realizziamo la soluzione e la colleghiamo agli strumenti che usate già, senza cambiare il vostro modo di lavorare più del necessario.", punti: ["Strumenti esistenti", "Niente complessità inutile"] },
-  { numero: "04", icona: <IconaProvetta />, titolo: "Prova e ritocchi", testo: "La proviamo su casi reali con il vostro team, correggiamo quello che non va e la miglioriamo dopo il rilascio.", punti: ["Casi reali", "Ritocchi dopo il rilascio"] },
+  { numero: "01", icona: "🔍", titolo: "Analisi", testo: "Partiamo da 30 minuti di chiamata: ci raccontate dove si perde tempo e quali dati usate ogni giorno.", punti: ["Processi ripetitivi", "Dati che usate"] },
+  { numero: "02", icona: "🛡️", titolo: "Dati e accessi", testo: "Prima di costruire decidiamo chi può vedere cosa, dove restano i dati e quali strumenti tocchiamo.", punti: ["Accessi e permessi", "Dove restano i dati"] },
+  { numero: "03", icona: "⚙️", titolo: "Costruzione", testo: "Realizziamo la soluzione e la colleghiamo agli strumenti che usate già, senza cambiare il vostro modo di lavorare più del necessario.", punti: ["Strumenti esistenti", "Niente complessità inutile"] },
+  { numero: "04", icona: "🧪", titolo: "Prova e ritocchi", testo: "La proviamo su casi reali con il vostro team, correggiamo quello che non va e la miglioriamo dopo il rilascio.", punti: ["Casi reali", "Ritocchi dopo il rilascio"] },
 ];
 
 export default function ComeLavoriamo() {
@@ -29,7 +28,7 @@ export default function ComeLavoriamo() {
               style={{ transitionDelay: `${i * 100}ms` }}
             >
               <span className="font-label text-[13px] tracking-[2px] text-accent">{p.numero}</span>
-              <div aria-hidden className="my-5 flex h-12 w-12 items-center justify-center rounded-xl bg-bg-2 text-accent">{p.icona}</div>
+              <div aria-hidden className="my-5 flex h-12 w-12 items-center justify-center rounded-xl bg-bg-2 text-2xl">{p.icona}</div>
               <h3 className="mb-3 text-lg font-bold tracking-[-0.5px] text-text-0">{p.titolo}</h3>
               <p className="mb-5 text-sm leading-relaxed text-text-1">{p.testo}</p>
               <ul className="space-y-2">
