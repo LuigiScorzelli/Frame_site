@@ -23,7 +23,8 @@ interface Limitatore {
 // The Vercel Marketplace integration injects KV_REST_API_*; UPSTASH_REDIS_REST_* works for a direct Upstash setup.
 const UPSTASH_URL = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
 const UPSTASH_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
-const redis = UPSTASH_URL && UPSTASH_TOKEN ? new Redis({ url: UPSTASH_URL, token: UPSTASH_TOKEN }) : null;
+/** Shared Upstash client (also used by the check-up cache); null when not configured. */
+export const redis = UPSTASH_URL && UPSTASH_TOKEN ? new Redis({ url: UPSTASH_URL, token: UPSTASH_TOKEN }) : null;
 
 let avvisoMostrato = false;
 
@@ -87,16 +88,26 @@ export function ipDa(request: Request): string {
   return request.headers.get("x-real-ip")?.trim() || "unknown";
 }
 
+/** Salted SHA-256 of a personal value (IP, email). Use it as key and in logs; never the raw value. */
+export function hashSalato(valore: string): string {
+  const sale = process.env.RATELIMIT_SALT || "aiframe-ratelimit";
+  return createHash("sha256").update(`${sale}:${valore}`).digest("hex");
+}
+
 /** Salted SHA-256 of the IP. Use it as rate-limit key and in logs; never log the raw IP. */
 export function hashIp(ip: string): string {
-  const sale = process.env.RATELIMIT_SALT || "aiframe-ratelimit";
-  return createHash("sha256").update(`${sale}:${ip}`).digest("hex");
+  return hashSalato(ip);
 }
 
 /** Checks the limit for the request's IP. Fails open if Redis is unreachable, logging the error. */
 export async function controllaLimite(limitatore: Limitatore, request: Request): Promise<RisultatoLimite> {
+  return controllaLimiteChiave(limitatore, hashIp(ipDa(request)));
+}
+
+/** Same as controllaLimite with a key chosen by the caller (already hashed). Fails open too. */
+export async function controllaLimiteChiave(limitatore: Limitatore, chiave: string): Promise<RisultatoLimite> {
   try {
-    return await limitatore.limita(hashIp(ipDa(request)));
+    return await limitatore.limita(chiave);
   } catch (err) {
     console.error("ratelimit: errore del limitatore, richiesta lasciata passare", err instanceof Error ? err.message : err);
     return { ok: true, limite: 0, rimanenti: 0, reset: Date.now() };
