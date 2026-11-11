@@ -119,3 +119,21 @@ Con `CALENDLY_URL` valorizzato (dal 9/11 costante in `brand.ts`) la pagina incor
 **Bozze sulle anteprime:** da oggi `bozza: true` si vede anche sulle anteprime Vercel (`VERCEL_ENV=preview`, protette, pagina in `noindex`, esclusa dalla sitemap), non solo in sviluppo: serve a rileggere un articolo prima di pubblicarlo. In produzione resta nascosta.
 
 **Pubblicazione:** riletto da Luigi sull'anteprima, pubblicato l'11/11 con data 11/11 (decisione di Luigi: oggi, non martedì 17/11 come nel piano). Va online con il merge su `main`, non c'è pubblicazione programmata.
+
+## 2026-11-11 · Sfondi della home portati nelle pagine interne
+
+**Richiesta di Luigi:** le pagine interne non continuavano lo stile della home, soprattutto negli sfondi; da riusare i due sfondi della home che piacciono: i bagliori di "Dati, sicurezza e controllo" e la scritta gigante di "Chi siamo".
+
+**Diagnosi:** la griglia a puntini c'era già in `PageHero` e nell'hero della home, ma al 3% sotto un velo dell'80-100%: invisibile. Il carattere della home veniva da 4 elementi (fascia che scorre, foto, bagliori, scritta di sfondo) che le pagine interne non avevano; in più le `Section` interne avevano tutte lo stesso fondo.
+
+**Fatto:**
+- `src/components/ui/Sfondo.tsx`: `Puntini` (9%, sfumati con una maschera al posto del velo), `Bagliori` (disposizioni `fascia`, `hero`, `testata`), `ScrittaSfondo` (taglie `grande`, `media`). Sostituisce le copie a mano in Hero, PageHero, DatiBand, ChiSiamo, 404, articoli. `/amazon-seo` non toccata.
+- `PageHero`: bagliori sempre, prop `parola` per la scritta di sfondo con la parola della pagina (SERVIZI, PLUGIN, CHECK-UP, RISORSE, CONTATTI, PRIVACY). FR>ME resta solo in "Chi siamo", per non mettere l'agenzia sopra il prodotto. `/grazie` e `/autore` senza parola.
+- Hero della home con i bagliori.
+- `Section tono="alterno"` (fondo `bg-1`) sulle sezioni pari di servizi, plugin, risorse, privacy. Le schede `bg-bg-1` dentro passano a `bg-0` con una regola non in layer in `globals.css` (dentro `@layer utilities` Tailwind v4 la scarta). Le sezioni con moduli (check-up, piano a pagamento di `/plugin`) restano `bg-0`: i loro campi `bg-0` sparirebbero.
+- `FasciaPausa` (dal DatiBand): al massimo una per pagina; su `/plugin` è la sezione 3 "Privacy".
+- "Come lavoriamo": emoji sostituite da icone SVG (`IconaLente`, `IconaScudo`, `IconaIngranaggio`, `IconaProvetta`).
+
+**Regola:** bagliori negli hero e in una sola fascia pausa per pagina, altrimenti diventano carta da parati. Contrasto peggiore del testo `text-1` sopra i bagliori sovrapposti: 5,6:1.
+
+**Da tenere presente:** se il video della voce 1.3 va nell'hero della home, i bagliori vanno spostati accanto o sotto.
