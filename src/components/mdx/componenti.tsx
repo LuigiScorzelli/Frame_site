@@ -2,10 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import type { MDXRemoteProps } from "next-mdx-remote/rsc";
 import CtaButton from "@/components/ui/CtaButton";
+import TrackedLink from "@/components/ui/TrackedLink";
 import { PLUGIN_NAME, INSTALL_PATH } from "@/lib/brand";
 
 // Components allowed inside content/articoli/*.mdx (docs/lancio/02-specifiche.md, section 6):
-// headings, paragraphs, lists, tables, images (next/image), <Nota> and <CtaInstalla>.
+// headings, paragraphs, lists, tables, images (next/image), <Nota>, <CtaInstalla> and <Scarica>.
 
 function Nota({ titolo = "Nota", children }: { titolo?: string; children: React.ReactNode }) {
   return (
@@ -29,6 +30,34 @@ function CtaInstalla({ pagina = "articolo" }: { pagina?: string }) {
       >
         INSTALLA GRATIS &rarr;
       </CtaButton>
+    </div>
+  );
+}
+
+/** Download box for a file in public/ (e.g. href="/risorse/file.xlsx"). */
+function Scarica({
+  href,
+  testo = "Scarica il file Excel",
+  formato = "XLSX",
+  pagina = "articolo",
+}: {
+  href: string;
+  testo?: string;
+  formato?: string;
+  pagina?: string;
+}) {
+  return (
+    <div className="my-8 flex flex-col gap-4 border border-accent-border bg-bg-1 p-6 sm:flex-row sm:items-center sm:justify-between">
+      <p className="font-label text-[13px] font-bold tracking-[2px] text-text-1">FILE {formato.toUpperCase()} · GRATUITO</p>
+      <TrackedLink
+        href={href}
+        download
+        evento="download_risorsa"
+        props={{ pagina, posizione: "pagina" }}
+        className="inline-flex items-center justify-center gap-2 bg-accent px-7 py-3.5 font-label text-sm font-bold tracking-wide text-bg-0 transition-all duration-200 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
+      >
+        {testo.toUpperCase()} &darr;
+      </TrackedLink>
     </div>
   );
 }
@@ -69,4 +98,5 @@ export const componentiMdx: NonNullable<MDXRemoteProps["components"]> = {
     ) : null,
   Nota,
   CtaInstalla,
+  Scarica,
 };
