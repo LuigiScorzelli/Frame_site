@@ -6,6 +6,7 @@ import remarkGfm from "remark-gfm";
 import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
 import CtaButton from "@/components/ui/CtaButton";
+import { Puntini } from "@/components/ui/Sfondo";
 import JsonLd from "@/components/seo/JsonLd";
 import { componentiMdx } from "@/components/mdx/componenti";
 import { CATEGORIE, formatDataArticolo, getArticoli, getArticolo } from "@/lib/content";
@@ -72,11 +73,7 @@ export default async function ArticoloPage({ params }: PageProps) {
       />
       <NavBar />
       <main className="relative bg-bg-0 pt-24 lg:pt-28">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-[520px]"
-          style={{ backgroundImage: "radial-gradient(circle, rgba(232,236,244,0.03) 1px, transparent 1px)", backgroundSize: "32px 32px", maskImage: "linear-gradient(to bottom, black, transparent)" }}
-        />
+        <Puntini className="bottom-auto h-[520px]" />
         <article className="relative mx-auto max-w-[780px] px-6 pb-20 pt-16">
           <div className="mb-8 flex items-center gap-2 font-label text-[13px] tracking-[1px] text-text-1">
             <Link href="/risorse" className="transition-colors hover:text-accent">RISORSE</Link>

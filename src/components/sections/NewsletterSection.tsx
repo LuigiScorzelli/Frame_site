@@ -1,9 +1,12 @@
 import InteresseForm from "@/components/ui/InteresseForm";
+import { ScrittaSfondo } from "@/components/ui/Sfondo";
+import { LOGO_TEXT } from "@/lib/brand";
 
 export default function NewsletterSection({ pagina = "risorse" }: { pagina?: string }) {
   return (
-    <section className="border-y border-border bg-bg-1 py-16">
-      <div className="mx-auto flex max-w-[1440px] flex-col items-center px-6 text-center lg:px-14">
+    <section className="relative overflow-hidden border-y border-border bg-bg-1 py-16">
+      <ScrittaSfondo testo={LOGO_TEXT} />
+      <div className="relative mx-auto flex max-w-[1440px] flex-col items-center px-6 text-center lg:px-14">
         <span className="font-label text-[13px] font-medium tracking-[3px] text-accent">NEWSLETTER</span>
         <h2 className="mt-6 text-4xl font-display font-extrabold leading-tight tracking-[-0.5px] text-text-0">
           Una email ogni due settimane.

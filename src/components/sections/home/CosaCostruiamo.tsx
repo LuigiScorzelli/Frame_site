@@ -20,22 +20,22 @@ interface Scheda {
 }
 
 const grande: Scheda = {
-  titolo: "AUTOMAZIONI DEI FLUSSI RIPETITIVI",
-  testo: "Copiare dati da un'email a un foglio, mandare lo stesso promemoria ogni settimana, aggiornare due programmi a mano: lo fa il sistema, voi controllate.",
-  immagine: "/images/servizi/automazione.jpg",
+  titolo: "COLLEGAMENTI E STRUMENTI SU MISURA",
+  testo: "CRM, email, gestionale ed e-commerce che si passano i dati da soli, senza doppioni. Quando il software standard non basta, costruiamo lo strumento che manca.",
+  immagine: "/images/servizi/sviluppo.jpg",
   velo: "bg-bg-0/90",
-  icona: <IconaFulmine />,
-  tag: ["WORKFLOW", "EMAIL E FOGLI", "PROMEMORIA"],
+  icona: <IconaCodice />,
+  tag: ["INTEGRAZIONI", "GESTIONALI", "SU MISURA"],
 };
 
 const laterali: Scheda[] = [
   {
-    titolo: "COLLEGAMENTI E STRUMENTI SU MISURA",
-    testo: "CRM, email, gestionale ed e-commerce che si passano i dati da soli, senza doppioni. Quando il software standard non basta, costruiamo lo strumento che manca.",
-    immagine: "/images/servizi/sviluppo.jpg",
+    titolo: "AUTOMAZIONI DEI FLUSSI RIPETITIVI",
+    testo: "Copiare dati da un'email a un foglio, mandare lo stesso promemoria ogni settimana, aggiornare due programmi a mano: lo fa il sistema, voi controllate.",
+    immagine: "/images/servizi/automazione.jpg",
     velo: "bg-bg-0/85",
-    icona: <IconaCodice />,
-    tag: ["INTEGRAZIONI", "GESTIONALI", "SU MISURA"],
+    icona: <IconaFulmine />,
+    tag: ["WORKFLOW", "EMAIL E FOGLI", "PROMEMORIA"],
   },
   {
     titolo: "ASSISTENTI AI SUI VOSTRI DATI",
@@ -50,15 +50,20 @@ const laterali: Scheda[] = [
 function Card({ s, grandeFormato }: { s: Scheda; grandeFormato?: boolean }) {
   return (
     <div
-      className={cn("relative flex-1 overflow-hidden border border-border bg-cover bg-center p-8", grandeFormato && "lg:min-h-[400px]")}
+      className={cn("relative flex-1 overflow-hidden border border-border bg-cover bg-center p-8", grandeFormato && "lg:min-h-[400px] lg:p-12")}
       style={{ backgroundImage: `url('${s.immagine}')` }}
     >
       <div className={cn("absolute inset-0", s.velo)} />
       <div className="relative flex h-full flex-col justify-between">
         <div>
-          <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-bg-2 text-accent">{s.icona}</div>
-          <h3 className="mb-3 text-lg font-semibold text-text-0">{s.titolo}</h3>
-          <p className="max-w-[420px] text-sm leading-relaxed text-text-1">{s.testo}</p>
+          <div className={cn("mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-bg-2 text-accent", grandeFormato && "lg:mb-8 lg:h-14 lg:w-14")}>
+            {s.icona}
+          </div>
+          {/* The big card needs bigger type, or the text floats in a mostly empty box. */}
+          <h3 className={cn("mb-3 text-lg font-semibold text-text-0", grandeFormato && "lg:mb-5 lg:text-[28px] lg:leading-tight lg:tracking-[-0.5px]")}>
+            {s.titolo}
+          </h3>
+          <p className={cn("max-w-[420px] text-sm leading-relaxed text-text-1", grandeFormato && "lg:max-w-[560px] lg:text-lg")}>{s.testo}</p>
         </div>
         <div className="mt-6 flex flex-wrap gap-1.5">{s.tag.map((t) => <Tag key={t}>{t}</Tag>)}</div>
       </div>

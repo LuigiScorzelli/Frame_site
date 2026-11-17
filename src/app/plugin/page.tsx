@@ -5,11 +5,12 @@ import Footer from "@/components/layout/Footer";
 import CtaButton from "@/components/ui/CtaButton";
 import Section from "@/components/ui/Section";
 import PageHero from "@/components/ui/PageHero";
+import FasciaPausa from "@/components/ui/FasciaPausa";
 import Scheda from "@/components/ui/Scheda";
 import { IconaCroce, IconaSpunta } from "@/components/ui/Icone";
 import InteresseForm from "@/components/ui/InteresseForm";
 import JsonLd from "@/components/seo/JsonLd";
-import { AGENCY_NAME, BETA_DOWNLOAD_PATH, PLUGIN_NAME, SITE_URL, WPORG_URL } from "@/lib/brand";
+import { AGENCY_NAME, BETA_DOWNLOAD_PATH, LOGO_TEXT, PLUGIN_NAME, SITE_URL, WPORG_URL } from "@/lib/brand";
 
 const descrizione =
   "Assistente per siti WordPress di piccole aziende: risponde con le informazioni del tuo sito, raccoglie le richieste fuori orario, le consegna via email e nel pannello. Gratis, con la tua chiave AI.";
@@ -97,7 +98,7 @@ export default function PluginPage() {
       />
       <NavBar />
       <main>
-        <PageHero tag="PLUGIN WORDPRESS · GRATUITO · IN ITALIANO" title={`${PLUGIN_NAME}: il tuo sito risponde anche quando sei chiuso.`}>
+        <PageHero tag="PLUGIN WORDPRESS · GRATUITO · IN ITALIANO" parola="PLUGIN" title={`${PLUGIN_NAME}: il tuo sito risponde anche quando sei chiuso.`}>
             <p className="max-w-2xl text-lg leading-relaxed text-text-1">
               Per attività locali, studi e piccole aziende con un sito WordPress. Risponde con le informazioni del tuo
               sito, raccoglie le richieste, te le consegna. Richiede WordPress 7.0 e PHP 8.3.
@@ -156,7 +157,7 @@ export default function PluginPage() {
 
         {/* TODO: sezione "Schermate" (5 screenshot veri) e video 90 s di installazione quando disponibili */}
 
-        <Section numero={2} tag="PROVE" title="A che punto siamo, detto chiaro">
+        <Section numero={2} tono="alterno" tag="PROVE" title="A che punto siamo, detto chiaro">
           <div className="mb-8 grid max-w-3xl gap-6 sm:grid-cols-2">
             {[
               { valore: "24/10/2026", etichetta: "IN PROVA SU SITI REALI DAL" },
@@ -175,18 +176,18 @@ export default function PluginPage() {
           </p>
         </Section>
 
-        <Section numero={3} tag="PRIVACY" title="Cosa succede ai dati dei tuoi clienti">
-          <p className="max-w-3xl text-lg leading-relaxed text-text-1">
+        <FasciaPausa etichetta="03 / PRIVACY" titolo="Cosa succede ai dati dei tuoi clienti">
+          <p>
             Le conversazioni restano sul server 24 ore, poi vengono cancellate. L&apos;indirizzo IP viene salvato solo come
             impronta, non in chiaro. Le richieste consegnate si conservano per il tempo che scegli tu: 7, 30, 90, 180 o
             365 giorni. Esporti e cancelli i dati personali con gli strumenti standard di WordPress. Tutti i dettagli
             nella{" "}
             <Link href="/privacy" className="text-accent underline-offset-4 hover:underline">pagina privacy</Link>.
           </p>
-        </Section>
+        </FasciaPausa>
 
 
-        <Section numero={4} tag="DOMANDE FREQUENTI" title="Domande frequenti">
+        <Section numero={4} tono="alterno" tag="DOMANDE FREQUENTI" title="Domande frequenti">
           <dl className="grid gap-6 md:grid-cols-2">
             {faq.map((f, i) => (
               <div key={f.domanda} className="border border-border bg-bg-1 p-8">
@@ -198,7 +199,7 @@ export default function PluginPage() {
           </dl>
         </Section>
 
-        <Section numero={5} tag="PIANO A PAGAMENTO" title="Quando ti serve di più">
+        <Section numero={5} scritta={LOGO_TEXT} tag="PIANO A PAGAMENTO" title="Quando ti serve di più">
           <p className="max-w-3xl text-lg leading-relaxed text-text-1">
             Il piano a pagamento aggiunge vendita guidata, preventivi con i tuoi prezzi, riconoscimento del cliente
             abituale, CRM e voce. 30 giorni di prova. Si attiva dal pannello del plugin, senza reinstallare.

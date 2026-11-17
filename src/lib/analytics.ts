@@ -12,7 +12,8 @@ export type Evento =
   | "click_prenota"
   | "click_checkup"
   | "click_account"
-  | "download_checklist";
+  | "download_checklist"
+  | "download_risorsa";
 
 /** Allowed properties only. Never put emails or visitor URLs here. */
 export type ProprietaEvento = {
