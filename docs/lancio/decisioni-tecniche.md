@@ -182,7 +182,7 @@ Con `CALENDLY_URL` valorizzato (dal 9/11 costante in `brand.ts`) la pagina incor
 
 **Bloccato su:** dati del Titolare per iubenda (nome, indirizzo, P. IVA). Lo stesso dato chiude il `TODO:dato` della P. IVA in `Footer.tsx`.
 
-**Da decidere (Luigi):** lasciare il banner attivo senza informativa fino ai dati del Titolare, oppure togliere `NEXT_PUBLIC_IUBENDA_WIDGET_ID` dalla Production e riaccenderlo insieme a `NEXT_PUBLIC_IUBENDA_POLICY_ID=42824372`. Consiglio della sessione: spegnerlo finché manca l'informativa.
+**Decisione di Luigi (19/11):** il banner **resta attivo** in produzione anche senza informativa collegata, fino ai dati del Titolare. `NEXT_PUBLIC_IUBENDA_WIDGET_ID` non si tocca. (La sessione aveva proposto di spegnerlo finché manca l'informativa.)
 
 **Quando arriva il Titolare:** inserirlo nel pannello iubenda, impostare `NEXT_PUBLIC_IUBENDA_POLICY_ID=42824372` su Vercel (Production), redeploy; P. IVA nel footer con un commit.
 
