@@ -141,3 +141,11 @@ Con `CALENDLY_URL` valorizzato (dal 9/11 costante in `brand.ts`) la pagina incor
 **Aggiornamento 11/11, dopo l'anteprima (decisione di Luigi):** la scritta FR>ME non resta solo in "Chi siamo": va anche dietro "05 / Piano a pagamento" di `/plugin` e la newsletter di `/risorse` (prop `scritta` di `Section`). Le testate delle pagine tengono la parola della pagina. In home, "Cosa costruiamo" apre con "Collegamenti e strumenti su misura" nella scheda grande; "Automazioni dei flussi ripetitivi" passa nella prima laterale.
 
 **Aggiornamento 11/11, seconda revisione dell'anteprima (decisione di Luigi):** in "Come lavoriamo" tornano le emoji colorate; le icone SVG lime sono tolte. La scheda grande di "Cosa costruiamo" ha testo più grande su desktop (titolo 28 px, testo 18 px).
+
+## 2026-11-19 · Nome del plugin nel sito: inFrame
+
+**Decisione di Luigi (19/11):** il plugin si chiama **inFrame** (stesso nome del prodotto Freemius, vedi `freemius.md`).
+
+**Come:** `PLUGIN_NAME = "inFrame"` in `src/lib/brand.ts`, costante. `NEXT_PUBLIC_PLUGIN_NAME` è tolta da `.env.example`: come per `CALENDLY_URL`, un valore vecchio in un ambiente Vercel mostrerebbe un altro nome senza avvisi. Se la variabile è ancora impostata su Vercel non ha più effetto e si può cancellare.
+
+**Non toccati:** il widget dell'assistente (`public/assistente/wpla-widget-*.js`), `public/wpla/update.json` e il riconoscimento del plugin nel check-up (`wpla-*` in `src/lib/checkup/analisi.ts`): dipendono dallo slug del plugin installato, che cambia con la voce 2.3 nel repo del plugin.
