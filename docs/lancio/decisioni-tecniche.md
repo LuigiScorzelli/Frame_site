@@ -141,3 +141,20 @@ Con `CALENDLY_URL` valorizzato (dal 9/11 costante in `brand.ts`) la pagina incor
 **Aggiornamento 11/11, dopo l'anteprima (decisione di Luigi):** la scritta FR>ME non resta solo in "Chi siamo": va anche dietro "05 / Piano a pagamento" di `/plugin` e la newsletter di `/risorse` (prop `scritta` di `Section`). Le testate delle pagine tengono la parola della pagina. In home, "Cosa costruiamo" apre con "Collegamenti e strumenti su misura" nella scheda grande; "Automazioni dei flussi ripetitivi" passa nella prima laterale.
 
 **Aggiornamento 11/11, seconda revisione dell'anteprima (decisione di Luigi):** in "Come lavoriamo" tornano le emoji colorate; le icone SVG lime sono tolte. La scheda grande di "Cosa costruiamo" ha testo più grande su desktop (titolo 28 px, testo 18 px).
+
+## 2026-11-19 · iubenda (informativa e banner) e Freemius in sandbox
+
+**Decisioni di Luigi (19/11):**
+- Umami, Vercel Analytics e Speed Insights si caricano **solo dopo il consenso "Misurazione"** (finalità 4 di iubenda), anche se non usano cookie: il par. 7.2 delle linee guida del Garante per gli strumenti senza cookie resta aperto (D42). In `/privacy` non si scrive "banner non necessario".
+- Calendly incorporato in `/contatti` **bloccato fino al consenso "Esperienza"** (finalità 3). Verificato il 19/11 con `curl` sulla pagina di embed: Calendly imposta `_calendly_session` e Cloudflare `__cf_bm` e `_cfuvid` sul dominio calendly.com. Senza consenso al posto del calendario c'è un riquadro con "Gestisci le preferenze", "Apri Calendly in una nuova scheda" e l'email.
+- Checkout Freemius **solo su anteprime e in locale**: il pulsante "Prova 30 giorni" (evento `click_prova`) e `/api/freemius/sandbox` sono spenti con `VERCEL_ENV=production` anche se le variabili ci fossero. In produzione `/plugin` resta con "Avvisami".
+
+**Come:**
+- `src/lib/iubenda.ts`: ID pubblici da `NEXT_PUBLIC_IUBENDA_SITE_ID` e `NEXT_PUBLIC_IUBENDA_POLICY_ID`, finalità usate. Senza i due ID niente banner e tutto si carica come prima.
+- `src/components/consenso/Iubenda.tsx`: configurazione inline in `<head>` (consenso per finalità, callback che scrivono la preferenza su `window` e lanciano l'evento `iubenda:consenso`) e `iubenda_cs.js`. Testi, colori e servizi stanno nel pannello di iubenda.
+- `src/lib/consenso.ts`: `useConsenso(finalità)` per i componenti React. Il blocco preventivo di iubenda (`type="text/plain"`) non è usato: gli script li monta React dopo il consenso.
+- `src/components/consenso/Statistiche.tsx` sostituisce `<Analytics />`, `<SpeedInsights />` e lo script Umami nel layout. Gli eventi `traccia()` prima del consenso vanno persi, non si accodano.
+- Footer: "Cookie policy" e "Preferenze cookie" (classe `iubenda-cs-preferences-link`) quando iubenda è attivo. `/privacy`: elenco servizi con Vercel, Umami Cloud (regione UE, sub-responsabili anche negli USA), Brevo, Resend, Upstash, Calendly; sezione 5 con i link a privacy e cookie policy di iubenda.
+- Freemius: `src/lib/freemius.ts`, `src/app/api/freemius/sandbox/route.ts` (firma `md5(ctx + product_id + secret_key + public_key + "checkout")`, la stessa di `@freemius/sdk` 0.5.0), `src/components/ui/ProvaFreemius.tsx` con `@freemius/checkout`. La chiave segreta è solo in `FREEMIUS_SECRET_KEY`. Dettagli del pannello in `freemius.md`.
+
+**Limiti noti:** con iubenda attivo chi non sceglie nel banner non viene contato; i numeri di Umami da oggi non sono confrontabili con quelli di prima. Freemius non è ancora nell'elenco di `/privacy`: va aggiunto quando il checkout diventa pubblico (sprint 3, con il sì di Luigi).
