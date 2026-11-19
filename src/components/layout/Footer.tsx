@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ACCOUNT_URL, AGENCY_NAME, CITY, CONTACT_EMAIL, FOUNDER_URL, PLUGIN_NAME } from "@/lib/brand";
 import TrackedLink from "@/components/ui/TrackedLink";
 import Logo from "@/components/ui/Logo";
+import { COOKIE_POLICY_URL, IUBENDA_ATTIVO } from "@/lib/iubenda";
 
 const cosaFacciamo = [
   { label: "Servizi", href: "/servizi" },
@@ -69,6 +70,21 @@ export default function Footer() {
                   </li>
                 )}
                 <li><Link href="/privacy" className={linkClass}>Privacy</Link></li>
+                {IUBENDA_ATTIVO && (
+                  <>
+                    <li>
+                      <a href={COOKIE_POLICY_URL} target="_blank" rel="noopener noreferrer" className={linkClass}>
+                        Cookie policy
+                      </a>
+                    </li>
+                    <li>
+                      {/* iubenda opens its preferences panel on any element with this class. */}
+                      <a href="#" className={`iubenda-cs-preferences-link ${linkClass}`}>
+                        Preferenze cookie
+                      </a>
+                    </li>
+                  </>
+                )}
                 <li><Link href="/contatti" className={linkClass}>Contatti</Link></li>
                 <li>
                   <a href={FOUNDER_URL} target="_blank" rel="noopener noreferrer" className={linkClass}>

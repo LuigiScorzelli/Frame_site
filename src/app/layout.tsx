@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Inter } from "next/font/google";
-import Script from "next/script";
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import JsonLd from "@/components/seo/JsonLd";
 import AssistenteAI from "@/components/ui/AssistenteAI";
+import Iubenda from "@/components/consenso/Iubenda";
+import Statistiche from "@/components/consenso/Statistiche";
 import { AGENCY_NAME, CITY, CONTACT_EMAIL, FOUNDER_URL, SITE_URL } from "@/lib/brand";
 
 const bricolage = Bricolage_Grotesque({
@@ -18,7 +17,7 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-// Umami (cookieless statistics): production deployments only, so dev and preview visits are not counted.
+// Umami (cookieless statistics, loaded after consent: src/components/consenso/Statistiche.tsx): production deployments only, so dev and preview visits are not counted.
 // UMAMI_ANCHE_PREVIEW=1, passed only as a build env of a one-off test deploy, turns it on in a preview.
 const UMAMI_WEBSITE_ID = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID;
 const umamiAttivo =
@@ -56,6 +55,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="it">
+      <head>
+        <Iubenda />
+      </head>
       <body
         className={`${bricolage.variable} ${inter.variable} antialiased bg-bg-0 text-text-0`}
       >
@@ -73,15 +75,7 @@ export default function RootLayout({
         />
         {children}
         <AssistenteAI />
-        <Analytics />
-        <SpeedInsights />
-        {umamiAttivo && (
-          <Script
-            src="https://cloud.umami.is/script.js"
-            data-website-id={UMAMI_WEBSITE_ID}
-            strategy="afterInteractive"
-          />
-        )}
+        <Statistiche umamiWebsiteId={umamiAttivo ? UMAMI_WEBSITE_ID : undefined} />
       </body>
     </html>
   );
