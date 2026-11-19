@@ -4,8 +4,9 @@
 export const AGENCY_NAME = "aiframe";
 // Visual logo only (Luigi, 7/11): the name in copy stays AGENCY_NAME.
 export const LOGO_TEXT = "FR>ME";
-// Provisional name until the final one is chosen (see docs/lancio/00-LEGGIMI.md).
-export const PLUGIN_NAME = process.env.NEXT_PUBLIC_PLUGIN_NAME ?? "Lead Assistant";
+// Final plugin name (Luigi, 19/11). A constant, not an env var: a stale value in one
+// Vercel environment would silently show another name (same reasoning as CALENDLY_URL).
+export const PLUGIN_NAME = "inFrame";
 export const CONTACT_EMAIL = "info@aiframe.it";
 // Primary domain (Luigi, 11/11): aiframe.it redirects here with a 308.
 export const SITE_URL = "https://www.aiframe.it";

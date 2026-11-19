@@ -165,3 +165,11 @@ Con `CALENDLY_URL` valorizzato (dal 9/11 costante in `brand.ts`) la pagina incor
 **Informativa iubenda (19/11, licenza Pro singola acquistata da Luigi):** pubblicata, privacy e cookie policy 42824372 rispondono 200. Servizi: Brevo email, Resend, Vercel, Calendly Widget, API di OpenAI (segnato come servizio IA, chatbot), HubSpot CRM, Hostinger dalla libreria; Umami Cloud e Upstash creati a mano (testi scritti dal codice: Upstash in `fra1`, impronte di IP ed email al massimo 24 ore, risultato del check-up 1 ora); clausole "Modulo di contatto" (nome, email, sito web) e "Mailing list o newsletter" (con sito web per il check-up). Nella cookie policy Calendly è sotto Esperienza e Umami sotto Misurazione, come nel codice. **Manca il Titolare** (nome e indirizzo): finché non c'è, `NEXT_PUBLIC_IUBENDA_POLICY_ID` resta vuota e il sito non linka l'informativa. Da verificare: luogo del server Hostinger (iubenda scrive "Hostinger UK Limited, Regno Unito").
 
 **Limiti noti:** con iubenda attivo chi non sceglie nel banner non viene contato; i numeri di Umami da oggi non sono confrontabili con quelli di prima. Freemius non è ancora nell'elenco di `/privacy`: va aggiunto quando il checkout diventa pubblico (sprint 3, con il sì di Luigi).
+
+## 2026-11-19 · Nome del plugin nel sito: inFrame
+
+**Decisione di Luigi (19/11):** il plugin si chiama **inFrame** (stesso nome del prodotto Freemius, vedi `freemius.md`).
+
+**Come:** `PLUGIN_NAME = "inFrame"` in `src/lib/brand.ts`, costante. `NEXT_PUBLIC_PLUGIN_NAME` è tolta da `.env.example`: come per `CALENDLY_URL`, un valore vecchio in un ambiente Vercel mostrerebbe un altro nome senza avvisi. Se la variabile è ancora impostata su Vercel non ha più effetto e si può cancellare.
+
+**Non toccati:** il widget dell'assistente (`public/assistente/wpla-widget-*.js`), `public/wpla/update.json` e il riconoscimento del plugin nel check-up (`wpla-*` in `src/lib/checkup/analisi.ts`): dipendono dallo slug del plugin installato, che cambia con la voce 2.3 nel repo del plugin.

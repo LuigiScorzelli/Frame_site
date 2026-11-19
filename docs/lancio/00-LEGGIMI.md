@@ -15,7 +15,7 @@ aiframe.it resta il sito dell'agenzia (automazioni e AI per piccole aziende) e l
 
 ## Regole fisse (decise da Luigi il 5/11/2026)
 1. **Voce "noi"**: aiframe è l'agenzia. "Abbiamo costruito", "lo installiamo noi". Mai "io" nei testi del sito. (Il profilo LinkedIn resta in prima persona, ma non riguarda questo repo.)
-2. **Nome del plugin: ancora da trovare.** Nei testi si scrive `[NOME]` e nel codice una costante `PLUGIN_NAME` in `src/lib/brand.ts` (default provvisorio: "Lead Assistant"). Quando il nome arriva, si cambia in un punto solo. Slug, cartelle e route non devono contenere il nome.
+2. **Nome del plugin: inFrame** (deciso da Luigi il 19/11). Nei testi si scrive `[NOME]` e nel codice si usa solo la costante `PLUGIN_NAME` in `src/lib/brand.ts`. Se cambia, si cambia in un punto solo. Slug, cartelle e route non devono contenere il nome.
 3. **Niente prezzi.** Luigi non li conosce ancora. In `/servizi` si descrive cosa comprende ogni servizio e si manda a "Prenota 30 minuti". Nessun "da X €", nessun placeholder visibile.
 4. **Niente numeri senza fonte.** I numeri dei test interni si dichiarano come test; i numeri che ancora non esistono si segnano nel codice come `TODO:dato` e nel sito non si mostrano (si mostra la frase senza numero, mai una cifra inventata). I "-40%" e "+55%" attuali vanno tolti.
 5. **Servizi gestiti, niente codice dove non serve**: WordPress.org per distribuire la versione gratuita, Freemius per pagamenti/licenze/portale cliente, Brevo per le liste, Resend per le notifiche, Calendly per le call, Upstash Redis per i rate limit, MDX nel repo per il blog. Non si scrivono checkout, login, licenze, fatture.
@@ -25,7 +25,7 @@ aiframe.it resta il sito dell'agenzia (automazioni e AI per piccole aziende) e l
 9. Lingua: testi in italiano, codice e commit in inglese (come da `CLAUDE.md`).
 
 ## Cosa aspetta Luigi (bloccanti segnati nel piano)
-- Nome del plugin (entro il 15/11; proposta in `companyBrain/.../nome-plugin.md`)
+- ~~Nome del plugin~~ fatto il 19/11: inFrame
 - Prezzi (non bloccano: /servizi funziona senza)
 - Account Brevo, Upstash (Marketplace Vercel), Calendly, Freemius (sprint 3)
 - Dominio verificato su Resend (SPF, DKIM, DMARC)
