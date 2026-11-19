@@ -44,7 +44,7 @@
     marketingConsent: String(pick('marketingConsent', 'false')) === 'true',
     fallbackPhone: pick('fallbackPhone', ''),
     fallbackEmail: pick('fallbackEmail', ''),
-    launcherLabel: pick('launcherLabel', 'Hai domande? Chiedi a me'),
+    launcherLabel: pick('launcherLabel', 'Hai domande? Chiedi a noi'),
     suggestions: pick('suggestions', ''),
     open: String(pick('open', 'false')) === 'true',
     timeoutMs: Number(pick('timeoutMs', 30000)) || 30000
@@ -53,9 +53,11 @@
   if (!cfg.endpoint || !cfg.siteKey) { console.warn('[WPLA] endpoint e site-key sono obbligatori'); return; }
 
   var company = cfg.company || 'l\'azienda';
-  var WELCOME = cfg.welcome || ('Ciao! Sono l\'assistente virtuale di ' + company + ', un sistema di intelligenza artificiale. ' +
-    'Rispondo usando le informazioni presenti su questo sito. Per richieste particolari posso metterti in contatto con una persona del nostro team.');
-  var CONSENT = cfg.consentText || ('Per ricontattarti trasmetteremo a ' + company + ' il riepilogo della tua richiesta e i dati di contatto ' +
+  var WELCOME = cfg.welcome || ('Ciao! Questo è l\'assistente virtuale di ' + company + ', un sistema di intelligenza artificiale: ' +
+    'risponde usando le informazioni presenti su questo sito. Per richieste particolari possiamo metterti in contatto con una persona del nostro team.');
+  // "ad aiframe", "all'azienda", "a Impianti Rossi"
+  var toCompany = /^l'/i.test(company) ? 'al' + company : (/^a/i.test(company) ? 'ad ' : 'a ') + company;
+  var CONSENT = cfg.consentText || ('Per ricontattarti trasmetteremo ' + toCompany + ' il riepilogo della tua richiesta e i dati di contatto ' +
     'che ci hai indicato, usati solo per rispondere alla tua richiesta.');
 
   // ---------------------------------------------------------------- stato (sessionStorage, solo per la scheda)
@@ -429,8 +431,8 @@
   function failure(err, offerForm) {
     console.warn('[WPLA]', err && err.message ? err.message : err);
     push({ kind: 'error', text: offerForm
-      ? 'In questo momento non riesco a rispondere. Lasciaci i tuoi contatti e ti risponderemo al più presto.'
-      : 'Non sono riuscito a inviare la richiesta: il servizio non risponde. Riprova tra poco.' });
+      ? 'In questo momento non riusciamo a rispondere. Lasciaci i tuoi contatti e ti risponderemo al più presto.'
+      : 'Non siamo riusciti a inviare la richiesta: il servizio non risponde. Riprova tra poco.' });
     // Degrado (spec. §12): se il servizio non risponde, il modulo di contatto resta disponibile
     if (offerForm && !S.done) {
       S.pendingForm = { type: 'contact_form', reason: 'handoff', version: cfg.consentVersion, emailRequired: cfg.mode === 'ecommerce' };
