@@ -4,7 +4,7 @@ import Footer from "@/components/layout/Footer";
 import Section from "@/components/ui/Section";
 import PageHero from "@/components/ui/PageHero";
 import { AGENCY_NAME, CONTACT_EMAIL, PLUGIN_NAME, SITE_URL } from "@/lib/brand";
-import { COOKIE_POLICY_URL, IUBENDA_ATTIVO, PRIVACY_POLICY_URL } from "@/lib/iubenda";
+import { COOKIE_POLICY_URL, POLICY_ATTIVA, PRIVACY_POLICY_URL } from "@/lib/iubenda";
 
 const descrizione = `Come ${AGENCY_NAME} e il plugin ${PLUGIN_NAME} trattano i dati: spiegato in italiano semplice, poi l'informativa completa.`;
 
@@ -96,7 +96,7 @@ export default function PrivacyPage() {
         </Section>
 
         <Section numero={5} tag="INFORMATIVA COMPLETA" title="Titolare, basi giuridiche, responsabili, tempi, diritti">
-          {IUBENDA_ATTIVO ? (
+          {POLICY_ATTIVA ? (
             <p className="max-w-3xl text-[15px] leading-relaxed text-text-1">
               L&apos;informativa completa è gestita con iubenda:{" "}
               <a href={PRIVACY_POLICY_URL} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
