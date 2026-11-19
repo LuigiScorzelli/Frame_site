@@ -9,6 +9,8 @@ import FasciaPausa from "@/components/ui/FasciaPausa";
 import Scheda from "@/components/ui/Scheda";
 import { IconaCroce, IconaSpunta } from "@/components/ui/Icone";
 import InteresseForm from "@/components/ui/InteresseForm";
+import ProvaFreemius from "@/components/ui/ProvaFreemius";
+import { checkoutSandboxAttivo } from "@/lib/freemius";
 import JsonLd from "@/components/seo/JsonLd";
 import { AGENCY_NAME, BETA_DOWNLOAD_PATH, LOGO_TEXT, PLUGIN_NAME, SITE_URL, WPORG_URL } from "@/lib/brand";
 
@@ -208,6 +210,12 @@ export default function PluginPage() {
             Perché gratis? Perché il modo più onesto di farti vedere se funziona è lasciartelo provare sul tuo sito. Se
             poi ti serve di più, c&apos;è il piano a pagamento.
           </p>
+          {/* Sandbox checkout: previews and local dev only (src/lib/freemius.ts). Production keeps the form. */}
+          {checkoutSandboxAttivo() && (
+            <div className="mt-6">
+              <ProvaFreemius pagina="plugin" />
+            </div>
+          )}
           <div className="mt-6">
             <InteresseForm fonte="newsletter" interesse="pro" pagina="plugin" />
           </div>
