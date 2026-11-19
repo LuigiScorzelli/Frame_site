@@ -209,4 +209,6 @@ Con `CALENDLY_URL` valorizzato (dal 9/11 costante in `brand.ts`) la pagina incor
 
 **Da sapere:** un `openGraph.images` scritto nei metadati nasconde il file `opengraph-image.tsx` della stessa route, e senza `images` la pagina perde quella del sito: per questo l'URL è sempre esplicito (`immaginePropria: true` sulle route con il loro file). Il campo `cover` del frontmatter non è più usato per l'anteprima (nessun articolo lo aveva).
 
-**Provato il 19/11** (build di produzione in locale): tag `og:*`, `twitter:*`, `article:published_time` e `article:author` su 10 pagine; 6 immagini aperte e controllate; articolo inesistente → 404. Anteprima LinkedIn (Post Inspector) da fare dopo il merge: le anteprime Vercel sono protette.
+**Provato il 19/11** (build di produzione in locale): tag `og:*`, `twitter:*`, `article:published_time` e `article:author` su 10 pagine; 6 immagini aperte e controllate; articolo inesistente → 404. Anteprima LinkedIn da fare dopo il merge: le anteprime Vercel sono protette.
+
+**In produzione dal 19/11, 16:16** (PR #16): `og:image` 200 (`image/png`) e `twitter:card=summary_large_image` su home, `/plugin`, `/servizi`, `/check-up`, `/risorse`, articolo, `/contatti`, `/privacy`; le immagini pesano come in locale, quindi anche nella build di Vercel i font si caricano. **Post Inspector di LinkedIn** su `/plugin` e sull'articolo: immagine, titolo e dominio corretti. Voce 1.4 chiusa.
