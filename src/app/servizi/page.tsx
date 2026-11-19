@@ -7,7 +7,8 @@ import Section from "@/components/ui/Section";
 import PageHero from "@/components/ui/PageHero";
 import Scheda from "@/components/ui/Scheda";
 import { IconaAssistente, IconaCodice, IconaCollegamento, IconaFulmine, IconaRazzo, IconaStella } from "@/components/ui/Icone";
-import { AGENCY_NAME, BOOKING_URL, CONTACT_EMAIL, PLUGIN_NAME, SITE_URL } from "@/lib/brand";
+import { AGENCY_NAME, BOOKING_URL, CONTACT_EMAIL, PLUGIN_NAME } from "@/lib/brand";
+import { metaSocial } from "@/lib/seo";
 
 const descrizione = `Automazioni, assistenti AI e collegamenti tra gli strumenti per piccole aziende, più avvio guidato e integrazioni per ${PLUGIN_NAME}, il nostro plugin WordPress.`;
 
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
   title: { absolute: `Servizi: automazioni, assistenti AI e avvio di ${PLUGIN_NAME} | ${AGENCY_NAME}` },
   description: descrizione,
   alternates: { canonical: "/servizi" },
-  openGraph: { url: `${SITE_URL}/servizi`, description: descrizione },
+  ...metaSocial({ percorso: "/servizi", immaginePropria: true, titolo: `Servizi: automazioni, assistenti AI e avvio di ${PLUGIN_NAME}`, descrizione }),
 };
 
 interface Servizio {

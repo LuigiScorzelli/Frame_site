@@ -6,7 +6,8 @@ import PageHero from "@/components/ui/PageHero";
 import Section from "@/components/ui/Section";
 import Checkup from "@/components/ui/Checkup";
 import Calcolatore from "@/components/ui/Calcolatore";
-import { AGENCY_NAME, SITE_URL, INSTALL_PATH } from "@/lib/brand";
+import { AGENCY_NAME, INSTALL_PATH } from "@/lib/brand";
+import { metaSocial } from "@/lib/seo";
 
 // Check-up v1 (1.1): automatic site analysis (POST /api/checkup) with the email report, then the
 // client-side calculator (0.10).
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
   title: { absolute: `Check-up richieste perse: il tuo sito risponde ai clienti? | ${AGENCY_NAME}` },
   description: descrizione,
   alternates: { canonical: "/check-up" },
-  openGraph: { url: `${SITE_URL}/check-up`, title: "Check-up richieste perse: il tuo sito risponde ai clienti?", description: descrizione },
+  ...metaSocial({ percorso: "/check-up", immaginePropria: true, titolo: "Check-up richieste perse: il tuo sito risponde ai clienti?", descrizione }),
 };
 
 export default function CheckUpPage() {

@@ -4,6 +4,7 @@ import Footer from "@/components/layout/Footer";
 import CtaButton from "@/components/ui/CtaButton";
 import PageHero from "@/components/ui/PageHero";
 import { INSTALL_PATH } from "@/lib/brand";
+import { metaSocial } from "@/lib/seo";
 
 // Landing page after the Brevo double opt-in link (BREVO_REDIRECT_URL). Not indexed.
 
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
   description: "Iscrizione confermata.",
   robots: { index: false, follow: false },
   alternates: { canonical: "/grazie" },
+  ...metaSocial({ percorso: "/grazie", titolo: "Iscrizione confermata", descrizione: "Iscrizione confermata." }),
 };
 
 export default function GraziePage() {

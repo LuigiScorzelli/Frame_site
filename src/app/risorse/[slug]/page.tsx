@@ -11,6 +11,7 @@ import JsonLd from "@/components/seo/JsonLd";
 import { componentiMdx } from "@/components/mdx/componenti";
 import { CATEGORIE, formatDataArticolo, getArticoli, getArticolo } from "@/lib/content";
 import { AGENCY_NAME, AUTORI, SITE_URL, INSTALL_PATH } from "@/lib/brand";
+import { metaSocial } from "@/lib/seo";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -31,14 +32,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description: articolo.descrizione,
     alternates: { canonical: `/risorse/${slug}` },
     robots: articolo.bozza ? { index: false, follow: false } : undefined,
-    openGraph: {
-      type: "article",
-      url: `${SITE_URL}/risorse/${slug}`,
-      title: articolo.titolo,
-      description: articolo.descrizione,
-      publishedTime: articolo.data,
-      ...(articolo.cover ? { images: [articolo.cover] } : {}),
-    },
+    ...metaSocial({
+      percorso: `/risorse/${slug}`,
+      titolo: articolo.titolo,
+      descrizione: articolo.descrizione,
+      tipo: "article",
+      pubblicato: articolo.data,
+      autori: articolo.autore ? [`/autore/${articolo.autore}`] : undefined,
+      immaginePropria: true,
+    }),
   };
 }
 

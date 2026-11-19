@@ -12,12 +12,19 @@ import ComeLavoriamo from "@/components/sections/home/ComeLavoriamo";
 import DatiBand from "@/components/sections/home/DatiBand";
 import ChiSiamo from "@/components/sections/home/ChiSiamo";
 import { AGENCY_NAME, BOOKING_URL, CONTACT_EMAIL, PLUGIN_NAME } from "@/lib/brand";
+import { metaSocial } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: { absolute: `Automazioni e assistenti AI per piccole aziende | ${AGENCY_NAME}` },
   description:
     "Costruiamo automazioni, assistenti AI e collegamenti tra gli strumenti che usate già, per piccole aziende senza reparto tecnico. E abbiamo un plugin WordPress gratuito.",
   alternates: { canonical: "/" },
+  ...metaSocial({
+    percorso: "/",
+    titolo: `${AGENCY_NAME}: automazioni e assistenti AI per piccole aziende`,
+    descrizione:
+      "Costruiamo automazioni, assistenti AI e collegamenti tra gli strumenti che usate già, per piccole aziende senza reparto tecnico. E abbiamo un plugin WordPress gratuito.",
+  }),
 };
 
 // Verified beta facts (docs/lancio): the only figures on the page, each with its source.

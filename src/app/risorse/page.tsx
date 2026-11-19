@@ -7,7 +7,8 @@ import PageHero from "@/components/ui/PageHero";
 import Section from "@/components/ui/Section";
 import ElencoArticoli from "@/components/ui/ElencoArticoli";
 import { CATEGORIE, formatDataArticolo, getArticoli } from "@/lib/content";
-import { AGENCY_NAME, SITE_URL } from "@/lib/brand";
+import { AGENCY_NAME } from "@/lib/brand";
+import { metaSocial } from "@/lib/seo";
 
 const descrizione =
   "Guide pratiche per chi riceve richieste dal sito e vuole perderne meno: richieste perse, dal sito al CRM, AI senza invenzioni, privacy.";
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
   title: { absolute: `Guide su richieste dal sito, chatbot e CRM per piccole aziende | ${AGENCY_NAME}` },
   description: descrizione,
   alternates: { canonical: "/risorse" },
-  openGraph: { url: `${SITE_URL}/risorse`, title: `Risorse | ${AGENCY_NAME}`, description: descrizione },
+  ...metaSocial({ percorso: "/risorse", immaginePropria: true, titolo: "Guide su richieste dal sito, chatbot e CRM per piccole aziende", descrizione }),
 };
 
 // The holiday checklist card (sprint 2) is added when the PDF exists.

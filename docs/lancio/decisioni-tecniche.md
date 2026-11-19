@@ -173,3 +173,16 @@ Con `CALENDLY_URL` valorizzato (dal 9/11 costante in `brand.ts`) la pagina incor
 **Come:** `PLUGIN_NAME = "inFrame"` in `src/lib/brand.ts`, costante. `NEXT_PUBLIC_PLUGIN_NAME` è tolta da `.env.example`: come per `CALENDLY_URL`, un valore vecchio in un ambiente Vercel mostrerebbe un altro nome senza avvisi. Se la variabile è ancora impostata su Vercel non ha più effetto e si può cancellare.
 
 **Non toccati:** il widget dell'assistente (`public/assistente/wpla-widget-*.js`), `public/wpla/update.json` e il riconoscimento del plugin nel check-up (`wpla-*` in `src/lib/checkup/analisi.ts`): dipendono dallo slug del plugin installato, che cambia con la voce 2.3 nel repo del plugin.
+
+## 2026-11-19 · Open Graph e immagini di anteprima (voce 1.4)
+
+**Piano approvato da Luigi il 19/11.** Prima nessuna pagina aveva `og:image` (LinkedIn mostrava il link senza immagine), le pagine con un `openGraph` proprio perdevano `og:site_name`, `og:locale` e `og:type` (Next.js sostituisce l'`openGraph` del layout invece di unirlo) e `twitter:card` era `summary`.
+
+**Come:**
+- `src/lib/seo.ts`: `metaSocial({ percorso, titolo, descrizione, tipo, pubblicato, autori, immaginePropria })` restituisce `openGraph` e `twitter` completi (`summary_large_image`). Lo usano tutte le pagine tranne `/amazon-seo`, che non è stata toccata.
+- `src/lib/og.tsx`: `immagineSocial({ etichetta, titolo })`, 1200×630 nello stile del sito (fondo `bg-0`, bagliori lime e ciano, puntini, logo FR>ME, etichetta lime, titolo in Bricolage Grotesque 800). I font arrivano da Google Fonts in TTF, ridotti ai caratteri disegnati; se il download fallisce l'immagine esce con il font predefinito e un avviso `[og]` nei log. I puntini sono un pattern SVG: il renderer ignora i gradienti CSS ripetuti.
+- File `opengraph-image.tsx`: sito (home e pagine senza immagine propria), `/plugin`, `/servizi`, `/check-up`, `/risorse`, ogni articolo (`/risorse/[slug]`, etichetta = categoria, titolo dal frontmatter). Tutte generate alla build. Un articolo nuovo ha la sua immagine senza fare niente.
+
+**Da sapere:** un `openGraph.images` scritto nei metadati nasconde il file `opengraph-image.tsx` della stessa route, e senza `images` la pagina perde quella del sito: per questo l'URL è sempre esplicito (`immaginePropria: true` sulle route con il loro file). Il campo `cover` del frontmatter non è più usato per l'anteprima (nessun articolo lo aveva).
+
+**Provato il 19/11** (build di produzione in locale): tag `og:*`, `twitter:*`, `article:published_time` e `article:author` su 10 pagine; 6 immagini aperte e controllate; articolo inesistente → 404. Anteprima LinkedIn (Post Inspector) da fare dopo il merge: le anteprime Vercel sono protette.
