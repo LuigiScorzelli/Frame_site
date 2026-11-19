@@ -41,12 +41,13 @@ export const BETA_DOWNLOAD_PATH = "/api/wpla/download";
 export const INSTALL_PATH = "/plugin#installa";
 
 /**
- * AI assistant on this site: the plugin's standalone widget (public/assistente/, copied unchanged from
- * assisteAI_CRM/widget/src/wpla-widget.js; the commit is in the file name) talking to the n8n workflow
+ * AI assistant on this site: the plugin's standalone widget (public/assistente/, copied from
+ * assisteAI_CRM/widget/src/wpla-widget.js at the first commit in the file name, plus only the text
+ * changes of the second one: "noi" voice, aa19d2e) talking to the n8n workflow
  * "WP Lead Assistant - Servizi" on our VPS. New origins go in wpla_tenants.allowed_origins, not here.
  */
 export const ASSISTANT = {
-  scriptPath: "/assistente/wpla-widget-b4d6338.js",
+  scriptPath: "/assistente/wpla-widget-b4d6338-aa19d2e.js",
   endpoint: "https://n8n.aiframe.it/webhook/wpla-chat",
   siteKey: "aiframe",
   mode: "servizi",
