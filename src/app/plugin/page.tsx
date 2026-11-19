@@ -13,6 +13,7 @@ import ProvaFreemius from "@/components/ui/ProvaFreemius";
 import { checkoutSandboxAttivo } from "@/lib/freemius";
 import JsonLd from "@/components/seo/JsonLd";
 import { AGENCY_NAME, BETA_DOWNLOAD_PATH, LOGO_TEXT, PLUGIN_NAME, SITE_URL, WPORG_URL } from "@/lib/brand";
+import { metaSocial } from "@/lib/seo";
 
 const descrizione =
   "Assistente per siti WordPress di piccole aziende: risponde con le informazioni del tuo sito, raccoglie le richieste fuori orario, le consegna via email e nel pannello. Gratis, con la tua chiave AI.";
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
   title: { absolute: `${PLUGIN_NAME}, plugin chatbot gratuito per WordPress in italiano | ${AGENCY_NAME}` },
   description: descrizione,
   alternates: { canonical: "/plugin" },
-  openGraph: { url: `${SITE_URL}/plugin`, title: `${PLUGIN_NAME}, plugin chatbot gratuito per WordPress`, description: descrizione },
+  ...metaSocial({ percorso: "/plugin", immaginePropria: true, titolo: `${PLUGIN_NAME}, plugin chatbot gratuito per WordPress`, descrizione }),
 };
 
 const fa = [

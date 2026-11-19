@@ -8,6 +8,7 @@ import PageHero from "@/components/ui/PageHero";
 import Section from "@/components/ui/Section";
 import { CATEGORIE, formatDataArticolo, getArticoliAutore } from "@/lib/content";
 import { AGENCY_NAME, AUTORI, SITE_URL, type SlugAutore } from "@/lib/brand";
+import { metaSocial } from "@/lib/seo";
 
 // Author page (Company Brain, AV2): the article byline links here.
 
@@ -33,7 +34,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${autore.nome}, ${autore.ruolo}`,
     description: descrizione,
     alternates: { canonical: `/autore/${autore.slug}` },
-    openGraph: { type: "profile", url: `${SITE_URL}/autore/${autore.slug}`, title: autore.nome, description: descrizione },
+    ...metaSocial({ percorso: `/autore/${autore.slug}`, titolo: autore.nome, descrizione, tipo: "profile" }),
   };
 }
 

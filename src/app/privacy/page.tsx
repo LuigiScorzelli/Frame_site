@@ -3,8 +3,9 @@ import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
 import Section from "@/components/ui/Section";
 import PageHero from "@/components/ui/PageHero";
-import { AGENCY_NAME, CONTACT_EMAIL, PLUGIN_NAME, SITE_URL } from "@/lib/brand";
+import { AGENCY_NAME, CONTACT_EMAIL, PLUGIN_NAME } from "@/lib/brand";
 import { COOKIE_POLICY_URL, POLICY_ATTIVA, PRIVACY_POLICY_URL } from "@/lib/iubenda";
+import { metaSocial } from "@/lib/seo";
 
 const descrizione = `Come ${AGENCY_NAME} e il plugin ${PLUGIN_NAME} trattano i dati: spiegato in italiano semplice, poi l'informativa completa.`;
 
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
   title: "Privacy",
   description: descrizione,
   alternates: { canonical: "/privacy" },
-  openGraph: { url: `${SITE_URL}/privacy`, description: descrizione },
+  ...metaSocial({ percorso: "/privacy", titolo: `Privacy | ${AGENCY_NAME}`, descrizione }),
 };
 
 // Services listed in the iubenda policy too (19/11/2026). Do not write that a banner is "not needed": par. 7.2 of
