@@ -4,6 +4,7 @@ import Footer from "@/components/layout/Footer";
 import Section from "@/components/ui/Section";
 import PageHero from "@/components/ui/PageHero";
 import { AGENCY_NAME, CONTACT_EMAIL, PLUGIN_NAME, SITE_URL } from "@/lib/brand";
+import { COOKIE_POLICY_URL, POLICY_ATTIVA, PRIVACY_POLICY_URL } from "@/lib/iubenda";
 
 const descrizione = `Come ${AGENCY_NAME} e il plugin ${PLUGIN_NAME} trattano i dati: spiegato in italiano semplice, poi l'informativa completa.`;
 
@@ -14,13 +15,17 @@ export const metadata: Metadata = {
   openGraph: { url: `${SITE_URL}/privacy`, description: descrizione },
 };
 
+// Services listed in the iubenda policy too (19/11/2026). Do not write that a banner is "not needed": par. 7.2 of
+// the Garante cookie guidelines is still open for cookieless tools (D42).
 const sulSito = [
-  "Statistiche senza cookie (Vercel Analytics).",
-  "Contiamo le visite e i clic sui pulsanti principali con Umami, fornito da Umami Software Inc.: non usa cookie, raccoglie solo dati aggregati, senza identificare chi visita, e i dati sono conservati nella regione UE.",
+  "Il sito è ospitato da Vercel, che per farlo funzionare tratta l'indirizzo IP e i dati tecnici delle richieste.",
+  "Contiamo le visite e i clic sui pulsanti principali con Umami Cloud (Umami Software Inc.) e con Vercel Analytics, solo se lo accetti nelle preferenze cookie (Misurazione). Non usano cookie e raccolgono dati aggregati, senza identificare chi visita. I dati di Umami sono conservati nella regione UE, ma alcuni sub-responsabili di Umami sono negli Stati Uniti.",
   "Le email che ci lasci vanno in Brevo con doppia conferma.",
   "I moduli passano da Resend.",
-  "Le prenotazioni passano da Calendly.",
-  // TODO sprint 2: aggiungere Freemius per acquisti e licenze.
+  "Per limitare gli abusi sui moduli usiamo Upstash, con un'impronta del tuo IP, non l'IP in chiaro.",
+  "Le prenotazioni passano da Calendly. Il calendario incorporato in /contatti usa cookie di Calendly e si mostra solo se lo accetti nelle preferenze cookie (Esperienza).",
+  "Puoi cambiare le tue scelte quando vuoi dal link \"Preferenze cookie\" in fondo a ogni pagina.",
+  // TODO: add Freemius (purchases and licences) when the checkout goes public (sprint 3, Luigi's go-ahead).
 ];
 
 // Facts from the code of POST /api/checkup (src/lib/checkup, 11/11/2026).
@@ -91,12 +96,26 @@ export default function PrivacyPage() {
         </Section>
 
         <Section numero={5} tag="INFORMATIVA COMPLETA" title="Titolare, basi giuridiche, responsabili, tempi, diritti">
-          {/* TODO: testo legale completo, da far rivedere con il parere privacy già previsto. */}
-          <p className="max-w-3xl text-[15px] leading-relaxed text-text-1">
-            L&apos;informativa completa è in revisione legale e verrà pubblicata qui. Per qualsiasi richiesta sui tuoi
-            dati, compreso l&apos;accesso e la cancellazione, scrivici a{" "}
-            <a href={`mailto:${CONTACT_EMAIL}`} className="text-accent hover:underline">{CONTACT_EMAIL}</a>.
-          </p>
+          {POLICY_ATTIVA ? (
+            <p className="max-w-3xl text-[15px] leading-relaxed text-text-1">
+              L&apos;informativa completa è gestita con iubenda:{" "}
+              <a href={PRIVACY_POLICY_URL} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                privacy policy
+              </a>{" "}
+              e{" "}
+              <a href={COOKIE_POLICY_URL} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                cookie policy
+              </a>
+              . Per qualsiasi richiesta sui tuoi dati, compreso l&apos;accesso e la cancellazione, scrivici a{" "}
+              <a href={`mailto:${CONTACT_EMAIL}`} className="text-accent hover:underline">{CONTACT_EMAIL}</a>.
+            </p>
+          ) : (
+            <p className="max-w-3xl text-[15px] leading-relaxed text-text-1">
+              L&apos;informativa completa è in revisione legale e verrà pubblicata qui. Per qualsiasi richiesta sui tuoi
+              dati, compreso l&apos;accesso e la cancellazione, scrivici a{" "}
+              <a href={`mailto:${CONTACT_EMAIL}`} className="text-accent hover:underline">{CONTACT_EMAIL}</a>.
+            </p>
+          )}
         </Section>
       </main>
       <Footer />
