@@ -25,7 +25,8 @@ aiframe.it resta il sito dell'agenzia (automazioni e AI per piccole aziende) e l
 9. Lingua: testi in italiano, codice e commit in inglese (come da `CLAUDE.md`).
 
 ## Cosa aspetta Luigi (bloccanti segnati nel piano)
-- ~~Nome del plugin~~ fatto il 19/11: inFrame
+- ~~Nome del plugin~~ fatto il 19/11: inFrame, online dal 19/11
+- Dati del Titolare per iubenda (nome, indirizzo, P. IVA): sbloccano informativa collegata e P. IVA nel footer
 - Prezzi (non bloccano: /servizi funziona senza)
 - Account Brevo, Upstash (Marketplace Vercel), Calendly, Freemius (sprint 3)
 - Dominio verificato su Resend (SPF, DKIM, DMARC)

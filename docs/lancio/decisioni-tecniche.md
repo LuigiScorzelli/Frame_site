@@ -173,3 +173,27 @@ Con `CALENDLY_URL` valorizzato (dal 9/11 costante in `brand.ts`) la pagina incor
 **Come:** `PLUGIN_NAME = "inFrame"` in `src/lib/brand.ts`, costante. `NEXT_PUBLIC_PLUGIN_NAME` è tolta da `.env.example`: come per `CALENDLY_URL`, un valore vecchio in un ambiente Vercel mostrerebbe un altro nome senza avvisi. Se la variabile è ancora impostata su Vercel non ha più effetto e si può cancellare.
 
 **Non toccati:** il widget dell'assistente (`public/assistente/wpla-widget-*.js`), `public/wpla/update.json` e il riconoscimento del plugin nel check-up (`wpla-*` in `src/lib/checkup/analisi.ts`): dipendono dallo slug del plugin installato, che cambia con la voce 2.3 nel repo del plugin.
+
+**In produzione dal 19/11, 15:48** (PR #14, merge `3ea2e5c`): verificato con `curl` su home, `/plugin`, `/servizi`, `/check-up`, `/privacy`, `/contatti`: "inFrame" presente, "Lead Assistant" assente.
+
+## 2026-11-19 · iubenda in produzione senza informativa collegata
+
+**Stato:** la PR #13 è su `main` (merge `b275042`) prima che arrivassero i dati del Titolare. In produzione il banner è attivo (`NEXT_PUBLIC_IUBENDA_WIDGET_ID` impostata, widget `1a005c87…` nella home), ma `NEXT_PUBLIC_IUBENDA_POLICY_ID` è vuota: il sito non linka privacy e cookie policy. Da oggi le statistiche contano solo chi accetta "Misurazione".
+
+**Bloccato su:** dati del Titolare per iubenda (nome, indirizzo, P. IVA). Lo stesso dato chiude il `TODO:dato` della P. IVA in `Footer.tsx`.
+
+**Decisione di Luigi (19/11):** il banner **resta attivo** in produzione anche senza informativa collegata, fino ai dati del Titolare. `NEXT_PUBLIC_IUBENDA_WIDGET_ID` non si tocca. (La sessione aveva proposto di spegnerlo finché manca l'informativa.)
+
+**Quando arriva il Titolare:** inserirlo nel pannello iubenda, impostare `NEXT_PUBLIC_IUBENDA_POLICY_ID=42824372` su Vercel (Production), redeploy; P. IVA nel footer con un commit.
+
+## 2026-11-19 · Assistente del sito in voce "noi"
+
+**Problema** (esito Sprint 0, problema 1): il widget su ogni pagina parlava in prima persona singolare ("Sono l'assistente…", "non riesco a rispondere", "Non sono riuscito a inviare").
+
+**Come:** nuova copia `public/assistente/wpla-widget-b4d6338-aa19d2e.js` = widget del plugin a `b4d6338` più **solo** i testi del commit `aa19d2e` di `assisteAI_CRM` (benvenuto, etichetta predefinita, errori in voce "noi"; consenso "ad aiframe"). `ASSISTANT.scriptPath` in `brand.ts` punta al nuovo file; il nome nuovo evita che i browser tengano in cache il vecchio.
+
+**Perché non il widget di `main` del plugin:** da `b4d6338` a oggi `main` ha anche passaggio a WhatsApp, valutazione delle risposte, italiano/inglese e la rinomina inFrame (P6.6, P6.9, P6.8, P6.20). Sono funzioni nuove che parlano con il backend: vanno portate con una prova a parte sul workflow n8n del sito, non dentro una correzione di testi.
+
+**Resta in prima persona:** le risposte generate dal workflow n8n "WP Lead Assistant - Servizi" sulla VPS, finché non si aggiorna il prompt lì (fuori da questo repo).
+
+**Provato in locale il 19/11** (build di produzione): benvenuto "Questo è l'assistente… possiamo metterti in contatto"; con `fetch` bloccato nella pagina (nessuna richiesta al server n8n) l'errore è "non riusciamo a rispondere" e il consenso "trasmetteremo ad aiframe". Il widget salva la conversazione in `sessionStorage`: chi ha già una scheda aperta vede il vecchio benvenuto fino a una scheda nuova.
