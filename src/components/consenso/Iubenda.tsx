@@ -26,6 +26,10 @@ window._iub = window._iub || [];
     window.dispatchEvent(new CustomEvent("iubenda:consenso", { detail: window.__consensoIubenda }));
   }
   _iub.csConfiguration = _iub.csConfiguration || {};
+  // Host-only consent cookie. Otherwise iubenda writes it on the registrable domain, which on Vercel previews
+  // is .vercel.app, a public suffix the browser rejects: consent was lost on every page (seen 19/11/2026).
+  // In production the site lives only on www.aiframe.it (aiframe.it redirects there).
+  _iub.csConfiguration.localConsentDomainExact = true;
   _iub.csConfiguration.callback = {
     onConsentRead: function () { invia(); },
     onConsentGiven: function () { invia(); },

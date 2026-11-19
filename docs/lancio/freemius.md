@@ -19,7 +19,7 @@ Non ancora fatto nel pannello: prezzo del piano Pro, carta richiesta o no per la
 ## Sito
 - `/plugin`, sezione "Piano a pagamento": pulsante **Prova 30 giorni** (`src/components/ui/ProvaFreemius.tsx`, evento `click_prova`) solo se `checkoutSandboxAttivo()` (`src/lib/freemius.ts`): tutte le variabili impostate **e** `VERCEL_ENV` diverso da `production`. In produzione resta il modulo "Avvisami".
 - `GET /api/freemius/sandbox`: firma `ctx`/`token` della sandbox con la chiave segreta (formula di `@freemius/sdk` 0.5.0). 404 in produzione o senza variabili.
-- Provato in locale il 19/11 con una chiave segreta finta: l'overlay si apre sul prodotto inFrame e, senza prezzo, propone il download gratuito. La firma vera non è ancora provata.
+- Provato in locale il 19/11 con una chiave segreta finta e poi sull'anteprima della PR con la chiave vera: `/api/freemius/sandbox` risponde 200 (`no-store`), il checkout si apre in sandbox (`sandbox`, `plan_id=80287`, `trial=1`) senza errori di firma; senza prezzo propone il download gratuito. Acquisto di prova non ancora fatto.
 
 ## Variabili su Vercel (le imposta Luigi, solo Preview e Development)
 ```

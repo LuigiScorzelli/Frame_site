@@ -160,4 +160,6 @@ Con `CALENDLY_URL` valorizzato (dal 9/11 costante in `brand.ts`) la pagina incor
 
 **Provato in locale il 19/11** (build di produzione con il widget vero): prima della scelta riquadro al posto di Calendly e nessuna statistica; "Rifiuta" lascia tutto bloccato; dal riquadro "Gestisci le preferenze" apre il pannello; "Accetta tutto" + "Salva e continua" carica Calendly, Vercel Analytics e Speed Insights senza ricaricare; la scelta resta al ricaricamento. Umami non provato (parte solo su Vercel produzione).
 
+**Provato sull'anteprima della PR il 19/11** (dopo il Redeploy con le variabili): stessi flussi ok; Vercel Analytics e Speed Insights caricati da percorsi offuscati dopo il consenso. Il consenso però si perdeva a ogni pagina: iubenda scrive il cookie sul dominio registrabile, che sulle anteprime è `.vercel.app` (suffisso pubblico, il browser lo rifiuta). Aggiunto `localConsentDomainExact: true`: cookie solo sull'host esatto; in produzione il sito vive solo su `www.aiframe.it`.
+
 **Limiti noti:** con iubenda attivo chi non sceglie nel banner non viene contato; i numeri di Umami da oggi non sono confrontabili con quelli di prima. Freemius non è ancora nell'elenco di `/privacy`: va aggiunto quando il checkout diventa pubblico (sprint 3, con il sì di Luigi).
