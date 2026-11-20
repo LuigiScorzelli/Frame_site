@@ -2,7 +2,44 @@
 
 Ordine di esecuzione. Ogni voce ha un criterio di accettazione: finché non è vero, la voce non è chiusa. Le voci marcate **[B]** sono bloccate da qualcosa che deve fare Luigi (vedi `00-LEGGIMI.md`).
 
-## Sprint 0 · da giovedì 6/11 a domenica 9/11 · "pronto per lunedì"
+**Piano rivisto il 20/11/2026** (decisione di Luigi, vedi `decisioni-tecniche.md`): l'agenzia vende agenti AI, con la scelta su dove stanno i dati, e apre un'offerta per 5 clienti per raccogliere casi d'uso reali. Lo **Sprint A** qui sotto viene prima di tutto il resto. inFrame resta il prodotto dell'agenzia per chi vuole provare prima di un progetto più complesso: la sua pagina e i suoi sprint non cambiano, ma vengono dopo lo Sprint A.
+
+## Stato al 20/11
+| Sprint | Stato |
+| --- | --- |
+| A · Offerta agenti | Da iniziare: è il lavoro in corso |
+| 0 | Chiuso (`esito-sprint-0.md`) |
+| 1 | Chiuse 1.1 e 1.4. Aperte 1.2 (manca l'articolo 2) e 1.5 (repo del plugin). 1.3 spostata, vedi sotto |
+| 2 | Avviata solo la 2.2 (checkout Freemius in sandbox sulle anteprime). Dopo lo Sprint A |
+| 3 | Non iniziato. Dopo lo Sprint A |
+
+## Sprint A · dal 20/11 · "Offerta agenti"
+Obiettivo: chi apre il sito capisce che aiframe costruisce agenti AI per piccole aziende, sceglie se farli gestire a noi o tenerli sotto il proprio controllo, e può candidarsi a uno dei 5 posti dell'offerta di avvio.
+
+Base dei contenuti (Company Brain, bozze approvate da Luigi per il preventivo del 18/11): `vault/workspace/lavori/2026-11-18-preventivo-nitore/commerciale-offerta-ripetibile.md`.
+
+| # | Lavoro | Accettazione |
+| --- | --- | --- |
+| A.1 | Decisione registrata e piano riscritto (questo file, `decisioni-tecniche.md`, `00-LEGGIMI.md`) | Una sessione nuova sa cosa fare leggendo solo `docs/lancio/` |
+| A.2 | Testi nuovi in `03-contenuti.md`: home, `/servizi`, pagina dell'offerta, menu. Voce "noi"; le demo si chiamano demo; nessun numero di risultato finché non c'è un caso vero | Luigi ha letto e approvato i testi prima che diventino codice |
+| A.3 | `/servizi` riscritta: i tre agenti standard (preventivi e richieste, assistente WhatsApp, smistamento email) con cosa fa, cosa controlla una persona e tempi dichiarati come stime; le due formule (servizio gestito in UE, dati sotto il controllo del cliente); "su misura" in fondo | Le tre categorie generiche di oggi non ci sono più; ogni agente ha il suo punto di controllo umano scritto |
+| A.4 | Pagina nuova dell'offerta per 5 clienti: cosa ricevono (sconto sull'avvio, canone pieno), cosa danno in cambio (permesso scritto di pubblicare il caso, numeri prima e dopo, testimonianza), requisiti (Google Workspace, sito in HTTPS), posti e scadenza, modulo di candidatura con consenso. Solo agenti standard, uno per cliente | La candidatura di prova arriva per email e in Brevo con una `FONTE` dedicata; rate limit attivo sulla route |
+| A.5 | Home: hero e "Cosa costruiamo" sugli agenti, fascia sui dati allineata alle due formule, richiamo all'offerta. La fascia inFrame resta | In 5 secondi si capisce che vendiamo agenti; nessun numero senza fonte; Lighthouse accessibilità ≥ 90 |
+| A.6 | Menu e footer, `metadata` e immagine Open Graph della pagina nuova, `sitemap.ts`, `public/llms.txt`, eventi `click_candidatura` e `candidatura_ok` | Post Inspector di LinkedIn corretto sulla pagina dell'offerta |
+| A.7 | Post LinkedIn di annuncio (testo nel Company Brain, non in questo repo) | Bozza pronta per Luigi |
+
+**Decisioni di Luigi del 20/11:** il favore dell'offerta è uno sconto sull'avvio (il canone non si tocca); solo agenti standard; canali: sito e LinkedIn.
+
+**Ancora da decidere (bloccano A.2 dove indicato):**
+- **[B] Entità dello sconto sull'avvio.** Finché manca, i testi dicono "condizioni riservate ai primi 5" e la cifra va nella stima scritta.
+- **[B] Prezzi sul sito.** La regola 3 di `00-LEGGIMI.md` ("niente prezzi") resta valida finché Luigi non la cambia: il lavoro sui listini (`2026-11-20-prezzi-aiframe` nel Company Brain) è ancora in bozza.
+- **[B] Data di chiusura delle candidature.** Proposta: 31/01/2027.
+- **Menu.** Proposta: Servizi · Offerta · Plugin · Risorse, con Check-up nel footer.
+- **Indirizzo della pagina dell'offerta.** Si decide in A.2 con i testi.
+
+Fuori dallo Sprint A: agenti su misura in pubblicità, pagina `/casi` (arriva con il primo caso vero, voce 3.4), email a freddo (in pausa).
+
+## Sprint 0 · da giovedì 6/11 a domenica 9/11 · "pronto per lunedì" · chiuso
 Obiettivo: lunedì 10/11 il sito parla al titolare di PMI con WordPress, ha il blog vero, conta i download della beta, raccoglie email in una lista e misura i clic. Tutto il resto può aspettare.
 
 | # | Lavoro | Accettazione |
@@ -28,13 +65,13 @@ Fuori dallo sprint 0, anche se tenta: check-up automatico, Freemius, pagina part
 ## Sprint 1 · 10-23/11 (settimane 1-2 del piano contenuti)
 | # | Lavoro | Accettazione |
 | --- | --- | --- |
-| 1.1 | Check-up v1: `POST /api/checkup` riceve un URL, scarica la home e la pagina contatti (timeout 8 s, solo http/https, niente IP privati), calcola 5 voci con punteggio 0-100 (specifiche in `02-specifiche.md`), risponde in pagina; con email invia il report HTML via Resend e crea il contatto in Brevo (`FONTE=checkup`) | 10 siti reali analizzati senza errori; punteggio spiegato voce per voce |
-| 1.2 | Articoli 1 e 2 pubblicati in MDX (testi dal Company Brain); categorie e pagina `/risorse` con filtri | 2 articoli online |
-| 1.3 | Video 60 s in home (MP4 muto, caricato al clic; YouTube non in elenco per i lunghi) | LCP < 2,5 s su mobile |
-| 1.4 | Dati strutturati `Article` e `FAQPage`; Open Graph per ogni pagina | Anteprima LinkedIn corretta |
+| 1.1 | **Chiusa** (`decisioni-tecniche.md`, 11/11). Check-up v1: `POST /api/checkup` riceve un URL, scarica la home e la pagina contatti (timeout 8 s, solo http/https, niente IP privati), calcola 5 voci con punteggio 0-100 (specifiche in `02-specifiche.md`), risponde in pagina; con email invia il report HTML via Resend e crea il contatto in Brevo (`FONTE=checkup`) | 10 siti reali analizzati senza errori; punteggio spiegato voce per voce |
+| 1.2 | **Articolo 1 online, manca il 2.** Articoli 1 e 2 pubblicati in MDX (testi dal Company Brain); categorie e pagina `/risorse` con filtri | 2 articoli online |
+| 1.3 | ~~Video 60 s in home~~ Cambiato il 20/11: il video non va in home (la home presenta i servizi dell'agenzia). Se Luigi decide di farlo va in `/plugin`, registrato dopo la rinomina in inFrame, e si lega al lancio (Sprint 3). MP4 muto, caricato al clic | LCP < 2,5 s su mobile in `/plugin` |
+| 1.4 | **Chiusa il 19/11.** Dati strutturati `Article` e `FAQPage`; Open Graph per ogni pagina | Anteprima LinkedIn corretta |
 | 1.5 | `readme.txt`, 5 screenshot e icona del plugin pronti nel repo del plugin (non in questo) per la richiesta a WordPress.org | Plugin Check 0 errori con il nome definitivo |
 
-## Sprint 2 · 24/11-7/12 (settimane 3-4)
+## Sprint 2 · dopo lo Sprint A (era 24/11-7/12)
 | # | Lavoro | Accettazione |
 | --- | --- | --- |
 | 2.1 | Checklist PDF "sito pronto per le feste" (statico in `public/`), scaricabile dopo email | Download tracciato |
@@ -42,7 +79,7 @@ Fuori dallo sprint 0, anche se tenta: check-up automatico, Freemius, pagina part
 | 2.3 | Richiesta di pubblicazione su WordPress.org inviata (dal repo del plugin) | Email di presa in carico ricevuta |
 | 2.4 | Sequenza Brevo di onboarding (5 email in 14 giorni) collegata alla fonte `beta`/`install` | La sequenza parte all'iscrizione di prova |
 
-## Sprint 3 · dall'8/12 (lancio)
+## Sprint 3 · lancio di inFrame, dopo lo Sprint 2 (era dall'8/12)
 | # | Lavoro | Accettazione |
 | --- | --- | --- |
 | 3.1 | `WPORG_URL` valorizzato quando approvato; pulsanti aggiornati da soli | Clic su "Installa" porta a WordPress.org |
