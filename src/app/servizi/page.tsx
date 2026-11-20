@@ -8,10 +8,15 @@ import PageHero from "@/components/ui/PageHero";
 import Scheda from "@/components/ui/Scheda";
 import { IconaAssistente, IconaCollegamento, IconaFulmine, IconaRazzo, IconaScudo } from "@/components/ui/Icone";
 import { AGENCY_NAME, BOOKING_URL, PLUGIN_NAME } from "@/lib/brand";
+import { OFFERTA, offertaAperta } from "@/lib/offerta";
 import { metaSocial } from "@/lib/seo";
+import TrackedLink from "@/components/ui/TrackedLink";
 
 // Copy: docs/lancio/03-contenuti.md, section /servizi (approved by Luigi on 2026-11-20).
 // Rules: no prices, no result figures, delivery times are estimates and are labelled as such.
+// Re-rendered hourly so the link to /offerta disappears when the offer closes.
+export const revalidate = 3600;
+
 const descrizione =
   "Tre agenti AI per piccole aziende: preventivi e richieste, assistente WhatsApp, smistamento email. Gestiti da noi in UE oppure sul vostro server, con un controllo umano scritto.";
 
@@ -199,6 +204,15 @@ export default function ServiziPage() {
             Costruiamo anche agenti e automazioni su processi diversi: collegamenti tra CRM, gestionale ed e-commerce,
             strumenti che mancano al software standard. Si parte da 30 minuti di chiamata e da una proposta scritta.
           </p>
+          {offertaAperta() && (
+            <p className="mt-6 max-w-3xl text-[15px] leading-relaxed text-text-1">
+              Cerchiamo {OFFERTA.posti} aziende per i primi casi reali, a condizioni riservate.{" "}
+              <TrackedLink href="/offerta" evento="click_candidatura" props={{ pagina: "servizi", posizione: "pagina" }} className="text-accent underline underline-offset-4">
+                Leggi l&apos;offerta
+              </TrackedLink>
+              .
+            </p>
+          )}
           <p className="mt-6 max-w-3xl text-[15px] leading-relaxed text-text-1">
             Avete un sito WordPress e volete provare un assistente prima di un progetto? C&apos;è{" "}
             <Link href="/plugin" className="text-accent underline underline-offset-4">{PLUGIN_NAME}</Link>, il nostro
