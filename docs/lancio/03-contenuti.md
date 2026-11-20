@@ -1,53 +1,69 @@
 # Contenuti delle pagine (voce "noi", senza prezzi)
 
-Testi pronti per lo sprint 0. `[NOME]` = `PLUGIN_NAME`. `[da confermare]` = dato da inserire o frase da tenere senza numero. Regole di scrittura: headline = domanda del cliente, dettagli concreti, niente superlativi, niente "non è solo X, è Y", niente lineetta lunga. Tutto quello che il plugin "fa" qui sotto è già vero nella beta.21 (vedi `public/wpla/update.json`); non aggiungere funzioni non ancora rilasciate.
+Testi pronti per lo sprint 0; home, `/servizi`, menu e la pagina nuova `/offerta` riscritti il 20/11/2026 per lo Sprint A e **da approvare** prima del codice. `[NOME]` = `PLUGIN_NAME`. `[da confermare]` = dato da inserire o frase da tenere senza numero. Regole di scrittura: headline = domanda del cliente, dettagli concreti, niente superlativi, niente "non è solo X, è Y", niente lineetta lunga. Tutto quello che il plugin "fa" qui sotto è già vero nella beta.21 (vedi `public/wpla/update.json`); non aggiungere funzioni non ancora rilasciate.
 
 ## Menu e footer
-Menu: **Servizi · Plugin · Check-up · Risorse** · pulsante `Prenota 30 minuti` (→ Calendly o /contatti, evento `click_prenota`, posizione menu).
-Footer: colonna 1 "aiframe, automazioni e AI per piccole aziende. Il nostro primo prodotto è [NOME]." + email; colonna 2 "Cosa facciamo": Servizi, Plugin, Check-up, Risorse; colonna 3 Il mio account (se `ACCOUNT_URL`), Privacy, Contatti, "Chi c'è dietro → luigiscorzelli.com". Riga finale: "aiframe · P. IVA [da confermare] · Salerno".
+Menu (deciso da Luigi il 20/11): **Servizi · Offerta · Plugin · Risorse** · pulsante `Prenota 30 minuti` (→ Calendly o /contatti, evento `click_prenota`, posizione menu). La voce Offerta resta nel menu finché le candidature sono aperte (31/03/2027 o posti finiti).
+Footer: colonna 1 "aiframe costruisce agenti AI e automazioni per piccole aziende. I dati stanno dove decidete voi." + email; colonna 2 "Cosa facciamo": Servizi, Offerta, Plugin, Check-up, Risorse; colonna 3 Il mio account (se `ACCOUNT_URL`), Privacy, Contatti, "Chi c'è dietro → luigiscorzelli.com". Riga finale: "aiframe · P. IVA [da confermare] · Salerno".
 
 ---
 
 ## Home `/`
-Decisione di Luigi del 7/11/2026: la home presenta l'agenzia; il plugin ha una sola fascia e rimanda a `/plugin`. Azione principale: `Prenota 30 minuti`. I testi della vecchia home dedicata al plugin (problema, come funziona, privacy, gratis e a pagamento) sono nella storia git (commit `57a34b8`); i contenuti utili vanno in `/plugin`.
+**Testi del 20/11/2026, da approvare (voce A.2).** Decisione di Luigi del 20/11: l'agenzia vende agenti AI, con la scelta su dove stanno i dati; [NOME] ha una sola fascia e rimanda a `/plugin`. Azione principale: `Prenota 30 minuti`. I testi della home del 7/11 (automazioni, assistenti, collegamenti, strumenti su misura) sono nella storia git.
 
-**Titolo SEO**: Automazioni e assistenti AI per piccole aziende | aiframe
-**Descrizione**: Costruiamo automazioni, assistenti AI e collegamenti tra gli strumenti che usate già, per piccole aziende senza reparto tecnico. E abbiamo un plugin WordPress gratuito.
+Regole per tutti i testi sugli agenti: sono flussi con l'AI dentro e un controllo umano dichiarato, mai "agenti autonomi"; nessun risultato in numeri finché non c'è un caso vero; le demo si chiamano demo; non si nomina il fornitore dei modelli ("modelli AI con elaborazione in UE"); i tempi sono stime e si scrivono come stime.
+
+**Titolo SEO**: Agenti AI per piccole aziende, con i dati dove decidete voi | aiframe
+**Descrizione**: Costruiamo agenti AI che preparano i preventivi, rispondono su WhatsApp e smistano le email. Li gestiamo noi in UE, oppure girano sul vostro server con le vostre chiavi.
 
 **Hero**
-- Etichetta: AUTOMAZIONI E AI PER PICCOLE AZIENDE (senza la città: decisione di Luigi)
-- H1: **Quanto lavoro ripetitivo fate ancora a mano?**
-- Sotto: Siamo aiframe. Costruiamo automazioni, assistenti AI e collegamenti tra gli strumenti che usate già, per piccole aziende senza reparto tecnico.
-- Pulsanti: `Prenota 30 minuti` (evento `click_prenota`, posizione hero) · `Scopri il plugin gratuito` (→ /plugin).
+- Etichetta: AGENTI AI PER PICCOLE AZIENDE
+- H1: **Chi risponde alle richieste mentre state lavorando?**
+- Sotto: Siamo aiframe. Costruiamo agenti AI che preparano i preventivi, rispondono su WhatsApp e mettono ordine nella posta. L'AI legge e prepara, a decidere restate voi.
+- Pulsanti: `Prenota 30 minuti` (evento `click_prenota`, posizione hero) · `Guarda cosa fanno gli agenti` (→ /servizi).
 
-**Cosa facciamo** (titolo: Cosa costruiamo, in concreto; 4 schede)
-1. **Automazioni dei flussi ripetitivi.** Copiare dati da un'email a un foglio, mandare lo stesso promemoria ogni settimana, aggiornare due programmi a mano: lo fa il sistema, voi controllate.
-2. **Assistenti AI sui vostri dati.** Assistenti che rispondono con i vostri documenti e le vostre procedure, per i clienti o per chi lavora con voi. Con permessi chiari su cosa possono leggere.
-3. **Collegamenti tra gli strumenti.** CRM, email, fogli, gestionale ed e-commerce che si passano i dati da soli, senza copia-incolla e senza doppioni.
-4. **Strumenti su misura.** Quando il software standard non copre un pezzo del vostro lavoro, costruiamo lo strumento che manca, collegato a quello che avete già.
+**Ticker**: AGENTI AI · PREVENTIVI · WHATSAPP · SMISTAMENTO EMAIL · DATI IN UE · SUL VOSTRO SERVER O GESTITI DA NOI · PICCOLE AZIENDE ·
+
+**Barra sotto l'hero** (4 voci, parole e non cifre)
+- LEGGE · RICHIESTE DA EMAIL, MODULO E WHATSAPP
+- PREPARA · BOZZE DI PREVENTIVI E RISPOSTE
+- CHIEDE · A UNA PERSONA NEI CASI DUBBI
+- DATI · IN UE, DOVE DECIDETE VOI
+
+**Cosa costruiamo** (titolo: Tre agenti per il lavoro di ogni giorno; 3 schede, ognuna con link "Come funziona" → /servizi)
+1. **Preventivi e richieste.** Legge le richieste che arrivano da email e modulo del sito, chiede i dati che mancano e prepara il preventivo dal vostro tariffario. Lo approvate voi prima che parta.
+2. **Assistente WhatsApp.** Risponde alle domande frequenti con i vostri documenti, fissa gli appuntamenti in agenda e manda il promemoria. Quando non sa, passa la conversazione a una persona.
+3. **Smistamento email.** Mette ordine nella casella generica: inoltra ogni messaggio alla persona giusta e prepara le bozze per le domande che tornano sempre.
+Riga sotto: Avete un processo diverso da questi? Raccontatecelo: lo valutiamo insieme in 30 minuti.
 
 **Per chi** (titolo: Per chi lavoriamo)
-Piccole aziende senza reparto tecnico, con i dati sparsi tra email, fogli e gestionale, e qualcuno che passa ogni settimana ore a spostarli da un posto all'altro. Non serve sapere cos'è un'API: ci basta capire come lavorate oggi.
+Piccole aziende di servizi senza reparto tecnico: imprese di pulizie e manutenzioni, studi, attività locali. Le richieste arrivano da email, modulo e WhatsApp, e oggi qualcuno le legge, le copia e risponde a mano, quando trova il tempo. Non serve sapere cos'è un'API: ci basta capire come lavorate oggi.
+
+**Dati** (titolo: Dove stanno i vostri dati? Lo decidete voi.; 2 colonne, link "Confronta le due formule" → /servizi#formule e link alla privacy)
+- **Lo gestiamo noi.** L'agente gira su un server dedicato a voi in un data center dell'Unione Europea. Pensiamo noi a server, copie di sicurezza, controlli e modelli AI. Voi usate il servizio.
+- **Lo ospitate voi.** L'agente gira su un server intestato a voi, con le vostre chiavi. Noi entriamo solo per la manutenzione, con un accesso che potete togliere quando volete.
+Riga sotto: In tutti e due i casi gli account di posta, WhatsApp e CRM restano a nome vostro, e l'accordo sui dati si firma prima di cominciare.
 
 **Come lavoriamo** (titolo: Quattro passi, nessuna sorpresa)
-1. Analisi: 30 minuti di chiamata su dove si perde tempo e quali dati usate.
-2. Dati e accessi: chi può vedere cosa, dove restano i dati, quali strumenti tocchiamo.
-3. Costruzione: la soluzione collegata agli strumenti che usate già.
-4. Prova e ritocchi: casi reali con il vostro team, correzioni, miglioramenti dopo il rilascio.
-Riga: Dopo la chiamata ricevete una proposta scritta di una pagina.
+1. Stima scritta: ci raccontate il processo, vi mandiamo una stima che si legge da sola. La chiamata di 30 minuti c'è sempre, per chi la vuole.
+2. Demo prima della firma: vedete un agente funzionante con dati di esempio della vostra azienda. Se non vi convince, non dovete nulla.
+3. Costruzione: un agente alla volta, collegato agli strumenti che usate già, con i punti di controllo scritti.
+4. Prova e ritocchi: casi reali con il vostro team, correzioni, rapporto ogni mese.
+Riga: Nessun vincolo di durata: disdetta con 30 giorni di preavviso.
 
-**Fascia plugin** (etichetta: IL NOSTRO PRIMO PRODOTTO; titolo: [NOME]: il sito WordPress che risponde anche quando siete chiusi)
-Un plugin WordPress gratuito che risponde ai clienti con le informazioni del vostro sito, raccoglie nome, recapito e cosa cercano, e ve li consegna in posta. È in prova su siti reali dal 24 ottobre 2026 e supera 37 collaudi automatici su 37 (test interni).
+**Fascia offerta** (etichetta: 5 POSTI · CANDIDATURE FINO AL 31 MARZO 2027; titolo: Cerchiamo 5 aziende per i primi casi reali)
+Costruiamo un agente per cinque aziende a condizioni riservate. In cambio vi chiediamo di poter raccontare il vostro caso, con i numeri di prima e di dopo.
+Pulsante `Leggi l'offerta` (→ /offerta, evento `click_candidatura`, posizione home).
+
+**Fascia plugin** (etichetta: UN NOSTRO PRODOTTO, PER PROVARE; titolo: [NOME]: il sito WordPress che risponde anche quando siete chiusi)
+Volete vedere un assistente AI al lavoro prima di un progetto su misura? [NOME] è il nostro plugin WordPress gratuito: risponde ai clienti con le informazioni del vostro sito, raccoglie nome, recapito e cosa cercano, e ve li consegna in posta. È in prova su siti reali dal 24 ottobre 2026 e supera 37 collaudi automatici su 37 (test interni).
 Pulsante `Installa gratis` (→ /plugin, evento `click_installa`) · link "Oppure fai il check-up del tuo sito in 2 minuti" (→ /check-up).
 
-**Dati** (titolo: I vostri dati restano sotto controllo)
-Ogni progetto parte da una domanda: quali dati servono davvero, e chi deve poterli vedere. Diamo accessi solo dove servono, non copiamo informazioni sensibili in giro per strumenti diversi e vi lasciamo il controllo di quello che costruiamo. Link alla pagina privacy.
-
 **Chi siamo** (ancora `#chi-siamo`, destinazione del redirect da `/chi-siamo`)
-aiframe è lo studio di Luigi Scorzelli, a Salerno. Costruiamo automazioni per piccole aziende senza reparto tecnico. [NOME] nasce da una cosa vista in ogni azienda per cui abbiamo lavorato: le richieste arrivano alle 22 e qualcuno le legge alle 9. Link: luigiscorzelli.com.
+aiframe è lo studio di Luigi Scorzelli, a Salerno. Costruiamo agenti AI e automazioni per piccole aziende senza reparto tecnico. Partiamo da una cosa vista in ogni azienda per cui abbiamo lavorato: le richieste arrivano alle 22 e qualcuno le legge alle 9. Link: luigiscorzelli.com.
 
 **Chiusura**
-H2: Raccontateci un processo che vi fa perdere tempo.
+H2: Raccontateci come gestite oggi le richieste.
 Pulsanti: `Prenota 30 minuti` (evento `click_prenota`, posizione chiusura) · email info@aiframe.it.
 
 ---
@@ -102,32 +118,112 @@ Tre campi: richieste a settimana · quante arrivano fuori orario (%) · quanto v
 ---
 
 ## `/servizi`
-**Titolo SEO**: Avvio guidato, piano a pagamento e integrazioni per [NOME] | aiframe
-**Descrizione**: Non vuoi configurare niente? Lo facciamo noi: installazione, contenuti, prove con domande vere, collegamento al tuo gestionale.
+**Testi del 20/11/2026, da approvare (voce A.2).** La pagina descrive solo l'offerta dell'agenzia. **Proposta da confermare:** i tre servizi intorno a [NOME] che oggi stanno qui (avvio guidato, piano a pagamento, collegamento al gestionale) passano in `/plugin`, con gli stessi testi; qui resta una riga di rimando.
 
-Dal 7/11/2026 la pagina copre anche i progetti dell'agenzia (Servizi è il primo link del menu).
-- H1: **Cosa possiamo fare per la vostra azienda?**
-- Sotto: Lavoriamo in due modi: progetti su misura per togliere lavoro ripetitivo, e servizi intorno a [NOME], il nostro plugin WordPress. Il prezzo lo diciamo dopo 30 minuti di chiamata, quando abbiamo capito cosa serve.
+**Titolo SEO**: Agenti AI per preventivi, WhatsApp ed email | aiframe
+**Descrizione**: Tre agenti AI per piccole aziende: preventivi e richieste, assistente WhatsApp, smistamento email. Gestiti da noi in UE oppure sul vostro server, con un controllo umano scritto.
 
-**Progetti su misura** (titolo: Automazioni e AI per il vostro lavoro)
+- H1: **Quale lavoro volete togliere dalla vostra giornata?**
+- Sotto: Costruiamo agenti AI che leggono le richieste, preparano le risposte e passano a una persona i casi dubbi. Prezzi e tempi li trovate in una stima scritta, dopo che ci avete raccontato come lavorate.
 
-| Servizio | Per chi | Cosa comprende |
+**I tre agenti** (titolo: Tre agenti, ognuno con il suo controllo)
+
+| Agente | Per chi | Cosa fa | Cosa resta a voi | Tempi (stima) |
+| --- | --- | --- | --- | --- |
+| **Preventivi e richieste** | Chi riceve richieste di preventivo e risponde quando trova il tempo | Legge email e modulo del sito, chiede i dati mancanti, calcola un preventivo indicativo dal vostro tariffario, prepara la bozza e salva il contatto in un foglio o nel CRM | Ogni preventivo lo approvate voi prima dell'invio. Le cifre vengono dal vostro tariffario, non dall'AI | 3-4 settimane da quando abbiamo materiali e accessi |
+| **Assistente WhatsApp** | Chi riceve su WhatsApp sempre le stesse domande e richieste di appuntamento | Risponde dalle vostre domande frequenti e dai vostri documenti, fissa gli appuntamenti in agenda, manda il promemoria, passa la conversazione a un collega | Le domande fuori dai documenti, i reclami e i prezzi fuori tariffario arrivano a una persona | 4-6 settimane, compresa l'attesa dell'approvazione di Meta |
+| **Smistamento email** | Chi ha una casella generica (info@) che nessuno riesce a tenere in ordine | Classifica i messaggi, li inoltra alla persona giusta, passa le richieste di preventivo al primo agente, prepara le bozze per le domande frequenti | Tutte le bozze le rivedete voi. Reclami e messaggi che non rientrano in nessuna categoria arrivano a una persona | 2-3 settimane |
+
+Riga sotto la tabella: I tempi sono stime, non misure: li confermiamo nella stima scritta. Si parte da un agente, gli altri si aggiungono dopo.
+
+**Le due formule** (ancora `#formule`; titolo: Chi gestisce l'agente, e dove stanno i dati?)
+
+| | **Lo gestiamo noi** | **Lo ospitate voi** |
 | --- | --- | --- |
-| **Automazioni dei flussi ripetitivi** | Chi passa ore ogni settimana a copiare dati tra email, fogli e programmi | Analisi del flusso con chi lo fa ogni giorno, automazione costruita sugli strumenti che usate già, prove su casi reali, istruzioni scritte per il team |
-| **Assistenti AI sui vostri dati** | Chi risponde sempre alle stesse domande, a clienti o a colleghi | Raccolta di documenti e procedure, assistente che risponde solo da quelle fonti e dice quando non sa, permessi su cosa può leggere, prove con domande vere |
-| **Collegamenti e strumenti su misura** | Chi usa CRM, gestionale ed e-commerce che non si parlano | Collegamento degli strumenti esistenti con controllo dei duplicati e registro delle operazioni. Quando il software standard non basta, lo strumento che manca |
+| Per chi | Chi vuole un servizio che funziona, senza occuparsi di server | Chi vuole scegliere dove girano il sistema e i modelli AI |
+| Dove gira | Server dedicato a voi in un data center dell'Unione Europea, gestito da noi | Server in UE intestato a voi. Il nostro accesso di manutenzione lo potete togliere |
+| Modelli AI | Modelli AI con elaborazione in UE, scelti e pagati da noi dentro il canone | Con la vostra chiave: fornitore e regione li scegliete voi |
+| Copie di sicurezza e controlli | Li facciamo noi | Li impostiamo e li seguiamo noi, sul vostro server |
+| Accordo sui dati | Siamo responsabili del trattamento: accordo scritto con l'elenco dei fornitori | Accordo più corto, solo per gli accessi di manutenzione |
+| Se un giorno smettete | Vi consegniamo i flussi e i dati | Il sistema è già vostro |
 
-**Intorno a [NOME]** (titolo: Non vuoi configurare niente? Lo facciamo noi.)
+Sotto la tabella: In tutte e due le formule gli account di Google, WhatsApp e CRM sono intestati a voi. WhatsApp passa sempre da Meta: usiamo solo il canale ufficiale. Con dati sanitari o legali la soluzione si studia a parte.
 
-| Servizio | Per chi | Cosa comprende |
-| --- | --- | --- |
-| **Avvio guidato** | Chi vuole partire bene in un giorno | Installazione, caricamento di listini e documenti, 20 domande vere di prova, orari e tono delle risposte, consegna in videochiamata di 30 minuti |
-| **Piano a pagamento di [NOME]** (in arrivo) | Chi vuole che il sito venda, non solo risponda | Vendita guidata con proposta di prodotti o servizi, preventivi con i tuoi prezzi, cliente abituale riconosciuto, CRM, voce. Aggiornamento dei contenuti ogni mese e assistenza. 30 giorni di prova |
-| **Collegamento al tuo gestionale** | Chi ha già un CRM o un gestionale | Le richieste entrano nel tuo sistema (HubSpot provato nei nostri test), con controllo dei duplicati e registro delle operazioni |
+**Cosa vi chiediamo per partire** (elenco)
+- Google Workspace e un amministratore disponibile per circa 30 minuti, con la nostra guida.
+- Per WhatsApp: un sito pubblico in HTTPS che descrive l'azienda e un numero dedicato.
+- I contenuti: tariffario, domande frequenti, regole degli appuntamenti, chi si occupa di cosa.
+- La firma dell'accordo sui dati.
 
-Riga: Gestisci siti per i tuoi clienti? Scrivici: stiamo preparando una versione per agenzie.
-Come si procede: `Prenota 30 minuti` (Calendly, evento `click_prenota`) → analisi del sito e dei processi → proposta scritta di una pagina. Pagamento con bonifico su fattura.
-Nessuna cifra in pagina.
+**Su misura** (titolo: Il vostro processo non è tra questi?)
+Costruiamo anche agenti e automazioni su processi diversi: collegamenti tra CRM, gestionale ed e-commerce, strumenti che mancano al software standard. Si parte da 30 minuti di chiamata e da una proposta scritta.
+
+**Rimandi** (due righe, in fondo)
+- Cerchiamo 5 aziende per i primi casi reali, a condizioni riservate. `Leggi l'offerta` (→ /offerta, evento `click_candidatura`, posizione servizi).
+- Avete un sito WordPress e volete provare un assistente prima di un progetto? C'è [NOME], il nostro plugin gratuito (→ /plugin).
+
+Come si procede (titolo: Quattro passi, nessuna sorpresa): gli stessi quattro passi della home. `Prenota 30 minuti` (Calendly, evento `click_prenota`). Pagamento con bonifico su fattura.
+Nessuna cifra di prezzo in pagina.
+
+---
+
+## `/offerta`
+**Pagina nuova, testi del 20/11/2026, da approvare (voce A.2).** Indirizzo proposto: `/offerta`. Decisioni di Luigi: massimo 5 clienti, solo agenti standard, sconto sull'avvio (canone pieno), candidature fino al 31/03/2027, niente prezzi in pagina. L'entità dello sconto non è decisa: in pagina "condizioni riservate", la cifra va nella stima scritta. Quando i posti finiscono o la data passa, la pagina dice che le candidature sono chiuse e rimanda a `/servizi`; la voce esce dal menu.
+
+**Titolo SEO**: Cerchiamo 5 aziende per i primi agenti AI | aiframe
+**Descrizione**: Costruiamo un agente AI per cinque piccole aziende a condizioni riservate, in cambio di un caso d'uso pubblicabile. Candidature fino al 31 marzo 2027.
+
+- Etichetta: 5 POSTI · CANDIDATURE FINO AL 31 MARZO 2027
+- H1: **Volete essere una delle prime 5 aziende?**
+- Sotto: Costruiamo un agente AI per cinque piccole aziende, a condizioni riservate. In cambio vi chiediamo di poter raccontare com'è andata, con i numeri veri.
+- Pulsante `Candidati` (→ #candidatura, evento `click_candidatura`, posizione hero).
+
+**Perché lo facciamo** (titolo: Perché cinque, e perché adesso)
+Gli agenti che proponiamo li abbiamo costruiti e provati in demo. Ci mancano i casi reali: aziende vere, con i numeri di prima e di dopo. Preferiamo dirlo che inventare risultati. Per questo apriamo cinque posti a condizioni che dopo non ripeteremo.
+
+**Cosa ricevete** (elenco)
+- Un agente a scelta tra i tre: preventivi e richieste, assistente WhatsApp, smistamento email (→ /servizi per i dettagli).
+- Uno sconto sul costo di avvio, scritto nella stima che vi mandiamo. Il canone mensile resta quello di listino.
+- La formula che preferite: lo gestiamo noi in UE oppure lo ospitate voi.
+- Una demo funzionante prima della firma. Se non vi convince, non dovete nulla.
+- Nessun vincolo di durata: disdetta con 30 giorni di preavviso.
+
+**Cosa vi chiediamo** (elenco)
+- Il permesso scritto di pubblicare il caso, con il nome dell'azienda o in forma anonima: lo scegliete voi.
+- Di misurare insieme, prima di cominciare e dopo due mesi di uso, due o tre cose decise all'inizio. Per esempio in quanto tempo parte un preventivo, o quante richieste restano senza risposta.
+- Una testimonianza di poche righe a fine prova, solo se siete soddisfatti.
+- Una persona di riferimento che conosce il processo e ci risponde durante la costruzione.
+
+**Per chi è** (titolo: È per voi se)
+- siete una piccola azienda di servizi e le richieste arrivano da email, modulo o WhatsApp;
+- usate Google Workspace;
+- avete un sito pubblico in HTTPS (serve per l'agente WhatsApp);
+- potete cominciare entro la primavera del 2027.
+Riga: Scegliamo aziende di settori diversi e partiamo con una o due alla volta, in ordine di candidatura.
+
+**Come funziona** (4 passi)
+1. Vi candidate con il modulo qui sotto: bastano cinque minuti.
+2. Vi rispondiamo per email e vi mandiamo una stima scritta.
+3. Vedete la demo con dati di esempio della vostra azienda.
+4. Firmiamo la scheda di progetto, con i punti da verificare e le cose da misurare, e cominciamo.
+
+**Candidatura** (ancora `#candidatura`; modulo, `FONTE=offerta` in Brevo, evento `candidatura_ok`, rate limit come `/api/contact`)
+Campi: Nome e cognome · Azienda · Email di lavoro · Sito web · Quale agente vi interessa (preventivi e richieste / assistente WhatsApp / smistamento email / non so ancora) · Come gestite oggi queste richieste? (testo libero) · Quante ne ricevete in un mese, più o meno? (facoltativo) · Usate Google Workspace? (sì / no / non so).
+Consenso: "Ho letto l'informativa privacy e acconsento a essere ricontattato da aiframe su questa candidatura." [da far confermare al consulente privacy]
+Pulsante: `Invia la candidatura`.
+Dopo l'invio: "Candidatura ricevuta. Vi rispondiamo per email, di solito entro due giorni lavorativi." [tempo di risposta da confermare con Luigi]
+Errore: "Non siamo riusciti a inviare la candidatura. Riprovate tra poco o scriveteci a info@aiframe.it."
+
+**Domande frequenti**
+- **Quanto costa?** Dipende dall'agente e dalla formula. Lo trovate nella stima scritta, con lo sconto di avvio già indicato.
+- **Dove stanno i nostri dati?** In Unione Europea. Potete farci gestire il server oppure tenerlo voi (→ /servizi#formule).
+- **L'agente decide da solo?** No. Legge e prepara: preventivi e bozze li approvate voi, e i casi dubbi arrivano a una persona.
+- **Cosa succede se non siamo soddisfatti?** Prima della firma vedete una demo e potete fermarvi senza pagare nulla. Dopo, il canone si disdice con 30 giorni di preavviso.
+- **Il nostro nome deve comparire per forza?** No. Il caso si può pubblicare in forma anonima.
+- **Possiamo avere più di un agente?** Per i cinque posti ne costruiamo uno per azienda. Gli altri si aggiungono dopo, alle condizioni normali.
+
+**Stato chiuso** (quando posti o data sono esauriti)
+H1: Le candidature sono chiuse. Sotto: I cinque posti sono assegnati. Gli agenti restano disponibili alle condizioni normali. Pulsante `Vedi i servizi` (→ /servizi).
 
 ---
 

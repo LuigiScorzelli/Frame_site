@@ -18,7 +18,7 @@ aiframe.it è il sito dell'agenzia, che costruisce **agenti AI per piccole azien
 ## Regole fisse (decise da Luigi il 5/11/2026)
 1. **Voce "noi"**: aiframe è l'agenzia. "Abbiamo costruito", "lo installiamo noi". Mai "io" nei testi del sito. (Il profilo LinkedIn resta in prima persona, ma non riguarda questo repo.)
 2. **Nome del plugin: inFrame** (deciso da Luigi il 19/11). Nei testi si scrive `[NOME]` e nel codice si usa solo la costante `PLUGIN_NAME` in `src/lib/brand.ts`. Se cambia, si cambia in un punto solo. Slug, cartelle e route non devono contenere il nome.
-3. **Niente prezzi** sul sito, finché Luigi non decide diversamente (20/11: i prezzi degli agenti esistono per le stime scritte, il listino è ancora in bozza nel Company Brain). In `/servizi` si descrive cosa comprende ogni servizio e si manda a "Prenota 30 minuti". Nessun "da X €", nessun placeholder visibile.
+3. **Niente prezzi** sul sito (confermato da Luigi il 20/11 anche per gli agenti: le cifre vanno solo nelle stime scritte). In `/servizi` si descrive cosa comprende ogni servizio e si manda a "Prenota 30 minuti". Nessun "da X €", nessun placeholder visibile.
 4. **Niente numeri senza fonte.** I numeri dei test interni si dichiarano come test; i numeri che ancora non esistono si segnano nel codice come `TODO:dato` e nel sito non si mostrano (si mostra la frase senza numero, mai una cifra inventata). I "-40%" e "+55%" attuali vanno tolti.
 5. **Servizi gestiti, niente codice dove non serve**: WordPress.org per distribuire la versione gratuita, Freemius per pagamenti/licenze/portale cliente, Brevo per le liste, Resend per le notifiche, Calendly per le call, Upstash Redis per i rate limit, MDX nel repo per il blog. Non si scrivono checkout, login, licenze, fatture.
 6. **Non si cambia stack**: Next.js 16, App Router, Tailwind v4, Vercel. Si toglie Strapi.
@@ -29,8 +29,9 @@ aiframe.it è il sito dell'agenzia, che costruisce **agenti AI per piccole azien
 ## Cosa aspetta Luigi (bloccanti segnati nel piano)
 - ~~Nome del plugin~~ fatto il 19/11: inFrame, online dal 19/11
 - Dati del Titolare per iubenda (nome, indirizzo, P. IVA): sbloccano informativa collegata e P. IVA nel footer
-- Prezzi sul sito: sì o no per gli agenti (la regola 3 vale finché non decide; non blocca)
-- Offerta per 5 clienti: entità dello sconto sull'avvio e data di chiusura delle candidature (bloccano i testi, voce A.2)
+- ~~Prezzi sul sito~~ deciso il 20/11: niente prezzi sul sito
+- Offerta per 5 clienti: entità dello sconto sull'avvio (non blocca). Chiusura delle candidature decisa: 31/03/2027
+- Approvazione dei testi nuovi di `03-contenuti.md` (voce A.2): blocca il codice di A.3-A.6
 - Account Brevo, Upstash (Marketplace Vercel), Calendly, Freemius (sprint 3)
 - Dominio verificato su Resend (SPF, DKIM, DMARC)
 - ~~Fornitore e regione dell'elaborazione AI da dichiarare in /privacy~~ fatto il 7/11: chiave del cliente (OpenAI o Anthropic), chiamata diretta dal sito

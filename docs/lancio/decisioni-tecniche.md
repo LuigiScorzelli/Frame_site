@@ -232,4 +232,6 @@ Con `CALENDLY_URL` valorizzato (dal 9/11 costante in `brand.ts`) la pagina incor
 
 **Cosa non cambia nel sito:** grafica e componenti, `/plugin`, `/check-up`, `/risorse`, `/privacy`, `/contatti`, moduli, Brevo, rate limit, Open Graph. Cambiano i testi della home, `/servizi`, il menu, e si aggiunge la pagina dell'offerta.
 
-**Aperto:** entità dello sconto; prezzi sul sito sì o no (la regola "niente prezzi" vale finché Luigi non la cambia); data di chiusura delle candidature (proposta 31/01/2027); menu (proposta: Servizi · Offerta · Plugin · Risorse, Check-up nel footer); indirizzo della pagina.
+**Deciso da Luigi il 20/11 (sera):** niente prezzi sul sito; candidature fino al 31/03/2027 (il 31/01 proposto era troppo vicino); menu Servizi · Offerta · Plugin · Risorse, con Check-up nel footer.
+
+**Aperto:** entità dello sconto (nei testi "condizioni riservate ai primi 5", la cifra va nella stima scritta); indirizzo della pagina (proposta `/offerta`); dove mettere i servizi intorno a inFrame (proposta: in `/plugin`).

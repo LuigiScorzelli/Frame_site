@@ -30,12 +30,12 @@ Base dei contenuti (Company Brain, bozze approvate da Luigi per il preventivo de
 
 **Decisioni di Luigi del 20/11:** il favore dell'offerta è uno sconto sull'avvio (il canone non si tocca); solo agenti standard; canali: sito e LinkedIn.
 
-**Ancora da decidere (bloccano A.2 dove indicato):**
-- **[B] Entità dello sconto sull'avvio.** Finché manca, i testi dicono "condizioni riservate ai primi 5" e la cifra va nella stima scritta.
-- **[B] Prezzi sul sito.** La regola 3 di `00-LEGGIMI.md` ("niente prezzi") resta valida finché Luigi non la cambia: il lavoro sui listini (`2026-11-20-prezzi-aiframe` nel Company Brain) è ancora in bozza.
-- **[B] Data di chiusura delle candidature.** Proposta: 31/01/2027.
-- **Menu.** Proposta: Servizi · Offerta · Plugin · Risorse, con Check-up nel footer.
-- **Indirizzo della pagina dell'offerta.** Si decide in A.2 con i testi.
+**Decise da Luigi il 20/11 (sera):** niente prezzi sul sito (la regola 3 di `00-LEGGIMI.md` resta); candidature aperte fino al **31/03/2027**; menu **Servizi · Offerta · Plugin · Risorse**, con Check-up nel footer.
+
+**Ancora da decidere:**
+- **Entità dello sconto sull'avvio.** Non blocca: i testi dicono "condizioni riservate ai primi 5" e la cifra va nella stima scritta.
+- **Indirizzo della pagina dell'offerta.** Proposta in `03-contenuti.md`: `/offerta`.
+- **Servizi intorno a inFrame** (avvio guidato, piano a pagamento, collegamento al gestionale): proposta in `03-contenuti.md` di spostarli da `/servizi` a `/plugin`.
 
 Fuori dallo Sprint A: agenti su misura in pubblicità, pagina `/casi` (arriva con il primo caso vero, voce 3.4), email a freddo (in pausa).
 
