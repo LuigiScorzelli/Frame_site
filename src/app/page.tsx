@@ -12,18 +12,22 @@ import ComeLavoriamo from "@/components/sections/home/ComeLavoriamo";
 import DatiBand from "@/components/sections/home/DatiBand";
 import ChiSiamo from "@/components/sections/home/ChiSiamo";
 import { AGENCY_NAME, BOOKING_URL, CONTACT_EMAIL, PLUGIN_NAME } from "@/lib/brand";
+import { OFFERTA, offertaAperta } from "@/lib/offerta";
 import { metaSocial } from "@/lib/seo";
 
+// Re-rendered hourly so the offer band disappears when the offer closes (src/lib/offerta.ts).
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
-  title: { absolute: `Automazioni e assistenti AI per piccole aziende | ${AGENCY_NAME}` },
+  title: { absolute: `Agenti AI per piccole aziende, con i dati dove decidete voi | ${AGENCY_NAME}` },
   description:
-    "Costruiamo automazioni, assistenti AI e collegamenti tra gli strumenti che usate già, per piccole aziende senza reparto tecnico. E abbiamo un plugin WordPress gratuito.",
+    "Costruiamo agenti AI che preparano i preventivi, rispondono su WhatsApp e smistano le email. Li gestiamo noi in UE, oppure girano sul vostro server con le vostre chiavi.",
   alternates: { canonical: "/" },
   ...metaSocial({
     percorso: "/",
-    titolo: `${AGENCY_NAME}: automazioni e assistenti AI per piccole aziende`,
+    titolo: `${AGENCY_NAME}: agenti AI per piccole aziende`,
     descrizione:
-      "Costruiamo automazioni, assistenti AI e collegamenti tra gli strumenti che usate già, per piccole aziende senza reparto tecnico. E abbiamo un plugin WordPress gratuito.",
+      "Costruiamo agenti AI che preparano i preventivi, rispondono su WhatsApp e smistano le email. Li gestiamo noi in UE, oppure girano sul vostro server con le vostre chiavi.",
   }),
 };
 
@@ -45,25 +49,48 @@ export default function Home() {
 
         <Section tag="PER CHI" title="Per chi lavoriamo">
           <p className="max-w-3xl text-lg leading-relaxed text-text-1">
-            Piccole aziende senza reparto tecnico, con i dati sparsi tra email, fogli e gestionale, e qualcuno che passa
-            ogni settimana ore a spostarli da un posto all&apos;altro. Non serve sapere cos&apos;è un&apos;API: ci basta
-            capire come lavorate oggi.
+            Piccole aziende di servizi senza reparto tecnico: imprese di pulizie e manutenzioni, studi, attività locali.
+            Le richieste arrivano da email, modulo e WhatsApp, e oggi qualcuno le legge, le copia e risponde a mano,
+            quando trova il tempo. Non serve sapere cos&apos;è un&apos;API: ci basta capire come lavorate oggi.
           </p>
         </Section>
 
-        <ComeLavoriamo />
         <DatiBand />
+        <ComeLavoriamo />
+
+        {offertaAperta() && (
+          <section className="border-t border-accent-border bg-bg-0 py-20 lg:py-24">
+            <div className="mx-auto max-w-[1440px] px-6 lg:px-14">
+              <span className="font-label text-[13px] font-medium tracking-[2px] text-accent">
+                {OFFERTA.posti} POSTI · CANDIDATURE FINO AL {OFFERTA.ultimoGiornoTesto.toUpperCase()}
+              </span>
+              <h2 className="mt-4 max-w-3xl text-3xl font-display font-extrabold leading-tight tracking-[-0.5px] text-text-0 lg:text-[48px] lg:tracking-[-1px]">
+                Cerchiamo {OFFERTA.posti} aziende per i primi casi reali
+              </h2>
+              <p className="mt-6 max-w-3xl text-lg leading-relaxed text-text-1">
+                Costruiamo un agente per cinque aziende a condizioni riservate. In cambio vi chiediamo di poter
+                raccontare il vostro caso, con i numeri di prima e di dopo.
+              </p>
+              <div className="mt-8">
+                <CtaButton href="/offerta" evento="click_candidatura" props={{ pagina: "home", posizione: "pagina" }}>
+                  LEGGI L&apos;OFFERTA &rarr;
+                </CtaButton>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Plugin band */}
         <section className="border-t border-accent-border bg-bg-1 py-20 lg:py-24">
           <div className="mx-auto max-w-[1440px] px-6 lg:px-14">
-            <span className="font-label text-[13px] font-medium tracking-[2px] text-accent">IL NOSTRO PRIMO PRODOTTO</span>
+            <span className="font-label text-[13px] font-medium tracking-[2px] text-accent">UN NOSTRO PRODOTTO, PER PROVARE</span>
             <h2 className="mt-4 max-w-3xl text-3xl font-display font-extrabold leading-tight tracking-[-0.5px] text-text-0 lg:text-[48px] lg:tracking-[-1px]">
               {PLUGIN_NAME}: il sito WordPress che risponde anche quando siete chiusi
             </h2>
             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-text-1">
-              Un plugin WordPress gratuito che risponde ai clienti con le informazioni del vostro sito, raccoglie nome,
-              recapito e cosa cercano, e ve li consegna in posta.
+              Volete vedere un assistente AI al lavoro prima di un progetto su misura? {PLUGIN_NAME} è il nostro plugin
+              WordPress gratuito: risponde ai clienti con le informazioni del vostro sito, raccoglie nome, recapito e
+              cosa cercano, e ve li consegna in posta.
             </p>
             <div className="mt-8 grid max-w-3xl gap-6 sm:grid-cols-2">
               {prove.map((p) => (
@@ -89,7 +116,7 @@ export default function Home() {
         <section className="border-t border-border bg-bg-1 py-24">
           <div className="mx-auto max-w-[1200px] px-6 text-center lg:px-14">
             <h2 className="text-3xl font-display font-extrabold tracking-[-0.5px] text-text-0 lg:text-5xl">
-              Raccontateci un processo che vi fa perdere tempo.
+              Raccontateci come gestite oggi le richieste.
             </h2>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <CtaButton href={BOOKING_URL} variant="gradient" evento="click_prenota" props={{ pagina: "home", posizione: "chiusura" }}>

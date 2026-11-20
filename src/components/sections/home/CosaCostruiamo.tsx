@@ -2,7 +2,8 @@
 
 import { cn } from "@/lib/utils";
 import { useInView } from "@/components/animations/useInView";
-import { IconaAssistente, IconaCodice, IconaFulmine } from "@/components/ui/Icone";
+import Link from "next/link";
+import { IconaAssistente, IconaCollegamento, IconaFulmine } from "@/components/ui/Icone";
 
 const Tag = ({ children }: { children: string }) => (
   <span className="border border-[#2A3F66] bg-accent-dim px-2.5 py-0.5 font-label text-[12px] font-medium tracking-wider text-accent" style={{ letterSpacing: "1px" }}>
@@ -20,30 +21,30 @@ interface Scheda {
 }
 
 const grande: Scheda = {
-  titolo: "COLLEGAMENTI E STRUMENTI SU MISURA",
-  testo: "CRM, email, gestionale ed e-commerce che si passano i dati da soli, senza doppioni. Quando il software standard non basta, costruiamo lo strumento che manca.",
+  titolo: "PREVENTIVI E RICHIESTE",
+  testo: "Legge le richieste che arrivano da email e modulo del sito, chiede i dati che mancano e prepara il preventivo dal vostro tariffario. Lo approvate voi prima che parta.",
   immagine: "/images/servizi/sviluppo.jpg",
   velo: "bg-bg-0/90",
-  icona: <IconaCodice />,
-  tag: ["INTEGRAZIONI", "GESTIONALI", "SU MISURA"],
+  icona: <IconaFulmine />,
+  tag: ["EMAIL", "MODULO DEL SITO", "CRM"],
 };
 
 const laterali: Scheda[] = [
   {
-    titolo: "AUTOMAZIONI DEI FLUSSI RIPETITIVI",
-    testo: "Copiare dati da un'email a un foglio, mandare lo stesso promemoria ogni settimana, aggiornare due programmi a mano: lo fa il sistema, voi controllate.",
-    immagine: "/images/servizi/automazione.jpg",
-    velo: "bg-bg-0/85",
-    icona: <IconaFulmine />,
-    tag: ["WORKFLOW", "EMAIL E FOGLI", "PROMEMORIA"],
-  },
-  {
-    titolo: "ASSISTENTI AI SUI VOSTRI DATI",
-    testo: "Assistenti che rispondono con i vostri documenti e le vostre procedure, per i clienti o per chi lavora con voi, con permessi chiari su cosa possono leggere.",
+    titolo: "ASSISTENTE WHATSAPP",
+    testo: "Risponde alle domande frequenti con i vostri documenti, fissa gli appuntamenti in agenda e manda il promemoria. Quando non sa, passa la conversazione a una persona.",
     immagine: "/images/servizi/agenti-ai.jpg",
     velo: "bg-bg-0/85",
     icona: <IconaAssistente />,
-    tag: ["ASSISTENTI", "DOCUMENTI", "PERMESSI"],
+    tag: ["WHATSAPP", "AGENDA", "DOCUMENTI"],
+  },
+  {
+    titolo: "SMISTAMENTO EMAIL",
+    testo: "Mette ordine nella casella generica: inoltra ogni messaggio alla persona giusta e prepara le bozze per le domande che tornano sempre.",
+    immagine: "/images/servizi/automazione.jpg",
+    velo: "bg-bg-0/85",
+    icona: <IconaCollegamento />,
+    tag: ["CASELLA INFO@", "BOZZE"],
   },
 ];
 
@@ -77,10 +78,10 @@ export default function CosaCostruiamo() {
     <section id="servizi" ref={ref} className="relative bg-bg-0 py-24 lg:py-[100px]">
       <div className="mx-auto max-w-[1440px] px-6 lg:px-14">
         <div className="mb-12">
-          <span className="font-label text-[13px] font-medium tracking-[2px] text-accent">01 / COSA FACCIAMO</span>
-          <h2 className="mt-4 text-4xl font-display font-extrabold tracking-[-1px] text-text-0 lg:text-[48px]">Cosa costruiamo, in concreto.</h2>
+          <span className="font-label text-[13px] font-medium tracking-[2px] text-accent">01 / COSA COSTRUIAMO</span>
+          <h2 className="mt-4 text-4xl font-display font-extrabold tracking-[-1px] text-text-0 lg:text-[48px]">Tre agenti per il lavoro di ogni giorno.</h2>
           <p className="mt-4 max-w-[600px] text-base leading-relaxed text-text-1">
-            Partiamo da come lavorate oggi e dai dati che usate ogni giorno. Costruiamo sugli strumenti che avete già.
+            L&apos;AI legge e prepara. Preventivi, risposte e casi dubbi passano sempre da una persona.
           </p>
         </div>
         <div className={cn("flex flex-col gap-6 transition-all duration-500 lg:flex-row", inView ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0")}>
@@ -89,6 +90,10 @@ export default function CosaCostruiamo() {
             {laterali.map((s) => <Card key={s.titolo} s={s} />)}
           </div>
         </div>
+        <p className="mt-8 max-w-3xl text-[15px] leading-relaxed text-text-1">
+          <Link href="/servizi" className="text-accent underline underline-offset-4">Come funzionano i tre agenti</Link>. Avete un
+          processo diverso da questi? Raccontatecelo: lo valutiamo insieme in 30 minuti.
+        </p>
       </div>
     </section>
   );

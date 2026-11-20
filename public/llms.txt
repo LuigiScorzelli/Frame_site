@@ -1,15 +1,16 @@
 # aiframe
 
-> aiframe costruisce automazioni, assistenti AI e collegamenti tra gli strumenti per piccole aziende senza reparto tecnico. Abbiamo anche un plugin WordPress gratuito, in italiano, che risponde ai clienti con le informazioni del sito e raccoglie le richieste fuori orario. Studio a Salerno.
+> aiframe costruisce agenti AI e automazioni per piccole aziende senza reparto tecnico. Tre agenti standard: preventivi e richieste, assistente WhatsApp, smistamento email. Il cliente sceglie dove stanno i dati: servizio gestito da aiframe in Unione Europea, oppure sul proprio server con le proprie chiavi. Ogni agente ha un controllo umano scritto. aiframe ha anche un plugin WordPress gratuito, in italiano, per chi vuole provare un assistente AI sul proprio sito. Studio a Salerno.
 
 ## Pagine
 
-- [Home](https://www.aiframe.it/): cosa costruiamo, per chi lavoriamo, come lavoriamo, come teniamo sotto controllo i dati, chi siamo; il plugin gratuito e lo stato della beta.
-- [Servizi](https://www.aiframe.it/servizi): progetti su misura (automazioni dei flussi ripetitivi, assistenti AI sui vostri dati, collegamenti e strumenti su misura) e servizi intorno al plugin (avvio guidato, piano a pagamento in arrivo, collegamento al gestionale). Prezzo su chiamata.
-- [Plugin](https://www.aiframe.it/plugin): cosa fa e cosa non fa, requisiti (WordPress 7.0, PHP 8.3), installazione della beta, domande frequenti.
+- [Home](https://www.aiframe.it/): i tre agenti, per chi lavoriamo, le due formule sui dati, come lavoriamo, chi siamo; il plugin gratuito e lo stato della beta.
+- [Servizi](https://www.aiframe.it/servizi): i tre agenti AI (preventivi e richieste, assistente WhatsApp, smistamento email) con cosa fanno, cosa resta a una persona e tempi stimati; le due formule (gestito da noi in UE, ospitato dal cliente); cosa serve per partire; agenti e automazioni su misura. Prezzi nella stima scritta, non sul sito.
+- [Offerta](https://www.aiframe.it/offerta): cinque posti a condizioni riservate per i primi casi reali, in cambio di un caso d'uso pubblicabile. Candidature fino al 31 marzo 2027.
+- [Plugin](https://www.aiframe.it/plugin): cosa fa e cosa non fa, requisiti (WordPress 7.0, PHP 8.3), installazione della beta, domande frequenti, avvio guidato e collegamento al gestionale.
 - [Check-up](https://www.aiframe.it/check-up): controllo gratuito di come un sito riceve le richieste (5 voci con punteggio e spiegazione, report via email se richiesto) e calcolatore di quanto costano le richieste perse.
 - [Risorse](https://www.aiframe.it/risorse): articoli per chi riceve richieste dal sito.
 - [Il percorso di una richiesta cliente, disegnato su un foglio](https://www.aiframe.it/risorse/percorso-richiesta-cliente): un foglio con cinque colonne e quattro passi per vedere dove si fermano le richieste dei clienti (modulo, email, WhatsApp, telefono) e cosa sistemare per primo, anche senza strumenti.
 - [Luigi Scorzelli](https://www.aiframe.it/autore/luigi-scorzelli): pagina autore degli articoli, AI Automation Engineer, fondatore di aiframe.
 - [Privacy](https://www.aiframe.it/privacy): come sono trattati i dati sul sito, nell'assistente e nel plugin.
-- [Contatti](https://www.aiframe.it/contatti): 30 minuti per parlare del tuo sito.
+- [Contatti](https://www.aiframe.it/contatti): 30 minuti per parlare delle vostre richieste.

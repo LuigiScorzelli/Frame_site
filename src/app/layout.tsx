@@ -26,9 +26,9 @@ const umamiAttivo =
     (process.env.VERCEL_ENV === "preview" && process.env.UMAMI_ANCHE_PREVIEW === "1"));
 
 // Defaults for pages without their own metadata (home og:title, 404): same message as the home page.
-const titoloPredefinito = `${AGENCY_NAME}: automazioni e assistenti AI per piccole aziende`;
+const titoloPredefinito = `${AGENCY_NAME}: agenti AI per piccole aziende`;
 const descrizione =
-  "Costruiamo automazioni, assistenti AI e collegamenti tra gli strumenti che usate già, per piccole aziende senza reparto tecnico. E abbiamo un plugin WordPress gratuito.";
+  "Costruiamo agenti AI che preparano i preventivi, rispondono su WhatsApp e smistano le email. Li gestiamo noi in UE, oppure girano sul vostro server con le vostre chiavi.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

@@ -7,7 +7,7 @@ Ordine di esecuzione. Ogni voce ha un criterio di accettazione: finché non è v
 ## Stato al 20/11
 | Sprint | Stato |
 | --- | --- |
-| A · Offerta agenti | In corso: A.1 e A.2 chiuse, A.3 e A.4 in PR; prossima A.5 (home) |
+| A · Offerta agenti | In corso: A.1 e A.2 chiuse, A.3-A.6 in PR; restano la candidatura di prova, il Post Inspector e A.7 (post LinkedIn) |
 | 0 | Chiuso (`esito-sprint-0.md`) |
 | 1 | Chiuse 1.1 e 1.4. Aperte 1.2 (manca l'articolo 2) e 1.5 (repo del plugin). 1.3 spostata, vedi sotto |
 | 2 | Avviata solo la 2.2 (checkout Freemius in sandbox sulle anteprime). Dopo lo Sprint A |
@@ -24,8 +24,8 @@ Base dei contenuti (Company Brain, bozze approvate da Luigi per il preventivo de
 | A.2 | **Chiusa il 20/11** (testi approvati da Luigi). Testi nuovi in `03-contenuti.md`: home, `/servizi`, pagina dell'offerta, menu. Voce "noi"; le demo si chiamano demo; nessun numero di risultato finché non c'è un caso vero | Luigi ha letto e approvato i testi prima che diventino codice |
 | A.3 | **Fatta il 20/11, in PR.** `/servizi` riscritta: i tre agenti standard (preventivi e richieste, assistente WhatsApp, smistamento email) con cosa fa, cosa controlla una persona e tempi dichiarati come stime; le due formule (servizio gestito in UE, dati sotto il controllo del cliente); "su misura" in fondo | Le tre categorie generiche di oggi non ci sono più; ogni agente ha il suo punto di controllo umano scritto |
 | A.4 | **Fatta il 20/11, in PR.** Manca la candidatura di prova vera, che fa Luigi dall'anteprima. Pagina nuova dell'offerta per 5 clienti: cosa ricevono (sconto sull'avvio, canone pieno), cosa danno in cambio (permesso scritto di pubblicare il caso, numeri prima e dopo, testimonianza), requisiti (Google Workspace, sito in HTTPS), posti e scadenza, modulo di candidatura con consenso. Solo agenti standard, uno per cliente | La candidatura di prova arriva per email e in Brevo con una `FONTE` dedicata; rate limit attivo sulla route |
-| A.5 | Home: hero e "Cosa costruiamo" sugli agenti, fascia sui dati allineata alle due formule, richiamo all'offerta. La fascia inFrame resta | In 5 secondi si capisce che vendiamo agenti; nessun numero senza fonte; Lighthouse accessibilità ≥ 90 |
-| A.6 | Menu e footer, `metadata` e immagine Open Graph della pagina nuova, `sitemap.ts`, `public/llms.txt`, eventi `click_candidatura` e `candidatura_ok` | Post Inspector di LinkedIn corretto sulla pagina dell'offerta |
+| A.5 | **Fatta il 20/11, in PR.** Home: hero e "Cosa costruiamo" sugli agenti, fascia sui dati allineata alle due formule, richiamo all'offerta. La fascia inFrame resta | In 5 secondi si capisce che vendiamo agenti; nessun numero senza fonte; Lighthouse accessibilità ≥ 90 |
+| A.6 | **Fatta il 20/11, in PR.** Manca il Post Inspector di LinkedIn, che si fa dopo il merge. Menu e footer, `metadata` e immagine Open Graph della pagina nuova, `sitemap.ts`, `public/llms.txt`, eventi `click_candidatura` e `candidatura_ok` | Post Inspector di LinkedIn corretto sulla pagina dell'offerta |
 | A.7 | Post LinkedIn di annuncio (testo nel Company Brain, non in questo repo) | Bozza pronta per Luigi |
 
 **Decisioni di Luigi del 20/11:** il favore dell'offerta è uno sconto sull'avvio (il canone non si tocca); solo agenti standard; canali: sito e LinkedIn.
