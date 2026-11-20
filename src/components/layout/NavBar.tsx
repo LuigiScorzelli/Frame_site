@@ -6,17 +6,21 @@ import { cn } from "@/lib/utils";
 import Logo from "@/components/ui/Logo";
 import TrackedLink from "@/components/ui/TrackedLink";
 import { AGENCY_NAME, BOOKING_URL } from "@/lib/brand";
+import { useOffertaAperta } from "@/lib/useOffertaAperta";
 
 const navLinks = [
   { label: "SERVIZI", href: "/servizi" },
+  { label: "OFFERTA", href: "/offerta", soloConOfferta: true },
   { label: "PLUGIN", href: "/plugin" },
-  { label: "CHECK-UP", href: "/check-up" },
   { label: "RISORSE", href: "/risorse" },
 ];
 
 export default function NavBar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  // The Offerta entry leaves the menu when applications close (src/lib/offerta.ts).
+  const offerta = useOffertaAperta();
+  const voci = navLinks.filter((l) => !l.soloConOfferta || offerta);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -40,7 +44,7 @@ export default function NavBar() {
         </Link>
 
         <div className="hidden items-center gap-8 md:flex">
-          {navLinks.map((link) => (
+          {voci.map((link) => (
             <Link key={link.href} href={link.href} className="font-label text-[13px] font-medium tracking-wider text-text-1 transition-colors hover:text-text-0" style={{ letterSpacing: "1px" }}>{link.label}</Link>
           ))}
         </div>
@@ -63,7 +67,7 @@ export default function NavBar() {
         mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
       )}>
         <div className="flex h-full flex-col items-center justify-center gap-8">
-          {navLinks.map((link) => (
+          {voci.map((link) => (
             <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)} className="font-label text-xl font-medium tracking-wider text-text-0 transition-colors hover:text-accent">{link.label}</Link>
           ))}
           <TrackedLink href={BOOKING_URL} evento="click_prenota" props={{ posizione: "menu" }} className="mt-4 bg-accent px-8 py-3 font-label text-sm font-bold tracking-wider text-bg-0">PRENOTA 30 MINUTI &rarr;</TrackedLink>

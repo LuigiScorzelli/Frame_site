@@ -5,10 +5,10 @@ import { useInView } from "@/components/animations/useInView";
 
 // Labels, not figures: no number without a source.
 const voci = [
-  { valore: "DATI", etichetta: "ACCESSI SOLO DOVE SERVONO" },
-  { valore: "AI", etichetta: "ASSISTENTI SUI VOSTRI DOCUMENTI" },
-  { valore: "SEC", etichetta: "PERMESSI E INTEGRAZIONI CONTROLLATI" },
-  { valore: "OPS", etichetta: "AUTOMAZIONI PER IL LAVORO DI OGNI GIORNO" },
+  { valore: "LEGGE", etichetta: "RICHIESTE DA EMAIL, MODULO E WHATSAPP" },
+  { valore: "PREPARA", etichetta: "BOZZE DI PREVENTIVI E RISPOSTE" },
+  { valore: "CHIEDE", etichetta: "A UNA PERSONA NEI CASI DUBBI" },
+  { valore: "DATI", etichetta: "IN UE, DOVE DECIDETE VOI" },
 ];
 
 export default function MetricsBar() {

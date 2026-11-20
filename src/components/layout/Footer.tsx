@@ -1,11 +1,15 @@
+"use client";
+
 import Link from "next/link";
-import { ACCOUNT_URL, AGENCY_NAME, CITY, CONTACT_EMAIL, FOUNDER_URL, PLUGIN_NAME } from "@/lib/brand";
+import { ACCOUNT_URL, AGENCY_NAME, CITY, CONTACT_EMAIL, FOUNDER_URL } from "@/lib/brand";
+import { useOffertaAperta } from "@/lib/useOffertaAperta";
 import TrackedLink from "@/components/ui/TrackedLink";
 import Logo from "@/components/ui/Logo";
 import { COOKIE_POLICY_URL, IUBENDA_ATTIVO, POLICY_ATTIVA } from "@/lib/iubenda";
 
 const cosaFacciamo = [
   { label: "Servizi", href: "/servizi" },
+  { label: "Offerta", href: "/offerta", soloConOfferta: true },
   { label: "Plugin", href: "/plugin" },
   { label: "Check-up", href: "/check-up" },
   { label: "Risorse", href: "/risorse" },
@@ -21,6 +25,7 @@ const linkClass = "text-sm text-text-1 transition-colors hover:text-text-0";
 const headClass = "mb-4 font-label text-[12px] font-medium tracking-[2px] text-accent";
 
 export default function Footer() {
+  const offerta = useOffertaAperta();
   return (
     <footer className="bg-bg-0" style={{ borderTop: "2px solid #BFFF00" }}>
       <div className="mx-auto max-w-[1440px] px-6 py-12 lg:px-14">
@@ -30,7 +35,7 @@ export default function Footer() {
               <Logo className="text-[48px]" />
             </Link>
             <p className="mt-3 text-sm text-text-1">
-              {AGENCY_NAME}, automazioni e AI per piccole aziende. Il nostro primo prodotto è {PLUGIN_NAME}.
+              {AGENCY_NAME} costruisce agenti AI e automazioni per piccole aziende. I dati stanno dove decidete voi.
             </p>
             <a href={`mailto:${CONTACT_EMAIL}`} className="mt-3 inline-block font-label text-sm text-accent hover:underline">
               {CONTACT_EMAIL}
@@ -54,7 +59,7 @@ export default function Footer() {
             <div>
               <h2 className={headClass}>COSA FACCIAMO</h2>
               <ul className="space-y-3">
-                {cosaFacciamo.map((l) => (
+                {cosaFacciamo.filter((l) => !l.soloConOfferta || offerta).map((l) => (
                   <li key={l.href}><Link href={l.href} className={linkClass}>{l.label}</Link></li>
                 ))}
               </ul>

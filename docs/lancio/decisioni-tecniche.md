@@ -268,3 +268,15 @@ Con `CALENDLY_URL` valorizzato (dal 9/11 costante in `brand.ts`) la pagina incor
 
 **Da fare prima della produzione:** testo dei due consensi dal consulente privacy; attributo `FONTE` di Brevo con il valore nuovo `offerta` (è un testo libero: nessuna modifica in Brevo).
 
+## 2026-11-20 · Home, menu e footer sugli agenti AI (voci A.5 e A.6)
+
+**Come:** i testi approvati di `03-contenuti.md` nelle sezioni di `src/components/sections/home/` (hero, ticker, barra, tre agenti, come lavoriamo, chi siamo) e in `src/app/page.tsx` (per chi, fascia offerta, fascia plugin, chiusura). `DatiBand` non usa più `FasciaPausa`: ha lo stesso aspetto ma è più larga, per le due schede delle formule. Ordine delle sezioni: 01 cosa costruiamo, per chi, 02 dati, 03 come lavoriamo, offerta, plugin, 04 chi siamo. Titolo e descrizione predefiniti del sito (`layout.tsx`) e immagine Open Graph generale allineati: chiude il problema 6 dell'esito dello Sprint 0. `public/llms.txt` riscritto (problema 5).
+
+**Menu:** Servizi · Offerta · Plugin · Risorse. Check-up resta nel footer e nella fascia plugin della home.
+
+**La voce Offerta sparisce da sola.** Menu e footer usano `useOffertaAperta()` (`src/lib/useOffertaAperta.ts`): le pagine statiche sono costruite una volta, quindi sul server la voce c'è sempre e nel browser decide l'orologio del visitatore. Dopo il 31/03/2027 una pagina costruita prima toglie la voce al caricamento; chi naviga senza JavaScript la vede finché non c'è un deploy, e arriva alla pagina "Le candidature sono chiuse". Per questo `Footer` è diventato un componente client. La fascia offerta della home si rigenera ogni ora, come `/servizi`.
+
+**Provato il 20/11** (build di produzione in locale): home a 1280 px e a 375 px, nessuno scorrimento orizzontale, nessun errore di idratazione, nessun "€"; menu e footer con la voce Offerta. Lighthouse 13.6.0, solo accessibilità: home 100, `/offerta` 100, `/servizi` 100 (unico audit fallito: `label-content-name-mismatch`, già presente).
+
+**Resta fuori dal repo:** il workflow n8n dell'assistente sulla VPS, che descrive ancora i servizi vecchi.
+

@@ -1,6 +1,6 @@
 const voci = [
-  "AUTOMAZIONI ·", "ASSISTENTI AI ·", "COLLEGAMENTI TRA STRUMENTI ·", "STRUMENTI SU MISURA ·",
-  "PLUGIN WORDPRESS ·", "WORKFLOW ·", "DATI SOTTO CONTROLLO ·", "PICCOLE AZIENDE ·",
+  "AGENTI AI ·", "PREVENTIVI ·", "WHATSAPP ·", "SMISTAMENTO EMAIL ·",
+  "DATI IN UE ·", "SUL VOSTRO SERVER O GESTITI DA NOI ·", "PICCOLE AZIENDE ·",
 ];
 
 /** Decorative scrolling band (production style): hidden from screen readers, the words repeat the page. */

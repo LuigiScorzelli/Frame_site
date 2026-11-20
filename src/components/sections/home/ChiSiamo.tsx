@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import { useInView } from "@/components/animations/useInView";
 import { ScrittaSfondo } from "@/components/ui/Sfondo";
-import { AGENCY_NAME, CITY, FOUNDER_URL, LOGO_TEXT, PLUGIN_NAME } from "@/lib/brand";
+import { AGENCY_NAME, CITY, FOUNDER_URL, LOGO_TEXT } from "@/lib/brand";
 
 const valori = [
   { icona: "⚡", etichetta: "OPERATIVITÀ", testo: "Soluzioni pensate per il lavoro di ogni giorno." },
@@ -20,14 +20,14 @@ export default function ChiSiamo() {
       <ScrittaSfondo testo={LOGO_TEXT} />
       <div className="relative mx-auto max-w-[1440px] px-6 lg:px-14">
         <div className="mb-12">
-          <span className="font-label text-[13px] font-medium tracking-[2px] text-accent">03 / CHI C&apos;È DIETRO</span>
+          <span className="font-label text-[13px] font-medium tracking-[2px] text-accent">04 / CHI C&apos;È DIETRO</span>
           <h2 className="mt-4 text-4xl font-display font-extrabold tracking-[-1px] text-text-0 lg:text-[48px]">Chi siamo.</h2>
         </div>
         <div className="grid gap-16 lg:grid-cols-2">
           <div className={cn("transition-all duration-500", inView ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0")}>
             <p className="text-lg leading-relaxed text-text-1">
-              {AGENCY_NAME} è lo studio di Luigi Scorzelli, a {CITY}. Costruiamo automazioni per piccole aziende senza
-              reparto tecnico. {PLUGIN_NAME} nasce da una cosa vista in ogni azienda per cui abbiamo lavorato: le
+              {AGENCY_NAME} è lo studio di Luigi Scorzelli, a {CITY}. Costruiamo agenti AI e automazioni per piccole
+              aziende senza reparto tecnico. Partiamo da una cosa vista in ogni azienda per cui abbiamo lavorato: le
               richieste arrivano alle 22 e qualcuno le legge alle 9.
             </p>
             <a href={FOUNDER_URL} target="_blank" rel="noopener noreferrer" className="mt-6 inline-block font-label text-sm text-accent hover:underline">
