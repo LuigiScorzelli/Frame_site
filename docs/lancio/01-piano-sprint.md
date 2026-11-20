@@ -7,7 +7,7 @@ Ordine di esecuzione. Ogni voce ha un criterio di accettazione: finché non è v
 ## Stato al 20/11
 | Sprint | Stato |
 | --- | --- |
-| A · Offerta agenti | Da iniziare: è il lavoro in corso |
+| A · Offerta agenti | In corso: A.1 e A.2 chiuse, A.3 in PR; prossima A.4 (pagina `/offerta`) |
 | 0 | Chiuso (`esito-sprint-0.md`) |
 | 1 | Chiuse 1.1 e 1.4. Aperte 1.2 (manca l'articolo 2) e 1.5 (repo del plugin). 1.3 spostata, vedi sotto |
 | 2 | Avviata solo la 2.2 (checkout Freemius in sandbox sulle anteprime). Dopo lo Sprint A |
@@ -20,9 +20,9 @@ Base dei contenuti (Company Brain, bozze approvate da Luigi per il preventivo de
 
 | # | Lavoro | Accettazione |
 | --- | --- | --- |
-| A.1 | Decisione registrata e piano riscritto (questo file, `decisioni-tecniche.md`, `00-LEGGIMI.md`) | Una sessione nuova sa cosa fare leggendo solo `docs/lancio/` |
-| A.2 | Testi nuovi in `03-contenuti.md`: home, `/servizi`, pagina dell'offerta, menu. Voce "noi"; le demo si chiamano demo; nessun numero di risultato finché non c'è un caso vero | Luigi ha letto e approvato i testi prima che diventino codice |
-| A.3 | `/servizi` riscritta: i tre agenti standard (preventivi e richieste, assistente WhatsApp, smistamento email) con cosa fa, cosa controlla una persona e tempi dichiarati come stime; le due formule (servizio gestito in UE, dati sotto il controllo del cliente); "su misura" in fondo | Le tre categorie generiche di oggi non ci sono più; ogni agente ha il suo punto di controllo umano scritto |
+| A.1 | **Chiusa il 20/11.** Decisione registrata e piano riscritto (questo file, `decisioni-tecniche.md`, `00-LEGGIMI.md`) | Una sessione nuova sa cosa fare leggendo solo `docs/lancio/` |
+| A.2 | **Chiusa il 20/11** (testi approvati da Luigi). Testi nuovi in `03-contenuti.md`: home, `/servizi`, pagina dell'offerta, menu. Voce "noi"; le demo si chiamano demo; nessun numero di risultato finché non c'è un caso vero | Luigi ha letto e approvato i testi prima che diventino codice |
+| A.3 | **Fatta il 20/11, in PR.** `/servizi` riscritta: i tre agenti standard (preventivi e richieste, assistente WhatsApp, smistamento email) con cosa fa, cosa controlla una persona e tempi dichiarati come stime; le due formule (servizio gestito in UE, dati sotto il controllo del cliente); "su misura" in fondo | Le tre categorie generiche di oggi non ci sono più; ogni agente ha il suo punto di controllo umano scritto |
 | A.4 | Pagina nuova dell'offerta per 5 clienti: cosa ricevono (sconto sull'avvio, canone pieno), cosa danno in cambio (permesso scritto di pubblicare il caso, numeri prima e dopo, testimonianza), requisiti (Google Workspace, sito in HTTPS), posti e scadenza, modulo di candidatura con consenso. Solo agenti standard, uno per cliente | La candidatura di prova arriva per email e in Brevo con una `FONTE` dedicata; rate limit attivo sulla route |
 | A.5 | Home: hero e "Cosa costruiamo" sugli agenti, fascia sui dati allineata alle due formule, richiamo all'offerta. La fascia inFrame resta | In 5 secondi si capisce che vendiamo agenti; nessun numero senza fonte; Lighthouse accessibilità ≥ 90 |
 | A.6 | Menu e footer, `metadata` e immagine Open Graph della pagina nuova, `sitemap.ts`, `public/llms.txt`, eventi `click_candidatura` e `candidatura_ok` | Post Inspector di LinkedIn corretto sulla pagina dell'offerta |
@@ -34,8 +34,6 @@ Base dei contenuti (Company Brain, bozze approvate da Luigi per il preventivo de
 
 **Ancora da decidere:**
 - **Entità dello sconto sull'avvio.** Non blocca: i testi dicono "condizioni riservate ai primi 5" e la cifra va nella stima scritta.
-- **Indirizzo della pagina dell'offerta.** Proposta in `03-contenuti.md`: `/offerta`.
-- **Servizi intorno a inFrame** (avvio guidato, piano a pagamento, collegamento al gestionale): proposta in `03-contenuti.md` di spostarli da `/servizi` a `/plugin`.
 
 Fuori dallo Sprint A: agenti su misura in pubblicità, pagina `/casi` (arriva con il primo caso vero, voce 3.4), email a freddo (in pausa).
 

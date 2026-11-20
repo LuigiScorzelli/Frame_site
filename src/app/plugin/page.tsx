@@ -7,12 +7,12 @@ import Section from "@/components/ui/Section";
 import PageHero from "@/components/ui/PageHero";
 import FasciaPausa from "@/components/ui/FasciaPausa";
 import Scheda from "@/components/ui/Scheda";
-import { IconaCroce, IconaSpunta } from "@/components/ui/Icone";
+import { IconaCollegamento, IconaCroce, IconaRazzo, IconaSpunta } from "@/components/ui/Icone";
 import InteresseForm from "@/components/ui/InteresseForm";
 import ProvaFreemius from "@/components/ui/ProvaFreemius";
 import { checkoutSandboxAttivo } from "@/lib/freemius";
 import JsonLd from "@/components/seo/JsonLd";
-import { AGENCY_NAME, BETA_DOWNLOAD_PATH, LOGO_TEXT, PLUGIN_NAME, SITE_URL, WPORG_URL } from "@/lib/brand";
+import { AGENCY_NAME, BETA_DOWNLOAD_PATH, BOOKING_URL, CONTACT_EMAIL, LOGO_TEXT, PLUGIN_NAME, SITE_URL, WPORG_URL } from "@/lib/brand";
 import { metaSocial } from "@/lib/seo";
 
 const descrizione =
@@ -66,6 +66,25 @@ const faq = [
     domanda: "Dove vengono elaborati i dati?",
     risposta:
       "Le domande vanno dal tuo sito direttamente al fornitore AI che hai scelto, senza passare dai nostri server, e sono elaborate nella sua regione (di norma Stati Uniti). Citalo nella privacy del tuo sito. Le conversazioni restano 24 ore sul tuo server, poi vengono cancellate.",
+  },
+];
+
+const intornoAlPlugin = [
+  {
+    nome: "Avvio guidato",
+    icona: <IconaRazzo />,
+    etichette: ["IN UN GIORNO", "VIDEOCHIAMATA"],
+    perChi: "Chi vuole partire bene in un giorno",
+    comprende:
+      "Installazione, caricamento di listini e documenti, 20 domande vere di prova, orari e tono delle risposte, consegna in videochiamata di 30 minuti.",
+  },
+  {
+    nome: "Collegamento al tuo gestionale",
+    icona: <IconaCollegamento />,
+    etichette: ["CRM", "GESTIONALE"],
+    perChi: "Chi ha già un CRM o un gestionale",
+    comprende:
+      "Le richieste entrano nel tuo sistema (HubSpot provato nei nostri test), con controllo dei duplicati e registro delle operazioni.",
   },
 ];
 
@@ -222,7 +241,31 @@ export default function PluginPage() {
           </div>
         </Section>
 
-        <section className="border-t border-border bg-bg-1 py-24">
+        {/* Moved here from /servizi on 2026-11-20: that page now covers only the agency's AI agents. */}
+        <Section id="avvio" numero={6} tono="alterno" tag="LO FACCIAMO NOI" title="Non vuoi configurare niente? Lo facciamo noi.">
+          <div className="grid gap-6 md:grid-cols-2">
+            {intornoAlPlugin.map((s) => (
+              <Scheda key={s.nome} icona={s.icona} titolo={s.nome} etichette={s.etichette}>
+                <p className="font-label text-[13px] tracking-[1px] text-accent">PER CHI</p>
+                <p className="mt-1 text-[15px] text-text-0">{s.perChi}</p>
+                <p className="mt-5 font-label text-[13px] tracking-[1px] text-accent">COSA COMPRENDE</p>
+                <p className="mt-1 text-[15px] leading-relaxed">{s.comprende}</p>
+              </Scheda>
+            ))}
+          </div>
+          <div className="mt-8">
+            <CtaButton href={BOOKING_URL} evento="click_prenota" props={{ pagina: "plugin", posizione: "pagina" }}>
+              PRENOTA 30 MINUTI &rarr;
+            </CtaButton>
+          </div>
+          <p className="mt-8 text-[15px] text-text-1">
+            Gestisci siti per i tuoi clienti?{" "}
+            <a href={`mailto:${CONTACT_EMAIL}`} className="text-accent underline underline-offset-4">Scrivici</a>: stiamo
+            preparando una versione per agenzie.
+          </p>
+        </Section>
+
+        <section className="border-t border-border bg-bg-0 py-24">
           <div className="mx-auto flex max-w-[1440px] flex-col items-center gap-4 px-6 text-center sm:flex-row sm:justify-center lg:px-14">
             <CtaButton
               variant="gradient"
@@ -232,7 +275,7 @@ export default function PluginPage() {
             >
               INSTALLA GRATIS &rarr;
             </CtaButton>
-            <CtaButton href="/servizi" variant="secondary">
+            <CtaButton href="#avvio" variant="secondary">
               PREFERISCI CHE LO FACCIAMO NOI? VEDI L&apos;AVVIO GUIDATO
             </CtaButton>
           </div>
