@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getArticoli } from "@/lib/content";
 import { AUTORI, SITE_URL } from "@/lib/brand";
+import { offertaAperta } from "@/lib/offerta";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -9,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/plugin`, lastModified: now, changeFrequency: "weekly", priority: 0.95 },
     { url: `${SITE_URL}/check-up`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
     { url: `${SITE_URL}/servizi`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    ...(offertaAperta(now) ? [{ url: `${SITE_URL}/offerta`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.85 }] : []),
     { url: `${SITE_URL}/risorse`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE_URL}/contatti`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },

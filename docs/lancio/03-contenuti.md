@@ -207,9 +207,10 @@ Riga: Scegliamo aziende di settori diversi e partiamo con una o due alla volta, 
 3. Vedete la demo con dati di esempio della vostra azienda.
 4. Firmiamo la scheda di progetto, con i punti da verificare e le cose da misurare, e cominciamo.
 
-**Candidatura** (ancora `#candidatura`; modulo, `FONTE=offerta` in Brevo, evento `candidatura_ok`, rate limit come `/api/contact`)
+**Candidatura** (ancora `#candidatura`; modulo verso `POST /api/candidatura`, evento `candidatura_ok`, 5 richieste al minuto per IP)
 Campi: Nome e cognome · Azienda · Email di lavoro · Sito web · Quale agente vi interessa (preventivi e richieste / assistente WhatsApp / smistamento email / non so ancora) · Come gestite oggi queste richieste? (testo libero) · Quante ne ricevete in un mese, più o meno? (facoltativo) · Usate Google Workspace? (sì / no / non so).
 Consenso: "Ho letto l'informativa privacy e acconsento a essere ricontattato da aiframe su questa candidatura." [da far confermare al consulente privacy]
+Seconda casella, facoltativa (aggiunta il 20/11 con il codice): "Voglio ricevere anche le email di aiframe su agenti AI e automazioni (facoltativo, con doppia conferma)." Solo chi la spunta entra in Brevo.
 Pulsante: `Invia la candidatura`.
 Dopo l'invio: "Candidatura ricevuta. Vi rispondiamo per email, di solito entro due giorni lavorativi." [tempo di risposta da confermare con Luigi]
 Errore: "Non siamo riusciti a inviare la candidatura. Riprovate tra poco o scriveteci a info@aiframe.it."

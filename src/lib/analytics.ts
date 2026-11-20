@@ -13,7 +13,9 @@ export type Evento =
   | "click_checkup"
   | "click_account"
   | "download_checklist"
-  | "download_risorsa";
+  | "download_risorsa"
+  | "click_candidatura"
+  | "candidatura_ok";
 
 /** Allowed properties only. Never put emails or visitor URLs here. */
 export type ProprietaEvento = {

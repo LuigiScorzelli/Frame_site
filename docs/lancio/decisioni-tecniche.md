@@ -250,3 +250,21 @@ Con `CALENDLY_URL` valorizzato (dal 9/11 costante in `brand.ts`) la pagina incor
 
 **Provato il 20/11** (build di produzione in locale): `/servizi` e `/plugin#avvio` a 800 px e a 375 px, nessuno scorrimento orizzontale, nessun "€" in pagina; in console solo i 404 degli script Vercel, che in locale non esistono.
 
+## 2026-11-20 · Pagina `/offerta` e candidature (voce A.4)
+
+**Come:**
+- `src/lib/offerta.ts`: dati dell'offerta (`OFFERTA`: 5 posti, ultimo giorno 31/03/2027, `postiEsauriti`), `offertaAperta()` e `validaCandidatura()`, usata sia dal modulo sia dalla route.
+- `src/app/offerta/page.tsx` con la sua immagine Open Graph e il JSON-LD `FAQPage`; `src/components/ui/ModuloCandidatura.tsx`.
+- `POST /api/candidatura`: limite di 5 richieste al minuto per IP, campo trappola, convalida, email alla casella dell'agenzia tramite Resend con `replyTo` del candidato.
+- Eventi `click_candidatura` e `candidatura_ok`; `/offerta` nella sitemap finché l'offerta è aperta; riga di rimando in `/servizi`; una frase in `/privacy`.
+
+**Chiusura automatica:** la pagina e `/servizi` si rigenerano ogni ora (`revalidate = 3600`). Dal 1/4/2027, ora italiana, `/offerta` mostra "Le candidature sono chiuse", il rimando in `/servizi` sparisce, la sitemap la toglie e la route risponde 410. Se i posti finiscono prima: `postiEsauriti: true` in `src/lib/offerta.ts` e un deploy. La voce di menu (A.6) dovrà usare la stessa funzione.
+
+**Brevo solo con un consenso a parte.** Il piano diceva "in Brevo con una `FONTE` dedicata" per ogni candidatura. Il consenso del modulo però copre solo "essere ricontattato su questa candidatura", e Brevo è la lista delle email: per questo c'è una seconda casella facoltativa ("Voglio ricevere anche le email di aiframe…"). Solo chi la spunta entra in Brevo, con `FONTE=offerta` e doppia conferma. Le candidature si leggono nella posta, non in Brevo. Se Brevo fallisce, la candidatura resta valida (l'email è già partita) e l'errore va nei log.
+
+**Mai un successo finto:** senza `RESEND_API_KEY` la route risponde 503 "Candidature non ancora attive" (il modulo contatti, in quel caso, risponde 200).
+
+**Provato il 20/11:** 17 test nuovi (`src/lib/offerta.test.ts`, `src/app/api/candidatura/route.test.ts`, con Resend e Brevo sostituiti: nessuna email parte dai test), 88 in tutto. Nel browser, build di produzione: pagina a 800 px, modulo vuoto con i 7 errori, route con corpo vuoto (400), non oggetto (400), campo trappola (200). **Non provato:** un invio vero, perché in locale `RESEND_API_KEY` è valorizzata e sarebbe partita un'email. Lo fa Luigi dall'anteprima.
+
+**Da fare prima della produzione:** testo dei due consensi dal consulente privacy; attributo `FONTE` di Brevo con il valore nuovo `offerta` (è un testo libero: nessuna modifica in Brevo).
+

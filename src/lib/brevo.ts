@@ -1,6 +1,7 @@
 // Minimal Brevo client: only double opt-in contact creation (docs/lancio/02-specifiche.md, section 5).
 
-export type Fonte = "newsletter" | "checkup" | "beta";
+/** "offerta": applicants to the 5-client offer who also asked for updates (POST /api/candidatura). */
+export type Fonte = "newsletter" | "checkup" | "beta" | "offerta";
 
 interface ConfigBrevo {
   apiKey: string;
