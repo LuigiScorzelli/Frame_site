@@ -212,3 +212,26 @@ Con `CALENDLY_URL` valorizzato (dal 9/11 costante in `brand.ts`) la pagina incor
 **Provato il 19/11** (build di produzione in locale): tag `og:*`, `twitter:*`, `article:published_time` e `article:author` su 10 pagine; 6 immagini aperte e controllate; articolo inesistente → 404. Anteprima LinkedIn da fare dopo il merge: le anteprime Vercel sono protette.
 
 **In produzione dal 19/11, 16:16** (PR #16): `og:image` 200 (`image/png`) e `twitter:card=summary_large_image` su home, `/plugin`, `/servizi`, `/check-up`, `/risorse`, articolo, `/contatti`, `/privacy`; le immagini pesano come in locale, quindi anche nella build di Vercel i font si caricano. **Post Inspector di LinkedIn** su `/plugin` e sull'articolo: immagine, titolo e dominio corretti. Voce 1.4 chiusa.
+
+## 2026-11-20 · L'agenzia vende agenti AI; offerta di avvio per 5 clienti (Sprint A)
+
+**Decisione di Luigi del 20/11.** Il piano va rivisto partendo da cosa vende l'agenzia. Si punta sulla vendita di agenti AI; il tema dei dati è la leva: il cliente sceglie se ospitare e gestire gli agenti o lasciare a noi gestione e messa online. inFrame non è l'offerta dell'agenzia: è un prodotto dell'agenzia, disponibile a chi vuole provare prima di un progetto di AI più complesso. Resta con la sua pagina e non entra nel discorso sui servizi.
+
+**Da dove viene:** una richiesta di preventivo arrivata via email il 18/11 (impresa di servizi in avvio, tre agenti: preventivi, assistente WhatsApp, smistamento email). Il lavoro nel Company Brain (`vault/workspace/lavori/2026-11-18-preventivo-nitore/`) ha già le due formule e i prezzi decisi da Luigi il 19/11 per quel caso, e lo schema di offerta ripetibile (bozza, non listino ufficiale). Nessun dato del prospect va in questo repo.
+
+**Cosa si vende e si pubblicizza:**
+- tre agenti standard: preventivi e richieste, assistente WhatsApp, smistamento email. Sono workflow con l'AI dentro e un controllo umano dichiarato, non agenti autonomi: i testi lo devono dire;
+- due formule: servizio gestito in UE (server, backup, monitoraggio e modelli a carico nostro) oppure dati sotto il controllo del cliente (server e chiavi suoi, nostro accesso di manutenzione revocabile);
+- agenti su misura: si vendono a progetto, non si pubblicizzano.
+
+**Offerta per 5 clienti** (Luigi, 20/11): al massimo 5 clienti, solo sviluppo di agenti, per raccogliere casi d'uso reali. Scelte di Luigi: sconto sull'avvio (il canone resta pieno), solo agenti standard, canali sito e LinkedIn. Regole proposte e da confermare con i testi (A.2): un agente per cliente; scambio scritto nella scheda di progetto (permesso di pubblicare il caso, numeri prima e dopo, testimonianza); cosa si misura fissato all'inizio; scadenza oltre al numero di posti; clienti scaglionati, non cinque insieme.
+
+**Perché serve:** oggi non c'è nessun caso venduto, e gli asset sono demo. Senza casi veri il sito non può mostrare risultati (regola 4: niente numeri senza fonte).
+
+**Conseguenze sul piano:** nuovo Sprint A in testa a `01-piano-sprint.md`; Sprint 2 e 3 (Freemius, WordPress.org, sequenza Brevo, lancio di inFrame) vengono dopo, con le date da rifissare. Voce 1.3: il video non va in home; se si fa, va in `/plugin` e si lega al lancio.
+
+**Cosa non cambia nel sito:** grafica e componenti, `/plugin`, `/check-up`, `/risorse`, `/privacy`, `/contatti`, moduli, Brevo, rate limit, Open Graph. Cambiano i testi della home, `/servizi`, il menu, e si aggiunge la pagina dell'offerta.
+
+**Deciso da Luigi il 20/11 (sera):** niente prezzi sul sito; candidature fino al 31/03/2027 (il 31/01 proposto era troppo vicino); menu Servizi · Offerta · Plugin · Risorse, con Check-up nel footer.
+
+**Aperto:** entità dello sconto (nei testi "condizioni riservate ai primi 5", la cifra va nella stima scritta); indirizzo della pagina (proposta `/offerta`); dove mettere i servizi intorno a inFrame (proposta: in `/plugin`).
