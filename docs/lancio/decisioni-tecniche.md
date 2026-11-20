@@ -235,3 +235,18 @@ Con `CALENDLY_URL` valorizzato (dal 9/11 costante in `brand.ts`) la pagina incor
 **Deciso da Luigi il 20/11 (sera):** niente prezzi sul sito; candidature fino al 31/03/2027 (il 31/01 proposto era troppo vicino); menu Servizi · Offerta · Plugin · Risorse, con Check-up nel footer.
 
 **Aperto:** entità dello sconto (nei testi "condizioni riservate ai primi 5", la cifra va nella stima scritta); indirizzo della pagina (proposta `/offerta`); dove mettere i servizi intorno a inFrame (proposta: in `/plugin`).
+
+## 2026-11-20 · `/servizi` sugli agenti AI (voce A.3)
+
+**Testi approvati da Luigi il 20/11** (`03-contenuti.md`), con l'indirizzo `/offerta` per la pagina nuova e lo spostamento dei servizi intorno a inFrame.
+
+**Come:** `src/app/servizi/page.tsx` ha cinque sezioni: i tre agenti (schede con per chi, cosa fa, cosa resta a voi, tempi come stima), le due formule (`#formule`, due schede con le stesse sei voci), cosa serve per partire, su misura con il rimando a `/plugin`, i quattro passi. Titolo, descrizione e immagine Open Graph aggiornati.
+
+**Servizi intorno a inFrame:** "Avvio guidato" e "Collegamento al tuo gestionale", con la riga per le agenzie, sono ora in `/plugin`, sezione 06 (`#avvio`); il pulsante di chiusura di `/plugin` punta lì e non più a `/servizi`. La scheda "Piano a pagamento" non è stata spostata: `/plugin` ha già la sua sezione 05.
+
+**Rimandato ad A.4:** la riga di `/servizi` verso `/offerta`, perché la pagina non esiste ancora e il link darebbe 404.
+
+**Non toccati, da allineare in A.5 e A.6:** home, menu, footer, `public/llms.txt`. Fuori dal repo: l'assistente del sito risponde dal workflow n8n "Servizi" sulla VPS, che descrive ancora i servizi vecchi.
+
+**Provato il 20/11** (build di produzione in locale): `/servizi` e `/plugin#avvio` a 800 px e a 375 px, nessuno scorrimento orizzontale, nessun "€" in pagina; in console solo i 404 degli script Vercel, che in locale non esistono.
+
