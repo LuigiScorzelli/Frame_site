@@ -3,6 +3,7 @@ import { Resend } from "resend";
 import { configBrevo, creaContattoDoi } from "@/lib/brevo";
 import { CONTACT_EMAIL } from "@/lib/brand";
 import { ErroreCheckup, eseguiCheckup, normalizzaUrl, type RisultatoCheckup } from "@/lib/checkup";
+import { campoEmail, emailValida } from "@/lib/input";
 import { htmlReport, nomeSito, oggettoReport, testoReport } from "@/lib/checkup/report";
 import {
   controllaLimite,
@@ -19,7 +20,6 @@ import {
 export const runtime = "nodejs";
 export const maxDuration = 30;
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const RESEND_FROM = process.env.RESEND_FROM || "aiframe <noreply@aiframe.it>";
 
 const limitatore = creaLimitatore("checkup", 10, "1 h");
@@ -33,6 +33,7 @@ const MESSAGGI: Record<ErroreCheckup["codice"], { status: number; error: string 
   timeout: { status: 422, error: "Il sito non ha risposto entro 8 secondi. Riprova tra poco." },
   non_html: { status: 422, error: "L'indirizzo non porta a una pagina web." },
   troppi_redirect: { status: 422, error: "Il sito rimanda ad altri indirizzi troppe volte." },
+  troppo_complessa: { status: 422, error: "La pagina è troppo complessa per il controllo automatico. Puoi chiederci un controllo a mano." },
   errore_http: {
     status: 422,
     error: "Il sito ha rifiutato il nostro controllo (succede con alcuni sistemi anti-bot). Puoi chiederci un controllo a mano.",
@@ -108,8 +109,8 @@ export async function POST(request: Request) {
   }
   let email: string | null = null;
   if (body.email !== undefined && body.email !== null && body.email !== "") {
-    email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
-    if (!EMAIL_REGEX.test(email) || email.length > 200) {
+    email = campoEmail(body.email).toLowerCase();
+    if (!emailValida(email)) {
       return NextResponse.json({ error: "Inserisci un'email valida." }, { status: 400 });
     }
     if (body.consenso !== true) {

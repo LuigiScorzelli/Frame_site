@@ -1,15 +1,23 @@
 import { NextResponse } from "next/server";
 import { configBrevo, creaContattoDoi, type Fonte } from "@/lib/brevo";
-import { controllaLimite, creaLimitatore, intestazioniLimite } from "@/lib/ratelimit";
+import { campoEmail, emailValida } from "@/lib/input";
+import {
+  controllaLimite,
+  controllaLimiteChiave,
+  creaLimitatore,
+  hashSalato,
+  intestazioniLimite,
+} from "@/lib/ratelimit";
 
 // POST /api/newsletter: Brevo contact with double opt-in and FONTE attribute (0.7).
 // Body: { email, fonte: "newsletter" | "checkup" | "beta", consenso: true, interesse? }.
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const FONTI: readonly Fonte[] = ["newsletter", "checkup", "beta"];
 const INTERESSE_REGEX = /^[a-z0-9-]{1,32}$/;
 
 const limitatore = creaLimitatore("newsletter", 5, "60 s");
+// Per recipient: the sign-up form must not become a way to send confirmation emails to someone else's inbox.
+const limitatoreEmail = creaLimitatore("newsletter-email", 3, "24 h");
 
 export async function POST(request: Request) {
   const limite = await controllaLimite(limitatore, request);
@@ -28,8 +36,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Richiesta non valida." }, { status: 400 });
   }
 
-  const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
-  if (!EMAIL_REGEX.test(email) || email.length > 200) {
+  const email = campoEmail(body.email).toLowerCase();
+  if (!emailValida(email)) {
     return NextResponse.json({ error: "Inserisci un'email valida." }, { status: 400 });
   }
   if (body.consenso !== true) {
@@ -52,6 +60,10 @@ export async function POST(request: Request) {
     console.warn("newsletter: Brevo non configurato (BREVO_API_KEY, BREVO_LIST_ID, BREVO_DOI_TEMPLATE_ID, BREVO_REDIRECT_URL)");
     return NextResponse.json({ error: "Iscrizioni non ancora attive" }, { status: 503 });
   }
+
+  // Same answer as a real sign-up: nothing tells an abuser that the address is already being protected.
+  const limiteEmail = await controllaLimiteChiave(limitatoreEmail, hashSalato(`email:${email}`));
+  if (!limiteEmail.ok) return NextResponse.json({ ok: true });
 
   try {
     const esito = await creaContattoDoi(config, email, {

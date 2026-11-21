@@ -1,3 +1,5 @@
+import { campoEmail, emailValida, riga, testo } from "@/lib/input";
+
 // Launch offer for the first 5 clients (docs/lancio/01-piano-sprint.md, item A.4).
 // Decided by Luigi on 2026-11-20: 5 places, standard agents only, applications until 2027-03-31.
 
@@ -58,19 +60,13 @@ export interface Candidatura {
 export type CampoCandidatura = "nome" | "azienda" | "email" | "agente" | "processo" | "workspace" | "consenso";
 export type ErroriCandidatura = Partial<Record<CampoCandidatura, string>>;
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
-function testo(v: unknown, max: number): string {
-  return typeof v === "string" ? v.trim().slice(0, max) : "";
-}
-
 /** Validates the application form. Shared by the form (before sending) and the API route. */
 export function validaCandidatura(
   body: Record<string, unknown>,
 ): { ok: true; dati: Candidatura } | { ok: false; errori: ErroriCandidatura } {
-  const nome = testo(body.nome, 120);
-  const azienda = testo(body.azienda, 160);
-  const email = testo(body.email, 200).toLowerCase();
+  const nome = riga(body.nome, 120);
+  const azienda = riga(body.azienda, 160);
+  const email = campoEmail(body.email).toLowerCase();
   const processo = testo(body.processo, 3000);
   const agente = AGENTI_OFFERTA.find((a) => a.valore === body.agente)?.valore;
   const workspace = RISPOSTE_WORKSPACE.find((r) => r.valore === body.workspace)?.valore;
@@ -78,7 +74,7 @@ export function validaCandidatura(
   const errori: ErroriCandidatura = {};
   if (nome.length < 2) errori.nome = "Scrivete nome e cognome";
   if (azienda.length < 2) errori.azienda = "Scrivete il nome dell'azienda";
-  if (!EMAIL_REGEX.test(email)) errori.email = "Inserite un'email valida";
+  if (!emailValida(email)) errori.email = "Inserite un'email valida";
   if (!agente) errori.agente = "Scegliete un agente, oppure \"Non so ancora\"";
   if (processo.length < 20) errori.processo = "Raccontateci in due righe come gestite oggi queste richieste";
   if (!workspace) errori.workspace = "Scegliete una risposta";
@@ -91,10 +87,10 @@ export function validaCandidatura(
       nome,
       azienda,
       email,
-      sito: testo(body.sito, 300),
+      sito: riga(body.sito, 300),
       agente,
       processo,
-      volume: testo(body.volume, 80),
+      volume: riga(body.volume, 80),
       workspace,
       aggiornamenti: body.aggiornamenti === true,
     },

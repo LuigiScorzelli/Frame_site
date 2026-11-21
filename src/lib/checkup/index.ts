@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 import { redis } from "@/lib/ratelimit";
-import { linkContatti, rileva, valuta, type Voce } from "./analisi";
+import { linkContatti, rileva, troppoComplessa, valuta, type Voce } from "./analisi";
 import { ErroreCheckup, normalizzaUrl, scaricaPagina, type Pagina } from "./rete";
 
 // Check-up orchestrator: home page, contact page, 5 items, 1-hour cache of the result only (never the HTML).
@@ -58,7 +58,9 @@ async function cercaContatti(home: Pagina, scadenza: AbortSignal): Promise<Pagin
   for (const url of candidati.slice(0, 3)) {
     if (scadenza.aborted) return null;
     try {
-      return await scaricaPagina(url, scadenza);
+      const pagina = await scaricaPagina(url, scadenza);
+      // A contact page we will not parse is treated as not found: the home page result still stands.
+      return troppoComplessa(pagina.html) ? null : pagina;
     } catch (err) {
       // A forbidden address here means the site redirects to a private network: stop, do not retry.
       if (err instanceof ErroreCheckup && (err.codice === "indirizzo_vietato" || err.codice === "timeout")) return null;
@@ -77,6 +79,7 @@ export async function eseguiCheckup(url: URL, opzioni: { cache?: boolean } = {})
 
   const scadenza = AbortSignal.timeout(SCADENZA_MS);
   const home = await scaricaPagina(url, scadenza);
+  if (troppoComplessa(home.html)) throw new ErroreCheckup("troppo_complessa");
   const contatti = await cercaContatti(home, scadenza);
   const rilevamenti = rileva(home, contatti);
   const { punteggio, voci } = valuta(rilevamenti);

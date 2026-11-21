@@ -78,6 +78,42 @@ const ORARI =
 const CONSENSO = /privacy|consenso|acconsent|gdpr|trattamento|accett|informativa/i;
 const PAROLE_CONTATTI = /contatt|contact|scrivic|dove\s+siamo/i;
 
+/** Deepest nesting and most elements we accept: far above real pages (a large home page has a few thousand
+ * elements, nested a few dozen levels). */
+export const MAX_PROFONDITA = 500;
+export const MAX_ELEMENTI = 30_000;
+
+const VUOTI = new Set(["area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"]);
+
+/**
+ * True for pages built to keep the parser busy: its time grows with the square of the nesting depth, so a
+ * 1 MB page of nested tags would hold the function until its time limit. One linear pass over the tags,
+ * run before any parsing. Unclosed tags count as nesting, as they do for the parser; the content of
+ * scripts and styles is skipped, because "i<n" in inline JavaScript is not a tag.
+ */
+export function troppoComplessa(html: string): boolean {
+  const minuscolo = html.toLowerCase();
+  const tag = /<(\/?)([a-z][a-z0-9-]*)/g;
+  let profondita = 0;
+  let elementi = 0;
+  for (let m = tag.exec(minuscolo); m; m = tag.exec(minuscolo)) {
+    if (m[1]) {
+      if (profondita > 0) profondita--;
+      continue;
+    }
+    if (++elementi > MAX_ELEMENTI) return true;
+    if (m[2] === "script" || m[2] === "style") {
+      const fine = minuscolo.indexOf(`</${m[2]}`, tag.lastIndex);
+      if (fine === -1) break;
+      tag.lastIndex = fine + m[2].length + 2;
+      continue;
+    }
+    if (VUOTI.has(m[2])) continue;
+    if (++profondita > MAX_PROFONDITA) return true;
+  }
+  return false;
+}
+
 function radice(html: string): HTMLElement {
   return parse(html, { comment: false, blockTextElements: { script: true, style: true, noscript: true, pre: true } });
 }

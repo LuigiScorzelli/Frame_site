@@ -4,7 +4,13 @@ import { AGENCY_NAME, CONTACT_EMAIL } from "@/lib/brand";
 import { configBrevo, creaContattoDoi } from "@/lib/brevo";
 import { archivioCandidatureAttivo, salvaCandidatura, segnaEmailAgenzia } from "@/lib/candidature";
 import { AGENTI_OFFERTA, CAMPO_TRAPPOLA, RISPOSTE_WORKSPACE, offertaAperta, validaCandidatura } from "@/lib/offerta";
-import { controllaLimite, creaLimitatore, intestazioniLimite } from "@/lib/ratelimit";
+import {
+  controllaLimite,
+  controllaLimiteChiave,
+  creaLimitatore,
+  hashSalato,
+  intestazioniLimite,
+} from "@/lib/ratelimit";
 
 // POST /api/candidatura: application to the 5-client launch offer (docs/lancio/01-piano-sprint.md, A.4).
 // Order: 1) copy in Upstash (src/lib/candidature.ts), 2) email to the agency inbox through Resend.
@@ -15,6 +21,8 @@ const CONTACT_TO_EMAIL = process.env.CONTACT_TO_EMAIL || CONTACT_EMAIL;
 const RESEND_FROM = process.env.RESEND_FROM || "aiframe <noreply@aiframe.it>";
 
 const limitatore = creaLimitatore("candidatura", 5, "60 s");
+// Per recipient: the receipt and the Brevo confirmation go to an address nobody verified yet.
+const limitatoreEmail = creaLimitatore("candidatura-email", 3, "24 h");
 
 function escapeHtml(str: string): string {
   return str
@@ -115,6 +123,11 @@ export async function POST(request: Request) {
   await segnaEmailAgenzia(chiave, "inviata");
 
   // The application is already saved and delivered: from here on a fault is logged, never shown as an error.
+  // The address is not verified, so at most 3 messages a day reach it and the receipt carries no text
+  // typed by the visitor: the form cannot be used to deliver someone else's words or links from our sender.
+  const limiteEmail = await controllaLimiteChiave(limitatoreEmail, hashSalato(`email:${c.email}`));
+  if (!limiteEmail.ok) return NextResponse.json({ ok: true });
+
   try {
     const { error } = await resend.emails.send({
       from: RESEND_FROM,
@@ -122,8 +135,8 @@ export async function POST(request: Request) {
       replyTo: CONTACT_TO_EMAIL,
       subject: "Abbiamo ricevuto la vostra candidatura",
       html: `
-        <p>Buongiorno ${escapeHtml(c.nome)},</p>
-        <p>abbiamo ricevuto la candidatura di ${escapeHtml(c.azienda)} all'offerta per i primi 5 clienti (agente: ${escapeHtml(agente)}).</p>
+        <p>Buongiorno,</p>
+        <p>abbiamo ricevuto la vostra candidatura all'offerta per i primi 5 clienti (agente: ${escapeHtml(agente)}).</p>
         <p>Vi rispondiamo per email, di solito entro due giorni lavorativi. Se volete aggiungere qualcosa, rispondete a questo messaggio.</p>
         <p>Il team di ${AGENCY_NAME}</p>
       `,
