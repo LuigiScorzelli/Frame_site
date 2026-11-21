@@ -52,7 +52,7 @@ export default function InteresseForm({
           fonte,
           consenso: true,
           ...(interesse ? { interesse } : {}),
-          turnstile: await turnstile.token(),
+          ...(await turnstile.campi()),
         }),
       });
       const data = await res.json().catch(() => ({}));

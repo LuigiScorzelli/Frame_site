@@ -12,7 +12,7 @@ import {
   hashSalato,
   intestazioniLimite,
 } from "@/lib/ratelimit";
-import { ERRORE_TURNSTILE, verificaTurnstile } from "@/lib/turnstile";
+import { controllaTurnstile } from "@/lib/turnstile";
 
 // POST /api/checkup (sprint 1.1, docs/lancio/02-specifiche.md section 5).
 // Body: { url, email?, consenso? }. Answers the 5 scored items; with email + consent it also sends the
@@ -120,8 +120,9 @@ export async function POST(request: Request) {
   }
 
   // Before the download of someone else's site and before any email: both are what a bot would abuse.
-  if (!(await verificaTurnstile(body.turnstile))) {
-    return NextResponse.json({ error: ERRORE_TURNSTILE }, { status: 403 });
+  const erroreTurnstile = await controllaTurnstile(body);
+  if (erroreTurnstile) {
+    return NextResponse.json({ error: erroreTurnstile }, { status: 403 });
   }
 
   let risultato: RisultatoCheckup & { daCache: boolean };

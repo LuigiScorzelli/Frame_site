@@ -47,13 +47,21 @@ function caricaTurnstile(): Promise<TurnstileApi> {
 }
 
 /**
- * `widget` goes inside the form, where the challenge may appear. `token()` is called on submit and gives a
- * fresh single-use token, or undefined when Turnstile is off or could not run (the server then decides).
+ * `widget` goes inside the form, where the challenge may appear. `campi()` is called on submit and gives the
+ * fields to add to the request body: `turnstile` with a fresh single-use token, or `turnstile_esito` with a
+ * short code saying why there is none (the server refuses the request and logs the code). Empty when
+ * Turnstile is off.
+ *
+ * Codes: "script" (Cloudflare's script did not load), "render" (the widget threw), "attesa" (no answer in
+ * 60 s), "sostituito" (a newer submit took over), "cf-<code>" (Cloudflare's own error code), "cf-timeout"
+ * (the interactive challenge expired).
  */
-export function useTurnstile(): { widget: React.ReactNode; token: () => Promise<string | undefined> } {
+export type CampiTurnstile = { turnstile?: string; turnstile_esito?: string };
+
+export function useTurnstile(): { widget: React.ReactNode; campi: () => Promise<CampiTurnstile> } {
   const id = `ts-${useId().replace(/[^a-zA-Z0-9]/g, "")}`;
   const widgetId = useRef<string | null>(null);
-  const inAttesa = useRef<((token: string | undefined) => void) | null>(null);
+  const inAttesa = useRef<((esito: CampiTurnstile) => void) | null>(null);
 
   useEffect(() => {
     return () => {
@@ -62,23 +70,27 @@ export function useTurnstile(): { widget: React.ReactNode; token: () => Promise<
     };
   }, []);
 
-  const token = useCallback(async (): Promise<string | undefined> => {
-    if (!SITE_KEY) return undefined;
+  const campi = useCallback(async (): Promise<CampiTurnstile> => {
+    if (!SITE_KEY) return {};
+    const fallito = (codice: string): CampiTurnstile => {
+      console.warn("turnstile: nessun token,", codice);
+      return { turnstile_esito: codice };
+    };
     let api: TurnstileApi;
     try {
       api = await caricaTurnstile();
     } catch {
-      return undefined;
+      return fallito("script");
     }
-    return new Promise<string | undefined>((risolvi) => {
-      const scadenza = window.setTimeout(() => chiudi(undefined), ATTESA_MS);
-      const chiudi = (t: string | undefined) => {
+    return new Promise<CampiTurnstile>((risolvi) => {
+      const scadenza = window.setTimeout(() => chiudi(fallito("attesa")), ATTESA_MS);
+      const chiudi = (esito: CampiTurnstile) => {
         window.clearTimeout(scadenza);
         if (inAttesa.current === chiudi) inAttesa.current = null;
-        risolvi(t);
+        risolvi(esito);
       };
       // A second submit while the first is still waiting replaces it.
-      inAttesa.current?.(undefined);
+      inAttesa.current?.({ turnstile_esito: "sostituito" });
       inAttesa.current = chiudi;
       try {
         if (widgetId.current === null) {
@@ -91,12 +103,12 @@ export function useTurnstile(): { widget: React.ReactNode; token: () => Promise<
             language: "it",
             "response-field": false,
             "refresh-expired": "manual",
-            callback: (t: string) => inAttesa.current?.(t),
-            "error-callback": () => {
-              inAttesa.current?.(undefined);
+            callback: (t: string) => inAttesa.current?.({ turnstile: t }),
+            "error-callback": (codice: unknown) => {
+              inAttesa.current?.(fallito(`cf-${String(codice).replace(/[^a-zA-Z0-9-]/g, "").slice(0, 30)}`));
               return true;
             },
-            "timeout-callback": () => inAttesa.current?.(undefined),
+            "timeout-callback": () => inAttesa.current?.(fallito("cf-timeout")),
           });
         } else {
           // Tokens are single use: every submit starts from a clean widget.
@@ -104,10 +116,10 @@ export function useTurnstile(): { widget: React.ReactNode; token: () => Promise<
         }
         api.execute(`#${id}`);
       } catch {
-        chiudi(undefined);
+        chiudi(fallito("render"));
       }
     });
   }, [id]);
 
-  return { widget: SITE_KEY ? <div id={id} /> : null, token };
+  return { widget: SITE_KEY ? <div id={id} /> : null, campi };
 }

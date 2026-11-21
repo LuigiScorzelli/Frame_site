@@ -57,7 +57,7 @@ export default function ModuloCandidatura() {
       const res = await fetch("/api/candidatura", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...corpo, [CAMPO_TRAPPOLA]: trappola, turnstile: await turnstile.token() }),
+        body: JSON.stringify({ ...corpo, [CAMPO_TRAPPOLA]: trappola, ...(await turnstile.campi()) }),
       });
       if (!res.ok) {
         const dati = (await res.json().catch(() => ({}))) as { error?: string; errori?: ErroriCandidatura };
