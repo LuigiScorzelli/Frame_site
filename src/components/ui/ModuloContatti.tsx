@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { AGENCY_NAME, CONTACT_EMAIL } from "@/lib/brand";
 import { emailValida } from "@/lib/input";
+import { useTurnstile } from "@/components/ui/Turnstile";
 
 type Campi = { nome: string; email: string; sito: string; messaggio: string };
 type Errori = Partial<Record<keyof Campi | "consenso", string>>;
@@ -21,6 +22,7 @@ export default function ModuloContatti() {
   const [sitoWeb, setSitoWeb] = useState("");
   const [errori, setErrori] = useState<Errori>({});
   const [stato, setStato] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const turnstile = useTurnstile();
 
   const valida = (): Errori => {
     const e: Errori = {};
@@ -45,7 +47,7 @@ export default function ModuloContatti() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...campi, consenso: true, sito_web: sitoWeb }),
+        body: JSON.stringify({ ...campi, consenso: true, sito_web: sitoWeb, turnstile: await turnstile.token() }),
       });
       if (!res.ok) throw new Error(String(res.status));
       setStato("sent");
@@ -100,6 +102,8 @@ export default function ModuloContatti() {
         </label>
         {errori.consenso && <p className="mt-1 text-[13px] text-red">{errori.consenso}</p>}
       </div>
+
+      {turnstile.widget}
 
       <button
         type="submit"

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTurnstile } from "@/components/ui/Turnstile";
 import { traccia } from "@/lib/analytics";
 import { AGENCY_NAME, CONTACT_EMAIL } from "@/lib/brand";
 import { AGENTI_OFFERTA, CAMPO_TRAPPOLA, RISPOSTE_WORKSPACE, validaCandidatura, type ErroriCandidatura } from "@/lib/offerta";
@@ -33,6 +34,7 @@ export default function ModuloCandidatura() {
   const [errori, setErrori] = useState<ErroriCandidatura>({});
   const [stato, setStato] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [messaggio, setMessaggio] = useState("");
+  const turnstile = useTurnstile();
 
   const set =
     (k: keyof Campi) => (ev: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -55,12 +57,12 @@ export default function ModuloCandidatura() {
       const res = await fetch("/api/candidatura", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...corpo, [CAMPO_TRAPPOLA]: trappola }),
+        body: JSON.stringify({ ...corpo, [CAMPO_TRAPPOLA]: trappola, turnstile: await turnstile.token() }),
       });
       if (!res.ok) {
         const dati = (await res.json().catch(() => ({}))) as { error?: string; errori?: ErroriCandidatura };
         if (dati.errori) setErrori(dati.errori);
-        setMessaggio(res.status === 410 || res.status === 429 ? (dati.error ?? "") : "");
+        setMessaggio([403, 410, 429].includes(res.status) ? (dati.error ?? "") : "");
         setStato("error");
         return;
       }
@@ -158,6 +160,8 @@ export default function ModuloCandidatura() {
         <input id="cand-aggiornamenti" type="checkbox" checked={aggiornamenti} onChange={(e) => setAggiornamenti(e.target.checked)} className="mt-0.5 accent-[#BFFF00]" />
         <span>Voglio ricevere anche le email di {AGENCY_NAME} su agenti AI e automazioni (facoltativo, con doppia conferma).</span>
       </label>
+
+      {turnstile.widget}
 
       <button
         type="submit"

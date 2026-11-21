@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTurnstile } from "@/components/ui/Turnstile";
 import { traccia } from "@/lib/analytics";
 import { AGENCY_NAME, CONTACT_EMAIL } from "@/lib/brand";
 
@@ -32,6 +33,7 @@ export default function InteresseForm({
   const [consenso, setConsenso] = useState(false);
   const [stato, setStato] = useState<"idle" | "loading" | "ok" | "error">("idle");
   const [errore, setErrore] = useState("");
+  const turnstile = useTurnstile();
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,7 +47,13 @@ export default function InteresseForm({
       const res = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, fonte, consenso: true, ...(interesse ? { interesse } : {}) }),
+        body: JSON.stringify({
+          email,
+          fonte,
+          consenso: true,
+          ...(interesse ? { interesse } : {}),
+          turnstile: await turnstile.token(),
+        }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
@@ -116,6 +124,7 @@ export default function InteresseForm({
           {testoConsenso ?? `Acconsento a ricevere email da ${AGENCY_NAME}.`} Leggi la <a href="/privacy" className="underline hover:text-text-0">privacy</a>.
         </span>
       </label>
+      {turnstile.widget}
       {errore && <p className="text-sm text-red" role="alert">{errore}</p>}
     </form>
   );

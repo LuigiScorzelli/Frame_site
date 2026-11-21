@@ -25,6 +25,12 @@ const sulSito = [
   "I moduli passano da Resend.",
   "La candidatura all'offerta per i primi clienti ci arriva per email tramite Resend, con i dati che scrivi nel modulo, e ti mandiamo una email di conferma. Ne teniamo una copia in Upstash per 6 mesi, poi si cancella da sola: la usiamo solo per risponderti. In Brevo entri solo se spunti la casella degli aggiornamenti, e solo dopo la doppia conferma.",
   "Per limitare gli abusi sui moduli usiamo Upstash, con un'impronta del tuo IP, non l'IP in chiaro.",
+  // Shown only when the widget is active (NEXT_PUBLIC_TURNSTILE_SITE_KEY set at build time).
+  ...(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
+    ? [
+        "Per distinguere le persone dai programmi automatici, quando invii un modulo usiamo Turnstile di Cloudflare: il tuo browser contatta Cloudflare, che riceve il tuo indirizzo IP e i dati tecnici del browser e ci dice solo se la verifica è riuscita.",
+      ]
+    : []),
   "Le prenotazioni passano da Calendly. Il calendario incorporato in /contatti usa cookie di Calendly e si mostra solo se lo accetti nelle preferenze cookie (Esperienza).",
   "Puoi cambiare le tue scelte quando vuoi dal link \"Preferenze cookie\" in fondo a ogni pagina.",
   // TODO: add Freemius (purchases and licences) when the checkout goes public (sprint 3, Luigi's go-ahead).
