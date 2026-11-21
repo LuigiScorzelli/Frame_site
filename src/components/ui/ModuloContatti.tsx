@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { AGENCY_NAME, CONTACT_EMAIL } from "@/lib/brand";
-
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+import { emailValida } from "@/lib/input";
 
 type Campi = { nome: string; email: string; sito: string; messaggio: string };
 type Errori = Partial<Record<keyof Campi | "consenso", string>>;
@@ -26,7 +25,7 @@ export default function ModuloContatti() {
   const valida = (): Errori => {
     const e: Errori = {};
     if (campi.nome.trim().length < 2) e.nome = "Il nome deve avere almeno 2 caratteri";
-    if (!EMAIL_REGEX.test(campi.email.trim())) e.email = "Inserisci un'email valida";
+    if (!emailValida(campi.email.trim())) e.email = "Inserisci un'email valida";
     if (!consenso) e.consenso = "Serve il consenso per risponderti";
     return e;
   };

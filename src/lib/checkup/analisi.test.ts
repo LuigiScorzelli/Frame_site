@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { linkContatti, rileva, valuta, type IdVoce } from "./analisi";
+import { MAX_ELEMENTI, MAX_PROFONDITA, linkContatti, rileva, troppoComplessa, valuta, type IdVoce } from "./analisi";
 
 const fixture = (nome: string) => readFileSync(join(__dirname, "fixtures", nome), "utf8");
 const home = (nome: string) => ({ html: fixture(nome), link: "" });
@@ -95,5 +95,25 @@ describe("linkContatti", () => {
   it("ignores contact links to other sites", () => {
     const html = '<a href="https://altro.it/contatti">Contatti</a>';
     expect(linkContatti(html, new URL("https://rossi.it/"))).toBeNull();
+  });
+});
+
+describe("troppoComplessa", () => {
+  it("accepts the sample pages", () => {
+    for (const n of ["01-completo.html", "04-modulo-lungo.html", "10-contatti.html"]) expect(troppoComplessa(fixture(n)), n).toBe(false);
+  });
+
+  it("refuses pages nested or crowded beyond the limits, in a single quick pass", () => {
+    expect(troppoComplessa("<div>".repeat(MAX_PROFONDITA))).toBe(false);
+    expect(troppoComplessa("<div>".repeat(MAX_PROFONDITA + 1))).toBe(true);
+    expect(troppoComplessa("<p></p>".repeat(MAX_ELEMENTI + 1))).toBe(true);
+    const inizio = performance.now();
+    expect(troppoComplessa("<div>".repeat(200_000))).toBe(true);
+    expect(troppoComplessa("<script>".repeat(100_000))).toBe(false);
+    expect(performance.now() - inizio).toBeLessThan(200);
+  });
+
+  it("does not count comparisons in inline scripts as tags", () => {
+    expect(troppoComplessa("<script>" + "for(i=0;i<n;i++){}".repeat(5000) + "</script><p>ok</p>")).toBe(false);
   });
 });

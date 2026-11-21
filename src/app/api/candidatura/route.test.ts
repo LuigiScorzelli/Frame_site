@@ -79,7 +79,9 @@ describe("POST /api/candidatura", () => {
     expect(agenzia.html).toContain(CHIAVE);
     const ricevuta = invia.mock.calls[1][0];
     expect(ricevuta.to).toBe("mario@esempio.it");
-    expect(ricevuta.html).toContain("Rossi &lt;b&gt;Servizi&lt;/b&gt;");
+    // The receipt goes to an unverified address: nothing typed by the visitor is repeated in it.
+    expect(ricevuta.html).not.toContain("Rossi");
+    expect(ricevuta.html).not.toContain("Mario");
     expect(segna).toHaveBeenCalledWith(CHIAVE, "inviata");
     expect(creaContattoDoi).not.toHaveBeenCalled();
   });
@@ -121,15 +123,25 @@ describe("POST /api/candidatura", () => {
   });
 
   it("adds the contact to Brevo with FONTE=offerta only when updates are requested", async () => {
-    const res = await POST(richiesta({ ...valida, aggiornamenti: true }));
+    // Its own address: the per-recipient limit (3 a day) is shared by the tests that use "valida".
+    const res = await POST(richiesta({ ...valida, email: "aggiornamenti@esempio.it", aggiornamenti: true }));
     expect(res.status).toBe(200);
-    expect(creaContattoDoi).toHaveBeenCalledWith(expect.anything(), "mario@esempio.it", { FONTE: "offerta" });
+    expect(creaContattoDoi).toHaveBeenCalledWith(expect.anything(), "aggiornamenti@esempio.it", { FONTE: "offerta" });
   });
 
   it("still succeeds when Brevo fails after the email was sent", async () => {
     creaContattoDoi.mockRejectedValue(new Error("timeout"));
-    const res = await POST(richiesta({ ...valida, aggiornamenti: true }));
+    const res = await POST(richiesta({ ...valida, email: "brevo-giu@esempio.it", aggiornamenti: true }));
     expect(res.status).toBe(200);
+  });
+
+  it("sends at most 3 receipts a day to the same address, while every application still reaches the agency", async () => {
+    const stessa = { ...valida, email: "bersaglio@esempio.it", aggiornamenti: true };
+    for (let i = 0; i < 4; i++) expect((await POST(richiesta(stessa))).status).toBe(200);
+    const destinatari = invia.mock.calls.map((c) => c[0].to);
+    expect(destinatari.filter((d) => d === "bersaglio@esempio.it")).toHaveLength(3);
+    expect(destinatari.filter((d) => d !== "bersaglio@esempio.it")).toHaveLength(4);
+    expect(creaContattoDoi).toHaveBeenCalledTimes(3);
   });
 
   it("answers 400 with field errors and sends nothing", async () => {

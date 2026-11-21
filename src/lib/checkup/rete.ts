@@ -18,6 +18,7 @@ export type CodiceErrore =
   | "timeout"
   | "non_html"
   | "troppi_redirect"
+  | "troppo_complessa"
   | "errore_http";
 
 /** Error with a code the route turns into a 400/422 with an Italian message. */
