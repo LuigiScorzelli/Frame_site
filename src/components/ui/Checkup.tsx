@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTurnstile } from "@/components/ui/Turnstile";
 import { traccia } from "@/lib/analytics";
 import { AGENCY_NAME, CONTACT_EMAIL } from "@/lib/brand";
 
@@ -132,6 +133,9 @@ export default function Checkup() {
   const [stato2, setStato2] = useState<"idle" | "loading" | "error">("idle");
   const [errore2, setErrore2] = useState("");
   const [esitoEmail, setEsitoEmail] = useState<Risultato["email"]>(undefined);
+  // One widget per form: each sits where its own challenge would appear.
+  const turnstile = useTurnstile();
+  const turnstile2 = useTurnstile();
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -146,7 +150,7 @@ export default function Checkup() {
     setEsitoEmail(undefined);
     traccia("checkup_start", PROPS);
     const conEmail = email.trim() !== "";
-    const r = await chiama({ url, ...(conEmail ? { email, consenso: true } : {}) });
+    const r = await chiama({ url, ...(conEmail ? { email, consenso: true } : {}), turnstile: await turnstile.token() });
     if (!r.ok) {
       setStato("error");
       setErrore(r.errore);
@@ -170,7 +174,7 @@ export default function Checkup() {
     setStato2("loading");
     setErrore2("");
     // Same URL: the server answers from its 1-hour cache, the site is not downloaded again.
-    const r = await chiama({ url: urlAnalizzato, email: email2, consenso: true });
+    const r = await chiama({ url: urlAnalizzato, email: email2, consenso: true, turnstile: await turnstile2.token() });
     if (!r.ok) {
       setStato2("error");
       setErrore2(r.errore);
@@ -213,6 +217,7 @@ export default function Checkup() {
         <div>
           <CampiEmail id="checkup" email={email} setEmail={setEmail} consenso={consenso} setConsenso={setConsenso} obbligatoria={false} />
         </div>
+        {turnstile.widget}
         {stato === "loading" && (
           <p className="text-sm text-text-1" role="status">
             Scarichiamo la home e la pagina contatti: di solito servono pochi secondi, al massimo una ventina.
@@ -273,6 +278,7 @@ export default function Checkup() {
                   Vuoi il report con le 3 cose da sistemare per prime? Te lo mandiamo via email.
                 </p>
                 <CampiEmail id="checkup-report" email={email2} setEmail={setEmail2} consenso={consenso2} setConsenso={setConsenso2} obbligatoria />
+                {turnstile2.widget && <div className="mt-4">{turnstile2.widget}</div>}
                 <button
                   type="submit"
                   disabled={stato2 === "loading"}

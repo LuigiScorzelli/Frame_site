@@ -11,6 +11,7 @@ import {
   hashSalato,
   intestazioniLimite,
 } from "@/lib/ratelimit";
+import { ERRORE_TURNSTILE, verificaTurnstile } from "@/lib/turnstile";
 
 // POST /api/candidatura: application to the 5-client launch offer (docs/lancio/01-piano-sprint.md, A.4).
 // Order: 1) copy in Upstash (src/lib/candidature.ts), 2) email to the agency inbox through Resend.
@@ -66,6 +67,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Controllate i campi segnati.", errori: esito.errori }, { status: 400 });
   }
   const c = esito.dati;
+
+  if (!(await verificaTurnstile(body.turnstile))) {
+    return NextResponse.json({ error: ERRORE_TURNSTILE }, { status: 403 });
+  }
 
   // Never a fake success: without Resend nobody would read the application, without Upstash it has no copy.
   if (!process.env.RESEND_API_KEY || !archivioCandidatureAttivo()) {

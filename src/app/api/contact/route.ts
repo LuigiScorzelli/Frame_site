@@ -3,6 +3,7 @@ import { Resend } from "resend";
 import { CONTACT_EMAIL } from "@/lib/brand";
 import { campoEmail, emailValida, riga, testo } from "@/lib/input";
 import { controllaLimite, creaLimitatore, intestazioniLimite } from "@/lib/ratelimit";
+import { ERRORE_TURNSTILE, verificaTurnstile } from "@/lib/turnstile";
 
 const CONTACT_TO_EMAIL = process.env.CONTACT_TO_EMAIL || CONTACT_EMAIL;
 const RESEND_FROM = process.env.RESEND_FROM || "aiframe <noreply@aiframe.it>";
@@ -54,6 +55,9 @@ export async function POST(request: Request) {
   if (body.consenso !== true) errors.push("Serve il consenso al trattamento dei dati");
   if (errors.length > 0) {
     return NextResponse.json({ errors }, { status: 400 });
+  }
+  if (!(await verificaTurnstile(body.turnstile))) {
+    return NextResponse.json({ error: ERRORE_TURNSTILE }, { status: 403 });
   }
 
   const s = {

@@ -144,6 +144,26 @@ describe("POST /api/candidatura", () => {
     expect(creaContattoDoi).toHaveBeenCalledTimes(3);
   });
 
+  it("with Turnstile on, answers 403 and saves nothing when the token is missing or refused", async () => {
+    process.env.TURNSTILE_SECRET_KEY = "segreta-di-test";
+    const fetchFinto = vi.fn().mockResolvedValue(new Response(JSON.stringify({ success: false, "error-codes": ["invalid-input-response"] })));
+    vi.stubGlobal("fetch", fetchFinto);
+    try {
+      expect((await POST(richiesta(valida))).status).toBe(403);
+      expect((await POST(richiesta({ ...valida, turnstile: "token-falso" }))).status).toBe(403);
+      expect(fetchFinto).toHaveBeenCalledTimes(1);
+      expect(salva).not.toHaveBeenCalled();
+      expect(invia).not.toHaveBeenCalled();
+
+      fetchFinto.mockResolvedValue(new Response(JSON.stringify({ success: true })));
+      expect((await POST(richiesta({ ...valida, email: "turnstile@esempio.it", turnstile: "token-buono" }))).status).toBe(200);
+      expect(salva).toHaveBeenCalledTimes(1);
+    } finally {
+      delete process.env.TURNSTILE_SECRET_KEY;
+      vi.unstubAllGlobals();
+    }
+  });
+
   it("answers 400 with field errors and sends nothing", async () => {
     const res = await POST(richiesta({ ...valida, consenso: false }));
     expect(res.status).toBe(400);
