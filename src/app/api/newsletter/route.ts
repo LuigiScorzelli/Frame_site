@@ -8,7 +8,7 @@ import {
   hashSalato,
   intestazioniLimite,
 } from "@/lib/ratelimit";
-import { ERRORE_TURNSTILE, verificaTurnstile } from "@/lib/turnstile";
+import { controllaTurnstile } from "@/lib/turnstile";
 
 // POST /api/newsletter: Brevo contact with double opt-in and FONTE attribute (0.7).
 // Body: { email, fonte: "newsletter" | "checkup" | "beta", consenso: true, interesse? }.
@@ -56,8 +56,9 @@ export async function POST(request: Request) {
     interesse = body.interesse;
   }
 
-  if (!(await verificaTurnstile(body.turnstile))) {
-    return NextResponse.json({ error: ERRORE_TURNSTILE }, { status: 403 });
+  const erroreTurnstile = await controllaTurnstile(body);
+  if (erroreTurnstile) {
+    return NextResponse.json({ error: erroreTurnstile }, { status: 403 });
   }
 
   const config = configBrevo();

@@ -150,7 +150,7 @@ export default function Checkup() {
     setEsitoEmail(undefined);
     traccia("checkup_start", PROPS);
     const conEmail = email.trim() !== "";
-    const r = await chiama({ url, ...(conEmail ? { email, consenso: true } : {}), turnstile: await turnstile.token() });
+    const r = await chiama({ url, ...(conEmail ? { email, consenso: true } : {}), ...(await turnstile.campi()) });
     if (!r.ok) {
       setStato("error");
       setErrore(r.errore);
@@ -174,7 +174,7 @@ export default function Checkup() {
     setStato2("loading");
     setErrore2("");
     // Same URL: the server answers from its 1-hour cache, the site is not downloaded again.
-    const r = await chiama({ url: urlAnalizzato, email: email2, consenso: true, turnstile: await turnstile2.token() });
+    const r = await chiama({ url: urlAnalizzato, email: email2, consenso: true, ...(await turnstile2.campi()) });
     if (!r.ok) {
       setStato2("error");
       setErrore2(r.errore);

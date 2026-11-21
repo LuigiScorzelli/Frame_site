@@ -47,7 +47,7 @@ export default function ModuloContatti() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...campi, consenso: true, sito_web: sitoWeb, turnstile: await turnstile.token() }),
+        body: JSON.stringify({ ...campi, consenso: true, sito_web: sitoWeb, ...(await turnstile.campi()) }),
       });
       if (!res.ok) throw new Error(String(res.status));
       setStato("sent");
