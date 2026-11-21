@@ -1,0 +1,10 @@
+{
+  "version": "0.2.0-beta.25",
+  "package": "https://aiframe.it/inframe/inframe-0.2.0-beta.25.zip",
+  "sha256": "6a96c20bc299b4d0b2f81ce04ce591dd25b14c4b371582b4d96eb3eddfa5998b",
+  "requires": "7.0",
+  "requires_php": "8.3",
+  "tested": "7.1",
+  "released": "2026-11-21",
+  "changelog": "Important: from this version the plugin is named inFrame everywhere (folder and main file inframe/inframe.php, prefix inframe_ for options and tables). WordPress treats it as a new plugin: it does not take over the data or settings of WP Lead Assistant 0.2.0-beta.24 and it is not offered as an update to it. Delete the old plugin (this deletes its data), then install this one and set it up again.\nChanged: the shortcode is now [inframe_chat], the block is inframe/chat, the REST route is inframe/v1, and the wp-config.php constants are INFRAME_OPENAI_API_KEY and INFRAME_ANTHROPIC_API_KEY. Updates come from https://aiframe.it/inframe/.\nChanged: the product name is inFrame in the plugin header, menu, page titles, footer, block, privacy tools, test emails and update details; text domain inframe.\nEnglish and Italian: code strings are English and the Italian translation ships in languages/. Administrators see the panel in their own language; the chat, consent text, form errors, owner emails and widget follow the site language, and the AI answers in the site language.\nWelcome and hours: Appearance has a new tab with three guided paths, up to 10 welcome rules with suggested questions per page or category, opening hours per day and an out-of-hours message, computed in the site time zone.\nAccessible widget: text and link colours are derived from the owner's colour with the WCAG contrast formulas, so light colours stay readable; the AI badge, launcher name, header landmark, typing and answer announcements, keyboard focus, reduced motion and 200% zoom / 320 px layouts were fixed."
+}
