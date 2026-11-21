@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { traccia } from "@/lib/analytics";
 import { AGENCY_NAME, CONTACT_EMAIL } from "@/lib/brand";
-import { AGENTI_OFFERTA, RISPOSTE_WORKSPACE, validaCandidatura, type ErroriCandidatura } from "@/lib/offerta";
+import { AGENTI_OFFERTA, CAMPO_TRAPPOLA, RISPOSTE_WORKSPACE, validaCandidatura, type ErroriCandidatura } from "@/lib/offerta";
 
 type Campi = {
   nome: string;
@@ -29,7 +29,7 @@ export default function ModuloCandidatura() {
   const [consenso, setConsenso] = useState(false);
   const [aggiornamenti, setAggiornamenti] = useState(false);
   // Honeypot: hidden from people and screen readers, bots fill it.
-  const [sitoWeb, setSitoWeb] = useState("");
+  const [trappola, setTrappola] = useState("");
   const [errori, setErrori] = useState<ErroriCandidatura>({});
   const [stato, setStato] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [messaggio, setMessaggio] = useState("");
@@ -55,7 +55,7 @@ export default function ModuloCandidatura() {
       const res = await fetch("/api/candidatura", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...corpo, sito_web: sitoWeb }),
+        body: JSON.stringify({ ...corpo, [CAMPO_TRAPPOLA]: trappola }),
       });
       if (!res.ok) {
         const dati = (await res.json().catch(() => ({}))) as { error?: string; errori?: ErroriCandidatura };
@@ -140,8 +140,8 @@ export default function ModuloCandidatura() {
       </div>
 
       <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", top: "auto", width: 1, height: 1, overflow: "hidden" }}>
-        <label htmlFor="cand-sito-web">Lascia vuoto questo campo</label>
-        <input id="cand-sito-web" name="sito_web" tabIndex={-1} autoComplete="off" value={sitoWeb} onChange={(e) => setSitoWeb(e.target.value)} />
+        <label htmlFor="cand-rif">Non compilare</label>
+        <input id="cand-rif" name={CAMPO_TRAPPOLA} type="text" tabIndex={-1} autoComplete="off" data-1p-ignore="true" data-lpignore="true" data-form-type="other" value={trappola} onChange={(e) => setTrappola(e.target.value)} />
       </div>
 
       <div>

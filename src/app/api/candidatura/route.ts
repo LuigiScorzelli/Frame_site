@@ -1,13 +1,15 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { CONTACT_EMAIL } from "@/lib/brand";
+import { AGENCY_NAME, CONTACT_EMAIL } from "@/lib/brand";
 import { configBrevo, creaContattoDoi } from "@/lib/brevo";
-import { AGENTI_OFFERTA, RISPOSTE_WORKSPACE, offertaAperta, validaCandidatura } from "@/lib/offerta";
+import { archivioCandidatureAttivo, salvaCandidatura, segnaEmailAgenzia } from "@/lib/candidature";
+import { AGENTI_OFFERTA, CAMPO_TRAPPOLA, RISPOSTE_WORKSPACE, offertaAperta, validaCandidatura } from "@/lib/offerta";
 import { controllaLimite, creaLimitatore, intestazioniLimite } from "@/lib/ratelimit";
 
 // POST /api/candidatura: application to the 5-client launch offer (docs/lancio/01-piano-sprint.md, A.4).
-// The application reaches the agency inbox through Resend. Brevo (double opt-in, FONTE=offerta) only when
-// the visitor ticked the separate, optional "aggiornamenti" consent.
+// Order: 1) copy in Upstash (src/lib/candidature.ts), 2) email to the agency inbox through Resend.
+// The visitor sees success only when both worked. Then, best effort: a receipt to the applicant and Brevo
+// (double opt-in, FONTE=offerta) only when the visitor ticked the separate, optional "aggiornamenti" consent.
 
 const CONTACT_TO_EMAIL = process.env.CONTACT_TO_EMAIL || CONTACT_EMAIL;
 const RESEND_FROM = process.env.RESEND_FROM || "aiframe <noreply@aiframe.it>";
@@ -41,7 +43,9 @@ export async function POST(request: Request) {
   }
 
   // Honeypot: real visitors never see this field. Bots that fill it get a silent 200.
-  if (typeof body.sito_web === "string" && body.sito_web.trim().length > 0) {
+  // "sito_web" is the old name, still accepted from pages cached before the rename.
+  const trappola = [body[CAMPO_TRAPPOLA], body.sito_web].some((v) => typeof v === "string" && v.trim().length > 0);
+  if (trappola) {
     return NextResponse.json({ ok: true });
   }
 
@@ -55,17 +59,28 @@ export async function POST(request: Request) {
   }
   const c = esito.dati;
 
-  // Never a fake success: without Resend nobody would read the application.
-  if (!process.env.RESEND_API_KEY) {
-    console.warn("candidatura: RESEND_API_KEY non configurata, candidatura non inviata");
+  // Never a fake success: without Resend nobody would read the application, without Upstash it has no copy.
+  if (!process.env.RESEND_API_KEY || !archivioCandidatureAttivo()) {
+    console.warn(
+      "candidatura: servizio non configurato, candidatura non inviata",
+      !process.env.RESEND_API_KEY ? "RESEND_API_KEY" : "Upstash",
+    );
     return NextResponse.json({ error: "Candidature non ancora attive." }, { status: 503 });
   }
 
+  let chiave: string;
+  try {
+    chiave = await salvaCandidatura(c);
+  } catch (err) {
+    console.error("candidatura: salvataggio non riuscito", err instanceof Error ? err.name : err);
+    return NextResponse.json({ error: "Non siamo riusciti a inviare la candidatura." }, { status: 502 });
+  }
+
+  const resend = new Resend(process.env.RESEND_API_KEY);
   const agente = AGENTI_OFFERTA.find((a) => a.valore === c.agente)?.etichetta ?? c.agente;
   const workspace = RISPOSTE_WORKSPACE.find((r) => r.valore === c.workspace)?.etichetta ?? c.workspace;
 
   try {
-    const resend = new Resend(process.env.RESEND_API_KEY);
     const { error } = await resend.emails.send({
       from: RESEND_FROM,
       to: CONTACT_TO_EMAIL,
@@ -82,19 +97,42 @@ export async function POST(request: Request) {
         <p><strong>Richieste al mese:</strong> ${escapeHtml(c.volume) || "Non indicato"}</p>
         <p><strong>Come le gestiscono oggi:</strong><br>${escapeHtml(c.processo).replace(/\n/g, "<br>")}</p>
         <p><strong>Aggiornamenti via email:</strong> ${c.aggiornamenti ? "sì (doppia conferma in Brevo)" : "no"}</p>
+        <p style="color:#666"><small>Copia salvata: ${escapeHtml(chiave)}</small></p>
       `,
     });
     if (error) {
       // Log the provider error name only: the payload contains personal data.
       console.error("candidatura: errore Resend", error.name);
+      await segnaEmailAgenzia(chiave, "non_inviata");
       return NextResponse.json({ error: "Non siamo riusciti a inviare la candidatura." }, { status: 502 });
     }
   } catch (err) {
     console.error("candidatura: errore interno", err instanceof Error ? err.name : err);
+    await segnaEmailAgenzia(chiave, "non_inviata");
     return NextResponse.json({ error: "Non siamo riusciti a inviare la candidatura." }, { status: 502 });
   }
 
-  // The application is already delivered: a Brevo fault must not turn it into an error for the visitor.
+  await segnaEmailAgenzia(chiave, "inviata");
+
+  // The application is already saved and delivered: from here on a fault is logged, never shown as an error.
+  try {
+    const { error } = await resend.emails.send({
+      from: RESEND_FROM,
+      to: c.email,
+      replyTo: CONTACT_TO_EMAIL,
+      subject: "Abbiamo ricevuto la vostra candidatura",
+      html: `
+        <p>Buongiorno ${escapeHtml(c.nome)},</p>
+        <p>abbiamo ricevuto la candidatura di ${escapeHtml(c.azienda)} all'offerta per i primi 5 clienti (agente: ${escapeHtml(agente)}).</p>
+        <p>Vi rispondiamo per email, di solito entro due giorni lavorativi. Se volete aggiungere qualcosa, rispondete a questo messaggio.</p>
+        <p>Il team di ${AGENCY_NAME}</p>
+      `,
+    });
+    if (error) console.error("candidatura: ricevuta al candidato non inviata", error.name);
+  } catch (err) {
+    console.error("candidatura: ricevuta al candidato non inviata", err instanceof Error ? err.name : err);
+  }
+
   if (c.aggiornamenti) {
     const config = configBrevo();
     if (!config) {

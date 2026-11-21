@@ -280,3 +280,19 @@ Con `CALENDLY_URL` valorizzato (dal 9/11 costante in `brand.ts`) la pagina incor
 
 **Resta fuori dal repo:** il workflow n8n dell'assistente sulla VPS, che descrive ancora i servizi vecchi.
 
+
+## 2026-11-21 · Candidature: copia in Upstash, ricevuta al candidato, campo trappola
+
+**Perché:** le candidature di `/offerta` non arrivavano né a Luigi né al candidato. La route non passa da n8n (lo fa Resend), non mandava nessuna ricevuta al candidato e non salvava niente: l'email all'agenzia era l'unica copia. I log Vercel non sono leggibili da qui (progetto in un altro account), quindi la causa della mancata consegna è ancora da trovare nel pannello Resend.
+
+**Decisioni di Luigi (21/11):** copia in Upstash, non nel Postgres della VPS; conservazione 6 mesi; chat nelle anteprime Vercel lasciata com'è (403 `origin_not_allowed`, la produzione e localhost rispondono 200).
+
+**Come:**
+- `src/lib/candidature.ts`: `salvaCandidatura()` scrive `candidatura:<data ISO>:<uuid>` con scadenza 183 giorni, `email_agenzia: "in_invio"`; `segnaEmailAgenzia()` la aggiorna a `inviata` o `non_inviata` mantenendo la scadenza.
+- `POST /api/candidatura`, nell'ordine: copia in Upstash, email all'agenzia (con la chiave della copia), poi ricevuta al candidato e Brevo. Il visitatore vede "Candidatura ricevuta" solo se copia ed email all'agenzia sono riuscite. Senza Upstash o senza Resend: 503. Copia non riuscita: 502, nessuna email. Email all'agenzia non riuscita: 502, la copia resta con `non_inviata`. Ricevuta al candidato o Brevo non riusciti: solo nei log.
+- Campo trappola: da `sito_web` a `rif_interno`, con gli attributi che fanno ignorare il campo a 1Password e LastPass. La route rifiuta in silenzio anche `sito_web`, per le pagine in cache.
+- `/privacy`: ricevuta e copia in Upstash per 6 mesi.
+
+**Leggere le candidature salvate:** console Upstash, Data Browser, chiavi `candidatura:*`.
+
+**Da fare per Luigi:** aggiornare il servizio Upstash nell'informativa iubenda (oggi dice "al massimo 24 ore"); controllare che Upstash sia attivo su Production in Vercel, altrimenti il modulo risponde 503.

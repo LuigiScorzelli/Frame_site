@@ -13,7 +13,20 @@ vi.mock("@/lib/brevo", () => ({
   creaContattoDoi: (...a: unknown[]) => creaContattoDoi(...a),
 }));
 
+// No Upstash either: the store is replaced and records the calls.
+const archivioAttivo = vi.fn();
+const salva = vi.fn();
+const segna = vi.fn();
+vi.mock("@/lib/candidature", () => ({
+  archivioCandidatureAttivo: () => archivioAttivo(),
+  salvaCandidatura: (...a: unknown[]) => salva(...a),
+  segnaEmailAgenzia: (...a: unknown[]) => segna(...a),
+}));
+
+import { CAMPO_TRAPPOLA } from "@/lib/offerta";
 import { POST } from "./route";
+
+const CHIAVE = "candidatura:2026-12-01T10:00:00.000Z:abc";
 
 const valida = {
   nome: "Mario Rossi",
@@ -40,6 +53,9 @@ beforeEach(() => {
   process.env.RESEND_API_KEY = "re_test";
   invia.mockReset().mockResolvedValue({ error: null });
   creaContattoDoi.mockReset().mockResolvedValue({ ok: true });
+  archivioAttivo.mockReset().mockReturnValue(true);
+  salva.mockReset().mockResolvedValue(CHIAVE);
+  segna.mockReset().mockResolvedValue(undefined);
   vi.spyOn(console, "warn").mockImplementation(() => {});
   vi.spyOn(console, "error").mockImplementation(() => {});
 });
@@ -50,15 +66,58 @@ afterEach(() => {
 });
 
 describe("POST /api/candidatura", () => {
-  it("emails the application with escaped HTML and skips Brevo without the updates consent", async () => {
+  it("saves, emails the agency with escaped HTML, sends the receipt and skips Brevo without the updates consent", async () => {
     const res = await POST(richiesta(valida));
     expect(res.status).toBe(200);
-    expect(invia).toHaveBeenCalledTimes(1);
-    const email = invia.mock.calls[0][0];
-    expect(email.replyTo).toBe("mario@esempio.it");
-    expect(email.html).toContain("Rossi &lt;b&gt;Servizi&lt;/b&gt;");
-    expect(email.html).not.toContain("<b>Servizi</b>");
+    expect(salva).toHaveBeenCalledTimes(1);
+    expect(salva.mock.calls[0][0]).toMatchObject({ email: "mario@esempio.it", azienda: "Rossi <b>Servizi</b>" });
+    expect(invia).toHaveBeenCalledTimes(2);
+    const agenzia = invia.mock.calls[0][0];
+    expect(agenzia.replyTo).toBe("mario@esempio.it");
+    expect(agenzia.html).toContain("Rossi &lt;b&gt;Servizi&lt;/b&gt;");
+    expect(agenzia.html).not.toContain("<b>Servizi</b>");
+    expect(agenzia.html).toContain(CHIAVE);
+    const ricevuta = invia.mock.calls[1][0];
+    expect(ricevuta.to).toBe("mario@esempio.it");
+    expect(ricevuta.html).toContain("Rossi &lt;b&gt;Servizi&lt;/b&gt;");
+    expect(segna).toHaveBeenCalledWith(CHIAVE, "inviata");
     expect(creaContattoDoi).not.toHaveBeenCalled();
+  });
+
+  it("saves before emailing the agency", async () => {
+    const ordine: string[] = [];
+    salva.mockImplementation(async () => (ordine.push("salva"), CHIAVE));
+    invia.mockImplementation(async () => (ordine.push("email"), { error: null }));
+    await POST(richiesta(valida));
+    expect(ordine.slice(0, 2)).toEqual(["salva", "email"]);
+  });
+
+  it("answers 502 and sends no email when saving fails", async () => {
+    salva.mockRejectedValue(new Error("redis down"));
+    const res = await POST(richiesta(valida));
+    expect(res.status).toBe(502);
+    expect(invia).not.toHaveBeenCalled();
+  });
+
+  it("answers 503 when Upstash is not configured", async () => {
+    archivioAttivo.mockReturnValue(false);
+    const res = await POST(richiesta(valida));
+    expect(res.status).toBe(503);
+    expect(salva).not.toHaveBeenCalled();
+    expect(invia).not.toHaveBeenCalled();
+  });
+
+  it("still succeeds when only the receipt to the applicant fails", async () => {
+    invia.mockResolvedValueOnce({ error: null }).mockResolvedValueOnce({ error: { name: "validation_error" } });
+    const res = await POST(richiesta(valida));
+    expect(res.status).toBe(200);
+  });
+
+  it("answers 502 and marks the saved copy when the agency email throws", async () => {
+    invia.mockRejectedValue(new Error("network"));
+    const res = await POST(richiesta(valida));
+    expect(res.status).toBe(502);
+    expect(segna).toHaveBeenCalledWith(CHIAVE, "non_inviata");
   });
 
   it("adds the contact to Brevo with FONTE=offerta only when updates are requested", async () => {
@@ -91,6 +150,8 @@ describe("POST /api/candidatura", () => {
     invia.mockResolvedValue({ error: { name: "validation_error" } });
     const res = await POST(richiesta(valida));
     expect(res.status).toBe(502);
+    expect(invia).toHaveBeenCalledTimes(1);
+    expect(segna).toHaveBeenCalledWith(CHIAVE, "non_inviata");
     expect(creaContattoDoi).not.toHaveBeenCalled();
   });
 
@@ -101,9 +162,12 @@ describe("POST /api/candidatura", () => {
     expect(invia).not.toHaveBeenCalled();
   });
 
-  it("gives bots that fill the honeypot a silent 200", async () => {
-    const res = await POST(richiesta({ ...valida, sito_web: "https://spam.example" }));
-    expect(res.status).toBe(200);
+  it("gives bots that fill the honeypot a silent 200, with the new and the old field name", async () => {
+    for (const campo of [CAMPO_TRAPPOLA, "sito_web"]) {
+      const res = await POST(richiesta({ ...valida, [campo]: "https://spam.example" }));
+      expect(res.status).toBe(200);
+    }
+    expect(salva).not.toHaveBeenCalled();
     expect(invia).not.toHaveBeenCalled();
   });
 

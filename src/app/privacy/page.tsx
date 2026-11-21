@@ -23,7 +23,7 @@ const sulSito = [
   "Contiamo le visite e i clic sui pulsanti principali con Umami Cloud (Umami Software Inc.) e con Vercel Analytics, solo se lo accetti nelle preferenze cookie (Misurazione). Non usano cookie e raccolgono dati aggregati, senza identificare chi visita. I dati di Umami sono conservati nella regione UE, ma alcuni sub-responsabili di Umami sono negli Stati Uniti.",
   "Le email che ci lasci vanno in Brevo con doppia conferma.",
   "I moduli passano da Resend.",
-  "La candidatura all'offerta per i primi clienti ci arriva per email tramite Resend, con i dati che scrivi nel modulo: la usiamo solo per risponderti. In Brevo entri solo se spunti la casella degli aggiornamenti, e solo dopo la doppia conferma.",
+  "La candidatura all'offerta per i primi clienti ci arriva per email tramite Resend, con i dati che scrivi nel modulo, e ti mandiamo una email di conferma. Ne teniamo una copia in Upstash per 6 mesi, poi si cancella da sola: la usiamo solo per risponderti. In Brevo entri solo se spunti la casella degli aggiornamenti, e solo dopo la doppia conferma.",
   "Per limitare gli abusi sui moduli usiamo Upstash, con un'impronta del tuo IP, non l'IP in chiaro.",
   "Le prenotazioni passano da Calendly. Il calendario incorporato in /contatti usa cookie di Calendly e si mostra solo se lo accetti nelle preferenze cookie (Esperienza).",
   "Puoi cambiare le tue scelte quando vuoi dal link \"Preferenze cookie\" in fondo a ogni pagina.",

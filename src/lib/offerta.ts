@@ -36,6 +36,12 @@ export const RISPOSTE_WORKSPACE = [
 export type AgenteOfferta = (typeof AGENTI_OFFERTA)[number]["valore"];
 export type RispostaWorkspace = (typeof RISPOSTE_WORKSPACE)[number]["valore"];
 
+/**
+ * Honeypot key in the application body: a neutral name, so browsers and password managers do not autofill it
+ * (the old "sito_web" looked like a website field). The route still rejects "sito_web" too.
+ */
+export const CAMPO_TRAPPOLA = "rif_interno";
+
 export interface Candidatura {
   nome: string;
   azienda: string;
