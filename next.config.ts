@@ -17,9 +17,9 @@ const nextConfig: NextConfig = {
   async headers() {
     return [{ source: "/:path*", headers: INTESTAZIONI_SICUREZZA }];
   },
-  // The beta download route reads update.json and the zip from public/wpla at runtime.
+  // The beta download route reads update.json and the zip from public/inframe at runtime.
   outputFileTracingIncludes: {
-    "/api/wpla/download": ["./public/wpla/**"],
+    "/api/wpla/download": ["./public/inframe/**"],
   },
   async redirects() {
     return [
