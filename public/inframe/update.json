@@ -1,11 +1,11 @@
 {
-  "version": "0.2.0-beta.27",
-  "package": "https://aiframe.it/inframe/inframe-0.2.0-beta.27.zip",
-  "sha256": "125ca845a05f930901678e175a8f3750f63a061ba81fd3d2c886cbb981cd2f2e",
+  "version": "0.3.0",
+  "package": "https://aiframe.it/inframe/inframe-0.3.0.zip",
+  "sha256": "bc44fd0ba7ba199061563cd77b7382e55444898dcb43747863dadc77ea59b0b2",
   "requires": "7.0",
   "requires_php": "8.3",
   "tested": "7.1",
   "released": "2026-11-26",
-  "changelog": "Changed: the readme and the security procedure describe the plugin as a regular release: only the latest version receives security fixes, and updates are installed from Dashboard > Updates.\nNo changes to how the plugin works, to its data or to its settings.",
-  "signature": "29c53c0598313e2039deeb93c1b7e2cb3e27cf5bbebf430948c4714745b70cc3b26e440749cc1a198e2e40a8822d6aabb00e4b29a00eba46a16c94fdc662e90a"
+  "changelog": "Changed: version numbers now contain only digits and periods, as WordPress.org requires. Sites running 0.2.0-beta.27 receive 0.3.0 as a normal update, with data and settings kept.\nNo changes to how the plugin works, to its data or to its settings.",
+  "signature": "cac7f19999da68b8ae224840f0fa7a7fe5577c6b61eaeb2e22fe3c7f06cf1f50202b57430824ccf1885e9f1aee4ad39cc0ee2ea72ba62a3c9cf00e320df0610c"
 }
